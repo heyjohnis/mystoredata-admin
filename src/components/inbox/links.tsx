@@ -59,8 +59,7 @@ const Links: React.FC = () => {
   return (
     <div className="flex flex-col w-full mb-4">
       {items.map((item, i) => (
-        <Link href={item.url} key={i}>
-          <a className="flex items-center justify-start w-full p-2 text-sm">
+        <Link href={item.url} key={i} className="flex items-center justify-start w-full p-2 text-sm">
             {item.icon}
             <span className="ml-2">{item.name}</span>
             {item?.badge && (
@@ -70,7 +69,6 @@ const Links: React.FC = () => {
                 </CircularBadge>
               </span>
             )}
-          </a>
         </Link>
       ))}
     </div>

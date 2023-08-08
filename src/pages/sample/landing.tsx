@@ -13,8 +13,8 @@ const Index: React.FC = () => (
     <div className="flex items-center justify-around w-full px-4 py-4 text-gray-900 bg-white dark:bg-gray-900 dark:text-white">
       <Logo />
       <div className="hidden lg:flex lg:flex-row whitespace-nowrap">
-        <Link href="/documentation">
-          <a className="px-4 py-2 text-xs font-bold uppercase">Documentation</a>
+        <Link href="/documentation" className="px-4 py-2 text-xs font-bold uppercase">
+          Documentation
         </Link>
         <a
           href="https://themeforest.net/item/dboard-nextjs-admin-template/27870045"

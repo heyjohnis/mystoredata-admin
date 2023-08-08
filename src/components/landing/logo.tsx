@@ -7,11 +7,9 @@ const Logo: React.FC = () => {
   const {name} = config;
   return (
     <div className="uppercase font-bold text-base tracking-wider flex flex-row items-center justify-start w-full whitespace-nowrap text-blue-500">
-      <Link href="/">
-        <a className="flex flex-row items-center justify-start space-x-2">
+      <Link href="/" className="flex flex-row items-center justify-start space-x-2">
           <FiBox size={28} className="stroke-current" />
           <span>{name}</span>
-        </a>
       </Link>
     </div>
   );

@@ -25,12 +25,10 @@ const Dropdown: React.FC = () => {
           </div>
           <div className="flex flex-wrap">
             {flags.map((item, i) => (
-              <Link href="/" key={i}>
-                <a className="flex items-center justify-start w-1/2 p-2 text-sm text-gray-900 bg-white space-x-2 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+              <Link href="/" key={i} className="flex items-center justify-start w-1/2 p-2 text-sm text-gray-900 bg-white space-x-2 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                   <span
                     className={`text-base flag-icon flag-icon-${item.code}`}></span>
                   <span>{item.name}</span>
-                </a>
               </Link>
             ))}
           </div>

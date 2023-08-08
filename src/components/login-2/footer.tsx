@@ -9,13 +9,13 @@ const Footer: React.FC = () => {
       <div className="text-white">&copy; {name} 2021</div>
       <div className="flex flex-row ml-auto space-x-2">
         <Link href="/privacy-policy">
-          <a>Privacy policy</a>
+          Privacy policy
         </Link>
         <Link href="/terms-of-service">
-          <a>Terms of service</a>
+          Terms of service
         </Link>
         <Link href="/contact-us">
-          <a>Contact us</a>
+          Contact us
         </Link>
       </div>
     </div>

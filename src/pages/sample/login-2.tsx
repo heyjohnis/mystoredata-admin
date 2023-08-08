@@ -24,15 +24,15 @@ const Index: React.FC = () => {
           <div className="flex flex-row w-full mt-8">
             <span className="mr-1 text-secondary">New user?</span>
             <span>
-              <Link href="/create-account">
-                <a className="text-blue-500">Create account here</a>
+              <Link href="/create-account" className="text-blue-500">
+                Create account here
               </Link>
             </span>
           </div>
           <div className="w-full">
             <span>
-              <Link href="/forgot-password">
-                <a className="text-blue-500">Forgot password?</a>
+              <Link href="/forgot-password" className="text-blue-500">
+                Forgot password?
               </Link>
             </span>
           </div>

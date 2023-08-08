@@ -50,8 +50,7 @@ const AccountLinks: React.FC = () => {
       <ul className="list-none">
         {items.map((item, i) => (
           <li key={i}>
-            <Link href={item.url}>
-              <a className="flex flex-row items-center justify-start w-full h-10 px-2 text-gray-900 bg-white dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <Link href={item.url} className="flex flex-row items-center justify-start w-full h-10 px-2 text-gray-900 bg-white dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 {item.icon}
                 <span className="mx-2">{item.name}</span>
                 {item.badge && (
@@ -60,7 +59,6 @@ const AccountLinks: React.FC = () => {
                     {item.badge.number}
                   </span>
                 )}
-              </a>
             </Link>
           </li>
         ))}

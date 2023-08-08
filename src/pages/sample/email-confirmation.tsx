@@ -14,11 +14,9 @@ const EmailConfirmation: React.FC = () => {
         an email from dashboard and click on the included link to reset your
         password.
       </div>
-      <div className="flex w-full">
-        <Link href="/">
-          <a className="font-bold uppercase text-base px-6 py-3 rounded-lg w-full bg-blue-500 hover:bg-blue-600 text-white">
+      <div className="flex w-full" >
+        <Link href="/" className="font-bold uppercase text-base px-6 py-3 rounded-lg w-full bg-blue-500 hover:bg-blue-600 text-white">
             Go back
-          </a>
         </Link>
       </div>
     </div>

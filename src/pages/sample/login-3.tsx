@@ -32,28 +32,28 @@ const Index: React.FC = () => {
           <div className="flex flex-row w-full">
             <span className="mr-1 text-secondary">New user?</span>
             <span>
-              <Link href="/create-account">
-                <a className="text-blue-500">Create account here</a>
+              <Link href="/create-account" className="text-blue-500">
+                Create account here
               </Link>
             </span>
           </div>
           <div className="w-full">
             <span>
-              <Link href="/forgot-password">
-                <a className="text-blue-500">Forgot password?</a>
+              <Link href="/forgot-password" className="text-blue-500">
+                Forgot password?
               </Link>
             </span>
           </div>
           <div className="flex flex-col w-full mt-4">
             <div className="flex flex-row space-x-2">
               <Link href="/privacy-policy">
-                <a>Privacy policy</a>
+                Privacy policy
               </Link>
               <Link href="/terms-of-service">
-                <a>Terms of service</a>
+                Terms of service
               </Link>
               <Link href="/contact-us">
-                <a>Contact us</a>
+                Contact us
               </Link>
             </div>
             <div className="mt-auto text-gray-300">&copy; {name} 2021</div>

@@ -17,15 +17,15 @@ const Index: React.FC = () => {
         <div className="flex flex-row w-full">
           <span className="text-secondary mr-1">New user?</span>
           <span>
-            <Link href="/create-account">
-              <a className="text-blue-500">Create account here</a>
+            <Link href="/create-account" className="text-blue-500">
+              Create account here
             </Link>
           </span>
         </div>
         <div className="w-full">
           <span>
-            <Link href="/forgot-password">
-              <a className="text-blue-500">Forgot password?</a>
+            <Link href="/forgot-password" className="text-blue-500">
+              Forgot password?
             </Link>
           </span>
         </div>
