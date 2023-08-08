@@ -14,7 +14,7 @@ interface ConfigState {
 // Define the initial state using that type
 const initialState: ConfigState = {
   name: "마이스토어데이터",
-  description: "Next.js Tailwind CSS admin template",
+  description: "마이스토어데이터 통합관리 페이지",
   url: "https://d-board-nextjs.mobifica.com",
   layout: "layout-1",
   collapsed: false,

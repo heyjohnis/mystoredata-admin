@@ -1,4 +1,5 @@
 import type {AppProps} from "next/app";
+import { AppContext } from 'next/app';
 import Head from "next/head";
 import {Provider} from "react-redux";
 import Layout from "layouts";
@@ -21,7 +22,7 @@ Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-function App({Component, pageProps}: AppProps): React.ReactElement {
+const App = ({Component, pageProps}: AppProps): React.ReactElement => {
   return (
     <>
       <Head>
@@ -38,4 +39,9 @@ function App({Component, pageProps}: AppProps): React.ReactElement {
     </>
   );
 }
+
+App.getServerSideProps = async (appContext: AppContext) => {
+
+}
+
 export default App;
