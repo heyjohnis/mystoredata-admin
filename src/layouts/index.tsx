@@ -61,6 +61,7 @@ const Layouts: React.FC<LayoutProps> = ({children}) => {
     case "/login-2":
     case "/login-3":
     case "/sidebars":
+    case "/login":
       return <>{children}</>;
     case "/e-commerce":
       return <ECommerce>{children}</ECommerce>;

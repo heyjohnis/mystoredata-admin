@@ -60,7 +60,7 @@ const Index: React.FC = () => (
     <Screenshots />
 
     <div className="pb-4 text-xs text-center text-gray-400">
-      &copy; 2021 Batchthemes
+      &copy; 2023 Batchthemes
     </div>
   </div>
 );

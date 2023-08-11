@@ -6,7 +6,7 @@ import {Input} from "components/react-hook-form/input";
 import {Checkbox} from "components/react-hook-form/checkbox";
 
 export type FormProps = {
-  username: string;
+  userId: string;
   email: string;
   password: string;
   termsOfService: boolean;
@@ -16,7 +16,7 @@ export type FormProps = {
 const Index: React.FC = () => {
   const methods = useForm<FormProps>({
     defaultValues: {
-      username: "",
+      userId: "",
       email: "",
       password: "",
       termsOfService: false,
@@ -40,15 +40,15 @@ const Index: React.FC = () => {
         <div className="space-y-6">
           <div className="grid grid-cols-1 gap-y-2 gap-x-2 sm:grid-cols-12">
             <InputWrapper outerClassName="sm:col-span-12">
-              <Label id="username">Username</Label>
+              <Label id="userId">userId</Label>
               <Input
-                id="username"
-                name="username"
+                id="userId"
+                name="userId"
                 type="text"
-                rules={{required: "Username is required"}}
+                rules={{required: "로그인 아이디는 필수 입니다."}}
               />
-              {errors?.username?.message && (
-                <ErrorMessage>{errors.username.message}</ErrorMessage>
+              {errors?.userId?.message && (
+                <ErrorMessage>{errors.userId.message}</ErrorMessage>
               )}
             </InputWrapper>
 
@@ -58,7 +58,7 @@ const Index: React.FC = () => {
                 id="email"
                 name="email"
                 type="email"
-                rules={{required: "Please enter a valid email"}}
+                rules={{required: "정확한 이메일을 입력해주세요."}}
               />
               {errors?.email?.message && (
                 <ErrorMessage>{errors.email.message}</ErrorMessage>
@@ -72,15 +72,10 @@ const Index: React.FC = () => {
                 name="password"
                 type="password"
                 rules={{
-                  required: "Please enter a password",
+                  required: "패스워드를 입력해주세요.",
                   minLength: {
                     value: 4,
-                    message: "Your password should have at least 4 characters",
-                  },
-                  maxLength: {
-                    value: 8,
-                    message:
-                      "Your password should have no more than 8 characters",
+                    message: "패스워드는 최소 4자리 이상입니다.",
                   },
                 }}
               />
@@ -93,9 +88,9 @@ const Index: React.FC = () => {
               <Checkbox
                 id="terms-of-service"
                 name="termsOfService"
-                label="Terms of service"
+                label="서비스 이용약관"
                 rules={{
-                  required: "Please agree to our terms of service",
+                  required: "서비스 이용약관에 동의해주세요.",
                 }}
               />
               {errors?.termsOfService?.message && (
@@ -107,9 +102,9 @@ const Index: React.FC = () => {
               <Checkbox
                 id="privacy-policy"
                 name="privacyPolicy"
-                label="Privacy policy"
+                label="개인정보 처리방침"
                 rules={{
-                  required: "Please agree to our privacy policy",
+                  required: "개인정보 처리방침에 동의해주세요.",
                 }}
               />
               {errors?.privacyPolicy?.message && (
@@ -128,7 +123,7 @@ const Index: React.FC = () => {
             className="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:border-gray-700 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             Cancel
           </button>
-          <button
+          <button 
             type="submit"
             className="inline-flex justify-center px-3 py-2 ml-3 text-sm font-medium text-white bg-blue-500 border border-transparent shadow-sm rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             Submit

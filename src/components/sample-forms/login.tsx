@@ -3,16 +3,18 @@ import {InputWrapper} from "components/react-hook-form/input-wrapper";
 import {Label} from "components/react-hook-form/label";
 import {ErrorMessage} from "components/react-hook-form/error-message";
 import {Input} from "components/react-hook-form/input";
+import axios from "axios";
+import {handleLogin} from "utils/auth";
 
 export type FormProps = {
-  email: string;
+  userId: string;
   password: string;
 };
 
 const Index: React.FC = () => {
   const methods = useForm<FormProps>({
     defaultValues: {
-      email: "",
+      userId: "",
       password: "",
     },
   });
@@ -23,8 +25,12 @@ const Index: React.FC = () => {
   } = methods;
 
   const onSubmit = async (data: FormProps) => {
-    //eslint-disable-next-line
-    console.log(JSON.stringify(data, null, 2));
+  
+    const url = `http://localhost:8089/auth/login`;
+    const response = await axios.post(url, data);
+    console.log(response);
+    handleLogin(response.data.token);
+
   };
 
   return (
@@ -33,15 +39,15 @@ const Index: React.FC = () => {
         <div className="space-y-6">
           <div className="grid grid-cols-1 gap-y-1 gap-x-2 sm:grid-cols-12">
             <InputWrapper outerClassName="sm:col-span-12">
-              <Label id="email">Email</Label>
+              <Label id="userId">ID</Label>
               <Input
-                id="email"
-                name="email"
-                type="email"
-                rules={{required: "Please enter a valid email"}}
+                id="userId"
+                name="userId"
+                type="text"
+                rules={{required: "로그인 아이디를 입력해주세요"}}
               />
-              {errors?.email?.message && (
-                <ErrorMessage>{errors.email.message}</ErrorMessage>
+              {errors?.userId?.message && (
+                <ErrorMessage>{errors.userId.message}</ErrorMessage>
               )}
             </InputWrapper>
 
@@ -52,15 +58,10 @@ const Index: React.FC = () => {
                 name="password"
                 type="password"
                 rules={{
-                  required: "Please enter a password",
+                  required: "패스워드를 입력해주세요",
                   minLength: {
                     value: 4,
-                    message: "Your password should have at least 4 characters",
-                  },
-                  maxLength: {
-                    value: 8,
-                    message:
-                      "Your password should have no more than 8 characters",
+                    message: "패스워드는 4자리 이상이어야 합니다",
                   },
                 }}
               />
@@ -78,12 +79,12 @@ const Index: React.FC = () => {
             }}
             type="button"
             className="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:border-gray-700 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Cancel
+            취소
           </button>
           <button
             type="submit"
             className="inline-flex justify-center px-3 py-2 ml-3 text-sm font-medium text-white bg-blue-500 border border-transparent shadow-sm rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Submit
+            로그인
           </button>
         </div>
       </form>
