@@ -4,7 +4,9 @@ import Widget from "components/widget";
 import countries from "json/countries.json";
 import {formatNumber} from "functions/numbers";
 import { useEffect, useState } from 'react';
-import { post } from 'utils/restapi';
+import { POST, GET } from 'utils/restApi';
+import Modal from 'components/users/ModalDetail';
+import { useCallback } from 'react';
 
 export type UserProps = {
   userId: string;
@@ -16,41 +18,50 @@ export type UserProps = {
 
 const fields: Record<string, string>[] = [
   {
-    name: "Code",
-    key: "alpha3Code",
+    name: "로그인ID",
+    key: "userId",
   },
   {
-    name: "Name",
+    name: "사용자명",
     key: "name",
   },
   {
-    name: "Native name",
-    key: "nativeName",
+    name: "회사명",
+    key: "corpName",
   },
   {
-    name: "Capital",
-    key: "capital",
+    name: "사업자번호",
+    key: "corpNum",
   },
   {
-    name: "Population",
-    key: "population",
+    name: "이메일",
+    key: "email",
   },
 ];
 
 const Index: React.FC = () => {
 
   const [users, setUsers] = useState<UserProps[]>([]);
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+  const [ selectedUser, setSelectedUser ] = useState<UserProps | null>(null);
 
   useEffect(() => {
-    post('user/list', {}).then((res) => {
+    GET('user/list', {}).then((res) => {
       if (res.data) {
-        console.log(res.data);
-        setUsers(res.data);
+        setUsers(res.data.users);
       }
     });
 
   }, []);
 
+  const userDetail = (user: UserProps) => {
+    console.log(user);
+    onClickToggleModal();
+  }
+
+  const onClickToggleModal = useCallback(() => {
+    setOpenModal(!isOpenModal);
+  }, [isOpenModal]);
 
   return (
     <>
@@ -74,18 +85,22 @@ const Index: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {users.slice(0, 8).map((country, i) => (
-                <tr key={i}>
+              {users.map((user, i) => (
+                <tr key={i} onClick={ e => userDetail(user)}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {user["userId"]}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {country["name"]}
+                    {user["name"]}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {user["corpName"]}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {user["corpNum"]}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {user["email"]}
                   </td>
                 </tr>
               ))}
@@ -93,7 +108,7 @@ const Index: React.FC = () => {
           </table>
         </div>
       </Widget>
-
+      <Modal onClickToggleModal ={ onClickToggleModal } user={selectedUser} />
     </>
   );
 };

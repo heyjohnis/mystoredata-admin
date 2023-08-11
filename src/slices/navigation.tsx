@@ -21,6 +21,8 @@ import {
 } from "react-icons/bi"
 
 import { GiProcessor } from "react-icons/gi";
+import { MdOutlineCorporateFare } from "react-icons/md";
+
 
 export type NavigationState = {
   title: string;
@@ -49,7 +51,12 @@ const initialState: NavigationState[] = [
         title: "사용자",
         items: [],
       },
-
+      {
+        url: "/corps",
+        icon: <MdOutlineCorporateFare size={20} />,
+        title: "업체",
+        items: [],
+      },
     ],
   },
   {
@@ -62,7 +69,7 @@ const initialState: NavigationState[] = [
         items: [],
       },
       {
-        url: "/users",
+        url: "/logic",
         icon: <GiProcessor size={20} />,
         title: "로직개발",
         items: [],
