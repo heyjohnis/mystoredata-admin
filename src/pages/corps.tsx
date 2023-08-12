@@ -4,7 +4,7 @@ import Widget from "components/widget";
 import countries from "json/countries.json";
 import {formatNumber} from "functions/numbers";
 import { useEffect, useState } from 'react';
-import { POST, GET } from 'utils/restApi';
+import { POST, GET } from 'utils/restApi'
 
 export type UserProps = {
   _id: string;
@@ -43,7 +43,7 @@ const fields: Record<string, string>[] = [
 const Index: React.FC = () => {
 
   const [users, setUsers] = useState<UserProps[]>([]);
-
+  console.log("client side rendering...");
   useEffect(() => {
     GET('user/list', {}).then((res) => {
       if (res.data) {

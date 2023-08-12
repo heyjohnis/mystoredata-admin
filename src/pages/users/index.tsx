@@ -1,10 +1,9 @@
 import SectionTitle from "components/dashboard/section-title";
 import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
-import countries from "json/countries.json";
-import {formatNumber} from "functions/numbers";
+
 import { useEffect, useState } from 'react';
-import { POST, GET } from 'utils/restApi';
+import { POST, GET } from 'utils/restApi'
 import Modal from 'components/users/ModalDetail';
 import { useCallback } from 'react';
 
@@ -44,24 +43,24 @@ const Index: React.FC = () => {
   const [users, setUsers] = useState<UserProps[]>([]);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
   const [ selectedUser, setSelectedUser ] = useState<UserProps | null>(null);
+  const [ toggleModal, setToggleModal ] = useState<boolean>(false);
 
   useEffect(() => {
-    GET('user/list', {}).then((res) => {
-      if (res.data) {
+    GET('user/list').then((res: any) => {
+      console.log({res});
         setUsers(res.data.users);
-      }
     });
 
   }, []);
 
   const userDetail = (user: UserProps) => {
     console.log(user);
-    onClickToggleModal();
+    setSelectedUser(user);
   }
 
-  const onClickToggleModal = useCallback(() => {
-    setOpenModal(!isOpenModal);
-  }, [isOpenModal]);
+  const closedModal = () => {
+    setSelectedUser(null);
+  }
 
   return (
     <>
@@ -86,7 +85,7 @@ const Index: React.FC = () => {
             </thead>
             <tbody>
               {users.map((user, i) => (
-                <tr key={i} onClick={ e => userDetail(user)}>
+                <tr key={i} onClick={ () => userDetail(user)}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {user["userId"]}
                   </td>
@@ -108,7 +107,7 @@ const Index: React.FC = () => {
           </table>
         </div>
       </Widget>
-      <Modal onClickToggleModal ={ onClickToggleModal } user={selectedUser} />
+      <Modal user={selectedUser} closedModal={closedModal} />
     </>
   );
 };

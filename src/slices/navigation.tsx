@@ -1,19 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
   FiToggleLeft,
-  FiList,
-  FiActivity,
-  FiCalendar,
-  FiStar,
-  FiDroplet,
-  FiGrid,
-  FiClock,
-  FiCopy,
   FiUser,
   FiPieChart,
   FiCompass,
   FiHelpCircle,
-  FiShoppingCart,
   FiHome,
 } from "react-icons/fi";
 import { 

@@ -14,6 +14,7 @@ export type InputProps = {
     | "week";
   width?: string;
   placeholder?: string;
+  value?: string;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -21,6 +22,7 @@ export const Input: React.FC<InputProps> = ({
   type,
   width = "w-full",
   placeholder = "",
+  value = "",
 }) => {
   return (
     <input
@@ -28,6 +30,7 @@ export const Input: React.FC<InputProps> = ({
       type={type}
       name={name}
       className={`form-input block ${width} border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 flex-grow-1 focus:border-blue-500 focus:ring-0 sm:text-sm rounded-md`}
+      value={value}
     />
   );
 };
