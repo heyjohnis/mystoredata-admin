@@ -36,3 +36,21 @@ export async function GET (uri: string) {
       console.log(error.response);
     });;
 }
+
+export async function PUT (uri: string, data: any) {
+
+  const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:8089';
+  const token = cookie.get("token");
+  const url = `${serverURL}${uri}`;
+  return axios({
+      method: "put",
+      url,
+      headers: { Authorization: `Bearer ${token}` },
+      data,
+    }).then((response) => response ).catch((error) => {
+      if(error.response.status === 401) {
+        Router.push("/login");
+      }
+      console.log(error.response);
+    });
+}

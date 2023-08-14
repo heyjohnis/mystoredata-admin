@@ -7,14 +7,14 @@ import {ErrorMessage} from "components/forms/error-message";
 import {SuccessMessage} from "components/forms/success-message";
 import {Hint} from "components/forms/hint";
 import {Input} from "components/forms/input";
-import {Textarea} from "components/forms/textarea";
-import {Select} from "components/forms/select";
-import {Checkbox} from "components/forms/checkbox";
-import {Radio} from "components/forms/radio";
-
+import { POST, PUT } from 'utils/restApi';
+import { UserProps } from 'model/user';
+import AccountList from 'components/accounts/accountList';
 
 const Modal = ( { user, closedModal }: any) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [ isOpen, setIsOpen ] = useState<boolean>(false);
+  const [ form, setForm ] = useState<UserProps>({...user});
+  const [ isReadOnly, setIsReadOnly ] = useState<boolean>(false);
   const closeModal = () => {
     setIsOpen(false);
     closedModal();
@@ -23,8 +23,36 @@ const Modal = ( { user, closedModal }: any) => {
   useEffect(() => {
     if (user) {
       setIsOpen(true);
+      setForm(user);
+      setIsReadOnly( user.userId ? true : false );
     }
   }, [user]);
+
+  const saveUser = () => {
+    if(user.createdAt) {
+      PUT('user/update', form).then((res: any) => {
+        console.log('user update');
+        console.log('res: ', res);
+        closedModal(true);
+        closeModal();
+      });
+    } else {
+      POST('auth/signup', form).then((res: any) => {
+        console.log('user create');
+        if(res?.data) {
+          console.log('res: ', res);
+          closedModal(true);
+          closeModal();
+        }
+      });
+    }
+
+  };
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setForm((prevState: any) => ({ ...prevState, [name]: value }));
+  };
 
   return (
     <>
@@ -53,7 +81,7 @@ const Modal = ( { user, closedModal }: any) => {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-              <div className="relative inline-block w-full max-w-lg p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl space-y-4">
+              <div className="relative inline-block w-full max-w-3xl p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl space-y-4">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-gray-900 dark:text-white">
@@ -64,33 +92,51 @@ const Modal = ( { user, closedModal }: any) => {
                   onClick={closeModal}>
                   <FiX size={18} className="stroke-current" />
                 </button>
-                <div>
-                <InputWrapper inline={true} outerClassName="sm:col-span-12">
-                  <Label>로그인ID</Label>
-                  <Input name="name" type="text" width="w-100" value={user?.userId}  />
-                </InputWrapper>
-                <InputWrapper inline={true} outerClassName="sm:col-span-12">
-                  <Label>사용자명</Label>
-                  <Input name="name" type="text" width="w-64" value={user?.name}  />
-                </InputWrapper>
-                  <Label>회사명</Label>
-                  <Input name="name" type="text" width="w-64" value={user?.corpName}  />
-                <InputWrapper inline={true} outerClassName="sm:col-span-12">
-                  <Label>사업자번호</Label>
-                  <Input name="name" type="text" width="w-64" value={user?.corpNum}  />
-                </InputWrapper>
+                <div className='flex'>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>로그인ID</Label>
+                    <Input name="userId" type="text" value={form?.userId} onChange={handleChange} readOnly={isReadOnly} />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>패스워드</Label>
+                    <Input name="password" type="password" value={form?.password} onChange={handleChange} readOnly={isReadOnly} />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
+                    <Label>등록일시</Label>
+                    <Input name="createdAt" type="text" value={form?.createdAt} onChange={handleChange} readOnly={true} />
+                  </InputWrapper>                  
                 </div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Donec eu libero sit amet quam egestas semper. Aenean ultricies
-                  mi vitae est. Mauris placerat eleifend leo.
-                </p>
+                <div className='flex'>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>사용자명</Label>
+                    <Input name="name" type="text" value={form?.name} onChange={handleChange} />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>회사명</Label>
+                    <Input name="corpName" type="text" value={form?.corpName} onChange={handleChange} />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2">
+                    <Label>사업자번호</Label>
+                    <Input name="corpNum" type="text" value={form?.corpNum} onChange={handleChange} />
+                  </InputWrapper>
+                </div>
+                <div className=''>
+                  <InputWrapper outerClassName=" mt-2">
+                    <Label>이메일</Label>
+                    <Input name="email" type="text" value={form?.email} onChange={handleChange} width="w-full" />
+                  </InputWrapper>
+                </div>
+                
+                <AccountList accounts={form?.accounts} />
 
                 <button
                   type="button"
-                  onClick={closeModal}
-                  className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600">
-                  Close modal
+                  onClick={saveUser}
+                  className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
+                  >
+                  저장
                 </button>
+
               </div>
             </Transition.Child>
           </div>

@@ -3,17 +3,9 @@ import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 
 import { useEffect, useState } from 'react';
-import { POST, GET } from 'utils/restApi'
+import { GET } from 'utils/restApi'
 import Modal from 'components/users/ModalDetail';
-import { useCallback } from 'react';
-
-export type UserProps = {
-  userId: string;
-  name: string;
-  email: string;
-  corpNum: string;
-  corpName: string;
-};
+import { UserProps } from 'model/user';
 
 const fields: Record<string, string>[] = [
   {
@@ -42,34 +34,42 @@ const Index: React.FC = () => {
 
   const [users, setUsers] = useState<UserProps[]>([]);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const [ selectedUser, setSelectedUser ] = useState<UserProps | null>(null);
+  const [ selectedUser, setSelectedUser ] = useState<UserProps | null | {}>(null);
   const [ toggleModal, setToggleModal ] = useState<boolean>(false);
 
   useEffect(() => {
+    getUserList();
+  }, []);
+
+  const getUserList = () => {
     GET('user/list').then((res: any) => {
       console.log({res});
         setUsers(res.data.users);
     });
-
-  }, []);
+  }
 
   const userDetail = (user: UserProps) => {
     console.log(user);
     setSelectedUser(user);
   }
 
-  const closedModal = () => {
+  const closedModal = (isUpdated: boolean = false) => {
     setSelectedUser(null);
+    if(isUpdated) {
+      getUserList();
+    }
   }
+
+  const createUser = () => {
+    setSelectedUser({});
+
+  };
 
   return (
     <>
       <Notification />
-      <SectionTitle title="users" subtitle="사용자목록" />
-
-      <Widget
-        title="Default table"
-        description={<span>Use the following examples for larger tables</span>}>
+      <SectionTitle title="users" subtitle="사용자목록" buttonName='사용자추가' handleEvent={createUser} />
+      <Widget>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
             <thead>
