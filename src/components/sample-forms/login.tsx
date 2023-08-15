@@ -26,7 +26,7 @@ const Index: React.FC = () => {
 
   const onSubmit = async (data: FormProps) => {
   
-    const url = `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`;
+    const url = `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`;
     const response = await axios.post(url, data);
     console.log(response);
     handleLogin(response.data.token);
