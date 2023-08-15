@@ -10,6 +10,7 @@ import {Input} from "components/forms/input";
 import { POST, PUT } from 'utils/restApi';
 import { UserProps } from 'model/user';
 import AccountList from 'components/accounts/accountList';
+import CardList from 'components/cards/cardList';
 
 const Modal = ( { user, closedModal }: any) => {
   const [ isOpen, setIsOpen ] = useState<boolean>(false);
@@ -128,7 +129,7 @@ const Modal = ( { user, closedModal }: any) => {
                 </div>
                 
                 <AccountList accounts={form?.accounts} />
-
+                <CardList cards={form?.cards} />
                 <button
                   type="button"
                   onClick={saveUser}

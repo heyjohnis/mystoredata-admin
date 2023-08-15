@@ -1,10 +1,10 @@
 import { Select } from 'components/forms/select';
 
-export default function BankSelectbox({ onChange, selectedValue }: any) {
+export default function BankSelectbox({ onChange, selectedValue, isDisabled }: any) {
   console.log({selectedValue});
   return (
     <Select
-      width="w-32"
+      width="w-25"
       name="bankAccountType"
       placeholder='은행선택'
       value={selectedValue}
@@ -31,6 +31,7 @@ export default function BankSelectbox({ onChange, selectedValue }: any) {
           {key: "KBANK", value: "케이뱅크"},
       ]}
       onChange={ onChange }
+      isDisabled={isDisabled}
     />
   )
 }

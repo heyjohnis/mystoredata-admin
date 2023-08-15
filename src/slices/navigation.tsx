@@ -10,10 +10,11 @@ import {
 import { 
   BiMoney
 } from "react-icons/bi"
-
 import { GiProcessor } from "react-icons/gi";
 import { MdOutlineCorporateFare } from "react-icons/md";
-
+import { BsDatabase } from "react-icons/bs";
+import { BsCreditCard } from "react-icons/bs";
+import { LuBanknote } from "react-icons/lu";
 
 export type NavigationState = {
   title: string;
@@ -43,9 +44,15 @@ const initialState: NavigationState[] = [
         items: [],
       },
       {
-        url: "/corps",
-        icon: <MdOutlineCorporateFare size={20} />,
-        title: "업체",
+        url: "/accounts/data",
+        icon: <LuBanknote size={20} />,
+        title: "계좌데이터",
+        items: [],
+      },
+      {
+        url: "/cards/data",
+        icon: <BsCreditCard size={20} />,
+        title: "카드데이터",
         items: [],
       },
     ],

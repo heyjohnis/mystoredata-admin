@@ -4,4 +4,6 @@ export type AccountProps = {
     bankAccountType: 'C' | 'P';
     bankAccountNum: string;
     bankAccountPwd: string;
+    webId: string;
+    webPwd: string;
 }
