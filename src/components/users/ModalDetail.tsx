@@ -1,5 +1,5 @@
 import {Dialog, Transition} from "@headlessui/react";
-import {Fragment, useEffect, useState, PropsWithChildren, use} from "react";
+import {Fragment, useEffect, useState, PropsWithChildren} from "react";
 import {FiX} from "react-icons/fi";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
@@ -82,7 +82,7 @@ const Modal = ( { user, closedModal }: any) => {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-              <div className="relative inline-block w-full max-w-3xl p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl space-y-4">
+              <div className="relative inline-block w-full max-w-4xl p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl space-y-4">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-gray-900 dark:text-white">

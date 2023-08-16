@@ -8,7 +8,7 @@ import { AccountLogProps } from 'model/accountLog';
 
 const fields: Record<string, string>[] = [
   {
-    name: "사업자번호",
+    name: "사업자",
     key: "CorpNum",
   },
   {
@@ -71,16 +71,16 @@ const Index: React.FC = () => {
               {logs.map((log, i) => (
                 <tr key={i}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.CorpNum}
+                    {log.CorpNum} ({log.CorpName})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.BankAccountNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {log.Withdraw}
+                    {parseInt(log.Withdraw).toLocaleString('ko-KR') || '-'}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {log.Deposit}
+                    {parseInt(log.Deposit).toLocaleString('ko-KR') || '-'}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.TransDT}

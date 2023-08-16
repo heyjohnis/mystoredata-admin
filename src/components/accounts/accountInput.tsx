@@ -18,31 +18,36 @@ export default function AccountInput( { addAccout }: any) {
 
   }
   return (
-    <div className='flex mb-1'>
-      <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-        <Select
-          width="w-25"
-          name="bankAccountType"
-          placeholder='기업유형'
-          options={[
-            {key: "C", value: "법인"},
-            {key: "P", value: "개인"},
-          ]}
-          onChange={handleChange}
-          />
-      </InputWrapper>
-      <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-        <BankSelectbox onChange={handleChange} />
-      </InputWrapper>
-      <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-        <Input name="bankAccountNum" type="text" width="w-36" placeholder='계좌번호' value={form?.bankAccountNum} onChange={handleChange} />
-      </InputWrapper>
-      <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-      <Input name="webId" type="text" width="w-24" placeholder='로그인ID' value={form?.webId} onChange={handleChange} />
-      </InputWrapper>
-      <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-        <Input name="webPwd" type="password"  width="w-24" placeholder='로그인PW' value={form?.webPwd} onChange={handleChange} />
-      </InputWrapper>
+    <div className="flex mb-1 justify-between">
+      <div className='flex'>
+        <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
+          <Select
+            width="w-25"
+            name="bankAccountType"
+            placeholder='기업유형'
+            options={[
+              {key: "C", value: "법인"},
+              {key: "P", value: "개인"},
+            ]}
+            onChange={handleChange}
+            />
+        </InputWrapper>
+        <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
+          <BankSelectbox onChange={handleChange} />
+        </InputWrapper>
+        <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
+          <Input name="bankAccountNum" type="text" width="w-36" placeholder='계좌번호' value={form?.bankAccountNum} onChange={handleChange} />
+        </InputWrapper>
+        <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
+          <Input name="bankAccountPwd" type="text" width="w-32" placeholder='계좌비밀번호' value={form?.bankAccountPwd} onChange={handleChange} />
+        </InputWrapper>
+        <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
+          <Input name="webId" type="text" width="w-24" placeholder='로그인ID' value={form?.webId} onChange={handleChange} />
+        </InputWrapper>
+        <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
+          <Input name="webPwd" type="password"  width="w-24" placeholder='로그인PW' value={form?.webPwd} onChange={handleChange} />
+        </InputWrapper>
+        </div>
       <button
         type="button"
         onClick={regAccount}

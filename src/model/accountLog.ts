@@ -1,10 +1,13 @@
+import { UserProps } from './user'
+
 export type AccountLogProps = {
-    user: string,
+    user: UserProps,
     CorpNum: string,
+    CorpName: string,
     BankAccountNum: string,
-    Withdraw: number
-    Deposit: number,
-    Balance: number,
+    Withdraw: string
+    Deposit: string,
+    Balance: string,
     TransDT: string,
     TransType: string
     TransOffice: string,
