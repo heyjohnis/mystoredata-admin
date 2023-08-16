@@ -4,71 +4,55 @@ import Widget from "components/widget";
 
 import { useEffect, useState } from 'react';
 import { GET } from 'utils/restApi'
-import Modal from 'components/users/ModalDetail';
-import { UserProps } from 'model/user';
+import { AccountLogProps } from 'model/accountLog';
 
 const fields: Record<string, string>[] = [
   {
-    name: "로그인ID",
-    key: "userId",
-  },
-  {
-    name: "사용자명",
-    key: "name",
-  },
-  {
-    name: "회사명",
-    key: "corpName",
-  },
-  {
     name: "사업자번호",
-    key: "corpNum",
+    key: "CorpNum",
   },
   {
-    name: "이메일",
-    key: "email",
+    name: "계좌번호",
+    key: "BankAccountNum",
+  },
+  {
+    name: "입금",
+    key: "Withdraw",
+  },
+  {
+    name: "출금",
+    key: "Deposit",
+  },
+  {
+    name: "거래일시",
+    key: "TransDT",
+  },
+  {
+    name: "거래적요",
+    key: "TransRemark",
   },
 ];
 
 const Index: React.FC = () => {
 
-  const [users, setUsers] = useState<UserProps[]>([]);
-  const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const [ selectedUser, setSelectedUser ] = useState<UserProps | null | {}>(null);
-  const [ toggleModal, setToggleModal ] = useState<boolean>(false);
+  const [ logs, setLogs ] = useState<AccountLogProps[]>([]);
 
   useEffect(() => {
-    getUserList();
+    getAccountLogs();
   }, []);
 
-  const getUserList = () => {
-    GET('user/list').then((res: any) => {
+  const getAccountLogs = () => {
+    GET('account/log').then((res: any) => {
       console.log({res});
-        setUsers(res.data.users);
+      setLogs(res.data.logs);
     });
   }
 
-  const userDetail = (user: UserProps) => {
-    console.log(user);
-    setSelectedUser(user);
-  }
-
-  const closedModal = (isUpdated: boolean = false) => {
-    setSelectedUser(null);
-    if(isUpdated) {
-      getUserList();
-    }
-  }
-
-  const createUser = () => {
-    setSelectedUser({});
-
-  };
 
   return (
     <>
       <Notification />
-      <SectionTitle title="accounts" subtitle="계좌내역" buttonName='사용자추가' handleEvent={createUser} />
+      <SectionTitle title="accounts" subtitle="계좌내역" />
       <Widget>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
@@ -84,22 +68,25 @@ const Index: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, i) => (
-                <tr key={i} onClick={ () => userDetail(user)}>
+              {logs.map((log, i) => (
+                <tr key={i}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {user["userId"]}
+                    {log.CorpNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {user["name"]}
+                    {log.BankAccountNum}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
+                    {log.Withdraw}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
+                    {log.Deposit}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {user["corpName"]}
+                    {log.TransDT}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {user["corpNum"]}
-                  </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {user["email"]}
+                    {log.TransRemark}
                   </td>
                 </tr>
               ))}
@@ -107,7 +94,6 @@ const Index: React.FC = () => {
           </table>
         </div>
       </Widget>
-      <Modal user={selectedUser} closedModal={closedModal} />
     </>
   );
 };
