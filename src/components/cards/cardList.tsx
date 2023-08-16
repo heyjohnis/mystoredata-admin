@@ -28,17 +28,18 @@ export default function CardList({ cards }: any) {
   };
 
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-x-auto mt-3">
                 
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-col">
-          <div className="text-l font-bold">계좌정보</div>
+          <div className="text-l font-bold">카드정보</div>
         </div>
       </div>
       <div className="w-full">
         <CardInput addAccout={addAccout} />
-      { cardList.map((card: CardProps, i: any) => (
-        <div key={i} className='flex'>
+      { cardList && cardList.map((card: CardProps, i: any) => (
+        <div key={i} className='flex justify-between'>
+          <div className='flex'>
           <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
               <CardSelectbox onChange={handleChange} selectedValue={card["cardCompany"]} isDisabled={true} />
           </InputWrapper>
@@ -58,6 +59,7 @@ export default function CardList({ cards }: any) {
           <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
             <Input name="bankAccountNum" type="text"  width="w-36" placeholder='계좌번호' value={card?.cardNum} onChange={handleChange} readOnly={true} />
           </InputWrapper>
+          </div>
           <button
             type="button"
             onClick={() => accountDetail()}

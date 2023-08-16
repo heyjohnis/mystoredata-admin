@@ -82,7 +82,7 @@ const Modal = ( { user, closedModal }: any) => {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-              <div className="relative inline-block w-full max-w-4xl p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl space-y-4">
+              <div className="relative inline-block w-full max-w-4xl p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-gray-900 dark:text-white">
@@ -102,6 +102,10 @@ const Modal = ( { user, closedModal }: any) => {
                     <Label>패스워드</Label>
                     <Input name="password" type="password" value={form?.password} onChange={handleChange} readOnly={isReadOnly} />
                   </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>이메일</Label>
+                    <Input name="email" type="text" value={form?.email} onChange={handleChange} width="w-full" />
+                  </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-12 mt-2">
                     <Label>등록일시</Label>
                     <Input name="createdAt" type="text" value={form?.createdAt} onChange={handleChange} readOnly={true} />
@@ -120,24 +124,23 @@ const Modal = ( { user, closedModal }: any) => {
                     <Label>사업자번호</Label>
                     <Input name="corpNum" type="text" value={form?.corpNum} onChange={handleChange} />
                   </InputWrapper>
+
                 </div>
                 <div className=''>
-                  <InputWrapper outerClassName=" mt-2">
-                    <Label>이메일</Label>
-                    <Input name="email" type="text" value={form?.email} onChange={handleChange} width="w-full" />
-                  </InputWrapper>
+
                 </div>
                 
                 <AccountList accounts={form?.accounts} />
                 <CardList cards={form?.cards} />
-                <button
-                  type="button"
-                  onClick={saveUser}
-                  className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
-                  >
-                  저장
-                </button>
-
+                <div className='d-block mt-3 pt-3 border-t-2'>
+                  <button
+                    type="button"
+                    onClick={saveUser}
+                    className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
+                    >
+                    저장
+                  </button>
+                </div>
               </div>
             </Transition.Child>
           </div>

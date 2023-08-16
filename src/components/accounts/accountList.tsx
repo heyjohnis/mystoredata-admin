@@ -29,7 +29,7 @@ export default function AccountList({ accounts }: any) {
   };
 
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-x-auto mt-3">
                 
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-col">
@@ -38,7 +38,7 @@ export default function AccountList({ accounts }: any) {
       </div>
       <div className="w-full">
         <AccountInput addAccout={addAccout} />
-      { accountList.map((account: AccountProps, i: any) => (
+      { accounts && accountList.map((account: AccountProps, i: any) => (
         <div key={i} className='flex'>
           <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
               <BankSelectbox onChange={handleChange} selectedValue={account["bank"]} isDisabled={true} />
