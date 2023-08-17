@@ -20,3 +20,16 @@ export const BankCode: any = {
     "EJEJUBANK": "제주은행",
     "KBANK": "케이뱅크",
 };
+
+export const CardCode: any = {
+    "BC": "비씨카드",
+    "HANA": "하나SK카드",
+    "HYUNDAI": "현대카드",
+    "KB": "KB카드",
+    "CITI": "씨티카드",
+    "LOTTE": "롯데카드",
+    "NH": "농협NH카드",
+    "SAMSUNG": "삼성카드",
+    "SHINHAN": "신한카드",
+    "WOORI": "우리카드",
+}

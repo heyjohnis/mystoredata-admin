@@ -6,6 +6,7 @@ import BankSelectbox from './bankSelectbox';
 import { useState } from 'react';
 import { InputWrapper } from 'components/forms/input-wrapper';
 import AccountInput from './accountInput';
+import { DELETE } from 'utils/restApi';
 
 export default function AccountList({ accounts }: any) {
 
@@ -17,15 +18,20 @@ export default function AccountList({ accounts }: any) {
   };
 
   const addAccout = (account: AccountProps) => {
-    setAccountList((prevState: any) => ({ ...prevState, account}));
+    setAccountList((prevState: any) => ([ ...prevState, account]));
   };
 
   const accountDetail = () => {
 
   };
 
-  const accountDelete = () => {
-
+  const accountDelete = (account: AccountProps) => {
+    DELETE('account/delete', account).then((res: any) => {
+      console.log(res);
+        setAccountList(accountList.filter((item: AccountProps) => item.bankAccountNum !== account.bankAccountNum));
+        //alert('삭제에 실패하였습니다.\n' + res.data.error.message);
+      }
+    );
   };
 
   return (
@@ -38,7 +44,7 @@ export default function AccountList({ accounts }: any) {
       </div>
       <div className="w-full">
         <AccountInput addAccout={addAccout} />
-      { accounts && accountList.map((account: AccountProps, i: any) => (
+      { accountList && accountList.map((account: AccountProps, i: any) => (
         <div key={i} className='flex'>
           <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
               <BankSelectbox onChange={handleChange} selectedValue={account["bank"]} isDisabled={true} />
@@ -68,8 +74,8 @@ export default function AccountList({ accounts }: any) {
           </button>
           <button
             type="button"
-            onClick={accountDelete}
-            className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-gray-500 rounded-lg hover:bg-blue-600"
+            onClick={() => accountDelete(account)}
+            className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-gray-500 rounded-lg hover:bg-gray-600"
           >
             삭제
           </button>

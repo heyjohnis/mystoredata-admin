@@ -130,8 +130,8 @@ const Modal = ( { user, closedModal }: any) => {
 
                 </div>
                 
-                <AccountList accounts={form?.accounts} />
-                <CardList cards={form?.cards} />
+                <AccountList accounts={form?.accounts} user={user} />
+                <CardList cards={form?.cards} user={user} />
                 <div className='d-block mt-3 pt-3 border-t-2'>
                   <button
                     type="button"

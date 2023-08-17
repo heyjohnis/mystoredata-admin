@@ -5,8 +5,9 @@ import CardSelectbox from './cardSelectbox';
 import { useState } from 'react';
 import { InputWrapper } from 'components/forms/input-wrapper';
 import CardInput from './cardInput';
+import { DELETE } from 'utils/restApi';
 
-export default function CardList({ cards }: any) {
+export default function CardList({ cards, user }: any) {
 
   const [ form, setForm ] = useState<CardProps>();
   const [ cardList, setCardList ] = useState<CardProps[]>(cards);
@@ -15,16 +16,23 @@ export default function CardList({ cards }: any) {
     setForm((prevState: any) => ({ ...prevState, [name]: value }));
   };
 
-  const addAccout = (card: CardProps) => {
+  const addCard = (card: CardProps) => {
     setCardList((prevState: any) => ({ ...prevState, card}));
   };
 
-  const accountDetail = () => {
+  const cardDetail = () => {
 
   };
 
-  const accountDelete = () => {
-
+  const cardDelete = (card: CardProps) => {
+    DELETE('card/delete', card).then((res: any) => {
+      console.log(res);
+      if(res?.status === 200) {
+        setCardList(cardList.filter((item: CardProps) => item.cardNum !== card.cardNum));
+        //alert('삭제에 실패하였습니다.\n' + res.data.error.message);
+      }
+      }
+    );
   };
 
   return (
@@ -36,7 +44,7 @@ export default function CardList({ cards }: any) {
         </div>
       </div>
       <div className="w-full">
-        <CardInput addAccout={addAccout} />
+        <CardInput addCard={addCard} user={user} />
       { cardList && cardList.map((card: CardProps, i: any) => (
         <div key={i} className='flex justify-between'>
           <div className='flex'>
@@ -62,14 +70,14 @@ export default function CardList({ cards }: any) {
           </div>
           <button
             type="button"
-            onClick={() => accountDetail()}
+            onClick={() => cardDetail()}
             className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
           >
             상세보기
           </button>
           <button
             type="button"
-            onClick={accountDelete}
+            onClick={() => cardDelete(card)}
             className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-gray-500 rounded-lg hover:bg-blue-600"
           >
             삭제

@@ -3,18 +3,25 @@ import { Input } from 'components/forms/input';
 import { InputWrapper } from 'components/forms/input-wrapper';
 import { Select } from 'components/forms/select';
 import CardSelectbox from './cardSelectbox';
-import { AccountProps } from 'model/account';
+import { CardProps } from 'model/card';
 import { POST } from 'utils/restApi';
 
-export default function CardInput( { addCard }: any) {
-  const [ form, setForm ] = useState<AccountProps>();
+export default function CardInput( { addCard, user }: any) {
+  const [ form, setForm ] = useState<CardProps>();
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setForm((prevState: any) => ({ ...prevState, [name]: value }));
   };
 
-  const regAccount = () => {
-    POST('account/reg ', form)
+  const regCard = () => {
+    POST('card/reg ', {...form, user: user._id}).then((res: any) => {
+      console.log(res);
+      if(res?.status === 200) {
+        addCard(form);
+      } else {
+        alert('등록에 실패하였습니다.\n' + res?.data.error.message);
+      }
+    });
 
   }
   return (
@@ -23,7 +30,7 @@ export default function CardInput( { addCard }: any) {
           <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
             <Select
               width="w-25"
-              name="bankAccountType"
+              name="cardType"
               placeholder='기업유형'
               options={[
                 {key: "C", value: "법인"},
@@ -36,7 +43,7 @@ export default function CardInput( { addCard }: any) {
             <CardSelectbox onChange={handleChange} />
           </InputWrapper>
           <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-            <Input name="bankAccountNum" type="text" width="w-36" placeholder='계좌번호' value={form?.bankAccountNum} onChange={handleChange} />
+            <Input name="cardNum" type="text" width="w-36" placeholder='카드번호' value={form?.cardNum} onChange={handleChange} />
           </InputWrapper>
           <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
           <Input name="webId" type="text" width="w-24" placeholder='로그인ID' value={form?.webId} onChange={handleChange} />
@@ -47,7 +54,7 @@ export default function CardInput( { addCard }: any) {
       </div>
       <button
         type="button"
-        onClick={regAccount}
+        onClick={regCard}
         className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
       >
         저장

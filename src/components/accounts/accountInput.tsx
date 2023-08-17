@@ -14,7 +14,14 @@ export default function AccountInput( { addAccout }: any) {
   };
 
   const regAccount = () => {
-    POST('account/reg ', form)
+    POST('account/reg ', form).then((res: any) => {
+      console.log(res);
+      if(res.status === 200) {
+        addAccout(form);
+      } else {
+        alert('등록에 실패하였습니다.\n' + res.data.error.message);
+      }
+    });
 
   }
   return (
@@ -39,7 +46,7 @@ export default function AccountInput( { addAccout }: any) {
           <Input name="bankAccountNum" type="text" width="w-36" placeholder='계좌번호' value={form?.bankAccountNum} onChange={handleChange} />
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-          <Input name="bankAccountPwd" type="text" width="w-32" placeholder='계좌비밀번호' value={form?.bankAccountPwd} onChange={handleChange} />
+          <Input name="bankAccountPwd" type="password" width="w-32" placeholder='계좌비밀번호' value={form?.bankAccountPwd} onChange={handleChange} />
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
           <Input name="webId" type="text" width="w-24" placeholder='로그인ID' value={form?.webId} onChange={handleChange} />
