@@ -2,7 +2,6 @@ import { Select } from 'components/forms/select';
 import { CardCode } from 'data/commonCode';
 
 export default function CardSelectbox({ onChange, selectedValue, isDisabled }: any) {
-  console.log({selectedValue});
   const codes = Object.keys(CardCode).map((key) => ( { key, value: CardCode[key] } ));  
 
   return (

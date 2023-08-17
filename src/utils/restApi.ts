@@ -13,11 +13,14 @@ export async function POST (uri: string, data: any) {
         url,
         headers: { Authorization: `Bearer ${token}` },
         data,
-      }).then((response) => response ).catch((error) => {
+      }).then((response) => response )
+      .catch((error) => {
         if(error.response.status === 401) {
           Router.push("/login");
         }
-        console.log(error.response);
+        if(error.response?.data?.error?.message) {
+          alert(error.response.data.error.message);
+        }
       });
 }
 
@@ -29,12 +32,15 @@ export async function GET (uri: string) {
       method: "get",
       url,
       headers: { Authorization: `Bearer ${token}` },
-    }).then((response) => response ).catch((error) => {
+    }).then((response) => response )
+    .catch((error) => {
       if(error.response.status === 401) {
         Router.push("/login");
       }
-      console.log(error.response);
-    });;
+      if(error.response?.data?.error?.message) {
+        alert(error.response.data.error.message);
+      }
+    });
 }
 
 export async function PUT (uri: string, data: any) {
@@ -47,12 +53,15 @@ export async function PUT (uri: string, data: any) {
       url,
       headers: { Authorization: `Bearer ${token}` },
       data,
-    }).then((response) => response ).catch((error) => {
-      if(error.response.status === 401) {
-        Router.push("/login");
-      }
-      console.log(error.response);
-    });
+    }).then((response) => response )
+      .catch((error) => {
+        if(error.response.status === 401) {
+          Router.push("/login");
+        }
+        if(error.response?.data?.error?.message) {
+          alert(error.response.data.error.message);
+        }
+      });
 }
 
 export async function DELETE (uri: string, data: any) {
@@ -65,7 +74,13 @@ export async function DELETE (uri: string, data: any) {
       url,
       headers: { Authorization: `Bearer ${token}` },
       data,
-    }).then((response) => response ).catch((error) => {
-
+    }).then((response) => response )
+    .catch((error) => {
+      if(error.response.status === 401) {
+        Router.push("/login");
+      }
+      if(error.response?.data?.error?.message) {
+        alert(error.response.data.error.message);
+      }
     });
 }

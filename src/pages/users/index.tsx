@@ -44,7 +44,7 @@ const Index: React.FC = () => {
   const getUserList = () => {
     GET('user/list').then((res: any) => {
       console.log({res});
-        setUsers(res.data.users);
+        setUsers(res.data.data);
     });
   }
 
@@ -90,7 +90,7 @@ const Index: React.FC = () => {
                     {user["userId"]}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {user["name"]}
+                    {user["userName"]}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {user["corpName"]}

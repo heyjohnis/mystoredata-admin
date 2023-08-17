@@ -6,7 +6,7 @@ import BankSelectbox from './bankSelectbox';
 import { AccountProps } from 'model/account';
 import { POST } from 'utils/restApi';
 
-export default function AccountInput( { addAccout }: any) {
+export default function AccountInput( { addAccout, user }: any) {
   const [ form, setForm ] = useState<AccountProps>();
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -14,15 +14,15 @@ export default function AccountInput( { addAccout }: any) {
   };
 
   const regAccount = () => {
-    POST('account/reg ', form).then((res: any) => {
-      console.log(res);
-      if(res.status === 200) {
+    POST('account/reg ', {...form, corpNum: user.corpNum }).then((res: any) => {
+      if(res?.status === 200) {
         addAccout(form);
       } else {
-        alert('등록에 실패하였습니다.\n' + res.data.error.message);
+        alert('등록에 실패하였습니다');
       }
+    }).catch((err: any) => {
+      alert('등록에 실패하였습니다');
     });
-
   }
   return (
     <div className="flex mb-1 justify-between">

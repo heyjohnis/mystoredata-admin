@@ -106,28 +106,46 @@ const Modal = ( { user, closedModal }: any) => {
                     <Label>이메일</Label>
                     <Input name="email" type="text" value={form?.email} onChange={handleChange} width="w-full" />
                   </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
-                    <Label>등록일시</Label>
-                    <Input name="createdAt" type="text" value={form?.createdAt} onChange={handleChange} readOnly={true} />
-                  </InputWrapper>                  
-                </div>
-                <div className='flex'>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>사용자명</Label>
-                    <Input name="name" type="text" value={form?.name} onChange={handleChange} />
+                    <Input name="userName" type="text" value={form?.userName} onChange={handleChange} />
                   </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>휴대폰</Label>
+                    <Input name="mobile" type="text" value={form?.mobile} onChange={handleChange} />
+                  </InputWrapper>
+                </div>
+                <div className='flex'>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>회사명</Label>
                     <Input name="corpName" type="text" value={form?.corpName} onChange={handleChange} />
                   </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-4 mt-2">
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>사업자번호</Label>
                     <Input name="corpNum" type="text" value={form?.corpNum} onChange={handleChange} />
                   </InputWrapper>
-
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>대표자명</Label>
+                    <Input name="ceoName" type="text" value={form?.ceoName} onChange={handleChange} />
+                  </InputWrapper>
                 </div>
-                <div className=''>
-
+                <div className='flex'>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>업태</Label>
+                    <Input name="bizType" type="text" value={form?.bizType} onChange={handleChange} />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>업종</Label>
+                    <Input name="bizClass" type="text" value={form?.bizClass} onChange={handleChange} />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>주소</Label>
+                    <Input name="addr1" type="text" value={form?.addr1} onChange={handleChange} />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
+                    <Label>상세주소</Label>
+                    <Input name="addr2" type="text" value={form?.addr2} onChange={handleChange} />
+                  </InputWrapper>  
                 </div>
                 
                 <AccountList accounts={form?.accounts} user={user} />

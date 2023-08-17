@@ -8,7 +8,7 @@ import { InputWrapper } from 'components/forms/input-wrapper';
 import AccountInput from './accountInput';
 import { DELETE } from 'utils/restApi';
 
-export default function AccountList({ accounts }: any) {
+export default function AccountList({ accounts, user }: any) {
 
   const [ form, setForm ] = useState<AccountProps>();
   const [ accountList, setAccountList ] = useState<AccountProps[]>(accounts);
@@ -43,42 +43,46 @@ export default function AccountList({ accounts }: any) {
         </div>
       </div>
       <div className="w-full">
-        <AccountInput addAccout={addAccout} />
+        <AccountInput addAccout={addAccout} user={user} />
       { accountList && accountList.map((account: AccountProps, i: any) => (
-        <div key={i} className='flex'>
-          <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-              <BankSelectbox onChange={handleChange} selectedValue={account["bank"]} isDisabled={true} />
-          </InputWrapper>
-          <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-            <Select
-              width="w-32"
-              name="bankAccountType"
-              placeholder='기업유형'
-              value={account["bankAccountType"]}
-              options={[
-                  {key: "C", value: "법인"},
-                  {key: "P", value: "개인"},
-              ]}
-              isDisabled={true}
-              />
-          </InputWrapper>
-          <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
-            <Input name="bankAccountNum" type="text"  width="w-36" placeholder='계좌번호' value={account?.bankAccountNum} onChange={handleChange} readOnly={true} />
-          </InputWrapper>
-          <button
-            type="button"
-            onClick={() => accountDetail()}
-            className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
-          >
-            상세보기
-          </button>
-          <button
-            type="button"
-            onClick={() => accountDelete(account)}
-            className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-gray-500 rounded-lg hover:bg-gray-600"
-          >
-            삭제
-          </button>
+        <div key={i} className='flex justify-between'>
+          <div className='flex'>
+            <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
+              <Select
+                width="w-25"
+                name="bankAccountType"
+                placeholder='기업유형'
+                value={account["bankAccountType"]}
+                options={[
+                    {key: "C", value: "법인"},
+                    {key: "P", value: "개인"},
+                ]}
+                isDisabled={true}
+                />
+            </InputWrapper>
+            <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
+                <BankSelectbox onChange={handleChange} selectedValue={account["bank"]} isDisabled={true} />
+            </InputWrapper>
+            <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2"> 
+              <Input name="bankAccountNum" type="text"  width="w-36" placeholder='계좌번호' value={account?.bankAccountNum} onChange={handleChange} readOnly={true} />
+            </InputWrapper>
+          </div>
+          <div className='flex'>
+            <button
+              type="button"
+              onClick={() => accountDetail()}
+              className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+            >
+              상세보기
+            </button>
+            <button
+              type="button"
+              onClick={() => accountDelete(account)}
+              className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-gray-500 rounded-lg hover:bg-gray-600"
+            >
+              삭제
+            </button>
+          </div>
         </div>
         ))}
       </div>
