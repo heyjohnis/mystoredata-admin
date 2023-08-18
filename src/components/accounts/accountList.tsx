@@ -6,7 +6,7 @@ import BankSelectbox from './bankSelectbox';
 import { useState } from 'react';
 import { InputWrapper } from 'components/forms/input-wrapper';
 import AccountInput from './accountInput';
-import { DELETE } from 'utils/restApi';
+import { POST, DELETE } from 'utils/restApi';
 
 export default function AccountList({ accounts, user }: any) {
 
@@ -32,6 +32,15 @@ export default function AccountList({ accounts, user }: any) {
         //alert('삭제에 실패하였습니다.\n' + res.data.error.message);
       }
     );
+  };
+
+  const syncAccountLog = (account: AccountProps) => {
+    console.log("account sync: ", account);
+    POST('account/regLog', {...account, corpNum: user.corpNum}).then((res: any) => {
+      console.log('account/regLog: ', res);
+    }).catch((err: any) => {
+      console.log('account/regLog: ', err);
+    });
   };
 
   return (
@@ -68,6 +77,13 @@ export default function AccountList({ accounts, user }: any) {
             </InputWrapper>
           </div>
           <div className='flex'>
+            <button
+              type="button"
+              onClick={() => syncAccountLog(account)}
+              className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+            >
+              데이터수집
+            </button>
             <button
               type="button"
               onClick={() => accountDetail()}

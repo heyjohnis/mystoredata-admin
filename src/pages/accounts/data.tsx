@@ -44,7 +44,7 @@ const Index: React.FC = () => {
   const getAccountLogs = () => {
     GET('account/log').then((res: any) => {
       console.log({res});
-      setLogs(res.data.logs);
+      setLogs(res.data);
     });
   }
 
@@ -52,7 +52,7 @@ const Index: React.FC = () => {
   return (
     <>
       <Notification />
-      <SectionTitle title="accounts" subtitle="계좌내역" />
+      <SectionTitle title="account raw data" subtitle="계좌데이터" />
       <Widget>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
