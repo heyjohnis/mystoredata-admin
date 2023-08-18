@@ -17,7 +17,7 @@ export default function CardList({ cards, user }: any) {
   };
 
   const addCard = (card: CardProps) => {
-    setCardList((prevState: any) => ({ ...prevState, card}));
+    setCardList((prevState: any) => ([ ...prevState, card]));
   };
 
   const cardDetail = () => {

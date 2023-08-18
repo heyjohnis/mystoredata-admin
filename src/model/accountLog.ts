@@ -14,5 +14,6 @@ export type AccountLogProps = {
     TransRemark: string,
     TransRefKey: string,
     MgtRemark1: string,
-    MgtRemark2: string
+    MgtRemark2: string,
+    transDate: Date
 }

@@ -15,6 +15,7 @@ import { MdOutlineCorporateFare } from "react-icons/md";
 import { BsDatabase } from "react-icons/bs";
 import { BsCreditCard } from "react-icons/bs";
 import { LuBanknote } from "react-icons/lu";
+import { BiTransfer } from "react-icons/bi";
 
 export type NavigationState = {
   title: string;
@@ -53,6 +54,12 @@ const initialState: NavigationState[] = [
         url: "/cards/data",
         icon: <BsCreditCard size={20} />,
         title: "카드데이터",
+        items: [],
+      },
+      {
+        url: "/trans-money",
+        icon: <BiTransfer size={20} />,
+        title: "개래내역취합",
         items: [],
       },
     ],

@@ -9,6 +9,10 @@ import { CardLogProps } from 'model/cardLog';
 
 const fields: Record<string, string>[] = [
   {
+    name: "거래일",
+    key: "CorpNum",
+  },
+  {
     name: "사업자",
     key: "CorpNum",
   },
@@ -60,8 +64,7 @@ const Index: React.FC = () => {
       console.log({res});
       setLogs(res.data);
     });
-  }
-
+  };
 
   return (
     <>
@@ -84,6 +87,9 @@ const Index: React.FC = () => {
             <tbody>
               {logs.map((log, i) => (
                 <tr key={i}>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.UseDT.substring(0, 8)}
+                  </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.CorpNum} ({log.CorpName})
                   </td>

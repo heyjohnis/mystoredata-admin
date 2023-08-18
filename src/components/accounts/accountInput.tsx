@@ -16,7 +16,7 @@ export default function AccountInput( { addAccout, user }: any) {
   const regAccount = () => {
     POST('account/reg ', {...form, corpNum: user.corpNum }).then((res: any) => {
       if(res?.status === 200) {
-        addAccout(form);
+        if(res.data) addAccout(form);
       } else {
         alert('등록에 실패하였습니다');
       }

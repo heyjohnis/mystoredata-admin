@@ -8,6 +8,10 @@ import { AccountLogProps } from 'model/accountLog';
 
 const fields: Record<string, string>[] = [
   {
+    name: "거래일",
+    key: "CorpNum",
+  },
+  {
     name: "사업자",
     key: "CorpNum",
   },
@@ -17,19 +21,19 @@ const fields: Record<string, string>[] = [
   },
   {
     name: "입금",
-    key: "Withdraw",
-  },
-  {
-    name: "출금",
     key: "Deposit",
   },
   {
-    name: "거래일시",
-    key: "TransDT",
+    name: "출금",
+    key: "Withdraw",
   },
   {
     name: "거래적요",
     key: "TransRemark",
+  },
+  {
+    name: "거래일시",
+    key: "TransDT",
   },
 ];
 
@@ -71,22 +75,25 @@ const Index: React.FC = () => {
               {logs.map((log, i) => (
                 <tr key={i}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.TransDT.substring(0, 8)}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.CorpNum} ({log.CorpName})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.BankAccountNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.Withdraw).toLocaleString('ko-KR') || '-'}
-                  </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {parseInt(log.Deposit).toLocaleString('ko-KR') || '-'}
                   </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.TransDT}
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
+                    {parseInt(log.Withdraw).toLocaleString('ko-KR') || '-'}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.TransRemark}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.TransDT}
                   </td>
                 </tr>
               ))}

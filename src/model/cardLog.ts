@@ -22,4 +22,5 @@ export type CardLogProps = {
     UseStoreTaxType: string;
     UseStoreTel: string;
     user: string;
+    transDate: Date
 }
