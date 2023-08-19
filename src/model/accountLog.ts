@@ -4,6 +4,7 @@ export type AccountLogProps = {
     user: UserProps,
     CorpNum: string,
     CorpName: string,
+    Bank: string,
     BankAccountNum: string,
     Withdraw: string
     Deposit: string,
