@@ -6,6 +6,9 @@ import {CardCode} from "data/commonCode";
 import {useEffect, useState} from "react";
 import {GET} from "utils/restApi";
 import {CardLogProps} from "model/cardLog";
+import {InputWrapper} from "components/forms/input-wrapper";
+import {Label} from "components/forms/label";
+import {Input} from "components/forms/input";
 
 const fields: Record<string, string>[] = [
   {
@@ -52,13 +55,14 @@ const fields: Record<string, string>[] = [
 
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<CardLogProps[]>([]);
+  const [corpNum, setCorpNum] = useState<string>("");
 
   useEffect(() => {
     getCardLogs();
-  }, []);
+  }, [corpNum]);
 
   const getCardLogs = () => {
-    GET("card/log").then((res: any) => {
+    GET(`card/log?corpNum=${corpNum}`).then((res: any) => {
       console.log({res});
       setLogs(res.data);
     });
@@ -69,6 +73,17 @@ const Index: React.FC = () => {
       <Notification />
       <SectionTitle title="card raw data" subtitle="카드데이터" />
       <Widget>
+        <div className="flex flex-col overflow-x-auto">
+          <InputWrapper outerClassName="sm:col-span-12 mt-2">
+            <Label>조회사업자</Label>
+            <Input
+              name="corpNum"
+              type="text"
+              value={corpNum}
+              onChange={(e) => setCorpNum(e.target.value)}
+            />
+          </InputWrapper>
+        </div>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
             <thead>

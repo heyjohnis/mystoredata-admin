@@ -8,7 +8,7 @@ import {InputWrapper} from "components/forms/input-wrapper";
 import AccountInput from "./accountInput";
 import {POST, DELETE} from "utils/restApi";
 
-export default function AccountList({accounts, user}: any) {
+export default function AccountList({accounts, user, baseMonth}: any) {
   const [form, setForm] = useState<AccountProps>();
   const [accountList, setAccountList] = useState<AccountProps[]>(accounts);
   const handleChange = (e: any) => {
@@ -36,7 +36,13 @@ export default function AccountList({accounts, user}: any) {
 
   const syncAccountLog = (account: AccountProps) => {
     console.log("account sync: ", account);
-    POST("account/regLog", {...account, corpNum: user.corpNum})
+    POST("account/regLog", {
+      ...account,
+      corpNum: user.corpNum,
+      userId: user.userId,
+      birth: user.birth,
+      baseMonth,
+    })
       .then((res: any) => {
         console.log("account/regLog: ", res);
       })

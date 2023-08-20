@@ -7,7 +7,7 @@ import {InputWrapper} from "components/forms/input-wrapper";
 import CardInput from "./cardInput";
 import {DELETE, POST} from "utils/restApi";
 
-export default function CardList({cards, user}: any) {
+export default function CardList({cards, user, baseMonth}: any) {
   const [form, setForm] = useState<CardProps>();
   const [cardList, setCardList] = useState<CardProps[]>(cards);
   const handleChange = (e: any) => {
@@ -39,7 +39,7 @@ export default function CardList({cards, user}: any) {
 
   const syncCardLog = (card: CardProps) => {
     console.log("card sync: ", card);
-    POST("card/regLog", {...card, corpNum: user.corpNum})
+    POST("card/regLog", {...card, corpNum: user.corpNum, baseMonth})
       .then((res: any) => {
         console.log("card/regLog: ", res);
       })

@@ -14,7 +14,13 @@ export default function AccountInput({addAccout, user}: any) {
   };
 
   const regAccount = () => {
-    POST("account/reg ", {...form, corpNum: user.corpNum})
+    POST("account/reg ", {
+      ...form,
+      corpNum: user.corpNum,
+      user: user._id,
+      userId: user.userId,
+      birth: user.birth,
+    })
       .then((res: any) => {
         if (res?.status === 200) {
           if (res.data) addAccout(form);

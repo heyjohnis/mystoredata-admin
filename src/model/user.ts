@@ -17,4 +17,5 @@ export type UserProps = {
   accounts: Array<AccountProps>;
   cards: Array<any>;
   createdAt: string;
+  birth: string;
 };

@@ -11,10 +11,17 @@ import {POST, PUT} from "utils/restApi";
 import {UserProps} from "model/user";
 import AccountList from "components/accounts/accountList";
 import CardList from "components/cards/cardList";
+import Link from "next/link";
+import {set} from "nprogress";
 
 const Modal = ({user, closedModal}: any) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<UserProps>({...user});
+  const [searchYYYYMM, setSearchYYYYMM] = useState<string>(
+    new Date().getFullYear() +
+      "" +
+      (new Date().getMonth() + 1).toString().padStart(2, "0")
+  );
   const [isReadOnly, setIsReadOnly] = useState<boolean>(false);
   const closeModal = () => {
     setIsOpen(false);
@@ -172,7 +179,18 @@ const Modal = ({user, closedModal}: any) => {
                       onChange={handleChange}
                     />
                   </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
+                    <Label>생년월일</Label>
+                    <Input
+                      name="birth"
+                      type="text"
+                      value={form?.birth}
+                      placeholder="YYMMDD"
+                      onChange={handleChange}
+                    />
+                  </InputWrapper>
                 </div>
+
                 <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>업태</Label>
@@ -211,17 +229,42 @@ const Modal = ({user, closedModal}: any) => {
                     />
                   </InputWrapper>
                 </div>
+                <div className="flex">
+                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
+                    <Label>데이터수집 기간설정(연월)</Label>
+                    <Input
+                      name="addr2"
+                      type="text"
+                      value={searchYYYYMM}
+                      placeholder="YYYYMM"
+                      onChange={(e) => setSearchYYYYMM(e.target.value)}
+                    />
+                  </InputWrapper>
+                </div>
 
-                <AccountList accounts={form?.accounts} user={user} />
-                <CardList cards={form?.cards} user={user} />
+                <AccountList
+                  accounts={form?.accounts}
+                  user={user}
+                  baseMonth={searchYYYYMM}
+                />
+                <CardList
+                  cards={form?.cards}
+                  user={user}
+                  baseMonth={searchYYYYMM}
+                />
 
                 <div className="flex mt-3 pt-3 border-t-2 justify-between">
-                  <button
-                    type="button"
-                    onClick={gotoCategrory}
-                    className="px-4 py-2 text-xs font-bold text-white uppercase bg-gray-500 rounded-lg hover:bg-gray-600">
-                    카테고리 설정
-                  </button>
+                  <Link
+                    href={{
+                      pathname: "/category",
+                      query: {userId: form.userId},
+                    }}>
+                    <button
+                      type="button"
+                      className="px-4 py-2 text-xs font-bold text-white uppercase bg-gray-500 rounded-lg hover:bg-gray-600">
+                      카테고리 설정
+                    </button>
+                  </Link>
 
                   <button
                     type="button"

@@ -1,12 +1,13 @@
+import {useEffect, useState} from "react";
+import {BankCode, CardCode} from "data/commonCode";
+import {GET, PUT} from "utils/restApi";
+import {TransMoneyProps} from "model/TransMoney";
 import SectionTitle from "components/dashboard/section-title";
 import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
-import {BankCode, CardCode} from "data/commonCode";
-
-import {useEffect, useState} from "react";
-import {GET} from "utils/restApi";
-import {CardLogProps} from "model/cardLog";
-import {TransMoneyProps} from "model/TransMoney";
+import {Input} from "components/forms/input";
+import {InputWrapper} from "components/forms/input-wrapper";
+import {Label} from "components/forms/label";
 
 const fields: Record<string, string>[] = [
   {
@@ -49,13 +50,21 @@ const fields: Record<string, string>[] = [
 
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
+  const [corpNum, setCorpNum] = useState<string>("");
 
   useEffect(() => {
     getCardLogs();
-  }, []);
+  }, [corpNum]);
 
   const getCardLogs = () => {
-    GET("trans/log").then((res: any) => {
+    GET(`trans/log?corpNum=${corpNum}`).then((res: any) => {
+      console.log({res});
+      setLogs(res.data.data);
+    });
+  };
+
+  const transMerge = () => {
+    PUT(`trans/merge`, {corpNum}).then((res: any) => {
       console.log({res});
       setLogs(res.data.data);
     });
@@ -66,6 +75,22 @@ const Index: React.FC = () => {
       <Notification />
       <SectionTitle title="merged data" subtitle="거래내역취합" />
       <Widget>
+        <div className="flex">
+          <InputWrapper inline={true} outerClassName="sm:col-span-12 mr-1">
+            <Label>조회사업자</Label>
+            <Input
+              name="corpNum"
+              type="text"
+              value={corpNum}
+              onChange={(e) => setCorpNum(e.target.value)}
+            />
+          </InputWrapper>
+          <button
+            className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
+            onClick={transMerge}>
+            개러내역취합
+          </button>
+        </div>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
             <thead>

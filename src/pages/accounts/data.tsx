@@ -1,10 +1,14 @@
 import SectionTitle from "components/dashboard/section-title";
 import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
+import {Input} from "components/forms/input";
+import {InputWrapper} from "components/forms/input-wrapper";
+import {Label} from "components/forms/label";
 
 import {useEffect, useState} from "react";
 import {GET} from "utils/restApi";
 import {AccountLogProps} from "model/accountLog";
+import {BankCode} from "data/commonCode";
 
 const fields: Record<string, string>[] = [
   {
@@ -39,13 +43,14 @@ const fields: Record<string, string>[] = [
 
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<AccountLogProps[]>([]);
+  const [corpNum, setCorpNum] = useState<string>("");
 
   useEffect(() => {
     getAccountLogs();
-  }, []);
+  }, [corpNum]);
 
   const getAccountLogs = () => {
-    GET("account/log").then((res: any) => {
+    GET(`account/log?corpNum=${corpNum}`).then((res: any) => {
       console.log({res});
       setLogs(res.data);
     });
@@ -56,6 +61,15 @@ const Index: React.FC = () => {
       <Notification />
       <SectionTitle title="account raw data" subtitle="계좌데이터" />
       <Widget>
+        <InputWrapper outerClassName="sm:col-span-12 mt-2">
+          <Label>조회사업자</Label>
+          <Input
+            name="corpNum"
+            type="text"
+            value={corpNum}
+            onChange={(e) => setCorpNum(e.target.value)}
+          />
+        </InputWrapper>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
             <thead>
@@ -79,7 +93,7 @@ const Index: React.FC = () => {
                     {log.CorpNum} ({log.CorpName})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.BankAccountNum}
+                    [{BankCode[log.bank]}]{log.BankAccountNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {parseInt(log.Deposit).toLocaleString("ko-KR") || "-"}
