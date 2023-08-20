@@ -66,7 +66,9 @@ const Index: React.FC = () => {
   const transMerge = () => {
     PUT(`trans/merge`, {corpNum}).then((res: any) => {
       console.log({res});
-      setLogs(res.data.data);
+      if (res.data.success) {
+        getCardLogs();
+      }
     });
   };
 
