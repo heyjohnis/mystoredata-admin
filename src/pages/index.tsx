@@ -18,8 +18,6 @@ const Index: React.FC = () => {
     <>
       <Notification />
       <SectionTitle title="Overview" subtitle="Dashboard" />
-
-      
     </>
   );
 };

@@ -7,7 +7,6 @@ const Index: React.FC = () => {
     <CenteredForm
       title="Create account"
       subtitle="회원가입을 위해 로그인 아이디와 이메일을 등록해주세요.">
-        
       <CreateAccount />
 
       <div className="flex flex-row w-full mt-4">

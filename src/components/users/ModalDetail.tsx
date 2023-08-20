@@ -7,53 +7,54 @@ import {ErrorMessage} from "components/forms/error-message";
 import {SuccessMessage} from "components/forms/success-message";
 import {Hint} from "components/forms/hint";
 import {Input} from "components/forms/input";
-import { POST, PUT } from 'utils/restApi';
-import { UserProps } from 'model/user';
-import AccountList from 'components/accounts/accountList';
-import CardList from 'components/cards/cardList';
+import {POST, PUT} from "utils/restApi";
+import {UserProps} from "model/user";
+import AccountList from "components/accounts/accountList";
+import CardList from "components/cards/cardList";
 
-const Modal = ( { user, closedModal }: any) => {
-  const [ isOpen, setIsOpen ] = useState<boolean>(false);
-  const [ form, setForm ] = useState<UserProps>({...user});
-  const [ isReadOnly, setIsReadOnly ] = useState<boolean>(false);
+const Modal = ({user, closedModal}: any) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [form, setForm] = useState<UserProps>({...user});
+  const [isReadOnly, setIsReadOnly] = useState<boolean>(false);
   const closeModal = () => {
     setIsOpen(false);
     closedModal();
-  }
+  };
 
   useEffect(() => {
     if (user) {
       setIsOpen(true);
       setForm(user);
-      setIsReadOnly( user.userId ? true : false );
+      setIsReadOnly(user.userId ? true : false);
     }
   }, [user]);
 
   const saveUser = () => {
-    if(user.createdAt) {
-      PUT('user/update', form).then((res: any) => {
-        console.log('user update');
-        console.log('res: ', res);
+    if (user.createdAt) {
+      PUT("user/update", form).then((res: any) => {
+        console.log("user update");
+        console.log("res: ", res);
         closedModal(true);
         closeModal();
       });
     } else {
-      POST('auth/signup', form).then((res: any) => {
-        console.log('user create');
-        if(res?.data) {
-          console.log('res: ', res);
+      POST("auth/signup", form).then((res: any) => {
+        console.log("user create");
+        if (res?.data) {
+          console.log("res: ", res);
           closedModal(true);
           closeModal();
         }
       });
     }
-
   };
 
   const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setForm((prevState: any) => ({ ...prevState, [name]: value }));
+    const {name, value} = e.target;
+    setForm((prevState: any) => ({...prevState, [name]: value}));
   };
+
+  const gotoCategrory = () => {};
 
   return (
     <>
@@ -93,69 +94,139 @@ const Modal = ( { user, closedModal }: any) => {
                   onClick={closeModal}>
                   <FiX size={18} className="stroke-current" />
                 </button>
-                <div className='flex'>
+                <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>로그인ID</Label>
-                    <Input name="userId" type="text" value={form?.userId} onChange={handleChange} readOnly={isReadOnly} />
+                    <Input
+                      name="userId"
+                      type="text"
+                      value={form?.userId}
+                      onChange={handleChange}
+                      readOnly={isReadOnly}
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>패스워드</Label>
-                    <Input name="password" type="password" value={form?.password} onChange={handleChange} readOnly={isReadOnly} />
+                    <Input
+                      name="password"
+                      type="password"
+                      value={form?.password}
+                      onChange={handleChange}
+                      readOnly={isReadOnly}
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>이메일</Label>
-                    <Input name="email" type="text" value={form?.email} onChange={handleChange} width="w-full" />
+                    <Input
+                      name="email"
+                      type="text"
+                      value={form?.email}
+                      onChange={handleChange}
+                      width="w-full"
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>사용자명</Label>
-                    <Input name="userName" type="text" value={form?.userName} onChange={handleChange} />
+                    <Input
+                      name="userName"
+                      type="text"
+                      value={form?.userName}
+                      onChange={handleChange}
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>휴대폰</Label>
-                    <Input name="mobile" type="text" value={form?.mobile} onChange={handleChange} />
+                    <Input
+                      name="mobile"
+                      type="text"
+                      value={form?.mobile}
+                      onChange={handleChange}
+                    />
                   </InputWrapper>
                 </div>
-                <div className='flex'>
+                <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>회사명</Label>
-                    <Input name="corpName" type="text" value={form?.corpName} onChange={handleChange} />
+                    <Input
+                      name="corpName"
+                      type="text"
+                      value={form?.corpName}
+                      onChange={handleChange}
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>사업자번호</Label>
-                    <Input name="corpNum" type="text" value={form?.corpNum} onChange={handleChange} />
+                    <Input
+                      name="corpNum"
+                      type="text"
+                      value={form?.corpNum}
+                      onChange={handleChange}
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>대표자명</Label>
-                    <Input name="ceoName" type="text" value={form?.ceoName} onChange={handleChange} />
+                    <Input
+                      name="ceoName"
+                      type="text"
+                      value={form?.ceoName}
+                      onChange={handleChange}
+                    />
                   </InputWrapper>
                 </div>
-                <div className='flex'>
+                <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>업태</Label>
-                    <Input name="bizType" type="text" value={form?.bizType} onChange={handleChange} />
+                    <Input
+                      name="bizType"
+                      type="text"
+                      value={form?.bizType}
+                      onChange={handleChange}
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>업종</Label>
-                    <Input name="bizClass" type="text" value={form?.bizClass} onChange={handleChange} />
+                    <Input
+                      name="bizClass"
+                      type="text"
+                      value={form?.bizClass}
+                      onChange={handleChange}
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>주소</Label>
-                    <Input name="addr1" type="text" value={form?.addr1} onChange={handleChange} />
+                    <Input
+                      name="addr1"
+                      type="text"
+                      value={form?.addr1}
+                      onChange={handleChange}
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-12 mt-2">
                     <Label>상세주소</Label>
-                    <Input name="addr2" type="text" value={form?.addr2} onChange={handleChange} />
-                  </InputWrapper>  
+                    <Input
+                      name="addr2"
+                      type="text"
+                      value={form?.addr2}
+                      onChange={handleChange}
+                    />
+                  </InputWrapper>
                 </div>
-                
+
                 <AccountList accounts={form?.accounts} user={user} />
                 <CardList cards={form?.cards} user={user} />
-                <div className='d-block mt-3 pt-3 border-t-2'>
+
+                <div className="flex mt-3 pt-3 border-t-2 justify-between">
+                  <button
+                    type="button"
+                    onClick={gotoCategrory}
+                    className="px-4 py-2 text-xs font-bold text-white uppercase bg-gray-500 rounded-lg hover:bg-gray-600">
+                    카테고리 설정
+                  </button>
+
                   <button
                     type="button"
                     onClick={saveUser}
-                    className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
-                    >
+                    className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600">
                     저장
                   </button>
                 </div>

@@ -2,9 +2,9 @@ import SectionTitle from "components/dashboard/section-title";
 import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 
-import { useEffect, useState } from 'react';
-import { GET } from 'utils/restApi'
-import { AccountLogProps } from 'model/accountLog';
+import {useEffect, useState} from "react";
+import {GET} from "utils/restApi";
+import {AccountLogProps} from "model/accountLog";
 
 const fields: Record<string, string>[] = [
   {
@@ -38,20 +38,18 @@ const fields: Record<string, string>[] = [
 ];
 
 const Index: React.FC = () => {
-
-  const [ logs, setLogs ] = useState<AccountLogProps[]>([]);
+  const [logs, setLogs] = useState<AccountLogProps[]>([]);
 
   useEffect(() => {
     getAccountLogs();
   }, []);
 
   const getAccountLogs = () => {
-    GET('account/log').then((res: any) => {
+    GET("account/log").then((res: any) => {
       console.log({res});
       setLogs(res.data);
     });
-  }
-
+  };
 
   return (
     <>
@@ -84,10 +82,10 @@ const Index: React.FC = () => {
                     {log.BankAccountNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.Deposit).toLocaleString('ko-KR') || '-'}
+                    {parseInt(log.Deposit).toLocaleString("ko-KR") || "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.Withdraw).toLocaleString('ko-KR') || '-'}
+                    {parseInt(log.Withdraw).toLocaleString("ko-KR") || "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.TransRemark}

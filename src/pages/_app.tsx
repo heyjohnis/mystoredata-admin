@@ -1,12 +1,12 @@
 import type {AppProps} from "next/app";
-import { AppContext } from 'next/app';
+import {AppContext} from "next/app";
 import Head from "next/head";
 import {Provider} from "react-redux";
 import Layout from "layouts";
 import store from "store";
 import Router from "next/router";
 import NProgress from "nprogress";
-import cookie from 'js-cookie';
+import cookie from "js-cookie";
 import "css/tailwind.css";
 import "css/main.css";
 import "css/layouts/layout-1.css";
@@ -18,14 +18,13 @@ import "css/components/nprogress.css";
 import "css/components/recharts.css";
 import "css/components/steps.css";
 import "css/components/left-sidebar-3.css";
-import { useEffect } from 'react';
+import {useEffect} from "react";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 const App = ({Component, pageProps}: AppProps): React.ReactElement => {
-
   useEffect(() => {
     const token = cookie.get("token");
     if (!token) {
@@ -48,6 +47,6 @@ const App = ({Component, pageProps}: AppProps): React.ReactElement => {
       </Provider>
     </>
   );
-}
+};
 
 export default App;

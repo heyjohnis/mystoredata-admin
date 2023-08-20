@@ -7,15 +7,13 @@ import {
   FiHelpCircle,
   FiHome,
 } from "react-icons/fi";
-import { 
-  BiMoney
-} from "react-icons/bi"
-import { GiProcessor } from "react-icons/gi";
-import { MdOutlineCorporateFare } from "react-icons/md";
-import { BsDatabase } from "react-icons/bs";
-import { BsCreditCard } from "react-icons/bs";
-import { LuBanknote } from "react-icons/lu";
-import { BiTransfer } from "react-icons/bi";
+import {BiMoney, BiCategory} from "react-icons/bi";
+import {GiProcessor} from "react-icons/gi";
+import {MdOutlineCorporateFare} from "react-icons/md";
+import {BsDatabase} from "react-icons/bs";
+import {BsCreditCard} from "react-icons/bs";
+import {LuBanknote} from "react-icons/lu";
+import {BiTransfer} from "react-icons/bi";
 
 export type NavigationState = {
   title: string;
@@ -62,6 +60,12 @@ const initialState: NavigationState[] = [
         title: "개래내역취합",
         items: [],
       },
+      {
+        url: "/category",
+        icon: <BiCategory size={20} />,
+        title: "나의 카테고리",
+        items: [],
+      },
     ],
   },
   {
@@ -79,7 +83,6 @@ const initialState: NavigationState[] = [
         title: "로직개발",
         items: [],
       },
-
     ],
   },
   {
@@ -202,7 +205,6 @@ const initialState: NavigationState[] = [
             ],
           },
 
-
           {
             url: "/sample/",
             title: "UI Elements",
@@ -257,7 +259,7 @@ const initialState: NavigationState[] = [
                 title: "Typography",
                 items: [],
               },
-        ],
+            ],
           },
           {
             url: "/sample/",
@@ -512,7 +514,7 @@ const initialState: NavigationState[] = [
                   },
                 ],
               },
-            ]
+            ],
           },
         ],
       },

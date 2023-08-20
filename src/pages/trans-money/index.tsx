@@ -1,12 +1,12 @@
 import SectionTitle from "components/dashboard/section-title";
 import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
-import { BankCode, CardCode } from 'data/commonCode';
+import {BankCode, CardCode} from "data/commonCode";
 
-import { useEffect, useState } from 'react';
-import { GET } from 'utils/restApi'
-import { CardLogProps } from 'model/cardLog';
-import { TransMoneyProps } from 'model/TransMoney';
+import {useEffect, useState} from "react";
+import {GET} from "utils/restApi";
+import {CardLogProps} from "model/cardLog";
+import {TransMoneyProps} from "model/TransMoney";
 
 const fields: Record<string, string>[] = [
   {
@@ -45,20 +45,17 @@ const fields: Record<string, string>[] = [
     name: "거래일시",
     key: "TransRemark",
   },
-
-
 ];
 
 const Index: React.FC = () => {
-
-  const [ logs, setLogs ] = useState<TransMoneyProps[]>([]);
+  const [logs, setLogs] = useState<TransMoneyProps[]>([]);
 
   useEffect(() => {
     getCardLogs();
   }, []);
 
   const getCardLogs = () => {
-    GET('trans/log').then((res: any) => {
+    GET("trans/log").then((res: any) => {
       console.log({res});
       setLogs(res.data.data);
     });
@@ -92,16 +89,23 @@ const Index: React.FC = () => {
                     {log.corpNum} ({log.corpName})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                  { log.bank && (`[${BankCode[log.bank]}]`)}{log.bankAccountNum}  { log.cardCompany && ( `[${CardCode[log.cardCompany]}]`)}{log.cardNum}
+                    {log.bank && `[${BankCode[log.bank]}]`}
+                    {log.bankAccountNum}{" "}
+                    {log.cardCompany && `[${CardCode[log.cardCompany]}]`}
+                    {log.cardNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {log.transMoney.toLocaleString('ko-KR') || '-'} 
+                    {log.transMoney.toLocaleString("ko-KR") || "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {`${log.transRemark || ''} ${log.transType ? '|': ''} ${log.transType || ''} ${log.transOffice ? '|' : ''} ${log.transOffice || ''} `}
+                    {`${log.transRemark || ""} ${log.transType ? "|" : ""} ${
+                      log.transType || ""
+                    } ${log.transOffice ? "|" : ""} ${log.transOffice || ""} `}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {`${log.useStoreBizType || ''} ${log.useStoreName ? '|' : ''} ${log.useStoreName || ''}`}
+                    {`${log.useStoreBizType || ""} ${
+                      log.useStoreName ? "|" : ""
+                    } ${log.useStoreName || ""}`}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.cardApprovalType}
@@ -112,7 +116,6 @@ const Index: React.FC = () => {
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.transDate.toString().substring(0, 19)}
                   </td>
-
                 </tr>
               ))}
             </tbody>

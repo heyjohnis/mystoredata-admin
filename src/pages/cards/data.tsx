@@ -1,11 +1,11 @@
 import SectionTitle from "components/dashboard/section-title";
 import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
-import { CardCode } from 'data/commonCode';
+import {CardCode} from "data/commonCode";
 
-import { useEffect, useState } from 'react';
-import { GET } from 'utils/restApi'
-import { CardLogProps } from 'model/cardLog';
+import {useEffect, useState} from "react";
+import {GET} from "utils/restApi";
+import {CardLogProps} from "model/cardLog";
 
 const fields: Record<string, string>[] = [
   {
@@ -48,19 +48,17 @@ const fields: Record<string, string>[] = [
     name: "거래일시",
     key: "TransRemark",
   },
-
 ];
 
 const Index: React.FC = () => {
-
-  const [ logs, setLogs ] = useState<CardLogProps[]>([]);
+  const [logs, setLogs] = useState<CardLogProps[]>([]);
 
   useEffect(() => {
     getCardLogs();
   }, []);
 
   const getCardLogs = () => {
-    GET('card/log').then((res: any) => {
+    GET("card/log").then((res: any) => {
       console.log({res});
       setLogs(res.data);
     });
@@ -97,10 +95,12 @@ const Index: React.FC = () => {
                     [{CardCode[log.cardCompany]}] {log.CardNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.CardApprovalCost).toLocaleString('ko-KR') || '-'} 
+                    {parseInt(log.CardApprovalCost).toLocaleString("ko-KR") ||
+                      "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
-                  ({parseInt(log.Tax).toLocaleString('ko-KR') || '-'},  {log.Currency})
+                    ({parseInt(log.Tax).toLocaleString("ko-KR") || "-"},{" "}
+                    {log.Currency})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.CardApprovalType}

@@ -1,7 +1,7 @@
 import cookie from "js-cookie";
 import Router from "next/router";
 
-export const handleLogin = (token: string, goto="") => {
+export const handleLogin = (token: string, goto = "") => {
   cookie.set("token", token);
   Router.push("/" + goto);
 };
