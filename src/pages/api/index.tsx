@@ -18,6 +18,6 @@ export const redirectUser = (ctx: any, location: any) => {
 
 export const handleLogout = () => {
   cookie.remove("medq_token");
-  window.localStorage.setItem("logout", Date.now());
+  window.localStorage.setItem("logout", Date.now().toString());
   Router.push("/");
 };

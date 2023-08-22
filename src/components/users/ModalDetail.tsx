@@ -61,8 +61,6 @@ const Modal = ({user, closedModal}: any) => {
     setForm((prevState: any) => ({...prevState, [name]: value}));
   };
 
-  const gotoCategrory = () => {};
-
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>

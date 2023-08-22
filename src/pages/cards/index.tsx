@@ -33,7 +33,7 @@ const fields: Record<string, string>[] = [
 const Index: React.FC = () => {
   const [users, setUsers] = useState<UserProps[]>([]);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
-  const [selectedUser, setSelectedUser] = useState<UserProps | null | {}>(null);
+  const [selectedUser, setSelectedUser] = useState<UserProps | null>(null);
   const [toggleModal, setToggleModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Index: React.FC = () => {
     setSelectedUser(user);
   };
 
-  const closedModal = (isUpdated: boolean = false) => {
+  const closedModal = (isUpdated = false) => {
     setSelectedUser(null);
     if (isUpdated) {
       getUserList();
@@ -60,7 +60,7 @@ const Index: React.FC = () => {
   };
 
   const createUser = () => {
-    setSelectedUser({});
+    setSelectedUser(null);
   };
 
   return (

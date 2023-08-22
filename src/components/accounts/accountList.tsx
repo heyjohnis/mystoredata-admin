@@ -1,4 +1,3 @@
-import {FiPlus} from "react-icons/fi";
 import {Input} from "components/forms/input";
 import {AccountProps} from "model/account";
 import {Select} from "components/forms/select";
@@ -9,18 +8,21 @@ import AccountInput from "./accountInput";
 import {POST, DELETE} from "utils/restApi";
 
 export default function AccountList({accounts, user, baseMonth}: any) {
-  const [form, setForm] = useState<AccountProps>();
+  //const [form, setForm] = useState<AccountProps>();
   const [accountList, setAccountList] = useState<AccountProps[]>(accounts);
   const handleChange = (e: any) => {
-    const {name, value} = e.target;
-    setForm((prevState: any) => ({...prevState, [name]: value}));
+    console.log(e.target.value);
+    // const {name, value} = e.target;
+    // setForm((prevState: any) => ({...prevState, [name]: value}));
   };
 
   const addAccout = (account: AccountProps) => {
     setAccountList((prevState: any) => [...prevState, account]);
   };
 
-  const accountDetail = () => {};
+  const accountDetail = () => {
+    console.log("account detail");
+  };
 
   const accountDelete = (account: AccountProps) => {
     DELETE("account/delete", account).then((res: any) => {

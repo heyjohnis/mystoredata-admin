@@ -19,7 +19,9 @@ export default function CardList({cards, user, baseMonth}: any) {
     setCardList((prevState: any) => [...prevState, card]);
   };
 
-  const cardDetail = () => {};
+  const cardDetail = () => {
+    console.log("card detail");
+  };
 
   const cardDelete = (card: CardProps) => {
     DELETE("card/delete", {...card, corpNum: user.corpNum})
@@ -27,9 +29,10 @@ export default function CardList({cards, user, baseMonth}: any) {
         console.log("card/delete: ", res);
         if (res?.status === 200) {
           setCardList(
-            cardList.filter((item: CardProps) => item.cardNum !== card.cardNum)
+            cardList.filter(
+              (item: CardProps) => item.cardNum !== card.cardNum
+            ) || []
           );
-        } else {
         }
       })
       .catch((err: any) => {

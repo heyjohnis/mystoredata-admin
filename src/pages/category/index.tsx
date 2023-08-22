@@ -21,7 +21,7 @@ const fields: Record<string, string>[] = [
   },
 ];
 
-export default function index() {
+export default function Index() {
   const router = useRouter();
   const [categories, setCategories] = useState<any[]>([]);
 

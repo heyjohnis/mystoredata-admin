@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const TestPage: React.FC = () => {
   console.log("server side rendering...");
   return (

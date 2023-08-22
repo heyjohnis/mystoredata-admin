@@ -29,7 +29,7 @@ export default function AccountInput({addAccout, user}: any) {
         }
       })
       .catch((err: any) => {
-        alert("등록에 실패하였습니다");
+        alert("등록에 실패하였습니다" + err.message);
       });
   };
   return (
