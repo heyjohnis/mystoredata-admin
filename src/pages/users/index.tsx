@@ -32,7 +32,7 @@ const fields: Record<string, string>[] = [
 
 const Index: React.FC = () => {
   const [users, setUsers] = useState<UserProps[]>([]);
-  const [selectedUser, setSelectedUser] = useState<UserProps | null>(null);
+  const [selectedUser, setSelectedUser] = useState<UserProps | any>(null);
 
   useEffect(() => {
     getUserList();
@@ -58,7 +58,7 @@ const Index: React.FC = () => {
   };
 
   const createUser = () => {
-    setSelectedUser(null);
+    setSelectedUser({});
   };
 
   return (

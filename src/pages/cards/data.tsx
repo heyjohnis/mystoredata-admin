@@ -107,7 +107,8 @@ const Index: React.FC = () => {
                     {log.CorpNum} ({log.CorpName})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    [{CardCode[log.cardCompany]}] {log.CardNum}
+                    [{CardCode[log.cardCompany as keyof typeof CardCode]}]{" "}
+                    {log.CardNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {parseInt(log.CardApprovalCost).toLocaleString("ko-KR") ||

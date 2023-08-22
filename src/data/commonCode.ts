@@ -1,4 +1,5 @@
 export const BankCode: any = {
+  "": "은행선택",
   KB: "국민은행",
   SHINHAN: "신한은행",
   NH: "농협은행",
@@ -22,6 +23,7 @@ export const BankCode: any = {
 };
 
 export const CardCode: any = {
+  "": "카드사선택",
   BC: "비씨카드",
   HANA: "하나SK카드",
   HYUNDAI: "현대카드",
@@ -32,4 +34,58 @@ export const CardCode: any = {
   SAMSUNG: "삼성카드",
   SHINHAN: "신한카드",
   WOORI: "우리카드",
+};
+
+export const UsePurpose: any = {
+  BIZ: "사업목적",
+  BIZA: "개인사용 사업자회계",
+  PERS: "개인사용목적",
+};
+
+// https://dev.barobill.co.kr/docs/references/계좌조회-API#은행-별-필수항목
+export const setBankInput = (code: string): [boolean, boolean, boolean] => {
+  switch (code) {
+    case "KB":
+      return [true, false, false];
+    case "SHINHAN":
+      return [true, true, false];
+    case "NH":
+      return [true, true, false];
+    case "HANA":
+      return [false, false, true];
+    case "SC":
+      return [false, false, true];
+    case "WOORI":
+      return [false, false, true];
+    case "IBK":
+      return [false, false, true];
+    case "KDB":
+      return [false, false, true];
+    case "KFCC":
+      return [false, false, true];
+    case "CITI":
+      return [false, false, true];
+    case "SUHYUP":
+      return [false, false, true];
+    case "CU":
+      return [true, true, false];
+    case "EPOST":
+      return [false, false, true];
+    case "KJBANK":
+      return [false, false, true];
+    case "JBBANK":
+      return [false, false, true];
+    case "DGB":
+      return [true, true, false];
+    case "BUSANBANK":
+      return [false, false, true];
+    case "KNBANK":
+      return [false, false, true];
+    case "EJEJUBANK":
+      return [false, false, true];
+    case "KBANK":
+      return [true, true, true];
+    default:
+      return [true, true, true];
+  }
 };

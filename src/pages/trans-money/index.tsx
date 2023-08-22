@@ -116,9 +116,11 @@ const Index: React.FC = () => {
                     {log.corpNum} ({log.corpName})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.bank && `[${BankCode[log.bank]}]`}
+                    {log.bank &&
+                      `[${BankCode[log.bank as keyof typeof BankCode]}]`}
                     {log.bankAccountNum}{" "}
-                    {log.cardCompany && `[${CardCode[log.cardCompany]}]`}
+                    {log.cardCompany &&
+                      `[${CardCode[log.cardCompany as keyof typeof CardCode]}]`}
                     {log.cardNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">

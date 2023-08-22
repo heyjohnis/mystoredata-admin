@@ -16,7 +16,7 @@ export default function AccountList({accounts, user, baseMonth}: any) {
     // setForm((prevState: any) => ({...prevState, [name]: value}));
   };
 
-  const addAccout = (account: AccountProps) => {
+  const addAccount = (account: AccountProps) => {
     setAccountList((prevState: any) => [...prevState, account]);
   };
 
@@ -61,7 +61,7 @@ export default function AccountList({accounts, user, baseMonth}: any) {
         </div>
       </div>
       <div className="w-full">
-        <AccountInput addAccout={addAccout} user={user} />
+        <AccountInput addAccount={addAccount} user={user} />
         {accountList &&
           accountList.map((account: AccountProps, i: any) => (
             <div key={i} className="flex justify-between">
@@ -95,6 +95,19 @@ export default function AccountList({accounts, user, baseMonth}: any) {
                     value={account?.bankAccountNum}
                     onChange={handleChange}
                     readOnly={true}
+                  />
+                </InputWrapper>
+                <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                  <Select
+                    width="w-25"
+                    name="useKind"
+                    placeholder="사용목적"
+                    value={account["bankAccountType"]}
+                    options={[
+                      {key: "BIZ", value: "사업목적"},
+                      {key: "BIZA", value: "개인사용 사업자회계"},
+                      {key: "PERS", value: "개인사용목적"},
+                    ]}
                   />
                 </InputWrapper>
               </div>

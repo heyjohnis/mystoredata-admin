@@ -5,11 +5,27 @@ import {Select} from "components/forms/select";
 import BankSelectbox from "./bankSelectbox";
 import {AccountProps} from "model/account";
 import {POST} from "utils/restApi";
+import {setBankInput} from "../../data/commonCode";
 
-export default function AccountInput({addAccout, user}: any) {
+export default function AccountInput({addAccount, user}: any) {
   const [form, setForm] = useState<AccountProps>();
+  const [ableWebId, setAbleWebId] = useState<boolean>(false);
+  const [ableWebPwd, setAbleWebPwd] = useState<boolean>(false);
+  const [useIndenty, setUseIndenty] = useState<boolean>(false);
+
   const handleChange = (e: any) => {
     const {name, value} = e.target;
+    setForm((prevState: any) => ({...prevState, [name]: value}));
+  };
+
+  const bankSelectChange = (e: any) => {
+    setAbleWebId(false);
+    setAbleWebPwd(false);
+    const {name, value} = e.target;
+    const [idInput, pwInput, indentyInput] = setBankInput(value);
+    setAbleWebId(!idInput);
+    setAbleWebPwd(!pwInput);
+    setUseIndenty(indentyInput);
     setForm((prevState: any) => ({...prevState, [name]: value}));
   };
 
@@ -19,11 +35,11 @@ export default function AccountInput({addAccout, user}: any) {
       corpNum: user.corpNum,
       user: user._id,
       userId: user.userId,
-      birth: user.birth,
+      birth: useIndenty ? user.birth : "",
     })
       .then((res: any) => {
         if (res?.status === 200) {
-          if (res.data) addAccout(form);
+          if (res.data) addAccount(form);
         } else {
           alert("등록에 실패하였습니다");
         }
@@ -48,7 +64,7 @@ export default function AccountInput({addAccout, user}: any) {
           />
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-          <BankSelectbox onChange={handleChange} />
+          <BankSelectbox onChange={bankSelectChange} />
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
           <Input
@@ -78,6 +94,7 @@ export default function AccountInput({addAccout, user}: any) {
             placeholder="로그인ID"
             value={form?.webId}
             onChange={handleChange}
+            disabled={ableWebId}
           />
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
@@ -88,6 +105,7 @@ export default function AccountInput({addAccout, user}: any) {
             placeholder="로그인PW"
             value={form?.webPwd}
             onChange={handleChange}
+            disabled={ableWebPwd}
           />
         </InputWrapper>
       </div>
