@@ -1,10 +1,10 @@
 import {useState} from "react";
 import {Input} from "components/forms/input";
 import {InputWrapper} from "components/forms/input-wrapper";
-import {Select} from "components/forms/select";
-import CardSelectbox from "./cardSelectbox";
 import {CardProps} from "model/card";
 import {POST} from "utils/restApi";
+import CommonCodeSelect from "components/CommonCodeSelect";
+import {CardCode, CorpType} from "data/commonCode";
 
 export default function CardInput({addCard, user}: any) {
   const [form, setForm] = useState<CardProps>();
@@ -27,19 +27,20 @@ export default function CardInput({addCard, user}: any) {
     <div className="flex mb-1 justify-between">
       <div className="flex">
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-          <Select
-            width="w-25"
+          <CommonCodeSelect
             name="cardType"
-            placeholder="기업유형"
-            options={[
-              {key: "C", value: "법인"},
-              {key: "P", value: "개인"},
-            ]}
+            commonCode={CorpType}
             onChange={handleChange}
+            placeholder="기업유형"
           />
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-          <CardSelectbox onChange={handleChange} />
+          <CommonCodeSelect
+            name="cardCompany"
+            commonCode={CardCode}
+            onChange={handleChange}
+            placeholder="카드사선택"
+          />
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
           <Input

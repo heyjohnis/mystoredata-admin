@@ -1,11 +1,10 @@
 import {useState} from "react";
 import {Input} from "components/forms/input";
 import {InputWrapper} from "components/forms/input-wrapper";
-import {Select} from "components/forms/select";
-import BankSelectbox from "./bankSelectbox";
 import {AccountProps} from "model/account";
 import {POST} from "utils/restApi";
-import {setBankInput} from "../../data/commonCode";
+import {CorpType, BankCode, setBankInput} from "../../data/commonCode";
+import CommonCodeSelect from "components/CommonCodeSelect";
 
 export default function AccountInput({addAccount, user}: any) {
   const [form, setForm] = useState<AccountProps>();
@@ -52,19 +51,20 @@ export default function AccountInput({addAccount, user}: any) {
     <div className="flex mb-1 justify-between">
       <div className="flex">
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-          <Select
-            width="w-25"
+          <CommonCodeSelect
             name="bankAccountType"
-            placeholder="기업유형"
-            options={[
-              {key: "C", value: "법인"},
-              {key: "P", value: "개인"},
-            ]}
+            commonCode={CorpType}
             onChange={handleChange}
+            placeholder="기업유형"
           />
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-          <BankSelectbox onChange={bankSelectChange} />
+          <CommonCodeSelect
+            name="bank"
+            commonCode={BankCode}
+            onChange={bankSelectChange}
+            placeholder="은행선택"
+          />
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
           <Input

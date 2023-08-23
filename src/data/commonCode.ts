@@ -1,5 +1,4 @@
-export const BankCode: any = {
-  "": "은행선택",
+export const BankCode: Record<string, string> = {
   KB: "국민은행",
   SHINHAN: "신한은행",
   NH: "농협은행",
@@ -22,8 +21,7 @@ export const BankCode: any = {
   KBANK: "케이뱅크",
 };
 
-export const CardCode: any = {
-  "": "카드사선택",
+export const CardCode: Record<string, string> = {
   BC: "비씨카드",
   HANA: "하나SK카드",
   HYUNDAI: "현대카드",
@@ -36,10 +34,15 @@ export const CardCode: any = {
   WOORI: "우리카드",
 };
 
-export const UsePurpose: any = {
+export const UsePurpose: Record<string, string> = {
   BIZ: "사업목적",
   BIZA: "개인사용 사업자회계",
   PERS: "개인사용목적",
+};
+
+export const CorpType: Record<string, string> = {
+  C: "법인",
+  P: "개인",
 };
 
 // https://dev.barobill.co.kr/docs/references/계좌조회-API#은행-별-필수항목

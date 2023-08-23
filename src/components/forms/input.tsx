@@ -38,7 +38,7 @@ export const Input: React.FC<InputProps> = ({
       type={type}
       name={name}
       className={`form-input block ${width} border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 flex-grow-1 focus:border-blue-500 focus:ring-0 sm:text-sm rounded-md ${
-        readOnly || disabled ? "bg-zinc-100" : ""
+        readOnly || disabled ? "bg-gray-100 dark:bg-gray-800 text-gray-500" : ""
       }`}
       value={value}
       onChange={onChange} // 전달된 onChange 이벤트 핸들러 함수

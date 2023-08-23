@@ -1,11 +1,11 @@
 import {Input} from "components/forms/input";
 import {CardProps} from "model/card";
-import {Select} from "components/forms/select";
-import CardSelectbox from "./cardSelectbox";
 import {useState} from "react";
 import {InputWrapper} from "components/forms/input-wrapper";
 import CardInput from "./cardInput";
-import {DELETE, POST} from "utils/restApi";
+import {PUT, DELETE, POST} from "utils/restApi";
+import {CardCode, UsePurpose} from "data/commonCode";
+import CommonCodeSelect from "components/CommonCodeSelect";
 
 export default function CardList({cards, user, baseMonth}: any) {
   const [form, setForm] = useState<CardProps>();
@@ -51,6 +51,11 @@ export default function CardList({cards, user, baseMonth}: any) {
       });
   };
 
+  const handleChangeUsePurpose = async (card: CardProps) => {
+    const result = await PUT("card/update", {...card});
+    console.log({result});
+  };
+
   return (
     <div className="w-full overflow-x-auto mt-3">
       <div className="flex flex-row items-center justify-between">
@@ -65,35 +70,48 @@ export default function CardList({cards, user, baseMonth}: any) {
             <div key={i} className="flex justify-between">
               <div className="flex">
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                  <Select
+                  <CommonCodeSelect
                     width="w-25"
                     name="bankAccountType"
                     placeholder="기업유형"
                     value={card["cardType"]}
-                    options={[
-                      {key: "C", value: "법인"},
-                      {key: "P", value: "개인"},
-                    ]}
-                    isDisabled={true}
+                    commonCode={{C: "법인", P: "개인"}}
+                    onChange={handleChange}
                   />
                 </InputWrapper>
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                  <CardSelectbox
+                  <CommonCodeSelect
+                    name="cardCompany"
+                    commonCode={CardCode}
                     onChange={handleChange}
-                    selectedValue={card["cardCompany"]}
-                    isDisabled={true}
+                    value={card["cardCompany"]}
+                    diabled={true}
                   />
                 </InputWrapper>
 
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                   <Input
-                    name="bankAccountNum"
+                    name="cardNum"
                     type="text"
                     width="w-36"
-                    placeholder="계좌번호"
+                    placeholder="카드번호"
                     value={card?.cardNum}
                     onChange={handleChange}
                     readOnly={true}
+                  />
+                </InputWrapper>
+                <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                  <CommonCodeSelect
+                    name="useKind"
+                    commonCode={UsePurpose}
+                    value={card["cardType"]}
+                    placeholder="사용목적"
+                    onChange={(e) =>
+                      handleChangeUsePurpose({
+                        ...card,
+                        useKind: e.target.value,
+                      })
+                    }
                   />
                 </InputWrapper>
               </div>

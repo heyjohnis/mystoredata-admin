@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {BankCode, CardCode} from "data/commonCode";
+import {BankCode, CardCode, UsePurpose} from "data/commonCode";
 import {GET, PUT} from "utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
 import SectionTitle from "components/dashboard/section-title";
@@ -20,19 +20,23 @@ const fields: Record<string, string>[] = [
   },
   {
     name: "계좌/카드번호",
-    key: "CardNum",
+    key: "assetNum",
   },
   {
     name: "거래금액",
+    key: "transMoney",
+  },
+  {
+    name: "사용목적",
     key: "Withdraw",
   },
   {
     name: "통장내역",
-    key: "Deposit",
+    key: "accountMemo",
   },
   {
     name: "카드내역",
-    key: "TransDT",
+    key: "cardMemo",
   },
   {
     name: "결제결과",
@@ -40,11 +44,11 @@ const fields: Record<string, string>[] = [
   },
   {
     name: "결제방법",
-    key: "TransRemark",
+    key: "depositType",
   },
   {
     name: "거래일시",
-    key: "TransRemark",
+    key: "transDate",
   },
 ];
 
@@ -126,6 +130,10 @@ const Index: React.FC = () => {
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {log.transMoney.toLocaleString("ko-KR") || "-"}
                   </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
+                    {UsePurpose[log.useKind as keyof typeof UsePurpose]}
+                  </td>
+
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {`${log.transRemark || ""} ${log.transType ? "|" : ""} ${
                       log.transType || ""

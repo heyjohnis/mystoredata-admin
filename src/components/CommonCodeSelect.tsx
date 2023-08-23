@@ -1,13 +1,23 @@
 import {Select} from "components/forms/select";
-import {BankCode} from "data/commonCode";
 
+type CommonCodeSelectProps = {
+  name: string;
+  commonCode: Record<string, string>;
+  value?: string;
+  onChange?: (e: any) => void;
+  width?: string;
+  diabled?: boolean;
+  placeholder?: string;
+};
 export default function CommonCodeSelect({
-  commonCode,
-  onChange,
-  selectedValue,
-  isDisabled,
   name,
-}) {
+  commonCode,
+  value,
+  onChange,
+  width,
+  diabled,
+  placeholder,
+}: CommonCodeSelectProps) {
   const codes = Object.keys(commonCode).map((key) => ({
     key,
     value: commonCode[key],
@@ -15,13 +25,13 @@ export default function CommonCodeSelect({
 
   return (
     <Select
-      width="w-25"
-      name="bank"
-      placeholder={commonCode[""]}
-      value={selectedValue}
+      width={width || "w-25"}
+      name={name}
+      value={value}
       options={codes}
       onChange={onChange}
-      isDisabled={isDisabled}
+      placeholder={placeholder}
+      diabled={diabled}
     />
   );
 }

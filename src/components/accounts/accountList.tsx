@@ -1,11 +1,12 @@
 import {Input} from "components/forms/input";
 import {AccountProps} from "model/account";
 import {Select} from "components/forms/select";
-import BankSelectbox from "./bankSelectbox";
 import {useState} from "react";
 import {InputWrapper} from "components/forms/input-wrapper";
 import AccountInput from "./accountInput";
-import {POST, DELETE} from "utils/restApi";
+import {POST, PUT, DELETE} from "utils/restApi";
+import CommonCodeSelect from "components/CommonCodeSelect";
+import {BankCode, CorpType, UsePurpose} from "data/commonCode";
 
 export default function AccountList({accounts, user, baseMonth}: any) {
   //const [form, setForm] = useState<AccountProps>();
@@ -34,6 +35,11 @@ export default function AccountList({accounts, user, baseMonth}: any) {
       );
       //alert('삭제에 실패하였습니다.\n' + res.data.error.message);
     });
+  };
+
+  const handleChangeUsePurpose = async (account: AccountProps) => {
+    const result = await PUT("account/update", {...account});
+    console.log({result});
   };
 
   const syncAccountLog = (account: AccountProps) => {
@@ -67,23 +73,23 @@ export default function AccountList({accounts, user, baseMonth}: any) {
             <div key={i} className="flex justify-between">
               <div className="flex">
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                  <Select
+                  <CommonCodeSelect
                     width="w-25"
                     name="bankAccountType"
-                    placeholder="기업유형"
+                    commonCode={CorpType}
                     value={account["bankAccountType"]}
-                    options={[
-                      {key: "C", value: "법인"},
-                      {key: "P", value: "개인"},
-                    ]}
-                    isDisabled={true}
+                    diabled={true}
+                    placeholder="기업유형"
                   />
                 </InputWrapper>
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                  <BankSelectbox
+                  <CommonCodeSelect
+                    name="bank"
                     onChange={handleChange}
-                    selectedValue={account["bank"]}
-                    isDisabled={true}
+                    value={account["bank"]}
+                    commonCode={BankCode}
+                    diabled={true}
+                    placeholder="은행선택"
                   />
                 </InputWrapper>
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
@@ -98,16 +104,17 @@ export default function AccountList({accounts, user, baseMonth}: any) {
                   />
                 </InputWrapper>
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                  <Select
-                    width="w-25"
+                  <CommonCodeSelect
                     name="useKind"
-                    placeholder="사용목적"
+                    commonCode={UsePurpose}
                     value={account["bankAccountType"]}
-                    options={[
-                      {key: "BIZ", value: "사업목적"},
-                      {key: "BIZA", value: "개인사용 사업자회계"},
-                      {key: "PERS", value: "개인사용목적"},
-                    ]}
+                    placeholder="사용목적"
+                    onChange={(e) =>
+                      handleChangeUsePurpose({
+                        ...account,
+                        useKind: e.target.value,
+                      })
+                    }
                   />
                 </InputWrapper>
               </div>
