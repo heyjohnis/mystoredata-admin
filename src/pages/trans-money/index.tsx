@@ -8,6 +8,7 @@ import Widget from "components/widget";
 import {Input} from "components/forms/input";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
+import ModalTransMoney from "components/trans-money/ModalTransMoney";
 
 const fields: Record<string, string>[] = [
   {
@@ -55,6 +56,7 @@ const fields: Record<string, string>[] = [
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const [corpNum, setCorpNum] = useState<string>("");
+  const [asset, setAsset] = useState<TransMoneyProps>();
 
   useEffect(() => {
     getCardLogs();
@@ -75,6 +77,13 @@ const Index: React.FC = () => {
       }
     });
   };
+
+  const assetDetail = (asset: TransMoneyProps) => {
+    console.log(asset);
+    setAsset(asset);
+  };
+
+  const closedModal = (isUpdated = false) => {};
 
   return (
     <>
@@ -112,7 +121,7 @@ const Index: React.FC = () => {
             </thead>
             <tbody>
               {logs.map((log, i) => (
-                <tr key={i}>
+                <tr key={i} onClick={() => assetDetail(log)}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.transDate.toString().substring(0, 10)}
                   </td>
@@ -133,7 +142,6 @@ const Index: React.FC = () => {
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                     {UsePurpose[log.useKind as keyof typeof UsePurpose]}
                   </td>
-
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {`${log.transRemark || ""} ${log.transType ? "|" : ""} ${
                       log.transType || ""
@@ -159,6 +167,7 @@ const Index: React.FC = () => {
           </table>
         </div>
       </Widget>
+      <ModalTransMoney asset={asset} closedModal={closedModal} />
     </>
   );
 };

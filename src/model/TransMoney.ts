@@ -1,5 +1,5 @@
 export type TransMoneyProps = {
-  bank: string;
+  bank?: string;
   cardApprovalCost: string;
   cardApprovalType: string;
   cardNum: string;
@@ -28,4 +28,5 @@ export type TransMoneyProps = {
   useStoreTel: string;
   user: string;
   useKind: string;
+  category: string;
 };

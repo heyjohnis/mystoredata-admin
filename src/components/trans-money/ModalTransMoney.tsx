@@ -4,52 +4,45 @@ import {FiX} from "react-icons/fi";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
-import {POST, PUT} from "utils/restApi";
+import {GET} from "utils/restApi";
 import {UserProps} from "model/user";
 import AccountList from "components/accounts/accountList";
 import CardList from "components/cards/cardList";
 import Link from "next/link";
+import {TransMoneyProps} from "model/TransMoney";
+import {BankCode, CardCode, UsePurpose} from "data/commonCode";
+import CommonCodeSelect from "components/CommonCodeSelect";
 
-const Modal = ({user, closedModal}: any) => {
+type Props = {
+  asset?: TransMoneyProps;
+  closedModal: (isSaved?: boolean) => void;
+};
+
+const ModalTransMoney = ({asset, closedModal}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [form, setForm] = useState<UserProps>({...user});
-  const [searchYYYYMM, setSearchYYYYMM] = useState<string>(
-    new Date().getFullYear() +
-      "" +
-      (new Date().getMonth() + 1).toString().padStart(2, "0")
-  );
+  const [form, setForm] = useState<TransMoneyProps>();
+  const [category, setCategory] = useState<Record<string, string> | null>();
   const [isReadOnly, setIsReadOnly] = useState<boolean>(false);
   const closeModal = () => {
     setIsOpen(false);
     closedModal();
   };
-
   useEffect(() => {
-    if (user) {
+    if (asset) {
       setIsOpen(true);
-      setForm(user);
-      setIsReadOnly(user.userId ? true : false);
+      setForm(asset);
+      getCategory(asset);
     }
-  }, [user]);
+  }, [asset]);
 
-  const saveUser = () => {
-    if (user.createdAt) {
-      PUT("user/update", form).then((res: any) => {
-        console.log("user update");
-        console.log("res: ", res);
-        closedModal(true);
-        closeModal();
-      });
-    } else {
-      POST("auth/signup", form).then((res: any) => {
-        console.log("user create");
-        if (res?.data) {
-          console.log("res: ", res);
-          closedModal(true);
-          closeModal();
-        }
-      });
+  const getCategory = async (asset: TransMoneyProps) => {
+    const result = await GET(`user/category/${asset.user}`);
+    const obj = result?.data?.data?.category;
+    const categoryData: {[key: string]: any} = {};
+    for (const key in obj) {
+      categoryData[key] = obj[key].name;
     }
+    setCategory(categoryData);
   };
 
   const handleChange = (e: any) => {
@@ -88,7 +81,7 @@ const Modal = ({user, closedModal}: any) => {
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-gray-900 dark:text-white">
-                  사용자 상세정보
+                  거래내역 상세정보
                 </Dialog.Title>
                 <button
                   className="absolute top-0 right-0 m-4 font-bold uppercase"
@@ -97,172 +90,154 @@ const Modal = ({user, closedModal}: any) => {
                 </button>
                 <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>로그인ID</Label>
+                    <Label>거래일</Label>
                     <Input
-                      name="userId"
+                      name="transDate"
                       type="text"
-                      value={form?.userId}
+                      width="w-48"
+                      value={form?.transDate.toString() || ""}
                       onChange={handleChange}
-                      readOnly={isReadOnly}
+                      readOnly={true}
                     />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>패스워드</Label>
-                    <Input
-                      name="password"
-                      type="password"
-                      value={form?.password}
-                      onChange={handleChange}
-                      readOnly={isReadOnly}
-                    />
-                  </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>이메일</Label>
-                    <Input
-                      name="email"
-                      type="text"
-                      value={form?.email}
-                      onChange={handleChange}
-                      width="w-full"
-                    />
-                  </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>사용자명</Label>
-                    <Input
-                      name="userName"
-                      type="text"
-                      value={form?.userName}
-                      onChange={handleChange}
-                    />
-                  </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>휴대폰</Label>
-                    <Input
-                      name="mobile"
-                      type="text"
-                      value={form?.mobile}
-                      onChange={handleChange}
-                    />
-                  </InputWrapper>
-                </div>
-                <div className="flex">
-                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>회사명</Label>
-                    <Input
-                      name="corpName"
-                      type="text"
-                      value={form?.corpName}
-                      onChange={handleChange}
-                    />
-                  </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>사업자번호</Label>
+                    <Label>사업자</Label>
                     <Input
                       name="corpNum"
                       type="text"
-                      value={form?.corpNum}
+                      value={form?.corpNum || ""}
                       onChange={handleChange}
+                      readOnly={true}
                     />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>대표자명</Label>
+                    <Label>계좌번호</Label>
                     <Input
-                      name="ceoName"
+                      name="bankAccountNum"
                       type="text"
-                      value={form?.ceoName}
+                      width="w-48"
+                      value={`${form?.bank ? BankCode[form?.bank || ""] : ""} ${
+                        form?.bankAccountNum || ""
+                      }`}
                       onChange={handleChange}
-                    />
-                  </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
-                    <Label>생년월일</Label>
-                    <Input
-                      name="birth"
-                      type="text"
-                      value={form?.birth}
-                      placeholder="YYMMDD"
-                      onChange={handleChange}
-                    />
-                  </InputWrapper>
-                </div>
-
-                <div className="flex">
-                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>업태</Label>
-                    <Input
-                      name="bizType"
-                      type="text"
-                      value={form?.bizType}
-                      onChange={handleChange}
+                      readOnly={true}
                     />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>업종</Label>
+                    <Label>카드번호</Label>
                     <Input
-                      name="bizClass"
+                      name="cardNum"
                       type="text"
-                      value={form?.bizClass}
+                      width="w-64"
+                      value={`${
+                        form?.cardCompany ? CardCode[form?.cardCompany] : ""
+                      } ${form?.cardNum || ""}`}
                       onChange={handleChange}
-                    />
-                  </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>주소</Label>
-                    <Input
-                      name="addr1"
-                      type="text"
-                      value={form?.addr1}
-                      onChange={handleChange}
-                    />
-                  </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
-                    <Label>상세주소</Label>
-                    <Input
-                      name="addr2"
-                      type="text"
-                      value={form?.addr2}
-                      onChange={handleChange}
+                      readOnly={true}
                     />
                   </InputWrapper>
                 </div>
                 <div className="flex">
-                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
-                    <Label>데이터수집 기간설정(연월)</Label>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>거래금액</Label>
                     <Input
-                      name="addr2"
+                      name="transMoney"
                       type="text"
-                      value={searchYYYYMM}
-                      placeholder="YYYYMM"
-                      onChange={(e) => setSearchYYYYMM(e.target.value)}
+                      className="text-right"
+                      value={form?.transMoney.toLocaleString("ko-KR") || ""}
+                      onChange={handleChange}
+                      readOnly={true}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>사용목적</Label>
+                    <CommonCodeSelect
+                      name="useKind"
+                      value={form?.useKind}
+                      commonCode={UsePurpose}
+                      onChange={handleChange}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>카테고리</Label>
+                    <CommonCodeSelect
+                      name="category"
+                      value={form?.category}
+                      commonCode={category}
+                      onChange={handleChange}
                     />
                   </InputWrapper>
                 </div>
-
-                <AccountList
-                  accounts={form?.accounts}
-                  user={user}
-                  baseMonth={searchYYYYMM}
-                />
-                <CardList
-                  cards={form?.cards}
-                  user={user}
-                  baseMonth={searchYYYYMM}
-                />
-
+                <div className="flex">
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>통장내역</Label>
+                    <Input
+                      name="transMoney"
+                      type="text"
+                      width="w-96"
+                      value={`${form?.transRemark || ""} ${
+                        form?.transType ? "|" : ""
+                      } ${form?.transType || ""} ${
+                        form?.transOffice ? "|" : ""
+                      } ${form?.transOffice || ""} `}
+                      onChange={handleChange}
+                      readOnly={true}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>카드내역</Label>
+                    <Input
+                      name="transMoney"
+                      type="text"
+                      width="w-96"
+                      value={`${form?.useStoreBizType || ""} ${
+                        form?.useStoreName ? "|" : ""
+                      } ${form?.useStoreName || ""}`}
+                      onChange={handleChange}
+                      readOnly={true}
+                    />
+                  </InputWrapper>
+                </div>
+                <div className="flex">
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>카드내역</Label>
+                    <Input
+                      name="transMoney"
+                      type="text"
+                      width="w-96"
+                      value={`${form?.useStoreBizType || ""} ${
+                        form?.useStoreName ? "|" : ""
+                      } ${form?.useStoreName || ""}`}
+                      onChange={handleChange}
+                      readOnly={true}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>결제결과</Label>
+                    <Input
+                      name="cardApprovalType"
+                      type="text"
+                      width="w-32"
+                      value={form?.cardApprovalType}
+                      onChange={handleChange}
+                      readOnly={true}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>결제방법</Label>
+                    <Input
+                      name="paymentPlan"
+                      type="text"
+                      width="w-32"
+                      value={form?.paymentPlan}
+                      onChange={handleChange}
+                      readOnly={true}
+                    />
+                  </InputWrapper>
+                </div>
                 <div className="flex mt-3 pt-3 border-t-2 justify-between">
-                  <Link
-                    href={{
-                      pathname: "/category",
-                      query: {userId: form.userId},
-                    }}>
-                    <button
-                      type="button"
-                      className="px-4 py-2 text-xs font-bold text-white uppercase bg-gray-500 rounded-lg hover:bg-gray-600">
-                      카테고리 설정
-                    </button>
-                  </Link>
-
                   <button
                     type="button"
-                    onClick={saveUser}
                     className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600">
                     저장
                   </button>
@@ -276,4 +251,4 @@ const Modal = ({user, closedModal}: any) => {
   );
 };
 
-export default Modal;
+export default ModalTransMoney;

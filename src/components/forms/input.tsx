@@ -20,6 +20,7 @@ export type InputProps = {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void; // onChange 이벤트 핸들러 함수
   readOnly?: boolean;
   disabled?: boolean;
+  className?: string;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -28,9 +29,10 @@ export const Input: React.FC<InputProps> = ({
   width = "w-full",
   placeholder = "",
   value = "",
-  onChange, // 새로운 prop으로 추가된 onChange
+  onChange,
   readOnly = false,
   disabled = false,
+  className = "",
 }) => {
   return (
     <input
@@ -39,7 +41,7 @@ export const Input: React.FC<InputProps> = ({
       name={name}
       className={`form-input block ${width} border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 flex-grow-1 focus:border-blue-500 focus:ring-0 sm:text-sm rounded-md ${
         readOnly || disabled ? "bg-gray-100 dark:bg-gray-800 text-gray-500" : ""
-      }`}
+      } ${className}`}
       value={value}
       onChange={onChange} // 전달된 onChange 이벤트 핸들러 함수
       readOnly={readOnly ? true : false}
