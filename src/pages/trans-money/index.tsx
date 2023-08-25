@@ -88,7 +88,12 @@ const Index: React.FC = () => {
     setAsset(asset);
   };
 
-  const closedModal = (isUpdated = false) => {};
+  const closedModal = (isUpdated = false) => {
+    if (isUpdated) {
+      getCardLogs();
+    }
+    console.log("closedModal");
+  };
 
   return (
     <>
