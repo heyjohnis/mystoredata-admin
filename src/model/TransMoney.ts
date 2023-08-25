@@ -29,4 +29,5 @@ export type TransMoneyProps = {
   user: string;
   useKind: string;
   category: string;
+  keyword: Array<string>;
 };

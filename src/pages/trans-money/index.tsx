@@ -32,6 +32,10 @@ const fields: Record<string, string>[] = [
     key: "Withdraw",
   },
   {
+    name: "키워드",
+    key: "keyword",
+  },
+  {
     name: "통장내역",
     key: "accountMemo",
   },
@@ -57,6 +61,7 @@ const Index: React.FC = () => {
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const [corpNum, setCorpNum] = useState<string>("");
   const [asset, setAsset] = useState<TransMoneyProps>();
+  const [category, setCategory] = useState<Record<string, string> | null>();
 
   useEffect(() => {
     getCardLogs();
@@ -78,7 +83,7 @@ const Index: React.FC = () => {
     });
   };
 
-  const assetDetail = (asset: TransMoneyProps) => {
+  const assetDetail = async (asset: TransMoneyProps) => {
     console.log(asset);
     setAsset(asset);
   };
@@ -141,6 +146,9 @@ const Index: React.FC = () => {
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                     {UsePurpose[log.useKind as keyof typeof UsePurpose]}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.keyword?.join(", ")}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {`${log.transRemark || ""} ${log.transType ? "|" : ""} ${

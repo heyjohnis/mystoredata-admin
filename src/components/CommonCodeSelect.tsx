@@ -18,10 +18,12 @@ export default function CommonCodeSelect({
   diabled,
   placeholder,
 }: CommonCodeSelectProps) {
-  const codes = Object.keys(commonCode).map((key) => ({
-    key,
-    value: commonCode[key],
-  }));
+  const codes = commonCode
+    ? Object.keys(commonCode).map((key) => ({
+        key,
+        value: commonCode[key],
+      }))
+    : [];
 
   return (
     <Select

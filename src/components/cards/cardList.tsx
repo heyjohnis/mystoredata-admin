@@ -84,11 +84,10 @@ export default function CardList({cards, user, baseMonth}: any) {
                     name="cardCompany"
                     commonCode={CardCode}
                     onChange={handleChange}
-                    value={card["cardCompany"]}
+                    value={card?.cardCompany}
                     diabled={true}
                   />
                 </InputWrapper>
-
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                   <Input
                     name="cardNum"
@@ -104,7 +103,7 @@ export default function CardList({cards, user, baseMonth}: any) {
                   <CommonCodeSelect
                     name="useKind"
                     commonCode={UsePurpose}
-                    value={card["cardType"]}
+                    value={card?.useKind}
                     placeholder="사용목적"
                     onChange={(e) =>
                       handleChangeUsePurpose({

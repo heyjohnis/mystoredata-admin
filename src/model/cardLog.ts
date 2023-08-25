@@ -23,4 +23,5 @@ export type CardLogProps = {
   UseStoreTel: string;
   user: string;
   transDate: Date;
+  keyword: Array<string>;
 };

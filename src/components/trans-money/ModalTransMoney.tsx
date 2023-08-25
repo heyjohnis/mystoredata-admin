@@ -15,14 +15,16 @@ import CommonCodeSelect from "components/CommonCodeSelect";
 
 type Props = {
   asset?: TransMoneyProps;
+  category?: Record<string, string>;
   closedModal: (isSaved?: boolean) => void;
 };
 
 const ModalTransMoney = ({asset, closedModal}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<TransMoneyProps>();
-  const [category, setCategory] = useState<Record<string, string> | null>();
   const [isReadOnly, setIsReadOnly] = useState<boolean>(false);
+  const [category, setCategory] = useState<Record<string, string>>({});
+
   const closeModal = () => {
     setIsOpen(false);
     closedModal();
@@ -38,13 +40,13 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   const getCategory = async (asset: TransMoneyProps) => {
     const result = await GET(`user/category/${asset.user}`);
     const obj = result?.data?.data?.category;
+    console.log({obj});
     const categoryData: {[key: string]: any} = {};
     for (const key in obj) {
       categoryData[key] = obj[key].name;
     }
     setCategory(categoryData);
   };
-
   const handleChange = (e: any) => {
     const {name, value} = e.target;
     setForm((prevState: any) => ({...prevState, [name]: value}));

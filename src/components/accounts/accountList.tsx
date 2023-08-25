@@ -107,7 +107,7 @@ export default function AccountList({accounts, user, baseMonth}: any) {
                   <CommonCodeSelect
                     name="useKind"
                     commonCode={UsePurpose}
-                    value={account["bankAccountType"]}
+                    value={account?.useKind}
                     placeholder="사용목적"
                     onChange={(e) =>
                       handleChangeUsePurpose({

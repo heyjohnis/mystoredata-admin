@@ -28,6 +28,10 @@ const fields: Record<string, string>[] = [
     key: "Withdraw",
   },
   {
+    name: "키워드",
+    key: "keyword",
+  },
+  {
     name: "세금/화폐",
     key: "Deposit",
   },
@@ -113,6 +117,9 @@ const Index: React.FC = () => {
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {parseInt(log.CardApprovalCost).toLocaleString("ko-KR") ||
                       "-"}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.keyword.join(", ")}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                     ({parseInt(log.Tax).toLocaleString("ko-KR") || "-"},{" "}
