@@ -1,10 +1,11 @@
 import {Dialog, Transition} from "@headlessui/react";
-import {Fragment, useEffect, useState} from "react";
+import {Fragment, use, useEffect, useState} from "react";
+import {useRouter} from "next/router";
 import {FiX} from "react-icons/fi";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
-import {GET} from "utils/restApi";
+import {GET, PUT} from "utils/restApi";
 import {UserProps} from "model/user";
 import AccountList from "components/accounts/accountList";
 import CardList from "components/cards/cardList";
@@ -20,6 +21,7 @@ type Props = {
 };
 
 const ModalTransMoney = ({asset, closedModal}: Props) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<TransMoneyProps>();
   const [isReadOnly, setIsReadOnly] = useState<boolean>(false);
@@ -27,7 +29,9 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
 
   const closeModal = () => {
     setIsOpen(false);
-    closedModal();
+    closedModal(
+      asset?.category !== form?.category || asset?.useKind !== form?.useKind
+    );
   };
   useEffect(() => {
     if (asset) {
@@ -47,10 +51,33 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
     }
     setCategory(categoryData);
   };
+
   const handleChange = (e: any) => {
     const {name, value} = e.target;
     setForm((prevState: any) => ({...prevState, [name]: value}));
+    if (name === "category") {
+      const selectedText = e.target.options[e.target.selectedIndex].text;
+      setForm((prevState: any) => ({...prevState, categoryName: selectedText}));
+    }
   };
+
+  const updateDetail = () => {
+    PUT(`trans/update/${form?._id}`, form)
+      .then((res) => {
+        //router.reload();
+      })
+      .catch((err) => {});
+  };
+
+  useEffect(() => {
+    if (
+      form?.category !== asset?.category ||
+      form?.useKind !== asset?.useKind
+    ) {
+      console.log("updateDetail: ", form);
+      updateDetail();
+    }
+  }, [form]);
 
   return (
     <>
@@ -167,6 +194,17 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                       value={form?.category}
                       commonCode={category}
                       onChange={handleChange}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>키워드</Label>
+                    <Input
+                      name="transMoney"
+                      type="text"
+                      width="w-96"
+                      value={form?.keyword.join(", ") || ""}
+                      onChange={handleChange}
+                      readOnly={true}
                     />
                   </InputWrapper>
                 </div>
