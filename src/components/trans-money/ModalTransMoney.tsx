@@ -57,8 +57,9 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
 
   const updateDetail = () => {
     PUT(`trans/update/${form?._id}`, form)
-      .then((res) => {
+      .then((res: any) => {
         console.log({res});
+        if (res.data.n > 0) alert("저장되었습니다");
       })
       .catch((err) => {
         console.log({err});
@@ -67,8 +68,9 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
 
   const saveRule = () => {
     POST(`user/category/rule`, form)
-      .then((res) => {
-        console.log({res});
+      .then((res: any) => {
+        if (res.data.n > 0) alert("저장되었습니다");
+        else alert("저장에 실패하였습니다");
       })
       .catch((err) => {
         console.log({err});
@@ -195,12 +197,14 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>카테고리</Label>
-                    <CommonCodeSelect
-                      name="category"
-                      value={form?.category}
-                      commonCode={category}
-                      onChange={handleChange}
-                    />
+                    {category && (
+                      <CommonCodeSelect
+                        name="category"
+                        value={form?.category}
+                        commonCode={category}
+                        onChange={handleChange}
+                      />
+                    )}
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>키워드</Label>

@@ -14,6 +14,7 @@ import {BsDatabase} from "react-icons/bs";
 import {BsCreditCard} from "react-icons/bs";
 import {LuBanknote} from "react-icons/lu";
 import {BiTransfer} from "react-icons/bi";
+import {MdAccountTree} from "react-icons/md";
 
 export type NavigationState = {
   title: string;
@@ -64,6 +65,12 @@ const initialState: NavigationState[] = [
         url: "/category",
         icon: <BiCategory size={20} />,
         title: "나의 카테고리",
+        items: [],
+      },
+      {
+        url: "/category-rule",
+        icon: <MdAccountTree size={20} />,
+        title: "나의 카테고리 Rule",
         items: [],
       },
     ],
