@@ -1,30 +1,23 @@
 import {Dialog, Transition} from "@headlessui/react";
-import {Fragment, use, useEffect, useState} from "react";
-import {useRouter} from "next/router";
+import {Fragment, useEffect, useState} from "react";
 import {FiX} from "react-icons/fi";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
-import {GET, PUT} from "utils/restApi";
-import {UserProps} from "model/user";
-import AccountList from "components/accounts/accountList";
-import CardList from "components/cards/cardList";
-import Link from "next/link";
+import {GET, POST, PUT} from "utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
 import {BankCode, CardCode, UsePurpose} from "data/commonCode";
 import CommonCodeSelect from "components/CommonCodeSelect";
 
 type Props = {
-  asset?: TransMoneyProps;
+  asset: TransMoneyProps | null;
   category?: Record<string, string>;
   closedModal: (isSaved?: boolean) => void;
 };
 
 const ModalTransMoney = ({asset, closedModal}: Props) => {
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<TransMoneyProps>();
-  const [isReadOnly, setIsReadOnly] = useState<boolean>(false);
   const [category, setCategory] = useState<Record<string, string>>({});
 
   const closeModal = () => {
@@ -42,6 +35,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   }, [asset]);
 
   const getCategory = async (asset: TransMoneyProps) => {
+    console.log("getCategory: ", asset);
     const result = await GET(`user/category/${asset.user}`);
     const obj = result?.data?.data?.category;
     console.log({obj});
@@ -64,9 +58,21 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   const updateDetail = () => {
     PUT(`trans/update/${form?._id}`, form)
       .then((res) => {
-        //router.reload();
+        console.log({res});
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log({err});
+      });
+  };
+
+  const saveRule = () => {
+    POST(`user/category/rule`, form)
+      .then((res) => {
+        console.log({res});
+      })
+      .catch((err) => {
+        console.log({err});
+      });
   };
 
   useEffect(() => {
@@ -278,8 +284,9 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                 <div className="flex mt-3 pt-3 border-t-2 justify-between">
                   <button
                     type="button"
-                    className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600">
-                    저장
+                    className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
+                    onClick={saveRule}>
+                    본 설정으로 모두 적용(향후 데이터 적옹)
                   </button>
                 </div>
               </div>

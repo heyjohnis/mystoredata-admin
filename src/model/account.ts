@@ -1,5 +1,5 @@
 export type AccountProps = {
-  user: string;
+  user: Object;
   corpNum: string;
   bank: string;
   bankAccountType: "C" | "P";

@@ -1,7 +1,7 @@
 import {AccountProps} from "./account";
 
 export type UserProps = {
-  _id: string;
+  _id: Object;
   userId: string;
   userName: string;
   email: string;

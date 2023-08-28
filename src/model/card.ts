@@ -1,5 +1,5 @@
 export type CardProps = {
-  user: string;
+  user: Object;
   corpNum: string;
   cardCompany: string;
   cardType: "C" | "P";

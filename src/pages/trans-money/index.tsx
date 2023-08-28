@@ -64,7 +64,7 @@ const fields: Record<string, string>[] = [
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const [corpNum, setCorpNum] = useState<string>("");
-  const [asset, setAsset] = useState<TransMoneyProps>();
+  const [asset, setAsset] = useState<TransMoneyProps | null>(null);
   const [category, setCategory] = useState<Record<string, string> | null>();
 
   useEffect(() => {
@@ -93,6 +93,7 @@ const Index: React.FC = () => {
   };
 
   const closedModal = (isUpdated = false) => {
+    setAsset(null);
     if (isUpdated) {
       getCardLogs();
     }
