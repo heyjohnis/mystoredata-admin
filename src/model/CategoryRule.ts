@@ -1,5 +1,5 @@
 export type CategoryRuleProps = {
-  user: Object;
+  user: string;
   category: string;
   categoryName: string;
   useKind: string;

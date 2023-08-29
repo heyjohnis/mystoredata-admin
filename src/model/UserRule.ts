@@ -1,5 +1,5 @@
 export type UserRoleProps = {
-  user: Object;
+  user: string;
   userId: string;
   useStoreBizType: string;
   useStoreName: string;

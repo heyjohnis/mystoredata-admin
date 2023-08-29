@@ -27,7 +27,7 @@ export type TransMoneyProps = {
   useStoreNum: string;
   useStoreTaxType: string;
   useStoreTel: string;
-  user: Object;
+  user: string;
   useKind: string;
   category: string;
   categoryName: string;
