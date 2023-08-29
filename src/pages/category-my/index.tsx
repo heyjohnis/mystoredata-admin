@@ -43,7 +43,7 @@ export default function Index() {
       <Notification />
       <SectionTitle
         title="setting category"
-        subtitle="키워드를 통한 카테고리 자동설정"
+        subtitle="사용자 상세화면에서 [카테고리 설정]을 누르세요"
       />
       <Widget>
         <div className="w-full overflow-x-auto">
