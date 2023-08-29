@@ -83,6 +83,7 @@ const Index: React.FC = () => {
       console.log({res});
       if (res.data.success) {
         getCardLogs();
+        alert("거래내역취합이 완료되었습니다.");
       }
     });
   };

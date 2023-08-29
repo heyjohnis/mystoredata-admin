@@ -52,6 +52,9 @@ export default function AccountList({accounts, user, baseMonth}: any) {
       baseMonth,
     })
       .then((res: any) => {
+        if (res.data.success) {
+          alert("데이터 수집이 완료되었습니다.");
+        }
         console.log("account/regLog: ", res);
       })
       .catch((err: any) => {

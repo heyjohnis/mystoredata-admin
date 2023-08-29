@@ -1,13 +1,10 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {GET, PUT} from "utils/restApi";
+import {GET} from "utils/restApi";
 import SectionTitle from "components/dashboard/section-title";
 import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 import {Badge} from "components/badges";
-import {CategoryProps} from "model/Category";
-import {Input} from "components/forms/input";
-import ModalCategory from "components/category/ModalCategory";
 
 const fields: Record<string, string>[] = [
   {
@@ -19,35 +16,26 @@ const fields: Record<string, string>[] = [
     key: "name",
   },
   {
-    name: "키워드",
-    key: "keyword",
+    name: "설정",
+    key: "setting",
   },
 ];
 
 export default function Index() {
   const router = useRouter();
-  const [categories, setCategories] = useState<CategoryProps[]>([]);
-  const [keyword, setKeyword] = useState<string>("");
-  const [category, setCategory] = useState<CategoryProps>();
+  const [categories, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
-    getCategories();
-  }, []);
-
-  const getCategories: any = async () => {
-    const {data}: any = await GET(`category/keyword-rule`);
-    setCategories(data);
-  };
-
-  const closedModal = (isChanged: boolean) => {
-    setCategory(undefined);
-    if (isChanged) {
-      getCategories();
+    if (router.query.user) {
+      const {user} = router.query;
+      user && getCategories(user);
     }
-  };
+  }, [router.query]);
 
-  const openDetailModal = (category: CategoryProps) => {
-    setCategory(category);
+  const getCategories: any = async (user: string) => {
+    const {data}: any = await GET(`user/category/${user}`);
+    console.log("getCategories: ", data);
+    setCategories(data.category || []);
   };
 
   return (
@@ -73,10 +61,7 @@ export default function Index() {
             </thead>
             <tbody>
               {categories.map((category, i) => (
-                <tr
-                  key={i}
-                  onClick={() => openDetailModal(category)}
-                  className="cursor-pointer">
+                <tr key={i}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {category.code}
                   </td>
@@ -90,16 +75,12 @@ export default function Index() {
                     </Badge>
                     {category.name}
                   </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {category.keyword.join(", ")}
-                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       </Widget>
-      <ModalCategory category={category} closedModal={closedModal} />
     </>
   );
 }

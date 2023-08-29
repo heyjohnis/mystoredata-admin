@@ -44,6 +44,12 @@ const initialState: NavigationState[] = [
         items: [],
       },
       {
+        url: "/category-my",
+        icon: <BiCategory size={20} />,
+        title: "사용자별 카테고리",
+        items: [],
+      },
+      {
         url: "/accounts/data",
         icon: <LuBanknote size={20} />,
         title: "계좌데이터",
@@ -61,6 +67,11 @@ const initialState: NavigationState[] = [
         title: "개래내역취합",
         items: [],
       },
+    ],
+  },
+  {
+    title: "처리 로직설정",
+    items: [
       {
         url: "/category",
         icon: <BiCategory size={20} />,
@@ -71,23 +82,6 @@ const initialState: NavigationState[] = [
         url: "/category-rule",
         icon: <MdAccountTree size={20} />,
         title: "거래적요 통한 카테고리",
-        items: [],
-      },
-    ],
-  },
-  {
-    title: "처리 로직설정",
-    items: [
-      {
-        url: "/",
-        icon: <BiMoney size={20} />,
-        title: "자산분류",
-        items: [],
-      },
-      {
-        url: "/logic",
-        icon: <GiProcessor size={20} />,
-        title: "로직개발",
         items: [],
       },
     ],

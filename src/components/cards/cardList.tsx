@@ -41,9 +41,9 @@ export default function CardList({cards, user, baseMonth}: any) {
   };
 
   const syncCardLog = (card: CardProps) => {
-    console.log("card sync: ", card);
     POST("card/regLog", {...card, corpNum: user.corpNum, baseMonth})
       .then((res: any) => {
+        if (res?.status === 200) alert("데이터 수집이 완료되었습니다.");
         console.log("card/regLog: ", res);
       })
       .catch((err: any) => {
