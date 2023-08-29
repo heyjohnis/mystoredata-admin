@@ -26,28 +26,22 @@ export default function Index() {
   const [categories, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
-    if (router.query.userId) {
-      const {userId} = router.query;
-      userId && getCategories(userId);
-    }
+    const {userId} = router.query;
+    getCategories(userId);
   }, [router.query]);
 
   const getCategories: any = async (userId: string) => {
     const {data}: any = await GET(`user/category?userId=${userId}`);
-    console.log(data);
-
-    const categoriesObj = data.data.category;
-    console.log(categoriesObj);
-    const dataArr = Object.keys(categoriesObj).map((key) => {
-      return {...categoriesObj[key], code: key};
-    });
-    setCategories(dataArr);
+    setCategories(data.category);
   };
 
   return (
     <>
       <Notification />
-      <SectionTitle title="setting category" subtitle="나의 카테고리" />
+      <SectionTitle
+        title="setting category"
+        subtitle="키워드를 통한 카테고리 자동설정"
+      />
       <Widget>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">

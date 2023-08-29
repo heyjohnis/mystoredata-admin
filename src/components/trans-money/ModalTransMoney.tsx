@@ -7,7 +7,8 @@ import {Input} from "components/forms/input";
 import {GET, POST, PUT} from "utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
 import {BankCode, CardCode, UsePurpose} from "data/commonCode";
-import CommonCodeSelect from "components/CommonCodeSelect";
+import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
+import {CategoryProps} from "model/Category";
 
 type Props = {
   asset: TransMoneyProps | null;
@@ -18,7 +19,7 @@ type Props = {
 const ModalTransMoney = ({asset, closedModal}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<TransMoneyProps>();
-  const [category, setCategory] = useState<Record<string, string>>({});
+  const [category, setCategory] = useState([]);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -36,14 +37,8 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
 
   const getCategory = async (asset: TransMoneyProps) => {
     console.log("getCategory: ", asset);
-    const result = await GET(`user/category/${asset.user}`);
-    const obj = result?.data?.data?.category;
-    console.log({obj});
-    const categoryData: {[key: string]: any} = {};
-    for (const key in obj) {
-      categoryData[key] = obj[key].name;
-    }
-    setCategory(categoryData);
+    const {data}: any = await GET(`user/category/${asset.user}`);
+    setCategory(data.category);
   };
 
   const handleChange = (e: any) => {
@@ -198,10 +193,10 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>카테고리</Label>
                     {category && (
-                      <CommonCodeSelect
+                      <CategorySelect
                         name="category"
                         value={form?.category}
-                        commonCode={category}
+                        codes={category}
                         onChange={handleChange}
                       />
                     )}

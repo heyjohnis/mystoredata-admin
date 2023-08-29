@@ -64,13 +64,13 @@ const initialState: NavigationState[] = [
       {
         url: "/category",
         icon: <BiCategory size={20} />,
-        title: "나의 카테고리",
+        title: "키워드 통한 카테고리",
         items: [],
       },
       {
         url: "/category-rule",
         icon: <MdAccountTree size={20} />,
-        title: "나의 카테고리 Rule",
+        title: "거래적요 통한 카테고리",
         items: [],
       },
     ],
