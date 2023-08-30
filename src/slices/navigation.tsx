@@ -13,7 +13,7 @@ import {MdOutlineCorporateFare} from "react-icons/md";
 import {BsDatabase} from "react-icons/bs";
 import {BsCreditCard} from "react-icons/bs";
 import {LuBanknote} from "react-icons/lu";
-import {BiTransfer} from "react-icons/bi";
+import {BiTransfer, BiBuildings} from "react-icons/bi";
 import {MdAccountTree} from "react-icons/md";
 
 export type NavigationState = {
@@ -40,13 +40,19 @@ const initialState: NavigationState[] = [
       {
         url: "/users",
         icon: <FiUser size={20} />,
-        title: "사용자",
+        title: "개인",
+        items: [],
+      },
+      {
+        url: "/company",
+        icon: <BiBuildings size={20} />,
+        title: "사업자",
         items: [],
       },
       {
         url: "/category-my",
         icon: <BiCategory size={20} />,
-        title: "사용자별 카테고리",
+        title: "계정별 카테고리",
         items: [],
       },
       {
