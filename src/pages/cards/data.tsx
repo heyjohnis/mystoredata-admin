@@ -55,18 +55,22 @@ const fields: Record<string, string>[] = [
     name: "거래일시",
     key: "TransRemark",
   },
+  {
+    name: "totalAmount",
+    key: "totalAmount",
+  },
 ];
 
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<CardLogProps[]>([]);
+  const [userId, setUserId] = useState<string>("");
   const [corpNum, setCorpNum] = useState<string>("");
-
   useEffect(() => {
     getCardLogs();
-  }, [corpNum]);
+  }, [userId, corpNum]);
 
   const getCardLogs = () => {
-    GET(`card/log?corpNum=${corpNum}`).then((res: any) => {
+    GET(`card/log?userId=${userId}&corpNum=${corpNum}`).then((res: any) => {
       console.log({res});
       setLogs(res.data);
     });
@@ -77,14 +81,23 @@ const Index: React.FC = () => {
       <Notification />
       <SectionTitle title="card raw data" subtitle="카드데이터" />
       <Widget>
-        <div className="flex flex-col overflow-x-auto">
-          <InputWrapper outerClassName="sm:col-span-12 mt-2">
-            <Label>조회사업자</Label>
+        <div className="flex">
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>사업자번호</Label>
             <Input
               name="corpNum"
               type="text"
               value={corpNum}
               onChange={(e) => setCorpNum(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>사용자ID</Label>
+            <Input
+              name="userId"
+              type="text"
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
             />
           </InputWrapper>
         </div>
@@ -139,6 +152,9 @@ const Index: React.FC = () => {
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.UseDT}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.TotalAmount}
                   </td>
                 </tr>
               ))}

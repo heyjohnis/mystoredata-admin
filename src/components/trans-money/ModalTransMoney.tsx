@@ -9,6 +9,7 @@ import {TransMoneyProps} from "model/TransMoney";
 import {BankCode, CardCode, UsePurpose} from "data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
+import Switch from "components/switch";
 
 type Props = {
   asset: TransMoneyProps | null;
@@ -20,11 +21,12 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<TransMoneyProps>();
   const [category, setCategory] = useState([]);
-
   const closeModal = () => {
     setIsOpen(false);
     closedModal(
-      asset?.category !== form?.category || asset?.useKind !== form?.useKind
+      asset?.category !== form?.category ||
+        asset?.useKind !== form?.useKind ||
+        asset?.useYn !== form?.useYn
     );
   };
   useEffect(() => {
@@ -61,6 +63,11 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
       });
   };
 
+  const setUseAsset = (useYn: boolean) => {
+    console.log("setUseAsset: ", useYn);
+    setForm((prevState: any) => ({...prevState, useYn}));
+  };
+
   const saveRule = () => {
     POST(`user/category/rule`, form)
       .then((res: any) => {
@@ -73,9 +80,11 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   };
 
   useEffect(() => {
+    console.log("form: ", form);
     if (
       form?.category !== asset?.category ||
-      form?.useKind !== asset?.useKind
+      form?.useKind !== asset?.useKind ||
+      form?.useYn !== asset?.useYn
     ) {
       console.log("updateDetail: ", form);
       updateDetail();
@@ -277,6 +286,14 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                       value={form?.paymentPlan}
                       onChange={handleChange}
                       readOnly={true}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>사용여부</Label>
+                    <Switch
+                      bgColor={"bg-gray-400"}
+                      initialState={form?.useYn}
+                      setSwitch={setUseAsset}
                     />
                   </InputWrapper>
                 </div>

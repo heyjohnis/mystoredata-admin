@@ -43,18 +43,22 @@ const fields: Record<string, string>[] = [
     name: "거래일시",
     key: "TransDT",
   },
+  {
+    name: "잔액",
+    key: "Balance",
+  },
 ];
 
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<AccountLogProps[]>([]);
+  const [userId, setUserId] = useState<string>("");
   const [corpNum, setCorpNum] = useState<string>("");
-
   useEffect(() => {
     getAccountLogs();
-  }, [corpNum]);
+  }, [userId, corpNum]);
 
   const getAccountLogs = () => {
-    GET(`account/log?corpNum=${corpNum}`).then((res: any) => {
+    GET(`account/log?corpNum=${corpNum}&userId=${userId}`).then((res: any) => {
       console.log({res});
       setLogs(res.data);
     });
@@ -65,15 +69,26 @@ const Index: React.FC = () => {
       <Notification />
       <SectionTitle title="account raw data" subtitle="계좌데이터" />
       <Widget>
-        <InputWrapper outerClassName="sm:col-span-12 mt-2">
-          <Label>조회사업자</Label>
-          <Input
-            name="corpNum"
-            type="text"
-            value={corpNum}
-            onChange={(e) => setCorpNum(e.target.value)}
-          />
-        </InputWrapper>
+        <div className="flex">
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>사업자번호</Label>
+            <Input
+              name="corpNum"
+              type="text"
+              value={corpNum}
+              onChange={(e) => setCorpNum(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>사용자ID</Label>
+            <Input
+              name="userId"
+              type="text"
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
+            />
+          </InputWrapper>
+        </div>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
             <thead>
@@ -113,6 +128,9 @@ const Index: React.FC = () => {
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.TransDT}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
+                    {parseInt(log.Balance).toLocaleString("ko-KR") || "-"}
                   </td>
                 </tr>
               ))}

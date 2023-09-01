@@ -65,21 +65,24 @@ const Index: React.FC = () => {
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const [corpNum, setCorpNum] = useState<string>("");
   const [asset, setAsset] = useState<TransMoneyProps | null>(null);
-  const [category, setCategory] = useState<Record<string, string> | null>();
-
+  const [userId, setUserId] = useState<string>("");
+  const [fromAt, setFromAt] = useState<string>("");
+  const [toAt, setToAt] = useState<string>("");
   useEffect(() => {
     getCardLogs();
-  }, [corpNum]);
+  }, [corpNum, userId, fromAt, toAt]);
 
   const getCardLogs = () => {
-    GET(`trans/log?corpNum=${corpNum}`).then((res: any) => {
+    GET(
+      `trans/log?corpNum=${corpNum}&userId=${userId}&fromAt=${fromAt}&toAt=${toAt}`
+    ).then((res: any) => {
       console.log({res});
-      setLogs(res.data.data);
+      setLogs(res.data);
     });
   };
 
   const transMerge = () => {
-    PUT(`trans/merge`, {corpNum}).then((res: any) => {
+    PUT(`trans/merge`, {corpNum, userId, fromAt, toAt}).then((res: any) => {
       console.log({res});
       if (res.data.success) {
         getCardLogs();
@@ -107,13 +110,42 @@ const Index: React.FC = () => {
       <SectionTitle title="merged data" subtitle="거래내역취합" />
       <Widget>
         <div className="flex">
-          <InputWrapper inline={true} outerClassName="sm:col-span-12 mr-1">
-            <Label>조회사업자</Label>
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>사업자번호</Label>
             <Input
               name="corpNum"
               type="text"
               value={corpNum}
               onChange={(e) => setCorpNum(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>사용자ID</Label>
+            <Input
+              name="userId"
+              type="text"
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
+            />
+          </InputWrapper>
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>시작일</Label>
+            <Input
+              name="fromAt"
+              type="text"
+              value={fromAt}
+              onChange={(e) => setFromAt(e.target.value)}
+              placeholder="YYYYMMDD"
+            />
+          </InputWrapper>
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>종료일</Label>
+            <Input
+              name="toAt"
+              type="text"
+              value={toAt}
+              onChange={(e) => setToAt(e.target.value)}
+              placeholder="YYYYMMDD"
             />
           </InputWrapper>
           <button
@@ -137,7 +169,10 @@ const Index: React.FC = () => {
             </thead>
             <tbody>
               {logs.map((log, i) => (
-                <tr key={i} onClick={() => assetDetail(log)}>
+                <tr
+                  key={i}
+                  onClick={() => assetDetail(log)}
+                  className={`${!log.useYn && "line-through text-gray-400"}`}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.transDate.toString().substring(0, 10)}
                   </td>

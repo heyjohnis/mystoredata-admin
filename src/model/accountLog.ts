@@ -2,6 +2,7 @@ import {UserProps} from "./user";
 
 export type AccountLogProps = {
   user: UserProps;
+  userId: string;
   CorpNum: string;
   CorpName: string;
   bank: string;

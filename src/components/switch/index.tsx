@@ -1,12 +1,14 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Switch} from "@headlessui/react";
 
 export type SwitchProps = {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   initialState?: boolean;
   bgColor?: string;
   activeBgColor?: string;
+  checked?: boolean;
+  setSwitch: (value: boolean) => void;
 };
 
 const Component: React.FC<SwitchProps> = ({
@@ -15,8 +17,13 @@ const Component: React.FC<SwitchProps> = ({
   initialState = false,
   bgColor = "bg-blue-500",
   activeBgColor = "bg-blue-800",
+  setSwitch,
 }) => {
   const [active, setActive] = useState<boolean>(initialState);
+
+  useEffect(() => {
+    setSwitch(active);
+  }, [active]);
 
   return (
     <Switch.Group>

@@ -1,5 +1,7 @@
 export type TransMoneyProps = {
   _id: string;
+  user: string;
+  userId: string;
   bank?: string;
   cardApprovalCost: string;
   cardApprovalType: string;
@@ -27,9 +29,9 @@ export type TransMoneyProps = {
   useStoreNum: string;
   useStoreTaxType: string;
   useStoreTel: string;
-  user: string;
   useKind: string;
   category: string;
   categoryName: string;
   keyword: Array<string>;
+  useYn: boolean;
 };

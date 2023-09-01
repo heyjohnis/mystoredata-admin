@@ -1,4 +1,6 @@
 export type CardLogProps = {
+  user: string;
+  userId: string;
   Amount: string;
   CardApprovalCost: string;
   CardApprovalNum: string;
@@ -21,7 +23,6 @@ export type CardLogProps = {
   UseStoreNum: string;
   UseStoreTaxType: string;
   UseStoreTel: string;
-  user: string;
   transDate: Date;
   keyword: Array<string>;
 };
