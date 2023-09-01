@@ -60,7 +60,13 @@ const Index: React.FC = () => {
             <div
               className="flex items-center justify-between w-full mb-2 lg:w-1/4 lg:pr-4 lg:mb-2"
               key={i}>
-              <Switch {...color} {...items} />
+              <Switch
+                setSwitch={(e) => {
+                  console.log(e);
+                }}
+                {...color}
+                {...items}
+              />
             </div>
           ))}
         </div>
