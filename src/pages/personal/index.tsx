@@ -4,7 +4,7 @@ import Widget from "components/widget";
 
 import {useEffect, useState} from "react";
 import {GET} from "utils/restApi";
-import Modal from "components/users/ModalDetail";
+import Modal from "components/user/PersonalDetailModal";
 import {UserProps} from "model/user";
 
 const fields: Record<string, string>[] = [
@@ -15,14 +15,6 @@ const fields: Record<string, string>[] = [
   {
     name: "사용자명",
     key: "name",
-  },
-  {
-    name: "회사명",
-    key: "corpName",
-  },
-  {
-    name: "사업자번호",
-    key: "corpNum",
   },
   {
     name: "이메일",
@@ -39,7 +31,7 @@ const Index: React.FC = () => {
   }, []);
 
   const getUserList = () => {
-    GET("user/list").then((res: any) => {
+    GET("user/list?userType=PERS").then((res: any) => {
       console.log({res});
       setUsers(res.data.data);
     });
@@ -65,8 +57,8 @@ const Index: React.FC = () => {
     <>
       <Notification />
       <SectionTitle
-        title="users"
-        subtitle="사용자목록"
+        title="personal user"
+        subtitle="개인사용자 목록"
         buttonName="사용자추가"
         handleEvent={createUser}
       />
@@ -92,12 +84,6 @@ const Index: React.FC = () => {
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {user["userName"]}
-                  </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {user["corpName"]}
-                  </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {user["corpNum"]}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {user["email"]}

@@ -4,7 +4,7 @@ import Widget from "components/widget";
 
 import {useEffect, useState} from "react";
 import {GET} from "utils/restApi";
-import Modal from "components/users/ModalDetail";
+import Modal from "components/corp/CorpDetailModal";
 import {UserProps} from "model/user";
 
 const fields: Record<string, string>[] = [
@@ -39,7 +39,7 @@ const Index: React.FC = () => {
   }, []);
 
   const getUserList = () => {
-    GET("user/list").then((res: any) => {
+    GET("user/list?userType=CORP").then((res: any) => {
       console.log({res});
       setUsers(res.data.data);
     });
@@ -65,7 +65,7 @@ const Index: React.FC = () => {
     <>
       <Notification />
       <SectionTitle
-        title="company"
+        title="corporation user"
         subtitle="사업자 목록"
         buttonName="사업자추가"
         handleEvent={createUser}

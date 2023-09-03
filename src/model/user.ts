@@ -4,6 +4,7 @@ export type UserProps = {
   _id: string;
   userId: string;
   userName: string;
+  userKind: string;
   email: string;
   mobile: string;
   corpNum: string;

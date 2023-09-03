@@ -10,9 +10,9 @@ import AccountList from "components/accounts/accountList";
 import CardList from "components/cards/cardList";
 import Link from "next/link";
 
-const Modal = ({user, closedModal}: any) => {
+const CorpDetailModal = ({user, closedModal}: any) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [form, setForm] = useState<UserProps>({...user});
+  const [form, setForm] = useState<UserProps>({...user, userType: "CORP"});
   const [searchYYYYMM, setSearchYYYYMM] = useState<string>(
     new Date().getFullYear() +
       "" +
@@ -88,7 +88,7 @@ const Modal = ({user, closedModal}: any) => {
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-gray-900 dark:text-white">
-                  사용자 상세정보
+                  사업자 상세정보
                 </Dialog.Title>
                 <button
                   className="absolute top-0 right-0 m-4 font-bold uppercase"
@@ -276,4 +276,4 @@ const Modal = ({user, closedModal}: any) => {
   );
 };
 
-export default Modal;
+export default CorpDetailModal;
