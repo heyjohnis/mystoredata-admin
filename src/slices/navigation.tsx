@@ -74,7 +74,7 @@ const initialState: NavigationState[] = [
         items: [],
       },
       {
-        url: "/",
+        url: "/fin-item/data",
         icon: <BiTransfer size={20} />,
         title: "금융상품",
         items: [],

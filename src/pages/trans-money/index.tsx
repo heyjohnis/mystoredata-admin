@@ -174,7 +174,7 @@ const Index: React.FC = () => {
                   onClick={() => assetDetail(log)}
                   className={`${!log.useYn && "line-through text-gray-400"}`}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.transDate.toString().substring(0, 10)}
+                    {new Date(log.transDate).toLocaleDateString("ko-KR")}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.corpNum} ({log.corpName})
@@ -216,7 +216,7 @@ const Index: React.FC = () => {
                     {log.paymentPlan}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.transDate.toString().substring(0, 19)}
+                    {new Date(log.transDate).toLocaleTimeString("ko-KR")}
                   </td>
                 </tr>
               ))}

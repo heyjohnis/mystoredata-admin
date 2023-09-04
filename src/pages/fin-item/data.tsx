@@ -7,8 +7,9 @@ import {Label} from "components/forms/label";
 
 import {useEffect, useState} from "react";
 import {GET} from "utils/restApi";
-import {AccountLogProps} from "model/accountLog";
-import {BankCode} from "data/commonCode";
+
+import {FinItemProps} from "model/FinItem";
+import ModalFinItem from "components/fin-item/ModalFinItem";
 
 const fields: Record<string, string>[] = [
   {
@@ -20,54 +21,64 @@ const fields: Record<string, string>[] = [
     key: "CorpNum",
   },
   {
-    name: "계좌번호",
-    key: "BankAccountNum",
+    name: "재무분류",
+    key: "item",
   },
   {
-    name: "입금",
-    key: "Deposit",
+    name: "재무항목유형",
+    key: "itemKind",
   },
   {
-    name: "출금",
-    key: "Withdraw",
+    name: "재무항목명",
+    key: "itemName",
   },
   {
-    name: "키워드",
-    key: "keyword",
-  },
-  {
-    name: "거래적요",
-    key: "TransRemark",
-  },
-  {
-    name: "거래일시",
-    key: "TransDT",
-  },
-  {
-    name: "잔액",
-    key: "Balance",
+    name: "현재평가액",
+    key: "amount",
   },
 ];
 
 const Index: React.FC = () => {
-  const [logs, setLogs] = useState<AccountLogProps[]>([]);
+  const [items, setItems] = useState<FinItemProps[]>([]);
   const [userId, setUserId] = useState<string>("");
   const [corpNum, setCorpNum] = useState<string>("");
+  const [selectedItem, setSelectedItem] = useState<FinItemProps | null>(null);
   useEffect(() => {
     getAccountLogs();
   }, [userId, corpNum]);
 
   const getAccountLogs = () => {
-    GET(`account/log?corpNum=${corpNum}&userId=${userId}`).then((res: any) => {
-      console.log({res});
-      setLogs(res.data);
-    });
+    GET(`fin-item/list?corpNum=${corpNum}&userId=${userId}`).then(
+      (res: any) => {
+        console.log({res});
+        setItems(res.data);
+      }
+    );
+  };
+
+  const regFinItem = () => {
+    openModal({});
+  };
+
+  const closedModal = (isClose: boolean) => {
+    if (isClose) {
+      setSelectedItem(null);
+    }
+  };
+
+  const openModal = (item: FinItemProps) => {
+    setSelectedItem(item);
   };
 
   return (
     <>
       <Notification />
-      <SectionTitle title="account raw data" subtitle="계좌데이터" />
+      <SectionTitle
+        title="financial asset & debt"
+        subtitle="자산, 부채"
+        buttonName="항목추가"
+        handleEvent={regFinItem}
+      />
       <Widget>
         <div className="flex">
           <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
@@ -103,34 +114,25 @@ const Index: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {logs.map((log, i) => (
-                <tr key={i}>
+              {items.map((item, i) => (
+                <tr key={i} onClick={() => openModal(item)}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.TransDT.substring(0, 8)}
-                  </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.CorpNum} ({log.CorpName})
+                    {item.userId}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    [{BankCode[log.bank]}]{log.BankAccountNum}
-                  </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.Deposit).toLocaleString("ko-KR") || "-"}
-                  </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.Withdraw).toLocaleString("ko-KR") || "-"}
+                    {item.finCorpName}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.keyword.join(", ")}
+                    {item.itemKindName}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.TransRemark}
+                    {item.itemTypeName}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.TransDT}
+                    {item.itemName}
                   </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.Balance).toLocaleString("ko-KR") || "-"}
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {item.amount.toLocaleString()}
                   </td>
                 </tr>
               ))}
@@ -138,6 +140,7 @@ const Index: React.FC = () => {
           </table>
         </div>
       </Widget>
+      <ModalFinItem finItem={selectedItem} closedModal={closedModal} />
     </>
   );
 };
