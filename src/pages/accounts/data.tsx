@@ -40,6 +40,18 @@ const fields: Record<string, string>[] = [
     key: "TransRemark",
   },
   {
+    name: "거래키",
+    key: "transRefKey",
+  },
+  {
+    name: "mgtRemark1",
+    key: "mgtRemark1",
+  },
+  {
+    name: "mgtRemark1",
+    key: "mgtRemark1",
+  },
+  {
     name: "거래일시",
     key: "TransDT",
   },
@@ -106,31 +118,41 @@ const Index: React.FC = () => {
               {logs.map((log, i) => (
                 <tr key={i}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.TransDT.substring(0, 8)}
+                    {new Date(log.transDate).toLocaleDateString("ko-KR")}{" "}
+                    {new Date(log.transDate).toLocaleTimeString("ko-KR")}{" "}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.CorpNum} ({log.CorpName})
+                    {log.corpNum} ({log.corpName})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    [{BankCode[log.bank]}]{log.BankAccountNum}
+                    [{BankCode[log.bank]}]{log.bankAccountNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.Deposit).toLocaleString("ko-KR") || "-"}
+                    {parseInt(log.deposit).toLocaleString("ko-KR") || "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.Withdraw).toLocaleString("ko-KR") || "-"}
+                    {parseInt(log.withdraw).toLocaleString("ko-KR") || "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.keyword.join(", ")}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.TransRemark}
+                    {log.transRemark}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.TransDT}
+                    {log.transRefKey}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.mgtRemark1}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.mgtRemark2}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.transDT}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.Balance).toLocaleString("ko-KR") || "-"}
+                    {parseInt(log.balance).toLocaleString("ko-KR") || "-"}
                   </td>
                 </tr>
               ))}

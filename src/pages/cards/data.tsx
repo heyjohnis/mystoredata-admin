@@ -33,31 +33,51 @@ const fields: Record<string, string>[] = [
   },
   {
     name: "세금/화폐",
-    key: "Deposit",
+    key: "tax",
   },
   {
     name: "결제결과",
-    key: "TransDT",
+    key: "cardApprovalType",
   },
   {
     name: "결제방식",
-    key: "TransRemark",
+    key: "paymentPlan",
   },
   {
     name: "사업자유형",
-    key: "TransRemark",
+    key: "useStoreBizType",
   },
   {
     name: "업체명",
-    key: "TransRemark",
+    key: "useStoreName",
   },
   {
     name: "거래일시",
-    key: "TransRemark",
+    key: "transDate",
   },
   {
     name: "totalAmount",
     key: "totalAmount",
+  },
+  {
+    name: "installmentMonths",
+    key: "installmentMonths",
+  },
+  {
+    name: "serviceCharge",
+    key: "serviceCharge",
+  },
+  {
+    name: "useStoreTaxType",
+    key: "useStoreTaxType",
+  },
+  {
+    name: "useStoreAddr",
+    key: "useStoreAddr",
+  },
+  {
+    name: "useStoreTel",
+    key: "useStoreTel",
   },
 ];
 
@@ -118,43 +138,59 @@ const Index: React.FC = () => {
               {logs.map((log, i) => (
                 <tr key={i}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.UseDT.substring(0, 8)}
+                    {new Date(log.transDate).toLocaleDateString("ko-KR")}{" "}
+                    {new Date(log.transDate).toLocaleTimeString("ko-KR")}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.CorpNum} ({log.CorpName})
+                    {log.corpNum} ({log.corpName})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     [{CardCode[log.cardCompany as keyof typeof CardCode]}]{" "}
-                    {log.CardNum}
+                    {log.cardNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {parseInt(log.CardApprovalCost).toLocaleString("ko-KR") ||
+                    {parseInt(log.cardApprovalCost).toLocaleString("ko-KR") ||
                       "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.keyword.join(", ")}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
-                    ({parseInt(log.Tax).toLocaleString("ko-KR") || "-"},{" "}
-                    {log.Currency})
+                    ({parseInt(log.tax).toLocaleString("ko-KR") || "-"},{" "}
+                    {log.currency})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.CardApprovalType}
+                    {log.cardApprovalType}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.PaymentPlan}
+                    {log.paymentPlan}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.UseStoreBizType}
+                    {log.useStoreBizType}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.UseStoreName}
+                    {log.useStoreName}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.UseDT}
+                    {log.useDT}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {log.TotalAmount}
+                    {log.totalAmount}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.installmentMonths}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.serviceCharge}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.useStoreTaxType}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.useStoreAddr}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.useStoreTel}
                   </td>
                 </tr>
               ))}

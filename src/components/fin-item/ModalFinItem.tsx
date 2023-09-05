@@ -15,7 +15,7 @@ import {FinItemProps} from "model/FinItem";
 type Props = {
   finItem: FinItemProps | null;
   category?: Record<string, string>;
-  closedModal: (isSaved?: boolean) => void;
+  closedModal: (isSaved: boolean) => void;
 };
 
 const ModalFinItem = ({finItem, closedModal}: Props) => {

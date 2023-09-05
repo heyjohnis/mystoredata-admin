@@ -57,7 +57,7 @@ const Index: React.FC = () => {
   };
 
   const regFinItem = () => {
-    openModal({});
+    openModal(null);
   };
 
   const closedModal = (isClose: boolean) => {
@@ -66,7 +66,7 @@ const Index: React.FC = () => {
     }
   };
 
-  const openModal = (item: FinItemProps) => {
+  const openModal = (item: FinItemProps | null) => {
     setSelectedItem(item);
   };
 
