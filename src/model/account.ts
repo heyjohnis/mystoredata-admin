@@ -1,4 +1,5 @@
 export type AccountProps = {
+  _id: string;
   user: string;
   corpNum: string;
   bank: string;

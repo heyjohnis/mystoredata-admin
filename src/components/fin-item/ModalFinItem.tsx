@@ -6,11 +6,12 @@ import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
 import {GET, POST, PUT} from "utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
-import {BankCode, CardCode, UsePurpose} from "data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
 import Switch from "components/switch";
 import {FinItemProps} from "model/FinItem";
+import {BankCorpCode, FinItemCode} from "data/commonCode";
+import {Select} from "components/forms/select";
 
 type Props = {
   finItem: FinItemProps | null;
@@ -21,10 +22,11 @@ type Props = {
 const ModalFinItem = ({finItem, closedModal}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<FinItemProps>();
-  const [category, setCategory] = useState([]);
+  const [isChanged, setIsChanged] = useState<boolean>(false);
   const closeModal = () => {
+    console.log("close modal");
     setIsOpen(false);
-    closedModal(true);
+    closedModal(isChanged);
   };
   useEffect(() => {
     if (finItem) {
@@ -36,43 +38,41 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
   const handleChange = (e: any) => {
     const {name, value} = e.target;
     setForm((prevState: any) => ({...prevState, [name]: value}));
-    if (name === "category") {
-      const selectedText = e.target.options[e.target.selectedIndex].text;
-      setForm((prevState: any) => ({...prevState, categoryName: selectedText}));
+    if (name === "itemType") {
+      setForm((prevState: any) => ({
+        ...prevState,
+        itemTypeName: FinItemCode[value],
+      }));
     }
   };
 
-  const updateDetail = () => {
-    PUT(`trans/update/${form?._id}`, form)
-      .then((res: any) => {
-        console.log({res});
-        if (res.data.n > 0) alert("저장되었습니다");
-      })
-      .catch((err) => {
-        console.log({err});
-      });
-  };
-
-  const setUseAsset = (useYn: boolean) => {
-    console.log("setUseAsset: ", useYn);
-    setForm((prevState: any) => ({...prevState, useYn}));
-  };
-
-  const saveRule = () => {
-    POST(`user/category/rule`, form)
-      .then((res: any) => {
-        if (res.data.n > 0) alert("저장되었습니다");
-        else alert("저장에 실패하였습니다");
-      })
-      .catch((err) => {
-        console.log({err});
-      });
+  const saveFinItemInfo = () => {
+    if (!form?._id) {
+      POST("fin-item/reg", form)
+        .then((res: any) => {
+          console.log({res});
+          if (res.data.is_success > 0) alert("저장되었습니다");
+        })
+        .catch((err) => {
+          console.log({err});
+        });
+    } else {
+      console.log("update: ", form);
+      PUT(`fin-item/update/${form?._id}`, form)
+        .then((res: any) => {
+          console.log({res});
+          setIsChanged(true);
+          alert("저장되었습니다");
+        })
+        .catch((err) => {
+          console.log({err});
+        });
+    }
   };
 
   useEffect(() => {
     console.log("form: ", finItem);
     console.log("updateDetail: ", finItem);
-    updateDetail();
   }, [finItem]);
 
   return (
@@ -102,11 +102,11 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-              <div className="relative inline-block w-full max-w-5xl p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl">
+              <div className="relative inline-block w-full max-w-2xl p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-gray-900 dark:text-white">
-                  거래내역 상세정보
+                  자산, 부채 상세
                 </Dialog.Title>
                 <button
                   className="absolute top-0 right-0 m-4 font-bold uppercase"
@@ -115,16 +115,85 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
                 </button>
                 <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>사용여부</Label>
-                    <Input name="useYn" type="text" onChange={handleChange} />
+                    <Label>사용자</Label>
+                    <Input
+                      name="userId"
+                      type="text"
+                      onChange={handleChange}
+                      disabled={true}
+                      value={form?.userId}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>재무구분</Label>
+                    <Select
+                      name="itemKind"
+                      onChange={handleChange}
+                      value={form?.itemKind}
+                      options={[
+                        {key: "ASSET", value: "자산"},
+                        {key: "LIABILITY", value: "부채"},
+                      ]}
+                      disabled={form?.isFixed}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>금융사</Label>
+                    <CommonCodeSelect
+                      name="corpCode"
+                      value={form?.finCorpCode}
+                      commonCode={BankCorpCode}
+                      onChange={handleChange}
+                      disabled={form?.isFixed}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>재무분류</Label>
+                    <CommonCodeSelect
+                      name="itemType"
+                      value={form?.itemType}
+                      commonCode={FinItemCode}
+                      onChange={handleChange}
+                    />
+                  </InputWrapper>
+                </div>
+                <div className="flex">
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>계좌번호</Label>
+                    <Input
+                      name="accountNum"
+                      type="text"
+                      onChange={handleChange}
+                      disabled={form?.isFixed}
+                      value={form?.accountNum}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>이름</Label>
+                    <Input
+                      name="itemName"
+                      type="text"
+                      onChange={handleChange}
+                      value={form?.itemName}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>현재평가액</Label>
+                    <Input
+                      name="amount"
+                      type="text"
+                      onChange={handleChange}
+                      value={form?.amount.toLocaleString()}
+                      disabled={form?.isFixed}
+                    />
                   </InputWrapper>
                 </div>
                 <div className="flex mt-3 pt-3 border-t-2 justify-between">
                   <button
                     type="button"
                     className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
-                    onClick={saveRule}>
-                    본 설정으로 모두 적용(향후 데이터 적옹)
+                    onClick={saveFinItemInfo}>
+                    저장
                   </button>
                 </div>
               </div>

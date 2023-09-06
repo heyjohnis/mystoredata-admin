@@ -1,4 +1,4 @@
-export const BankCode: Record<string, string> = {
+export const BaroBankCode: Record<string, string> = {
   KB: "국민은행",
   SHINHAN: "신한은행",
   NH: "농협은행",
@@ -19,6 +19,43 @@ export const BankCode: Record<string, string> = {
   KNBANK: "경남은행",
   EJEJUBANK: "제주은행",
   KBANK: "케이뱅크",
+};
+
+export const BankCorpCode: Record<string, string> = {
+  "039": "경남은행",
+  "034": "광주은행",
+  "012": "단위농협",
+  "032": "부산은행",
+  "045": "새마을금고",
+  "064": "산림조합",
+  "088": "신한은행",
+  "048": "신협",
+  "027": "씨티은행",
+  "020": "우리은행",
+  "071": "우체국예금보험",
+  "050": "저축은행중앙회",
+  "037": "전북은행",
+  "035": "제주은행",
+  "090": "카카오뱅크",
+  "089": "케이뱅크",
+  "092": "토스뱅크",
+  "081": "하나은행",
+  "054": "홍콩상하이은행",
+  "003": "IBK기업은행",
+  "004": "KB국민은행",
+  "031": "DGB대구은행",
+  "002": "KDB산업은행",
+  "011": "NH농협은행",
+  "023": "SC제일은행",
+  "007": "Sh수협은행",
+};
+
+export const FinItemCode: Record<string, string> = {
+  CHKACC: "자유입출금식 예금",
+  TIMDEP: "정기예금",
+  INSTSAVACC: "정기적금",
+  CRDCARD: "신용카드",
+  DEBICARD: "체크카드",
 };
 
 export const CardCode: Record<string, string> = {

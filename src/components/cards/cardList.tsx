@@ -85,7 +85,7 @@ export default function CardList({cards, user, baseMonth}: any) {
                     commonCode={CardCode}
                     onChange={handleChange}
                     value={card?.cardCompany}
-                    diabled={true}
+                    disabled={true}
                   />
                 </InputWrapper>
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">

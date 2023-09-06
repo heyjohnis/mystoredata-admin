@@ -3,7 +3,7 @@ import {Input} from "components/forms/input";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {AccountProps} from "model/account";
 import {POST} from "utils/restApi";
-import {CorpType, BankCode, setBankInput} from "../../data/commonCode";
+import {CorpType, BaroBankCode, setBankInput} from "../../data/commonCode";
 import CommonCodeSelect from "components/CommonCodeSelect";
 
 export default function AccountInput({addAccount, user}: any) {
@@ -61,7 +61,7 @@ export default function AccountInput({addAccount, user}: any) {
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
           <CommonCodeSelect
             name="bank"
-            commonCode={BankCode}
+            commonCode={BaroBankCode}
             onChange={bankSelectChange}
             placeholder="은행선택"
           />

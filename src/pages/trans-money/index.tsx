@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {BankCode, CardCode, UsePurpose} from "data/commonCode";
+import {BaroBankCode, CardCode, UsePurpose} from "data/commonCode";
 import {GET, PUT} from "utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
 import SectionTitle from "components/dashboard/section-title";
@@ -182,7 +182,9 @@ const Index: React.FC = () => {
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.bank &&
-                      `[${BankCode[log.bank as keyof typeof BankCode]}]`}
+                      `[${
+                        BaroBankCode[log.bank as keyof typeof BaroBankCode]
+                      }]`}
                     {log.bankAccountNum}{" "}
                     {log.cardCompany &&
                       `[${CardCode[log.cardCompany as keyof typeof CardCode]}]`}

@@ -7,7 +7,7 @@ type CommonCodeSelectProps = {
   value?: string;
   onChange?: (e: any) => void;
   width?: string;
-  diabled?: boolean;
+  disabled?: boolean;
   placeholder?: string;
 };
 export default function CommonCodeSelect({
@@ -16,7 +16,7 @@ export default function CommonCodeSelect({
   value,
   onChange,
   width,
-  diabled,
+  disabled,
   placeholder,
 }: CommonCodeSelectProps) {
   const codes = commonCode
@@ -34,7 +34,7 @@ export default function CommonCodeSelect({
       options={codes}
       onChange={onChange}
       placeholder={placeholder}
-      diabled={diabled}
+      disabled={disabled}
     />
   );
 }
@@ -45,7 +45,7 @@ type CategorySelectProps = {
   value?: string;
   onChange?: (e: any) => void;
   width?: string;
-  diabled?: boolean;
+  disabled?: boolean;
   placeholder?: string;
 };
 export function CategorySelect({
@@ -53,7 +53,7 @@ export function CategorySelect({
   codes,
   value,
   onChange,
-  diabled,
+  disabled,
   width = "w-full",
   placeholder = "::: 선택 :::",
 }: CategorySelectProps) {
@@ -61,11 +61,11 @@ export function CategorySelect({
     <select
       name={name}
       className={`block ${width} border-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 form-select focus:ring-blue-500 focus:border-blue-500 focus:ring-0 sm:text-sm rounded-md ${
-        diabled && "bg-gray-100 dark:bg-gray-800"
+        disabled && "bg-gray-100 dark:bg-gray-800"
       }`}
       onChange={onChange}
       defaultValue={value}
-      disabled={diabled}>
+      disabled={disabled}>
       <option value="">{placeholder}</option>
       {(codes || []).map((code) => (
         <option key={code.code} value={code.code}>

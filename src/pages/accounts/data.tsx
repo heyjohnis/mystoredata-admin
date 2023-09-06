@@ -8,7 +8,7 @@ import {Label} from "components/forms/label";
 import {useEffect, useState} from "react";
 import {GET} from "utils/restApi";
 import {AccountLogProps} from "model/accountLog";
-import {BankCode} from "data/commonCode";
+import {BaroBankCode} from "data/commonCode";
 
 const fields: Record<string, string>[] = [
   {
@@ -125,7 +125,7 @@ const Index: React.FC = () => {
                     {log.corpNum} ({log.corpName})
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    [{BankCode[log.bank]}]{log.bankAccountNum}
+                    [{BaroBankCode[log.bank]}]{log.bankAccountNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {parseInt(log.deposit).toLocaleString("ko-KR") || "-"}

@@ -6,7 +6,7 @@ import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
 import {GET, POST, PUT} from "utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
-import {BankCode, CardCode, UsePurpose} from "data/commonCode";
+import {BaroBankCode, CardCode, UsePurpose} from "data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
 import Switch from "components/switch";
@@ -157,9 +157,9 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                       name="bankAccountNum"
                       type="text"
                       width="w-48"
-                      value={`${form?.bank ? BankCode[form?.bank || ""] : ""} ${
-                        form?.bankAccountNum || ""
-                      }`}
+                      value={`${
+                        form?.bank ? BaroBankCode[form?.bank || ""] : ""
+                      } ${form?.bankAccountNum || ""}`}
                       onChange={handleChange}
                       readOnly={true}
                     />

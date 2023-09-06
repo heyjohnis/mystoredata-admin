@@ -17,12 +17,8 @@ const fields: Record<string, string>[] = [
     key: "userId",
   },
   {
-    name: "사업자",
+    name: "금융사",
     key: "CorpNum",
-  },
-  {
-    name: "재무분류",
-    key: "item",
   },
   {
     name: "재무항목유형",
@@ -31,6 +27,14 @@ const fields: Record<string, string>[] = [
   {
     name: "재무항목명",
     key: "itemName",
+  },
+  {
+    name: "재무분류",
+    key: "item",
+  },
+  {
+    name: "계좌번호",
+    key: "accountNum",
   },
   {
     name: "현재평가액",
@@ -44,10 +48,11 @@ const Index: React.FC = () => {
   const [corpNum, setCorpNum] = useState<string>("");
   const [selectedItem, setSelectedItem] = useState<FinItemProps | null>(null);
   useEffect(() => {
-    getAccountLogs();
+    getFinItems();
   }, [userId, corpNum]);
 
-  const getAccountLogs = () => {
+  const getFinItems = () => {
+    console.log("get fin items");
     GET(`fin-item/list?corpNum=${corpNum}&userId=${userId}`).then(
       (res: any) => {
         console.log({res});
@@ -60,9 +65,10 @@ const Index: React.FC = () => {
     openModal(null);
   };
 
-  const closedModal = (isClose: boolean) => {
-    if (isClose) {
-      setSelectedItem(null);
+  const closedModal = (isChanged: boolean) => {
+    setSelectedItem(null);
+    if (isChanged) {
+      getFinItems();
     }
   };
 
@@ -132,6 +138,9 @@ const Index: React.FC = () => {
                     {item.itemName}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {item.accountNum}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {item.amount.toLocaleString()}
                   </td>
                 </tr>
@@ -140,7 +149,10 @@ const Index: React.FC = () => {
           </table>
         </div>
       </Widget>
-      <ModalFinItem finItem={selectedItem} closedModal={closedModal} />
+      <ModalFinItem
+        finItem={selectedItem}
+        closedModal={(isChanged) => closedModal(isChanged)}
+      />
     </>
   );
 };
