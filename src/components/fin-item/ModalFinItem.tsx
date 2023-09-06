@@ -93,7 +93,6 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
               leaveTo="opacity-0">
               <Dialog.Overlay className="fixed inset-0 bg-gray-900/25" />
             </Transition.Child>
-
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -120,7 +119,7 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
                       name="userId"
                       type="text"
                       onChange={handleChange}
-                      disabled={true}
+                      disabled={!!form?._id}
                       value={form?.userId}
                     />
                   </InputWrapper>

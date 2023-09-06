@@ -42,6 +42,25 @@ const fields: Record<string, string>[] = [
   },
 ];
 
+const InitItem = {
+  _id: "",
+  user: "",
+  userId: "",
+  account: "",
+  card: "",
+  itemKind: "",
+  itemKindName: "",
+  itemType: "",
+  itemTypeName: "",
+  finCorpCode: "",
+  finCorpName: "",
+  itemName: "",
+  accountNum: "",
+  amount: 0,
+  isFixed: false,
+  useYn: true,
+};
+
 const Index: React.FC = () => {
   const [items, setItems] = useState<FinItemProps[]>([]);
   const [userId, setUserId] = useState<string>("");
@@ -62,7 +81,7 @@ const Index: React.FC = () => {
   };
 
   const regFinItem = () => {
-    openModal(null);
+    openModal(InitItem);
   };
 
   const closedModal = (isChanged: boolean) => {
@@ -72,7 +91,7 @@ const Index: React.FC = () => {
     }
   };
 
-  const openModal = (item: FinItemProps | null) => {
+  const openModal = (item: FinItemProps | any) => {
     setSelectedItem(item);
   };
 
