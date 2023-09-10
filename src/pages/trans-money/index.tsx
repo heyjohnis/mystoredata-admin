@@ -132,7 +132,7 @@ const Index: React.FC = () => {
             <Label>시작일</Label>
             <Input
               name="fromAt"
-              type="text"
+              type="date"
               value={fromAt}
               onChange={(e) => setFromAt(e.target.value)}
               placeholder="YYYYMMDD"
@@ -142,7 +142,7 @@ const Index: React.FC = () => {
             <Label>종료일</Label>
             <Input
               name="toAt"
-              type="text"
+              type="date"
               value={toAt}
               onChange={(e) => setToAt(e.target.value)}
               placeholder="YYYYMMDD"
