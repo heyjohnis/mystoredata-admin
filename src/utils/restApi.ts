@@ -67,7 +67,7 @@ export async function PUT(uri: string, data: any) {
     });
 }
 
-export async function DELETE(uri: string, data: any) {
+export async function DELETE(uri: string) {
   const serverURL =
     process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8089";
   const token = cookie.get("token");
@@ -76,7 +76,6 @@ export async function DELETE(uri: string, data: any) {
     method: "delete",
     url,
     headers: {Authorization: `Bearer ${token}`},
-    data,
   })
     .then((response) => response)
     .catch((error) => {

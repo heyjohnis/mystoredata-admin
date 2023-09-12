@@ -4,7 +4,7 @@ import {FiX} from "react-icons/fi";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
-import {GET, POST, PUT} from "utils/restApi";
+import {GET, POST, PUT, DELETE} from "utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
@@ -50,11 +50,18 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
     if (!form?._id) {
       POST("fin-item/reg", form)
         .then((res: any) => {
-          console.log({res});
-          if (res.data.is_success > 0) alert("저장되었습니다");
+          if (res?.data) {
+            setForm(res.data);
+            setIsChanged(true);
+            alert("저장되었습니다");
+            closedModal(true);
+          } else {
+            alert("저장에 실패하였습니다");
+          }
         })
         .catch((err) => {
           console.log({err});
+          alert("저장에 실패하였습니다" + err.toString());
         });
     } else {
       console.log("update: ", form);
@@ -63,6 +70,22 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
           console.log({res});
           setIsChanged(true);
           alert("저장되었습니다");
+        })
+        .catch((err) => {
+          console.log({err});
+        });
+    }
+  };
+
+  const deleteFinItemInfo = () => {
+    if (form?._id) {
+      const isDelete = confirm("삭제하시겠습니까?");
+      if (!isDelete) return;
+      DELETE(`fin-item/delete/${form?._id}`)
+        .then((res: any) => {
+          console.log({res});
+          setIsChanged(true);
+          alert("삭제되었습니다");
         })
         .catch((err) => {
           console.log({err});
@@ -194,6 +217,14 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
                     onClick={saveFinItemInfo}>
                     저장
                   </button>
+                  {!form?.isFixed && form?.user && (
+                    <button
+                      type="button"
+                      className="px-4 py-2 text-xs font-bold text-white uppercase bg-red-500 rounded-lg hover:bg-red-600"
+                      onClick={deleteFinItemInfo}>
+                      삭제
+                    </button>
+                  )}
                 </div>
               </div>
             </Transition.Child>
