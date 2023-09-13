@@ -79,7 +79,7 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
 
   const deleteFinItemInfo = () => {
     if (form?._id) {
-      const isDelete = confirm("삭제하시겠습니까?");
+      const isDelete: boolean = window.confirm("삭제하시겠습니까?");
       if (!isDelete) return;
       DELETE(`fin-item/delete/${form?._id}`)
         .then((res: any) => {
