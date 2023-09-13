@@ -24,7 +24,7 @@ export default function CardList({cards, user, baseMonth}: any) {
   };
 
   const cardDelete = (card: CardProps) => {
-    DELETE("card/delete", {...card, corpNum: user.corpNum})
+    DELETE(`card/delete/${card._id}`)
       .then((res: any) => {
         console.log("card/delete: ", res);
         if (res?.status === 200) {

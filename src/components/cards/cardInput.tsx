@@ -14,7 +14,13 @@ export default function CardInput({addCard, user}: any) {
   };
 
   const regCard = () => {
-    POST("card/reg ", {...form, user: user._id}).then((res: any) => {
+    POST("card/reg", {
+      ...form,
+      user: user._id,
+      userId: user.userId,
+      corpNum: user.corpNum,
+      corpName: user.corpName,
+    }).then((res: any) => {
       // console.log(res);
       if (res?.status === 200) {
         addCard(form);

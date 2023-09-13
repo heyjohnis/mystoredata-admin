@@ -1,4 +1,5 @@
 export type CardProps = {
+  _id: string;
   user: string;
   corpNum: string;
   cardCompany: string;

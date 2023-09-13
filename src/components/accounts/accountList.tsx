@@ -26,7 +26,8 @@ export default function AccountList({accounts, user, baseMonth}: any) {
   };
 
   const accountDelete = (account: AccountProps) => {
-    DELETE("account/delete", account).then((res: any) => {
+    console.log("account delete: ", account);
+    DELETE(`account/delete/${account._id}`).then((res: any) => {
       console.log(res);
       setAccountList(
         accountList.filter(
