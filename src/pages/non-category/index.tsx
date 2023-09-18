@@ -4,54 +4,60 @@ import {GET} from "utils/restApi";
 import SectionTitle from "components/dashboard/section-title";
 import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
-import {Badge} from "components/badges";
-import {CategoryRuleProps} from "model/CategoryRule";
-import {UsePurpose} from "data/commonCode";
+import {NonCategoryProps} from "model/NonCategory";
+import ModalNonCategory from "components/non-category/ModalNonCategory";
 
 const fields: Record<string, string>[] = [
-  {
-    name: "사용자ID",
-    key: "user",
-  },
-  {
-    name: "사용목적",
-    key: "useKind",
-  },
   {
     name: "적요",
     key: "remark",
   },
   {
-    name: "키워드",
-    key: "keyword",
+    name: "갯수",
+    key: "total",
+  },
+  {
+    name: "사용자",
+    key: "userId",
+  },
+  {
+    name: "회사명",
+    key: "corpName",
+  },
+  {
+    name: "마지막거래일",
+    key: "lastDate",
   },
 ];
 
 export default function CategoryRule() {
   const router = useRouter();
-  const [rules, setRules] = useState<CategoryRuleProps[]>([]);
+  const [nonCategories, setNonCategories] = useState([]);
+  const [category, setCategory] = useState<NonCategoryProps>();
 
   useEffect(() => {
-    const {user} = router.query;
-  }, [router.query]);
+    getNonCategories();
+  }, []);
 
   const getNonCategories: any = async (userId: string) => {
-    const data = await GET(`category/non-category/${userId || ""}`).then(
-      (res: any) => {
-        console.log(res);
-        setRules(res.data.data);
-      }
-    );
-    console.log(data);
+    const res: any = await GET(`category/non-category/${userId || ""}`);
+    console.log(res.data);
+    setNonCategories(res.data.sort((a: any, b: any) => b.total - a.total));
+  };
+
+  const closedModal = (isChanged: boolean) => {
+    setCategory(undefined);
+  };
+
+  const openDetailModal = (category: NonCategoryProps) => {
+    console.log({category});
+    setCategory(category);
   };
 
   return (
     <>
       <Notification />
-      <SectionTitle
-        title="auto-setting category"
-        subtitle="거래적요를 통한 카테고리 자동설정"
-      />
+      <SectionTitle title="non-category" subtitle="미분류 카테고리 설정" />
       <Widget>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
@@ -67,23 +73,23 @@ export default function CategoryRule() {
               </tr>
             </thead>
             <tbody>
-              {rules.map((rule, i) => (
-                <tr key={i}>
+              {nonCategories.map((category: NonCategoryProps, i) => (
+                <tr key={i} onClick={() => openDetailModal(category)}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {rule.user.toString()}
+                    {category._id}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {UsePurpose[rule.useKind as keyof typeof UsePurpose]}
+                    {category.total}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    [{rule.category}] {rule.categoryName}
+                    {category.userId}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {rule.transRemark} {rule.useStoreName}{" "}
-                    {rule.useStoreBizType}
+                    {category.corpName}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {rule.keyword?.join(", ")}
+                    {new Date(category?.lastDate).toLocaleDateString()}{" "}
+                    {new Date(category?.lastDate).toLocaleTimeString()}
                   </td>
                 </tr>
               ))}
@@ -91,6 +97,7 @@ export default function CategoryRule() {
           </table>
         </div>
       </Widget>
+      <ModalNonCategory nonCategory={category} closedModal={closedModal} />
     </>
   );
 }

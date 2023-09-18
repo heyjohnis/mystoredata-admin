@@ -15,6 +15,8 @@ import {BsCreditCard} from "react-icons/bs";
 import {LuBanknote} from "react-icons/lu";
 import {BiTransfer, BiBuildings} from "react-icons/bi";
 import {MdAccountTree} from "react-icons/md";
+import {FaMoneyBills} from "react-icons/fa6";
+import {TbDirectionsOff, TbDirections} from "react-icons/tb";
 
 export type NavigationState = {
   title: string;
@@ -75,7 +77,7 @@ const initialState: NavigationState[] = [
       },
       {
         url: "/fin-item/data",
-        icon: <BiTransfer size={20} />,
+        icon: <FaMoneyBills size={20} />,
         title: "금융상품",
         items: [],
       },
@@ -92,8 +94,14 @@ const initialState: NavigationState[] = [
       },
       {
         url: "/category-rule",
-        icon: <MdAccountTree size={20} />,
+        icon: <TbDirections size={20} />,
         title: "거래적요 통한 카테고리",
+        items: [],
+      },
+      {
+        url: "/non-category",
+        icon: <TbDirectionsOff size={20} />,
+        title: "미분류 카테고리",
         items: [],
       },
     ],
