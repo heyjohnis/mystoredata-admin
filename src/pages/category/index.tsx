@@ -8,6 +8,7 @@ import {Badge} from "components/badges";
 import {CategoryProps} from "model/Category";
 import {Input} from "components/forms/input";
 import ModalCategory from "components/category/ModalCategory";
+import {UsePurpose} from "../../data/commonCode";
 
 const fields: Record<string, string>[] = [
   {
@@ -86,7 +87,7 @@ export default function Index() {
                       color="text-blue-400 mr-1"
                       outlined
                       rounded>
-                      기본
+                      {UsePurpose[category?.useKind]}
                     </Badge>
                     {category.name}
                   </td>

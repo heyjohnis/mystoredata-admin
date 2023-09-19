@@ -10,6 +10,7 @@ import {BaroBankCode, CardCode, UsePurpose} from "data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
 import Switch from "components/switch";
+import {set} from "nprogress";
 
 type Props = {
   asset: TransMoneyProps | null;
@@ -21,6 +22,8 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<TransMoneyProps>();
   const [category, setCategory] = useState([]);
+  const [personalCategory, setPersonalCategory] = useState<CategoryProps[]>([]);
+  const [corpCategory, setCorpCategory] = useState<CategoryProps[]>([]);
   const closeModal = () => {
     setIsOpen(false);
     closedModal(
@@ -40,7 +43,9 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   const getCategory = async (asset: TransMoneyProps) => {
     console.log("getCategory: ", asset);
     const {data}: any = await GET(`user/category/${asset.user}`);
-    setCategory(data.category);
+    console.log("getCategory: ", data);
+    setPersonalCategory(data.personalCategory);
+    setCorpCategory(data.corpCategory);
   };
 
   const handleChange = (e: any) => {
@@ -201,11 +206,15 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>카테고리</Label>
-                    {category && (
+                    {(corpCategory || personalCategory) && (
                       <CategorySelect
                         name="category"
                         value={form?.category}
-                        codes={category}
+                        codes={
+                          form?.useKind === "BIZ"
+                            ? corpCategory
+                            : personalCategory || []
+                        }
                         onChange={handleChange}
                       />
                     )}

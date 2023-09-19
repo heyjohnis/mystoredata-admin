@@ -73,8 +73,7 @@ export const CardCode: Record<string, string> = {
 
 export const UsePurpose: Record<string, string> = {
   BIZ: "사업목적",
-  BIZA: "개인사용 사업자회계",
-  PERS: "개인사용목적",
+  PERSONAL: "개인사용목적",
 };
 
 export const CorpType: Record<string, string> = {

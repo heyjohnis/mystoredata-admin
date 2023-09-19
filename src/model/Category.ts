@@ -6,5 +6,6 @@ export type CategoryProps = {
   isFixed: boolean;
   default: boolean;
   keyword: Array<string>;
+  useKind: string;
   keywordString: string;
 };
