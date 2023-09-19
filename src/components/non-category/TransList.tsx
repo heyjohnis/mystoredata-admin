@@ -1,13 +1,13 @@
 import {Input} from "components/forms/input";
 import {AccountProps} from "model/account";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {InputWrapper} from "components/forms/input-wrapper";
-import {POST, PUT, DELETE} from "utils/restApi";
+import {POST, PUT, DELETE, GET} from "utils/restApi";
 import CommonCodeSelect from "components/CommonCodeSelect";
 import {BaroBankCode, CorpType, UsePurpose} from "data/commonCode";
 import {TransMoneyProps} from "model/TransMoney";
 
-export default function TransList({user, remark}: any) {
+export default function TransList({remark}: any) {
   const [transList, setTransList] = useState<TransMoneyProps[]>([]);
   const handleChange = (e: any) => {
     console.log(e.target.value);
@@ -23,8 +23,14 @@ export default function TransList({user, remark}: any) {
   //       console.log({err});
   //     });
   // };
+  useEffect(() => {
+    getTransList();
+  }, []);
 
-  const getTransList = async () => {};
+  const getTransList = async () => {
+    const res = GET(`trans/non-category?remark=${remark}`);
+    setTransList(res.data);
+  };
 
   const handleChangeUsePurpose = async (account: AccountProps) => {
     const result = await PUT("trans/update", {...account});

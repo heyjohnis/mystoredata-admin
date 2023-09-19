@@ -9,6 +9,7 @@ import {useDebouncedCallback} from "use-debounce";
 import {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
 import {GET, PUT} from "utils/restApi";
+import TransList from "./TransList";
 
 type Props = {
   nonCategory?: NonCategoryProps;
@@ -78,7 +79,7 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-              <div className="relative inline-block w-full max-w-2xl p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl">
+              <div className="relative inline-block w-full max-w-4xl p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-gray-900 dark:text-white">
@@ -96,8 +97,7 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
                       name="code"
                       type="text"
                       width="w-48"
-                      value={form?._id}
-                      onChange={handleChange}
+                      value={form?._id?.remark}
                       readOnly={true}
                     />
                   </InputWrapper>
@@ -111,7 +111,9 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
                     />
                   </InputWrapper>
                 </div>
-                <div className="flex"></div>
+                <div className="flex">
+                  <TransList remark={form?._id?.remark} />
+                </div>
               </div>
             </Transition.Child>
           </div>
