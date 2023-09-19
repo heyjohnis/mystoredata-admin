@@ -6,6 +6,8 @@ import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 import {NonCategoryProps} from "model/NonCategory";
 import ModalNonCategory from "components/non-category/ModalNonCategory";
+import {UsePurpose} from "data/commonCode";
+import {Badge} from "components/badges";
 
 const fields: Record<string, string>[] = [
   {
@@ -76,7 +78,14 @@ export default function CategoryRule() {
               {nonCategories.map((category: NonCategoryProps, i) => (
                 <tr key={i} onClick={() => openDetailModal(category)}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {category._id}
+                    <Badge
+                      size={"sm"}
+                      color="text-blue-400 mr-1"
+                      outlined
+                      rounded>
+                      {UsePurpose[category._id.useKind]}
+                    </Badge>{" "}
+                    {category._id?.remark}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {category.total}

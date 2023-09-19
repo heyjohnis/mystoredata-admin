@@ -18,7 +18,6 @@ type Props = {
 const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<NonCategoryProps>();
-  const [category, setCategory] = useState<CategoryProps>();
   const [isChanged, setIsChanged] = useState<boolean>(false);
   const [categories, setCategories] = useState<CategoryProps[]>([]);
 

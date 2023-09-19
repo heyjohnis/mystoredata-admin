@@ -1,5 +1,5 @@
 export type NonCategoryProps = {
-  _id: string;
+  _id: Record<string, string>;
   total: number;
   userId: string;
   corpName: string;

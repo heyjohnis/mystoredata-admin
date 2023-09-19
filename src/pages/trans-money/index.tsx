@@ -91,6 +91,13 @@ const Index: React.FC = () => {
     });
   };
 
+  const resetForm = () => {
+    setCorpNum("");
+    setUserId("");
+    setFromAt("");
+    setToAt("");
+  };
+
   const assetDetail = async (asset: TransMoneyProps) => {
     console.log(asset);
     setAsset(asset);
@@ -148,6 +155,11 @@ const Index: React.FC = () => {
               placeholder="YYYYMMDD"
             />
           </InputWrapper>
+          <button
+            className="px-4 py-2 text-xs font-bold text-white uppercase bg-gray-500 rounded-lg hover:bg-gray-600 mr-1"
+            onClick={resetForm}>
+            RESET
+          </button>
           <button
             className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
             onClick={transMerge}>

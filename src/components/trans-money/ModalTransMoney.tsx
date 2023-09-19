@@ -21,7 +21,6 @@ type Props = {
 const ModalTransMoney = ({asset, closedModal}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [form, setForm] = useState<TransMoneyProps>();
-  const [category, setCategory] = useState([]);
   const [personalCategory, setPersonalCategory] = useState<CategoryProps[]>([]);
   const [corpCategory, setCorpCategory] = useState<CategoryProps[]>([]);
   const closeModal = () => {
