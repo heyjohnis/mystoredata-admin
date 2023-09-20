@@ -9,6 +9,7 @@ import {UserProps} from "model/user";
 import AccountList from "components/accounts/accountList";
 import CardList from "components/cards/cardList";
 import Link from "next/link";
+import CommonCodeSelect from "components/CommonCodeSelect";
 
 const CorpDetailModal = ({user, closedModal}: any) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -50,6 +51,16 @@ const CorpDetailModal = ({user, closedModal}: any) => {
         }
       });
     }
+  };
+
+  const regHometaxInfo = () => {
+    if (!form.hometaxID || !form.hometaxPWD) {
+      alert("홈택스 ID와 패스워드를 입력해주세요.");
+      return;
+    }
+    POST("tax/reg", form).then((res: any) => {
+      console.log("tax/reg: ", res);
+    });
   };
 
   const handleChange = (e: any) => {
@@ -101,6 +112,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="userId"
                       type="text"
+                      width="w-28"
                       value={form?.userId}
                       onChange={handleChange}
                       readOnly={isReadOnly}
@@ -111,6 +123,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="password"
                       type="password"
+                      width="w-28"
                       value={form?.password}
                       onChange={handleChange}
                       readOnly={isReadOnly}
@@ -121,9 +134,9 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="email"
                       type="text"
+                      width="w-60"
                       value={form?.email}
                       onChange={handleChange}
-                      width="w-full"
                     />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
@@ -131,6 +144,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="userName"
                       type="text"
+                      width="w-28"
                       value={form?.userName}
                       onChange={handleChange}
                     />
@@ -140,7 +154,19 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="mobile"
                       type="text"
+                      width="w-32"
                       value={form?.mobile}
+                      onChange={handleChange}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
+                    <Label>생년월일</Label>
+                    <Input
+                      name="birth"
+                      type="text"
+                      width="w-28"
+                      value={form?.birth}
+                      placeholder="YYMMDD"
                       onChange={handleChange}
                     />
                   </InputWrapper>
@@ -151,6 +177,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="corpName"
                       type="text"
+                      width="w-28"
                       value={form?.corpName}
                       onChange={handleChange}
                     />
@@ -160,6 +187,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="corpNum"
                       type="text"
+                      width="w-28"
                       value={form?.corpNum}
                       onChange={handleChange}
                     />
@@ -169,28 +197,17 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="ceoName"
                       type="text"
+                      width="w-20"
                       value={form?.ceoName}
                       onChange={handleChange}
                     />
                   </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-12 mt-2">
-                    <Label>생년월일</Label>
-                    <Input
-                      name="birth"
-                      type="text"
-                      value={form?.birth}
-                      placeholder="YYMMDD"
-                      onChange={handleChange}
-                    />
-                  </InputWrapper>
-                </div>
-
-                <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>업태</Label>
                     <Input
                       name="bizType"
                       type="text"
+                      width="w-24"
                       value={form?.bizType}
                       onChange={handleChange}
                     />
@@ -200,6 +217,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="bizClass"
                       type="text"
+                      width="w-28"
                       value={form?.bizClass}
                       onChange={handleChange}
                     />
@@ -222,6 +240,33 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                       onChange={handleChange}
                     />
                   </InputWrapper>
+                </div>
+
+                <div className="flex">
+                  <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+                    <Label>홈택스ID</Label>
+                    <Input
+                      name="hometaxID"
+                      type="text"
+                      value={form?.hometaxID}
+                      onChange={handleChange}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+                    <Label>홈택스 패스워드</Label>
+                    <Input
+                      name="hometaxPWD"
+                      type="password"
+                      value={form?.hometaxPWD}
+                      onChange={handleChange}
+                    />
+                  </InputWrapper>
+                  <button
+                    type="button"
+                    onClick={regHometaxInfo}
+                    className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+                    홈택스등록
+                  </button>
                 </div>
                 <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-12 mt-2">

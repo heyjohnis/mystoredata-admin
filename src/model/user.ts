@@ -15,6 +15,9 @@ export type UserProps = {
   addr2: string;
   ceoName: string;
   password: string;
+  hometaxID: string;
+  hometaxPWD: string;
+  hometaxLoginMethod: string;
   accounts: Array<AccountProps>;
   cards: Array<any>;
   createdAt: string;
