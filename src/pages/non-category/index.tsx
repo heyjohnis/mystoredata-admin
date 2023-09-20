@@ -8,6 +8,7 @@ import {NonCategoryProps} from "model/NonCategory";
 import ModalNonCategory from "components/non-category/ModalNonCategory";
 import {UsePurpose} from "data/commonCode";
 import {Badge} from "components/badges";
+import {AxiosResponse} from "axios";
 
 const fields: Record<string, string>[] = [
   {

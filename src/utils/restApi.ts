@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import cookie from "js-cookie";
 import Router from "next/router";
 
-export async function POST(uri: string, data: any) {
+export async function POST(uri: string, data: any): Promise<any> {
   const serverURL =
     process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8089";
   const token = cookie.get("token");
@@ -24,7 +24,7 @@ export async function POST(uri: string, data: any) {
     });
 }
 
-export async function GET(uri: string) {
+export async function GET(uri: string): Promise<any> {
   const serverURL =
     process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8089";
   const token = cookie.get("token");
@@ -45,7 +45,7 @@ export async function GET(uri: string) {
     });
 }
 
-export async function PUT(uri: string, data: any) {
+export async function PUT(uri: string, data: any): Promise<any> {
   const serverURL =
     process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8089";
   const token = cookie.get("token");
@@ -67,7 +67,7 @@ export async function PUT(uri: string, data: any) {
     });
 }
 
-export async function DELETE(uri: string) {
+export async function DELETE(uri: string): Promise<any> {
   const serverURL =
     process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8089";
   const token = cookie.get("token");

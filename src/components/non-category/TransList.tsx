@@ -28,7 +28,7 @@ export default function TransList({remark}: any) {
   }, []);
 
   const getTransList = async () => {
-    const res = GET(`trans/non-category?remark=${remark}`);
+    const res: any = GET(`trans/non-category?remark=${remark}`);
     setTransList(res.data);
   };
 
