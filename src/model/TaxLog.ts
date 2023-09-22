@@ -39,9 +39,9 @@ export type TaxLogProps = {
   brokerBizClass: string;
   brokerContactName: string;
   brokerEmail: string;
-  amountTotal: Number;
-  taxTotal: Number;
-  totalAmount: Number;
+  amountTotal: number;
+  taxTotal: number;
+  totalAmount: number;
   cash: string;
   itemName: string;
   taxRegID: string;
