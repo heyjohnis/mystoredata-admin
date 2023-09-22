@@ -1,13 +1,12 @@
 import {useEffect, useState} from "react";
 import {BaroBankCode, CardCode, UsePurpose} from "data/commonCode";
 import {POST, PUT} from "utils/restApi";
-import {TransMoneyProps} from "model/TransMoney";
+import {TaxLogProps} from "model/TaxLog";
 import SearchForm from "components/SearchForm";
 import SectionTitle from "components/dashboard/section-title";
 import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 
-import ModalTransMoney from "components/trans-money/ModalTransMoney";
 import {SearchProps} from "model/SearchForm";
 
 const fields: Record<string, string>[] = [
@@ -20,57 +19,57 @@ const fields: Record<string, string>[] = [
     key: "CorpNum",
   },
   {
-    name: "계좌/카드번호",
-    key: "assetNum",
+    name: "NTSSendKey",
+    key: "NTSSendKey",
   },
   {
-    name: "거래금액",
-    key: "transMoney",
+    name: "purposeType",
+    key: "purposeType",
   },
   {
-    name: "사용목적",
-    key: "Withdraw",
+    name: "modifyCode",
+    key: "modifyCode",
   },
   {
-    name: "카테고리",
-    key: "category",
+    name: "taxType",
+    key: "taxType",
   },
   {
-    name: "키워드",
-    key: "keyword",
+    name: "InvoiceeBizClass",
+    key: "InvoiceeBizClass",
   },
   {
-    name: "통장내역",
-    key: "accountMemo",
+    name: "AmountTotal",
+    key: "AmountTotal",
   },
   {
-    name: "카드내역",
-    key: "cardMemo",
+    name: "TaxTotal",
+    key: "TaxTotal",
   },
   {
-    name: "결제결과",
-    key: "TransRemark",
+    name: "TotalAmount:",
+    key: "TotalAmount:",
   },
   {
-    name: "결제방법",
-    key: "depositType",
+    name: "Remark1:",
+    key: "Remark1:",
   },
   {
-    name: "거래일시",
-    key: "transDate",
+    name: "ItemName:",
+    key: "ItemName:",
   },
 ];
 
 const Index: React.FC = () => {
-  const [logs, setLogs] = useState<TransMoneyProps[]>([]);
-  const [asset, setAsset] = useState<TransMoneyProps | null>(null);
+  const [logs, setLogs] = useState<TaxLogProps[]>([]);
+  const [asset, setAsset] = useState<TaxLogProps | null>(null);
   const [form, setForm] = useState<SearchProps | null>(null);
   useEffect(() => {
     getTaxLogs();
   }, [form]);
 
   const getTaxLogs = () => {
-    POST(`tax/log`, form).then((res: any) => {
+    POST(`tax/logs`, form).then((res: any) => {
       console.log({res});
       setLogs(res.data);
     });
@@ -78,13 +77,9 @@ const Index: React.FC = () => {
   return (
     <>
       <Notification />
-      <SectionTitle title="merged data" subtitle="거래내역취합" />
+      <SectionTitle title="tax receipt" subtitle="세금계산서 이력" />
       <Widget>
-        <SearchForm
-          form={form}
-          handleClick={transMerge}
-          handleChange={setForm}
-        />
+        <SearchForm form={form} handleChange={setForm} />
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
             <thead>
@@ -103,59 +98,52 @@ const Index: React.FC = () => {
                 logs.map((log, i) => (
                   <tr
                     key={i}
-                    onClick={() => assetDetail(log)}
                     className={`${!log.useYn && "line-through text-gray-400"}`}>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {new Date(log.transDate).toLocaleDateString("ko-KR")}{" "}
-                      {new Date(log.transDate).toLocaleTimeString("ko-KR")}
+                      {new Date(log.issueDT).toLocaleDateString("ko-KR")}{" "}
+                      {new Date(log.issueDT).toLocaleTimeString("ko-KR")}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.corpNum} ({log.corpName})
+                      {log.corpNum}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.bank &&
-                        `[${
-                          BaroBankCode[log.bank as keyof typeof BaroBankCode]
-                        }]`}
-                      {log.bankAccountNum}{" "}
-                      {log.cardCompany &&
-                        `[${
-                          CardCode[log.cardCompany as keyof typeof CardCode]
-                        }]`}
-                      {log.cardNum}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                      {log.transMoney.toLocaleString("ko-KR") || "-"}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
-                      {UsePurpose[log.useKind as keyof typeof UsePurpose]}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
-                      {log.categoryName}
+                      {log.ntsSendKey}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.keyword?.join(", ")}
+                      {log.purposeType}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {`${log.transRemark || ""} ${log.transType ? "|" : ""} ${
-                        log.transType || ""
-                      } ${log.transOffice ? "|" : ""} ${
-                        log.transOffice || ""
-                      } `}
+                      {log.modifyCode}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {`${log.useStoreBizType || ""} ${
-                        log.useStoreName ? "|" : ""
-                      } ${log.useStoreName || ""}`}
+                      {log.taxType}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.cardApprovalType}
+                      {log.invoicerCorpNum} {log.invoicerCorpName}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.paymentPlan}
+                      {log.invoiceeCorpNum} {log.invoiceeCorpName}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {new Date(log.transDate).toLocaleTimeString("ko-KR")}
+                      {log.invoiceeBizType}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {log.invoiceeBizClass}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {log.amountTotal.toLocaleString("ko-KR")}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {log.taxTotal.toLocaleString("ko-KR")}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {log.totalAmount.toLocaleString("ko-KR")}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {log.remark1}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {log.itemName}
                     </td>
                   </tr>
                 ))}

@@ -115,6 +115,7 @@ const Index: React.FC = () => {
           form={form}
           handleClick={transMerge}
           handleChange={setForm}
+          handleChangeName={"거래내역취합"}
         />
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">

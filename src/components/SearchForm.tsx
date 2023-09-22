@@ -3,7 +3,11 @@ import {Input} from "components/forms/input";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 
-export default function SearchForm({handleChange, handleClick}: any): any {
+export default function SearchForm({
+  handleChange,
+  handleClick,
+  handleChangeName,
+}: any): any {
   const [corpNum, setCorpNum] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
   const [fromAt, setFromAt] = useState<string>("");
@@ -65,11 +69,13 @@ export default function SearchForm({handleChange, handleClick}: any): any {
         onClick={resetForm}>
         RESET
       </button>
-      <button
-        className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
-        onClick={handleClick}>
-        개러내역취합
-      </button>
+      {handleChangeName && (
+        <button
+          className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
+          onClick={handleClick}>
+          {handleChangeName}
+        </button>
+      )}
     </div>
   );
 }

@@ -58,6 +58,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
       alert("홈택스 ID와 패스워드를 입력해주세요.");
       return;
     }
+    console.log("regHometaxInfo: ", form);
     POST("tax/reg", form).then((res: any) => {
       console.log("tax/reg: ", res);
     });
