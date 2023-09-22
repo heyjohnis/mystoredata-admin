@@ -7,16 +7,12 @@ import {
   FiHelpCircle,
   FiHome,
 } from "react-icons/fi";
-import {BiMoney, BiCategory} from "react-icons/bi";
-import {GiProcessor} from "react-icons/gi";
-import {MdOutlineCorporateFare} from "react-icons/md";
-import {BsDatabase} from "react-icons/bs";
+import {BiCategory} from "react-icons/bi";
 import {BsCreditCard} from "react-icons/bs";
 import {LuBanknote} from "react-icons/lu";
 import {BiTransfer, BiBuildings} from "react-icons/bi";
-import {MdAccountTree} from "react-icons/md";
 import {FaMoneyBills} from "react-icons/fa6";
-import {TbDirectionsOff, TbDirections} from "react-icons/tb";
+import {TbReceiptTax, TbDirectionsOff, TbDirections} from "react-icons/tb";
 
 export type NavigationState = {
   title: string;
@@ -67,6 +63,12 @@ const initialState: NavigationState[] = [
         url: "/cards/data",
         icon: <BsCreditCard size={20} />,
         title: "카드데이터",
+        items: [],
+      },
+      {
+        url: "/tax/data",
+        icon: <TbReceiptTax size={20} />,
+        title: "세금계산서",
         items: [],
       },
       {
