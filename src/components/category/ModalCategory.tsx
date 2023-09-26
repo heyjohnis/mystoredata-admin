@@ -48,7 +48,7 @@ const ModalCategory = ({category, closedModal}: Props) => {
   useEffect(() => {
     if (category) {
       setIsOpen(true);
-      setForm({...category, keywordString: category.keyword.join(", ")});
+      setForm({...category, keywordString: category?.keyword?.join(", ")});
     }
   }, [category]);
 

@@ -88,12 +88,12 @@ export default function Index() {
                         color="text-blue-400 mr-1"
                         outlined
                         rounded>
-                        {UsePurpose[category?.useKind]}
+                        {UsePurpose[category?.useKind || ""]}
                       </Badge>
                       {category.name}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {category.keyword.join(", ")}
+                      {category.keyword?.join(", ")}
                     </td>
                   </tr>
                 ))}
