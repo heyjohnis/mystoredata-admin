@@ -199,7 +199,7 @@ export const Category: Array<any> = [
   {order: 500, code: "800", name: "이자비용"},
   {order: 510, code: "810", name: "외환차손"},
   {order: 520, code: "820", name: "외환환산손실"},
-  {order: 900, code: "900", name: "미분류"},
+  {order: 900, code: "999", name: "미분류"},
 ];
 
 export const FinClassCode: Record<string, string> = {

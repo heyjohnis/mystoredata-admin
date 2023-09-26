@@ -118,7 +118,7 @@ const ModalCategory = ({category, closedModal}: Props) => {
                       name="kind"
                       type="text"
                       width="w-48"
-                      value={form?.kind}
+                      value={form?.useKind}
                       onChange={handleChange}
                       readOnly={true}
                     />

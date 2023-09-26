@@ -16,13 +16,10 @@ const fields: Record<string, string>[] = [
     key: "CorpNum",
   },
   {
-    name: "사업자",
+    name: "사용자",
     key: "CorpNum",
   },
-  {
-    name: "계좌/카드번호",
-    key: "assetNum",
-  },
+
   {
     name: "거래금액",
     key: "transMoney",
@@ -40,16 +37,20 @@ const fields: Record<string, string>[] = [
     key: "category",
   },
   {
-    name: "키워드",
-    key: "keyword",
-  },
-  {
     name: "통장내역",
     key: "accountMemo",
   },
   {
     name: "카드내역",
     key: "cardMemo",
+  },
+  {
+    name: "키워드",
+    key: "keyword",
+  },
+  {
+    name: "계좌/카드번호",
+    key: "assetNum",
   },
   {
     name: "결제결과",
@@ -75,7 +76,11 @@ const Index: React.FC = () => {
 
   const getCardLogs = () => {
     GET(
-      `trans/log?corpNum=${form?.corpNum}&userId=${form?.userId}&fromAt=${form?.fromAt}&toAt=${form?.toAt}&category=${form?.category}`
+      `trans/log?corpNum=${form?.corpNum || ""}&userId=${
+        form?.userId || ""
+      }&fromAt=${form?.fromAt || ""}&toAt=${form?.toAt || ""}&category=${
+        form?.category || ""
+      }`
     ).then((res: any) => {
       console.log({res});
       setLogs(res.data);
@@ -149,18 +154,7 @@ const Index: React.FC = () => {
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                       {log.corpNum} ({log.corpName})
                     </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.bank &&
-                        `[${
-                          BaroBankCode[log.bank as keyof typeof BaroBankCode]
-                        }]`}
-                      {log.bankAccountNum}{" "}
-                      {log.cardCompany &&
-                        `[${
-                          CardCode[log.cardCompany as keyof typeof CardCode]
-                        }]`}
-                      {log.cardNum}
-                    </td>
+
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                       {log.transMoney.toLocaleString("ko-KR") || "-"}
                     </td>
@@ -173,9 +167,7 @@ const Index: React.FC = () => {
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                       {log.categoryName}
                     </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.keyword?.join(", ")}
-                    </td>
+
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                       {`${log.transRemark || ""} ${log.transType ? "|" : ""} ${
                         log.transType || ""
@@ -187,6 +179,21 @@ const Index: React.FC = () => {
                       {`${log.useStoreBizType || ""} ${
                         log.useStoreName ? "|" : ""
                       } ${log.useStoreName || ""}`}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {log.keyword?.join(", ")}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {log.bank &&
+                        `[${
+                          BaroBankCode[log.bank as keyof typeof BaroBankCode]
+                        }]`}
+                      {log.bankAccountNum}{" "}
+                      {log.cardCompany &&
+                        `[${
+                          CardCode[log.cardCompany as keyof typeof CardCode]
+                        }]`}
+                      {log.cardNum}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                       {log.cardApprovalType}

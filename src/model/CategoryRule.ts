@@ -9,4 +9,5 @@ export type CategoryRuleProps = {
   transRemark: string;
   transMoney: number;
   keyword: Array<string>;
+  finClass: string;
 };

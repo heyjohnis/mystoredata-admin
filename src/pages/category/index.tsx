@@ -8,12 +8,16 @@ import {Badge} from "components/badges";
 import {CategoryProps} from "model/Category";
 import {Input} from "components/forms/input";
 import ModalCategory from "components/category/ModalCategory";
-import {UsePurpose} from "../../data/commonCode";
+import {FinClassCode, UsePurpose} from "../../data/commonCode";
 
 const fields: Record<string, string>[] = [
   {
     name: "code",
     key: "code",
+  },
+  {
+    name: "거래구분",
+    key: "finClass",
   },
   {
     name: "카테고리명",
@@ -80,6 +84,11 @@ export default function Index() {
                   className="cursor-pointer">
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {category.code}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    <Badge size={"sm"} color="text-red-400 mr-1" rounded>
+                      {FinClassCode[category?.finClass || ""]}
+                    </Badge>
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     <Badge
