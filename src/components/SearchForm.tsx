@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import {Input} from "components/forms/input";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
+import {CategorySelect} from "./CommonCodeSelect";
+import {Category} from "data/commonCode";
 
 export default function SearchForm({
   handleChange,
@@ -12,17 +14,19 @@ export default function SearchForm({
   const [userId, setUserId] = useState<string>("");
   const [fromAt, setFromAt] = useState<string>("");
   const [toAt, setToAt] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
 
   const resetForm = () => {
     setCorpNum("");
     setUserId("");
     setFromAt("");
     setToAt("");
+    setCategory("");
   };
 
   useEffect(() => {
-    handleChange({corpNum, userId, fromAt, toAt});
-  }, [corpNum, userId, fromAt, toAt]);
+    handleChange({corpNum, userId, fromAt, toAt, category});
+  }, [corpNum, userId, fromAt, toAt, category]);
 
   return (
     <div className="flex">
@@ -45,6 +49,14 @@ export default function SearchForm({
         />
       </InputWrapper>
       <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+        <Label>카테고리</Label>
+        <CategorySelect
+          name="category"
+          onChange={(e) => setCategory(e.target.value)}
+          codes={Category}
+        />
+      </InputWrapper>
+      <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
         <Label>시작일</Label>
         <Input
           name="fromAt"
@@ -64,6 +76,7 @@ export default function SearchForm({
           placeholder="YYYYMMDD"
         />
       </InputWrapper>
+
       <button
         className="px-4 py-2 text-xs font-bold text-white uppercase bg-gray-500 rounded-lg hover:bg-gray-600 mr-1"
         onClick={resetForm}>

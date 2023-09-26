@@ -71,7 +71,7 @@ const Index: React.FC = () => {
 
   const getCardLogs = () => {
     GET(
-      `trans/log?corpNum=${form?.corpNum}&userId=${form?.userId}&fromAt=${form?.fromAt}&toAt=${form?.toAt}`
+      `trans/log?corpNum=${form?.corpNum}&userId=${form?.userId}&fromAt=${form?.fromAt}&toAt=${form?.toAt}&category=${form?.category}`
     ).then((res: any) => {
       console.log({res});
       setLogs(res.data);
@@ -84,6 +84,7 @@ const Index: React.FC = () => {
       userId: form?.userId,
       fromAt: form?.fromAt,
       toAt: form?.toAt,
+      category: form?.category,
     }).then((res: any) => {
       console.log({res});
       if (res.data.success) {

@@ -32,6 +32,8 @@ export type TransMoneyProps = {
   useKind: string;
   category: string;
   categoryName: string;
+  finClassCode: string;
+  finClassName: string;
   keyword: Array<string>;
   useYn: boolean;
 };

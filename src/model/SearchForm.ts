@@ -3,4 +3,5 @@ export type SearchProps = {
   userId: string;
   fromAt: Date;
   toAt: Date;
+  category?: string;
 };
