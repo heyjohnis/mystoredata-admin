@@ -201,3 +201,12 @@ export const Category: Array<any> = [
   {order: 520, code: "820", name: "외환환산손실"},
   {order: 900, code: "900", name: "미분류"},
 ];
+
+export const FinClassCode: Record<string, string> = {
+  IN1: "번것(수익+)",
+  IN2: "빌린것(부채+)",
+  IN3: "나머지(자산-)",
+  OUT1: "쓴것(비용+)",
+  OUT2: "갚은것(부채-)",
+  OUT3: "나머지(자산+)",
+};

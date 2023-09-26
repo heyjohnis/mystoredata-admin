@@ -32,6 +32,10 @@ const fields: Record<string, string>[] = [
     key: "Withdraw",
   },
   {
+    name: "거래구분",
+    key: "fin-class",
+  },
+  {
     name: "카테고리",
     key: "category",
   },
@@ -162,6 +166,9 @@ const Index: React.FC = () => {
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                       {UsePurpose[log.useKind as keyof typeof UsePurpose]}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
+                      {log.finClassName}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                       {log.categoryName}
