@@ -103,7 +103,7 @@ const initialState: NavigationState[] = [
       {
         url: "/non-category",
         icon: <TbDirectionsOff size={20} />,
-        title: "미분류 카테고리",
+        title: "임시 카테고리",
         items: [],
       },
     ],

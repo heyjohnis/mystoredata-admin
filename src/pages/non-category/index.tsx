@@ -6,11 +6,15 @@ import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 import {NonCategoryProps} from "model/NonCategory";
 import ModalNonCategory from "components/non-category/ModalNonCategory";
-import {UsePurpose} from "data/commonCode";
+import {FinClassCode, UsePurpose} from "data/commonCode";
 import {Badge} from "components/badges";
 import {AxiosResponse} from "axios";
 
 const fields: Record<string, string>[] = [
+  {
+    name: "거래구분",
+    key: "finClass",
+  },
   {
     name: "적요",
     key: "remark",
@@ -60,7 +64,7 @@ export default function CategoryRule() {
   return (
     <>
       <Notification />
-      <SectionTitle title="non-category" subtitle="미분류 카테고리 설정" />
+      <SectionTitle title="temp-category" subtitle="임시 카테고리 설정" />
       <Widget>
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left table-auto">
@@ -78,6 +82,11 @@ export default function CategoryRule() {
             <tbody>
               {nonCategories.map((category: NonCategoryProps, i) => (
                 <tr key={i} onClick={() => openDetailModal(category)}>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    <Badge size={"sm"} color="text-red-400 mr-1" rounded>
+                      {FinClassCode[category.finClass]} {category.finClass}
+                    </Badge>
+                  </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     <Badge
                       size={"sm"}
