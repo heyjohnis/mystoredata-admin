@@ -10,7 +10,6 @@ import {BaroBankCode, CardCode, UsePurpose} from "data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
 import Switch from "components/switch";
-import {set} from "nprogress";
 
 type Props = {
   asset: TransMoneyProps | null;
@@ -23,6 +22,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   const [form, setForm] = useState<TransMoneyProps>();
   const [personalCategory, setPersonalCategory] = useState<CategoryProps[]>([]);
   const [corpCategory, setCorpCategory] = useState<CategoryProps[]>([]);
+  const [userCategory, setUserCategory] = useState<CategoryProps[]>([]);
   const closeModal = () => {
     setIsOpen(false);
     closedModal(
@@ -45,6 +45,8 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
     console.log("getCategory: ", data);
     setPersonalCategory(data.personalCategory);
     setCorpCategory(data.corpCategory);
+    setUserCategory(data.userCategory || []);
+    console.log("userCategory: ", data.userCategory);
   };
 
   const handleChange = (e: any) => {
@@ -211,8 +213,8 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                         value={form?.category}
                         codes={
                           form?.useKind === "BIZ"
-                            ? corpCategory
-                            : personalCategory || []
+                            ? [...corpCategory, ...userCategory]
+                            : [...personalCategory, ...userCategory] || []
                         }
                         onChange={handleChange}
                       />
