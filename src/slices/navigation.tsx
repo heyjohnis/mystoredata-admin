@@ -7,6 +7,7 @@ import {
   FiHelpCircle,
   FiHome,
 } from "react-icons/fi";
+import {AiOutlineDashboard} from "react-icons/ai";
 import {BiCategory} from "react-icons/bi";
 import {BsCreditCard} from "react-icons/bs";
 import {LuBanknote} from "react-icons/lu";
@@ -81,6 +82,12 @@ const initialState: NavigationState[] = [
         url: "/fin-item/data",
         icon: <FaMoneyBills size={20} />,
         title: "금융상품",
+        items: [],
+      },
+      {
+        url: "/fin-status",
+        icon: <AiOutlineDashboard size={20} />,
+        title: "재정상태",
         items: [],
       },
     ],

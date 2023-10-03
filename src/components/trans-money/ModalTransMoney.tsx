@@ -6,7 +6,12 @@ import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
 import {GET, POST, PUT} from "utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
-import {BaroBankCode, CardCode, UsePurpose} from "data/commonCode";
+import {
+  BaroBankCode,
+  CardCode,
+  UsePurpose,
+  FinClassCode,
+} from "data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
 import Switch from "components/switch";
@@ -46,7 +51,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
     setPersonalCategory(data.personalCategory);
     setCorpCategory(data.corpCategory);
     setUserCategory(data.userCategory || []);
-    console.log("userCategory: ", data.userCategory);
+    console.log("category: ", asset.category);
   };
 
   const handleChange = (e: any) => {
@@ -55,6 +60,10 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
     if (name === "category") {
       const selectedText = e.target.options[e.target.selectedIndex].text;
       setForm((prevState: any) => ({...prevState, categoryName: selectedText}));
+    }
+    if (name === "finClassCode") {
+      const selectedText = e.target.options[e.target.selectedIndex].text;
+      setForm((prevState: any) => ({...prevState, finClassName: selectedText}));
     }
   };
 
@@ -90,7 +99,8 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
     if (
       form?.category !== asset?.category ||
       form?.useKind !== asset?.useKind ||
-      form?.useYn !== asset?.useYn
+      form?.useYn !== asset?.useYn ||
+      form?.finClassCode !== asset?.finClassCode
     ) {
       console.log("updateDetail: ", form);
       updateDetail();
@@ -207,7 +217,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>카테고리</Label>
-                    {(corpCategory || personalCategory) && (
+                    {corpCategory.length > 0 && (
                       <CategorySelect
                         name="category"
                         value={form?.category}
@@ -219,6 +229,16 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                         onChange={handleChange}
                       />
                     )}
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>거래구분</Label>
+                    <CommonCodeSelect
+                      name="finClassCode"
+                      value={form?.finClassCode}
+                      commonCode={FinClassCode}
+                      onChange={handleChange}
+                      disabled={true}
+                    />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>키워드</Label>
