@@ -8,8 +8,9 @@ import {NonCategoryProps} from "model/NonCategory";
 import {useDebouncedCallback} from "use-debounce";
 import {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
-import {GET, PUT} from "utils/restApi";
-import TransList from "./TransList";
+import {GET, PUT, POST} from "utils/restApi";
+import TransMoneyLog from "components/trans-money/TransMoneyLog";
+import {TransMoneyProps} from "model/TransMoney";
 
 type Props = {
   nonCategory?: NonCategoryProps;
@@ -21,6 +22,7 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
   const [form, setForm] = useState<NonCategoryProps>();
   const [isChanged, setIsChanged] = useState<boolean>(false);
   const [categories, setCategories] = useState<CategoryProps[]>([]);
+  const [logs, setLogs] = useState<TransMoneyProps[]>([]);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -40,7 +42,13 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
     const {name, value} = e.target;
     console.log("handleChange: ", name, value);
     setForm((prevState: any) => ({...prevState, [name]: value}));
-    // debounced(e.target.value);
+    if (name === "changeCategory") {
+      const selectedText = e.target.options[e.target.selectedIndex].text;
+      setForm((prevState: any) => ({
+        ...prevState,
+        changeCategoryName: selectedText,
+      }));
+    }
   };
 
   useEffect(() => {
@@ -49,8 +57,30 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
       setIsOpen(true);
       setForm({...nonCategory});
       getCategories();
+      getTransLog();
     }
   }, [nonCategory]);
+
+  const getTransLog = () => {
+    const category = nonCategory?._id.category;
+    POST(`trans/log`, {...form, category}).then((res: any) => {
+      console.log("transdata: ", res.data);
+      setLogs(res.data);
+    });
+  };
+
+  const changeCategory = () => {
+    const req = {
+      user: nonCategory?.user,
+      userId: nonCategory?.userId,
+      category: nonCategory?._id.category,
+      changeCategory: form?.changeCategory,
+      changeCategoryName: form?.changeCategoryName,
+    };
+    PUT(`trans/update-category`, req).then((res) => {
+      console.log("updated category: ", res);
+    });
+  };
 
   return (
     <>
@@ -83,14 +113,25 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium text-gray-900 dark:text-white">
-                  미분류 카테고리 상세정보
+                  임시 카테고리 상세정보
                 </Dialog.Title>
                 <button
                   className="absolute top-0 right-0 m-4 font-bold uppercase"
                   onClick={closeModal}>
                   <FiX size={18} className="stroke-current" />
                 </button>
+
                 <div className="flex">
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>사용자 ID</Label>
+                    <Input
+                      name="userId"
+                      type="text"
+                      width="w-48"
+                      value={form?.userId}
+                      readOnly={true}
+                    />
+                  </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>카테고리명</Label>
                     <Input
@@ -103,16 +144,23 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
                   </InputWrapper>
 
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>일괄변경</Label>
+                    <Label>변경 카테고리</Label>
                     <CategorySelect
-                      name="category"
+                      name="changeCategory"
                       onChange={handleChange}
                       codes={categories}
                     />
                   </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2 flex items-end">
+                    <button
+                      className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
+                      onClick={changeCategory}>
+                      일괄변경
+                    </button>
+                  </InputWrapper>
                 </div>
                 <div className="flex">
-                  <TransList remark={form?._id?.remark} />
+                  <TransMoneyLog logs={logs} setData={() => {}} />
                 </div>
               </div>
             </Transition.Child>

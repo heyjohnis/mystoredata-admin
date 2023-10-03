@@ -35,7 +35,11 @@ export default function Index() {
   const getCategories: any = async (user: string) => {
     const {data}: any = await GET(`user/category/${user}`);
     console.log("getCategories: ", data);
-    setCategories(data.category || []);
+    setCategories([
+      ...data.corpCategory,
+      ...data.personalCategory,
+      ...data.userCategory,
+    ]);
   };
 
   return (
