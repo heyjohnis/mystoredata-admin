@@ -37,45 +37,33 @@ const Index: React.FC = () => {
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const [asset, setAsset] = useState<TransMoneyProps | null>(null);
+  const [finClassCode, setFinClassCode] = useState<string>("");
 
-  useEffect(() => {
-    if (form?.userId && form?.fromAt && form.fromAt) getTransData();
-  }, [form]);
-
-  const getTransData = () => {
-    POST(`trans/money`, form)
-      .then((res: any) => {
-        console.log("trans-data: ", res.data);
-        setLogs(res.data);
-      })
-      .catch((err: any) => {});
-  };
   useEffect(() => {
     if (form?.userId && form?.fromAt && form.fromAt) getFinStatusData();
   }, [form]);
 
   const getFinStatusData = () => {
-    POST(`fin-status/amount`, form)
-      .then((res: any) => {
-        console.log("fin-status: ", res.data);
-        const finAmounts =
-          res?.data.length > 0
-            ? res?.data?.reduce(
-                (amts: FinAmount, amt: dataProps) => {
-                  amts[amt._id] = amt?.amount || 0;
-                  return amts;
-                },
-                {...initFinAmount} as FinAmount
-              )
-            : initFinAmount;
-        console.log("setFinAmount: ", finAmounts);
-        setFinAmount(finAmounts);
-      })
-      .catch((err: any) => {});
+    POST(`fin-status/amount`, form).then((res: any) => {
+      console.log("fin-status: ", res.data);
+      const finAmounts =
+        res?.data.length > 0
+          ? res?.data?.reduce(
+              (amts: FinAmount, amt: dataProps) => {
+                amts[amt._id] = amt?.amount || 0;
+                return amts;
+              },
+              {...initFinAmount} as FinAmount
+            )
+          : initFinAmount;
+      console.log("setFinAmount: ", finAmounts);
+      setFinAmount(finAmounts);
+    });
   };
 
-  const getFinClassData = (finClassCode: string) => {
-    POST(`trans/log`, {...form, finClassCode}).then((res: any) => {
+  const getFinClassData = (code: string) => {
+    setFinClassCode(code);
+    POST(`trans/log`, {...form, finClassCode: code}).then((res: any) => {
       console.log("transdata: ", res.data);
       setLogs(res.data);
     });
@@ -84,7 +72,7 @@ const Index: React.FC = () => {
   const closedModal = (isUpdated = false) => {
     setAsset(null);
     if (isUpdated) {
-      getFinStatusData();
+      getFinClassData(finClassCode);
     }
     console.log("closedModal");
   };
