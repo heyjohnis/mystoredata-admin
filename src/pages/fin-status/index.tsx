@@ -82,50 +82,92 @@ const Index: React.FC = () => {
       <SectionTitle title="Financial Status" subtitle="재정상태" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
-        <div className="w-full p-4 mt-4 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-          <div className="flex justify-between">
-            <div
-              className="flex justify-center cursor-pointer"
-              onClick={() => getFinClassData("IN1")}>
-              <div>번것(수익+)</div>
-              <div>{finAmount.IN1.toLocaleString()}</div>
+        <div className="flex justify-between">
+          <div className="w-1/2 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <h2 className="text-lg font-bold mb-3">자산/부채/수입/지출</h2>
+            <div className="flex justify-between m-5">
+              <div
+                className="flex justify-center cursor-pointer"
+                onClick={() => getFinClassData("IN1")}>
+                <div>번것(수익+)</div>
+                <div>{finAmount.IN1.toLocaleString()}</div>
+              </div>
+              <div className="bg-gray w-2"></div>
+              <div
+                className="flex justify-normal cursor-pointer"
+                onClick={() => getFinClassData("OUT1")}>
+                <div>쓴것(비용+)</div>
+                <div>{(finAmount.OUT1 * -1).toLocaleString()}</div>
+              </div>
             </div>
-            <div className="bg-gray w-2"></div>
-            <div
-              className="flex justify-normal cursor-pointer"
-              onClick={() => getFinClassData("OUT1")}>
-              <div>쓴것(비용+)</div>
-              <div>{(finAmount.OUT1 * -1).toLocaleString()}</div>
+            <div className="flex justify-between m-5">
+              <div
+                className="flex justify-center cursor-pointer"
+                onClick={() => getFinClassData("IN2")}>
+                <div>빌린것(부채+)</div>
+                <div>{finAmount.IN2.toLocaleString()}</div>
+              </div>
+              <div className="bg-gray w-2"></div>
+              <div
+                className="flex justify-normal cursor-pointer"
+                onClick={() => getFinClassData("OUT2")}>
+                <div>갚은것(부채-)</div>
+                <div>{(finAmount.OUT2 * -1).toLocaleString()}</div>
+              </div>
+            </div>
+            <div className="flex justify-between m-5">
+              <div
+                className="flex justify-center cursor-pointer"
+                onClick={() => getFinClassData("IN3")}>
+                <div>나머지(자산-)</div>
+                <div>{finAmount.IN3.toLocaleString()}</div>
+              </div>
+              <div className="bg-gray w-2"></div>
+              <div
+                className="flex justify-normal cursor-pointer"
+                onClick={() => getFinClassData("OUT3")}>
+                <div>나머지(자산+)</div>
+                <div>{(finAmount.OUT3 * -1).toLocaleString()}</div>
+              </div>
             </div>
           </div>
-          <div className="flex justify-between">
-            <div
-              className="flex justify-center cursor-pointer"
-              onClick={() => getFinClassData("IN2")}>
-              <div>빌린것(부채+)</div>
-              <div>{finAmount.IN2.toLocaleString()}</div>
-            </div>
-            <div className="bg-gray w-2"></div>
-            <div
-              className="flex justify-normal cursor-pointer"
-              onClick={() => getFinClassData("OUT2")}>
-              <div>갚은것(부채-)</div>
-              <div>{(finAmount.OUT2 * -1).toLocaleString()}</div>
-            </div>
-          </div>
-          <div className="flex justify-between">
-            <div
-              className="flex justify-center cursor-pointer"
-              onClick={() => getFinClassData("IN3")}>
-              <div>나머지(자산-)</div>
-              <div>{finAmount.IN3.toLocaleString()}</div>
-            </div>
-            <div className="bg-gray w-2"></div>
-            <div
-              className="flex justify-normal cursor-pointer"
-              onClick={() => getFinClassData("OUT3")}>
-              <div>나머지(자산+)</div>
-              <div>{(finAmount.OUT3 * -1).toLocaleString()}</div>
+          <div className="w-1/2 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <h2 className="text-lg font-bold mb-3">간편 재무제표</h2>
+            <div className="p-5 pt-1">
+              <table className="w-full">
+                <tbody>
+                  <tr>
+                    <td>수익</td>
+                    <td className="text-right">
+                      {finAmount.IN1.toLocaleString()}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>지출</td>
+                    <td className="text-right">
+                      {(finAmount.OUT1 * -1).toLocaleString()}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>내돈</td>
+                    <td className="text-right">
+                      {finAmount.IN2.toLocaleString()}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>남은돈(부채)</td>
+                    <td className="text-right">
+                      {((finAmount.OUT2 + finAmount.IN2) * -1).toLocaleString()}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>남은돈(자본)</td>
+                    <td className="text-right">
+                      {finAmount.IN3.toLocaleString()}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
