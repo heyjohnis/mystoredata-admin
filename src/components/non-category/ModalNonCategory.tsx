@@ -159,9 +159,7 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
                     </button>
                   </InputWrapper>
                 </div>
-                <div className="flex">
-                  <TransMoneyLog logs={logs} setData={() => {}} />
-                </div>
+                <div className="flex"></div>
               </div>
             </Transition.Child>
           </div>
