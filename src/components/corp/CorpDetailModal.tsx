@@ -10,6 +10,7 @@ import AccountList from "components/accounts/accountList";
 import CardList from "components/cards/cardList";
 import Link from "next/link";
 import CommonCodeSelect from "components/CommonCodeSelect";
+import {CorpType} from "../../data/commonCode";
 
 const CorpDetailModal = ({user, closedModal}: any) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -191,6 +192,16 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                       width="w-28"
                       value={form?.corpNum}
                       onChange={handleChange}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>기업유형</Label>
+                    <CommonCodeSelect
+                      name="corpType"
+                      commonCode={CorpType}
+                      value={form["corpType"]}
+                      onChange={handleChange}
+                      placeholder="기업유형"
                     />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">

@@ -9,6 +9,7 @@ export type UserProps = {
   mobile: string;
   corpNum: string;
   corpName: string;
+  corpType: string;
   bizType: string;
   bizClass: string;
   addr1: string;
