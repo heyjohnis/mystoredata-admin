@@ -14,6 +14,7 @@ import {LuBanknote} from "react-icons/lu";
 import {BiTransfer, BiBuildings} from "react-icons/bi";
 import {FaMoneyBills} from "react-icons/fa6";
 import {TbReceiptTax, TbDirectionsOff, TbDirections} from "react-icons/tb";
+import {GrUserWorker} from "react-icons/gr";
 
 export type NavigationState = {
   title: string;
@@ -70,6 +71,12 @@ const initialState: NavigationState[] = [
         url: "/trade-corp/data",
         icon: <BsFillBuildingsFill size={20} />,
         title: "거래처정보",
+        items: [],
+      },
+      {
+        url: "/employee/data",
+        icon: <GrUserWorker size={20} />,
+        title: "직원정보",
         items: [],
       },
       {
