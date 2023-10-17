@@ -108,8 +108,12 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
         console.log({err});
       });
   };
-  const saveLoan = () => {};
-  const saveBorrow = () => {};
+  const saveLoan = () => {
+    console.log("saveLoan: ", form);
+  };
+  const saveBorrow = () => {
+    console.log("saveBorrow: ", form);
+  };
 
   useEffect(() => {
     console.log("form: ", form);

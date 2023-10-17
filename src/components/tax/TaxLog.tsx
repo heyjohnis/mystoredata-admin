@@ -54,7 +54,7 @@ type Props = {
   logs: TaxLogProps[];
 };
 
-export default function TaxLog({logs}: Props) {
+export default function TaxLogs({logs}: Props) {
   return (
     <div className="w-full overflow-x-auto">
       <table className="w-full text-left table-auto">

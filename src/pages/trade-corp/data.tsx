@@ -11,6 +11,7 @@ import {TradeCorpProps} from "model/TradeCorp";
 import TaxLog from "components/tax/TaxLog";
 import TransMoneyLog from "components/trans-money/TransMoneyLog";
 import {TransMoneyProps} from "model/TransMoney";
+
 const fields: Record<string, string>[] = [
   {
     name: "사용자",

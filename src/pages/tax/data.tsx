@@ -8,7 +8,7 @@ import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 
 import {SearchProps} from "model/SearchForm";
-import TaxLog from "components/tax/taxLog";
+import TaxLog from "components/tax/TaxLog";
 
 const fields: Record<string, string>[] = [
   {
