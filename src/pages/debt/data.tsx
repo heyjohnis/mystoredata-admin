@@ -49,7 +49,7 @@ const Index: React.FC = () => {
   };
 
   const getLogs = (debt: string, userId: string) => {
-    POST(`trans/debt-log`, {userId, employee}).then((res: any) => {
+    POST(`trans/debt-log`, {userId, debt}).then((res: any) => {
       console.log({res});
       setTransMoneyLogs(res.data);
     });
