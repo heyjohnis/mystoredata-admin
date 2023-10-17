@@ -8,6 +8,7 @@ import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 
 import {SearchProps} from "model/SearchForm";
+import TaxLog from "components/tax/taxLog";
 
 const fields: Record<string, string>[] = [
   {
@@ -80,76 +81,7 @@ const Index: React.FC = () => {
       <SectionTitle title="tax receipt" subtitle="세금계산서 이력" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
-        <div className="w-full overflow-x-auto">
-          <table className="w-full text-left table-auto">
-            <thead>
-              <tr>
-                {fields.map((field, i) => (
-                  <th
-                    key={i}
-                    className="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase border-b border-gray-100 dark:border-gray-800 leading-4">
-                    {field.name}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {logs &&
-                logs.map((log, i) => (
-                  <tr
-                    key={i}
-                    className={`${!log.useYn && "line-through text-gray-400"}`}>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {new Date(log.issueDT).toLocaleDateString("ko-KR")}{" "}
-                      {new Date(log.issueDT).toLocaleTimeString("ko-KR")}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.corpNum}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.ntsSendKey}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.purposeType}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.modifyCode}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.taxType}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.invoicerCorpNum} {log.invoicerCorpName}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.invoiceeCorpNum} {log.invoiceeCorpName}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.invoiceeBizType}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.invoiceeBizClass}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.amountTotal.toLocaleString("ko-KR")}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.taxTotal.toLocaleString("ko-KR")}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.totalAmount.toLocaleString("ko-KR")}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.remark1}
-                    </td>
-                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {log.itemName}
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
+        <TaxLog logs={logs} />
       </Widget>
     </>
   );

@@ -28,9 +28,11 @@ const initFinAmount: FinAmount = {
   IN1: 0,
   IN2: 0,
   IN3: 0,
+  IN4: 0,
   OUT1: 0,
   OUT2: 0,
   OUT3: 0,
+  OUT4: 0,
 };
 
 const initFinTaxAmount: FinAmount = {
@@ -206,6 +208,29 @@ const Index: React.FC = () => {
                 </div>
                 <div className="w-24 text-right text-lg">
                   {(finAmount.OUT3 * -1).toLocaleString()}
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between m-5">
+              <div
+                className="flex justify-center cursor-pointer items-center"
+                onClick={() => getFinClassData("IN4")}>
+                <div className="w-24 text-gray-500	text-xs mr-3">
+                  미지정(입금)
+                </div>
+                <div className="w-24 text-right text-lg">
+                  {finAmount.IN4.toLocaleString()}
+                </div>
+              </div>
+              <div className="bg-gray w-2"></div>
+              <div
+                className="flex justify-center cursor-pointer items-center"
+                onClick={() => getFinClassData("OUT4")}>
+                <div className="w-24 text-gray-500	text-xs mr-3">
+                  미지정(출금)
+                </div>
+                <div className="w-24 text-right text-lg">
+                  {(finAmount.OUT4 * -1).toLocaleString()}
                 </div>
               </div>
             </div>

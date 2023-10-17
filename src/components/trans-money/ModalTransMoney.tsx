@@ -94,6 +94,23 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
       });
   };
 
+  const saveEmpPay = () => {
+    POST(`emp/reg`, form)
+      .then((res: any) => {
+        console.log("save employee: ", res);
+        // setForm(res.data);
+        if (res?.data.n > 0) {
+          closedModal(true);
+          alert("저장되었습니다");
+        }
+      })
+      .catch((err) => {
+        console.log({err});
+      });
+  };
+  const saveLoan = () => {};
+  const saveBorrow = () => {};
+
   useEffect(() => {
     console.log("form: ", form);
     if (
@@ -334,6 +351,26 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                     onClick={saveRule}>
                     본 설정으로 모두 적용(향후 데이터 적옹)
                   </button>
+                  <div>
+                    <button
+                      type="button"
+                      className="ml-2 px-4 py-2 text-xs font-bold text-white uppercase bg-red-500 rounded-lg hover:bg-red-600"
+                      onClick={saveEmpPay}>
+                      급여로 처리
+                    </button>
+                    <button
+                      type="button"
+                      className="ml-2 px-4 py-2 text-xs font-bold text-white uppercase bg-orange-500 rounded-lg hover:bg-orange-600"
+                      onClick={saveLoan}>
+                      대여금(빌려준 돈)으로 처리
+                    </button>
+                    <button
+                      type="button"
+                      className="ml-2 px-4 py-2 text-xs font-bold text-white uppercase bg-orange-500 rounded-lg hover:bg-orange-600"
+                      onClick={saveBorrow}>
+                      차입금(빌린 돈)으로 처리
+                    </button>
+                  </div>
                 </div>
               </div>
             </Transition.Child>

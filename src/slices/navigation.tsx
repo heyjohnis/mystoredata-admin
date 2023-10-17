@@ -9,7 +9,7 @@ import {
 } from "react-icons/fi";
 import {AiOutlineDashboard} from "react-icons/ai";
 import {BiCategory} from "react-icons/bi";
-import {BsCreditCard} from "react-icons/bs";
+import {BsCreditCard, BsFillBuildingsFill} from "react-icons/bs";
 import {LuBanknote} from "react-icons/lu";
 import {BiTransfer, BiBuildings} from "react-icons/bi";
 import {FaMoneyBills} from "react-icons/fa6";
@@ -64,6 +64,12 @@ const initialState: NavigationState[] = [
         url: "/cards/data",
         icon: <BsCreditCard size={20} />,
         title: "카드데이터",
+        items: [],
+      },
+      {
+        url: "/trade-corp/data",
+        icon: <BsFillBuildingsFill size={20} />,
+        title: "거래처정보",
         items: [],
       },
       {
