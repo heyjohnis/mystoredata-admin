@@ -15,6 +15,7 @@ import {BiTransfer, BiBuildings} from "react-icons/bi";
 import {FaMoneyBills} from "react-icons/fa6";
 import {TbReceiptTax, TbDirectionsOff, TbDirections} from "react-icons/tb";
 import {GrUserWorker} from "react-icons/gr";
+import {LiaMoneyCheckSolid} from "react-icons/lia";
 
 export type NavigationState = {
   title: string;
@@ -77,6 +78,12 @@ const initialState: NavigationState[] = [
         url: "/employee/data",
         icon: <GrUserWorker size={20} />,
         title: "직원정보",
+        items: [],
+      },
+      {
+        url: "/debt/data",
+        icon: <LiaMoneyCheckSolid size={20} />,
+        title: "빚정보",
         items: [],
       },
       {

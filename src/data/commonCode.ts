@@ -56,6 +56,8 @@ export const FinItemCode: Record<string, string> = {
   INSTSAVACC: "정기적금",
   CRDCARD: "신용카드",
   DEBICARD: "체크카드",
+  BORR: "차입금",
+  LOAN: "대여금",
 };
 
 export const CardCode: Record<string, string> = {

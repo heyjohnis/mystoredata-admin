@@ -11,6 +11,7 @@ import {
   CardCode,
   UsePurpose,
   FinClassCode,
+  FinItemCode,
 } from "data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
@@ -108,11 +109,21 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
         console.log({err});
       });
   };
-  const saveLoan = () => {
-    console.log("saveLoan: ", form);
-  };
-  const saveBorrow = () => {
-    console.log("saveBorrow: ", form);
+  const saveDebt = (type: string) => {
+    console.log("saveDebt: ", type);
+    const req = {
+      ...form,
+      debtTypeCode: type,
+      debtTypeName: FinItemCode[type],
+      debtName: form?.transRemark,
+    };
+    POST(`debt/reg`, req).then((res: any) => {
+      console.log("save loan: ", res);
+      if (res?.data.n > 0) {
+        closedModal(true);
+        alert("저장되었습니다");
+      }
+    });
   };
 
   useEffect(() => {
@@ -365,13 +376,13 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                     <button
                       type="button"
                       className="ml-2 px-4 py-2 text-xs font-bold text-white uppercase bg-orange-500 rounded-lg hover:bg-orange-600"
-                      onClick={saveLoan}>
+                      onClick={() => saveDebt("LOAN")}>
                       대여금(빌려준 돈)으로 처리
                     </button>
                     <button
                       type="button"
                       className="ml-2 px-4 py-2 text-xs font-bold text-white uppercase bg-orange-500 rounded-lg hover:bg-orange-600"
-                      onClick={saveBorrow}>
+                      onClick={() => saveDebt("BORR")}>
                       차입금(빌린 돈)으로 처리
                     </button>
                   </div>
