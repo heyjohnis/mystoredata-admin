@@ -38,14 +38,14 @@ const Index: React.FC = () => {
   }, [form]);
 
   const getTradeCorpList = () => {
-    POST(`debt/list`, form).then((res: any) => {
+    POST(`asset/list`, form).then((res: any) => {
       console.log({res});
       setAssts(res.data);
     });
   };
 
-  const getLogs = (debt: string, userId: string) => {
-    POST(`trans/asset-log`, {userId, debt}).then((res: any) => {
+  const getLogs = (asset: string, userId: string) => {
+    POST(`trans/asset-log`, {userId, asset}).then((res: any) => {
       console.log({res});
       setTransMoneyLogs(res.data);
     });
