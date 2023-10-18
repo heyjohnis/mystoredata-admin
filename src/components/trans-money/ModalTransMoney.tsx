@@ -113,12 +113,28 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
     console.log("saveDebt: ", type);
     const req = {
       ...form,
-      debtTypeCode: type,
-      debtTypeName: FinItemCode[type],
-      debtName: form?.transRemark,
+      finItemCode: type,
+      finItemName: FinItemCode[type],
+      finName: form?.transRemark,
     };
     POST(`debt/reg`, req).then((res: any) => {
       console.log("save loan: ", res);
+      if (res?.data.n > 0) {
+        closedModal(true);
+        alert("저장되었습니다");
+      }
+    });
+  };
+  const saveAsset = (type: string) => {
+    console.log("saveAsset: ", type);
+    const req = {
+      ...form,
+      finItemCode: type,
+      finItemName: FinItemCode[type],
+      finName: form?.transRemark,
+    };
+    POST(`asset/reg`, req).then((res: any) => {
+      console.log("save asset: ", res);
       if (res?.data.n > 0) {
         closedModal(true);
         alert("저장되었습니다");
@@ -376,7 +392,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                     <button
                       type="button"
                       className="ml-2 px-4 py-2 text-xs font-bold text-white uppercase bg-orange-500 rounded-lg hover:bg-orange-600"
-                      onClick={() => saveDebt("LOAN")}>
+                      onClick={() => saveAsset("LOAN")}>
                       대여금(빌려준 돈)으로 처리
                     </button>
                     <button

@@ -81,9 +81,15 @@ const initialState: NavigationState[] = [
         items: [],
       },
       {
+        url: "/asset/data",
+        icon: <LiaMoneyCheckSolid size={20} />,
+        title: "자산정보",
+        items: [],
+      },
+      {
         url: "/debt/data",
         icon: <LiaMoneyCheckSolid size={20} />,
-        title: "빚정보",
+        title: "부채정보",
         items: [],
       },
       {

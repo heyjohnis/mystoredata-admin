@@ -29,7 +29,7 @@ const fields: Record<string, string>[] = [
 
 const Index: React.FC = () => {
   const [form, setForm] = useState<SearchProps | null>(null);
-  const [debts, setDebts] = useState<FinItemProps[]>([]);
+  const [assets, setAssts] = useState<FinItemProps[]>([]);
   const [transMoneylogs, setTransMoneyLogs] = useState<TransMoneyProps[]>([]);
   const [asset, setAsset] = useState<TransMoneyProps | null>(null);
 
@@ -40,12 +40,12 @@ const Index: React.FC = () => {
   const getTradeCorpList = () => {
     POST(`debt/list`, form).then((res: any) => {
       console.log({res});
-      setDebts(res.data);
+      setAssts(res.data);
     });
   };
 
   const getLogs = (debt: string, userId: string) => {
-    POST(`trans/debt-log`, {userId, debt}).then((res: any) => {
+    POST(`trans/asset-log`, {userId, debt}).then((res: any) => {
       console.log({res});
       setTransMoneyLogs(res.data);
     });
@@ -54,7 +54,7 @@ const Index: React.FC = () => {
   return (
     <>
       <Notification />
-      <SectionTitle title="Debt Info" subtitle="부채 정보" />
+      <SectionTitle title="자산 Info" subtitle="자산 정보" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
         <div className="w-full overflow-x-auto">
@@ -71,26 +71,26 @@ const Index: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {debts &&
-                debts.map((debt, i) => (
+              {assets &&
+                assets.map((asset, i) => (
                   <tr
                     key={i}
                     className={`${
-                      !debt.useYn && "line-through text-gray-400"
+                      !asset.useYn && "line-through text-gray-400"
                     } cursor-pointer`}
-                    onClick={() => getLogs(debt._id, debt.userId)}>
+                    onClick={() => getLogs(asset._id, asset.userId)}>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {debt.corpNum} {debt.corpName} ({debt.userId})
+                      {asset.corpNum} {asset.corpName} ({asset.userId})
                     </td>
 
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {debt.finItemCode}
+                      {asset.finItemCode}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {debt.finItemName}
+                      {asset.finItemName}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                      {debt.finName}
+                      {asset.finName}
                     </td>
                   </tr>
                 ))}

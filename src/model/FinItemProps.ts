@@ -1,14 +1,14 @@
 import {UserProps} from "./user";
 
-export type DebtProps = {
+export type FinItemProps = {
   _id: string;
   user: UserProps;
   userId: string;
   corpNum: string;
   corpName: string;
-  debtTypeName: string;
-  debtTypeCode: string;
-  debtName: string;
+  finItemName: string;
+  finItemCode: string;
+  finName: string;
   transRemark: string;
   useYn: boolean;
 };
