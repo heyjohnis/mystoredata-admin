@@ -57,16 +57,19 @@ const Index: React.FC = () => {
   const [form, setForm] = useState<SearchProps>();
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
   const [taxAmount, setTaxAmount] = useState<FinAmount>(initFinTaxAmount);
-  const [assetAmount, setAssetAmount] = useState<assetProps[]>([]);
+  const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
-  const [asset, setAsset] = useState<TransMoneyProps | null>(null);
+  const [asset, setAsset] = useState<TransMoneyProps[] | null>(null);
+  const [debt, setDebt] = useState<TransMoneyProps[] | null>(null);
   const [finClassCode, setFinClassCode] = useState<string>("");
 
   useEffect(() => {
     if (form?.userId && form?.fromAt && form.fromAt) {
       getFinStatusData();
       getFinTaxData();
-      getFinAssetData();
+      getFinAccountData();
+      getAssetData();
+      getDebtData();
     }
   }, [form]);
 
@@ -114,10 +117,24 @@ const Index: React.FC = () => {
     });
   };
 
-  const getFinAssetData = () => {
+  const getFinAccountData = () => {
+    POST(`fin-status/account`, form).then((res: any) => {
+      console.log("fin-account: ", res.data);
+      setAccountAmount([...res.data]);
+    });
+  };
+
+  const getAssetData = () => {
     POST(`fin-status/asset`, form).then((res: any) => {
       console.log("fin-asset: ", res.data);
-      setAssetAmount([...res.data]);
+      setAsset([...res.data]);
+    });
+  };
+
+  const getDebtData = () => {
+    POST(`fin-status/debt`, form).then((res: any) => {
+      console.log("fin-debt: ", res.data);
+      setDebt([...res.data]);
     });
   };
 
@@ -155,7 +172,7 @@ const Index: React.FC = () => {
             <FinDailyStatus
               finAmount={finAmount}
               taxAmount={taxAmount}
-              assetAmount={assetAmount}
+              accountAmount={accountAmount}
             />
           </div>
           <div className="w-1/3 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
@@ -163,7 +180,7 @@ const Index: React.FC = () => {
             <FinSimpleStatus
               finAmount={finAmount}
               taxAmount={taxAmount}
-              assetAmount={assetAmount}
+              accountAmount={accountAmount}
             />
           </div>
         </div>

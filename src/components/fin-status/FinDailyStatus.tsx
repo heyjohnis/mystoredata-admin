@@ -7,7 +7,8 @@ type assetProps = {
 export default function FinDailyStatus({
   finAmount,
   taxAmount,
-  assetAmount,
+  accountAmount,
+  deb,
 }: any) {
   return (
     <>
@@ -77,15 +78,15 @@ export default function FinDailyStatus({
                     <div>{finAmount.OUT3.toLocaleString()}</div>
                   </li>
                   <li className="flex justify-between">
-                    <div className="inline-block w-25">빌린돈(부채+): 현금</div>
+                    <div className="inline-block w-25">현금</div>
                     <div>{finAmount.IN2.toLocaleString()}</div>
                   </li>
                   <li className="flex justify-between">
                     <div className="inline-block w-25">갚은돈(부채-): 현금</div>
                     <div>{finAmount.OUT2.toLocaleString()}</div>
                   </li>
-                  {assetAmount &&
-                    assetAmount.map((asset: assetProps) => (
+                  {accountAmount &&
+                    accountAmount.map((asset: assetProps) => (
                       <li className="flex justify-between">
                         <div className="inline-block w-25">
                           {asset.itemName}
@@ -123,8 +124,8 @@ export default function FinDailyStatus({
               <td>남은 돈(자본)</td>
               <td className="text-right">
                 <ul>
-                  {assetAmount &&
-                    assetAmount.map((asset: assetProps) => (
+                  {accountAmount &&
+                    accountAmount.map((asset: assetProps) => (
                       <li className="flex justify-between">
                         <div className="inline-block w-25">
                           {asset.itemName}

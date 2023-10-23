@@ -48,7 +48,6 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   const getCategory = async (asset: TransMoneyProps) => {
     console.log("getCategory: ", asset);
     const {data}: any = await GET(`user/category/${asset.user}`);
-    console.log("getCategory: ", data);
     setPersonalCategory(data.personalCategory);
     setCorpCategory(data.corpCategory);
     setUserCategory(data.userCategory || []);
@@ -200,7 +199,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                       name="transDate"
                       type="text"
                       width="w-48"
-                      value={form?.transDate.toString() || ""}
+                      value={form?.transDate?.toString() || ""}
                       onChange={handleChange}
                       readOnly={true}
                     />
@@ -249,7 +248,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                       name="transMoney"
                       type="text"
                       className="text-right"
-                      value={form?.transMoney.toLocaleString("ko-KR") || ""}
+                      value={form?.transMoney?.toLocaleString("ko-KR") || ""}
                       onChange={handleChange}
                       readOnly={true}
                     />
@@ -294,7 +293,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                       name="transMoney"
                       type="text"
                       width="w-96"
-                      value={form?.keyword.join(", ") || ""}
+                      value={form?.keyword?.join(", ") || ""}
                       onChange={handleChange}
                       readOnly={true}
                     />

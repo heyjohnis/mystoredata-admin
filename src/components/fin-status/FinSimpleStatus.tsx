@@ -85,12 +85,12 @@ export default function FinSimpleStatus({
                     <div>{finAmount.OUT2.toLocaleString()}</div>
                   </li>
                   {assetAmount &&
-                    assetAmount.map((asset: assetProps) => (
+                    assetAmount.map((account: assetProps) => (
                       <li className="flex justify-between">
                         <div className="inline-block w-25">
-                          {asset.itemName}
+                          {account.itemName}
                         </div>
-                        <div>{asset?.amount?.toLocaleString()}</div>
+                        <div>{account?.amount?.toLocaleString()}</div>
                       </li>
                     ))}
                 </ul>
@@ -124,12 +124,12 @@ export default function FinSimpleStatus({
               <td className="text-right">
                 <ul>
                   {assetAmount &&
-                    assetAmount.map((asset: assetProps) => (
+                    assetAmount.map((account: assetProps) => (
                       <li className="flex justify-between">
                         <div className="inline-block w-25">
-                          {asset.itemName}
+                          {account.itemName}
                         </div>
-                        <div>{asset?.amount?.toLocaleString()}</div>
+                        <div>{account?.amount?.toLocaleString()}</div>
                       </li>
                     ))}
                 </ul>
