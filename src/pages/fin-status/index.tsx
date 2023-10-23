@@ -187,7 +187,7 @@ const Index: React.FC = () => {
       </Widget>
       <Widget>
         <TransMoneyLog logs={logs} setData={setAsset} />
-        <ModalTransMoney asset={asset} closedModal={closedModal} />
+        {/* <ModalTransMoney asset={asset} closedModal={closedModal} /> */}
       </Widget>
     </>
   );
