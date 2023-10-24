@@ -83,6 +83,11 @@ export const CorpType: Record<string, string> = {
   P: "개인",
 };
 
+export const PayType: Record<string, string> = {
+  CREDIT: "신용",
+  CHECK: "체크",
+};
+
 // https://dev.barobill.co.kr/docs/references/계좌조회-API#은행-별-필수항목
 export const setBankInput = (code: string): [boolean, boolean, boolean] => {
   switch (code) {

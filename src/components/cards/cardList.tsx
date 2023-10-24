@@ -4,7 +4,7 @@ import {useState} from "react";
 import {InputWrapper} from "components/forms/input-wrapper";
 import CardInput from "./cardInput";
 import {PUT, DELETE, POST} from "utils/restApi";
-import {CardCode, UsePurpose} from "data/commonCode";
+import {CardCode, PayType, UsePurpose} from "data/commonCode";
 import CommonCodeSelect from "components/CommonCodeSelect";
 
 export default function CardList({cards, user, baseMonth}: any) {
@@ -41,6 +41,7 @@ export default function CardList({cards, user, baseMonth}: any) {
   };
 
   const syncCardLog = (card: CardProps) => {
+    console.log("syncCardLog: ", card);
     POST("card/regLog", {...card, corpNum: user.corpNum, baseMonth})
       .then((res: any) => {
         if (res?.status === 200) alert("데이터 수집이 완료되었습니다.");
@@ -85,6 +86,15 @@ export default function CardList({cards, user, baseMonth}: any) {
                     commonCode={CardCode}
                     onChange={handleChange}
                     value={card?.cardCompany}
+                    disabled={true}
+                  />
+                </InputWrapper>
+                <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                  <CommonCodeSelect
+                    name="payType"
+                    commonCode={PayType}
+                    onChange={handleChange}
+                    value={card?.payType}
                     disabled={true}
                   />
                 </InputWrapper>
