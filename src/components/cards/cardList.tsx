@@ -52,6 +52,30 @@ export default function CardList({cards, user, baseMonth}: any) {
       });
   };
 
+  // user,
+  // userId,
+  // corpNum,
+  // corpName,
+  // finName,
+  // finItemCode,
+  // finItemName,
+  // transRemark,
+
+  const addDebt = (card: CardProps) => {
+    console.log("addDebt: ", card);
+    const {_id, userId, corpNum, corpName} = user;
+    POST("debt/reg", {
+      user: _id,
+      userId,
+      corpNum,
+      corpName,
+      finName: CardCode[card.cardCompany],
+      finItemCode: "CRDCARD",
+      finItemName: "신용카드",
+      transRemark: card.cardNum,
+    }).then((res: any) => {});
+  };
+
   const handleChangeUsePurpose = async (card: CardProps) => {
     const result = await PUT("card/update", {...card});
     console.log({result});
@@ -125,6 +149,14 @@ export default function CardList({cards, user, baseMonth}: any) {
                 </InputWrapper>
               </div>
               <div className="flex">
+                {card.payType === "CREDIT" && (
+                  <button
+                    type="button"
+                    onClick={() => addDebt(card)}
+                    className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+                    부채등록
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => syncCardLog(card)}
