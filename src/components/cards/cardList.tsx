@@ -52,19 +52,9 @@ export default function CardList({cards, user, baseMonth}: any) {
       });
   };
 
-  // user,
-  // userId,
-  // corpNum,
-  // corpName,
-  // finName,
-  // finItemCode,
-  // finItemName,
-  // transRemark,
-
-  const addDebt = (card: CardProps) => {
-    console.log("addDebt: ", card);
+  const addCreditCard = (card: CardProps) => {
     const {_id, userId, corpNum, corpName} = user;
-    POST("debt/reg", {
+    POST("credit-card/reg", {
       user: _id,
       userId,
       corpNum,
@@ -72,8 +62,15 @@ export default function CardList({cards, user, baseMonth}: any) {
       finName: CardCode[card.cardCompany],
       finItemCode: "CRDCARD",
       finItemName: "신용카드",
+      cardNum: card.cardNum,
+      card: card._id,
       transRemark: card.cardNum,
-    }).then((res: any) => {});
+    }).then((res: any) => {
+      console.log({res});
+      if (res?.data?._id) {
+        alert("신용카드 등록이 완료되었습니다.");
+      }
+    });
   };
 
   const handleChangeUsePurpose = async (card: CardProps) => {
@@ -152,9 +149,9 @@ export default function CardList({cards, user, baseMonth}: any) {
                 {card.payType === "CREDIT" && (
                   <button
                     type="button"
-                    onClick={() => addDebt(card)}
+                    onClick={() => addCreditCard(card)}
                     className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                    부채등록
+                    신용카드등록
                   </button>
                 )}
                 <button

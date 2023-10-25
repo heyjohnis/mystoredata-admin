@@ -12,10 +12,12 @@ import {BiCategory} from "react-icons/bi";
 import {BsCreditCard, BsFillBuildingsFill} from "react-icons/bs";
 import {LuBanknote} from "react-icons/lu";
 import {BiTransfer, BiBuildings} from "react-icons/bi";
-import {FaMoneyBills} from "react-icons/fa6";
 import {TbReceiptTax, TbDirectionsOff, TbDirections} from "react-icons/tb";
-import {GrUserWorker} from "react-icons/gr";
 import {LiaMoneyCheckSolid} from "react-icons/lia";
+import {AiOutlineCreditCard} from "react-icons/ai";
+import {MdPeopleOutline} from "react-icons/md";
+import {LiaMoneyBillAlt} from "react-icons/lia";
+import {AiOutlineMinusCircle} from "react-icons/ai";
 
 export type NavigationState = {
   title: string;
@@ -30,7 +32,7 @@ export type NavigationState = {
 
 const initialState: NavigationState[] = [
   {
-    title: "Applications",
+    title: "사용자정보",
     items: [
       {
         url: "/",
@@ -56,6 +58,11 @@ const initialState: NavigationState[] = [
         title: "계정별 카테고리",
         items: [],
       },
+    ],
+  },
+  {
+    title: "거래데이터",
+    items: [
       {
         url: "/accounts/data",
         icon: <LuBanknote size={20} />,
@@ -68,6 +75,24 @@ const initialState: NavigationState[] = [
         title: "카드데이터",
         items: [],
       },
+
+      {
+        url: "/trans-money",
+        icon: <BiTransfer size={20} />,
+        title: "개래내역취합",
+        items: [],
+      },
+    ],
+  },
+  {
+    title: "기초데이터",
+    items: [
+      {
+        url: "/fin-item/data",
+        icon: <LiaMoneyBillAlt size={20} />,
+        title: "금융상품",
+        items: [],
+      },
       {
         url: "/trade-corp/data",
         icon: <BsFillBuildingsFill size={20} />,
@@ -75,8 +100,14 @@ const initialState: NavigationState[] = [
         items: [],
       },
       {
+        url: "/tax/data",
+        icon: <TbReceiptTax size={20} />,
+        title: "세금계산서",
+        items: [],
+      },
+      {
         url: "/employee/data",
-        icon: <GrUserWorker size={20} />,
+        icon: <MdPeopleOutline size={20} />,
         title: "직원정보",
         items: [],
       },
@@ -88,36 +119,19 @@ const initialState: NavigationState[] = [
       },
       {
         url: "/debt/data",
-        icon: <LiaMoneyCheckSolid size={20} />,
+        icon: <AiOutlineMinusCircle size={20} />,
         title: "부채정보",
         items: [],
       },
       {
-        url: "/tax/data",
-        icon: <TbReceiptTax size={20} />,
-        title: "세금계산서",
-        items: [],
-      },
-      {
-        url: "/trans-money",
-        icon: <BiTransfer size={20} />,
-        title: "개래내역취합",
-        items: [],
-      },
-      {
-        url: "/fin-item/data",
-        icon: <FaMoneyBills size={20} />,
-        title: "금융상품",
-        items: [],
-      },
-      {
-        url: "/fin-status",
-        icon: <AiOutlineDashboard size={20} />,
-        title: "재정상태",
+        url: "/credit-card/data",
+        icon: <AiOutlineCreditCard size={20} />,
+        title: "신용카드정보",
         items: [],
       },
     ],
   },
+
   {
     title: "처리 로직설정",
     items: [
@@ -141,6 +155,19 @@ const initialState: NavigationState[] = [
       },
     ],
   },
+
+  {
+    title: "재정상태",
+    items: [
+      {
+        url: "/fin-status",
+        icon: <AiOutlineDashboard size={20} />,
+        title: "재정상태",
+        items: [],
+      },
+    ],
+  },
+
   {
     title: "",
     items: [

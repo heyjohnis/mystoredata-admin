@@ -6,6 +6,7 @@ export type FinItemProps = {
   userId: string;
   corpNum: string;
   corpName: string;
+  card: string;
   finItemName: string;
   finItemCode: string;
   finName: string;

@@ -117,7 +117,11 @@ export default function TransMoneyLog({logs, setData}: Props) {
                     <Badge
                       size={"sm"}
                       color={`text-${
-                        log.payType === "CHECK" ? "blue" : "red"
+                        log.payType === "CHECK"
+                          ? "blue"
+                          : log.payType === "BILL"
+                          ? "yellow"
+                          : "red"
                       }-400 mr-1`}
                       rounded>
                       {log.payType}

@@ -35,6 +35,7 @@ const Index: React.FC = () => {
   const [form, setForm] = useState<SearchProps | null>(null);
   const [corps, setCorps] = useState<TradeCorpProps[]>([]);
   const [taxlogs, setTaxLogs] = useState<TaxLogProps[]>([]);
+  const [taxPayedlogs, setTaxPayedLogs] = useState<TaxLogProps[]>([]);
   const [transMoneylogs, setTransMoneyLogs] = useState<TransMoneyProps[]>([]);
   const [asset, setAsset] = useState<TransMoneyProps | null>(null);
 
@@ -57,6 +58,13 @@ const Index: React.FC = () => {
     POST(`trans/trade-log`, {userId, tradeCorp}).then((res: any) => {
       console.log({res});
       setTransMoneyLogs(res.data);
+    });
+  };
+
+  const getTaxPayedLogs = (tradeCorp: string, userId: string) => {
+    POST(`tax/payed`, {userId, tradeCorp}).then((res: any) => {
+      console.log({res});
+      setTaxPayedLogs(res.data);
     });
   };
 
@@ -116,6 +124,10 @@ const Index: React.FC = () => {
             </tbody>
           </table>
         </div>
+      </Widget>
+      <Widget>
+        <h3 className="m-2 text-lg font-bold	">부가세납부내역</h3>
+        <TaxLog logs={taxPayedlogs} />
       </Widget>
       <Widget>
         <h3 className="m-2 text-lg font-bold	">세금계산서 발행 이력</h3>
