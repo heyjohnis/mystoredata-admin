@@ -134,7 +134,7 @@ const Index: React.FC = () => {
     });
   };
 
-  const getTransData = (code: string, category: string = "") => {
+  const getTransData = (code: string, category = "") => {
     setFinClassCode(code);
     POST(`trans/log`, {
       ...form,
