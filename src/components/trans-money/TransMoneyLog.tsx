@@ -121,10 +121,12 @@ export default function TransMoneyLog({logs, setData}: Props) {
                           ? "blue"
                           : log.payType === "BILL"
                           ? "yellow"
-                          : "red"
+                          : log.payType === "CREDIT"
+                          ? "red"
+                          : "gray"
                       }-400 mr-1`}
                       rounded>
-                      {log.payType}
+                      {log.payType || "CASH"}
                     </Badge>
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">

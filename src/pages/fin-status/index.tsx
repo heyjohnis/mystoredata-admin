@@ -31,11 +31,9 @@ const initFinAmount: FinAmount = {
   IN1: 0,
   IN2: 0,
   IN3: 0,
-  IN4: 0,
   OUT1: 0,
   OUT2: 0,
   OUT3: 0,
-  OUT4: 0,
 };
 
 const initFinTaxAmount: FinAmount = {
@@ -53,6 +51,22 @@ type assetProps = {
   amount: number;
 };
 
+type categoryProps = {
+  finClassCode: string;
+  category: string;
+  categoryNames: string;
+  transMoney: number;
+};
+
+type classCategoryProps = {
+  IN1: Array<categoryProps>;
+  IN2: Array<categoryProps>;
+  IN3: Array<categoryProps>;
+  OUT1: Array<categoryProps>;
+  OUT2: Array<categoryProps>;
+  OUT3: Array<categoryProps>;
+};
+
 const Index: React.FC = () => {
   const [form, setForm] = useState<SearchProps>();
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
@@ -62,14 +76,22 @@ const Index: React.FC = () => {
   const [asset, setAsset] = useState<TransMoneyProps[] | null>(null);
   const [debt, setDebt] = useState<TransMoneyProps[] | null>(null);
   const [finClassCode, setFinClassCode] = useState<string>("");
+  const [category, setCategory] = useState<classCategoryProps>({
+    IN1: [],
+    IN2: [],
+    IN3: [],
+    OUT1: [],
+    OUT2: [],
+    OUT3: [],
+  });
 
   useEffect(() => {
     if (form?.userId && form?.fromAt && form.fromAt) {
       getFinStatusData();
-      getFinTaxData();
       getFinAccountData();
       getAssetData();
       getDebtData();
+      getCategroyByClass();
     }
   }, [form]);
 
@@ -88,32 +110,6 @@ const Index: React.FC = () => {
           : initFinAmount;
       console.log("setFinAmount: ", finAmounts);
       setFinAmount(finAmounts);
-    });
-  };
-
-  const getFinTaxData = () => {
-    POST(`fin-status/tax`, form).then((res: any) => {
-      console.log("fin-tax: ", res.data);
-      const taxAmounts =
-        res?.data.length > 0
-          ? res?.data?.forEach((item: any) => {
-              if (item._id === 1) {
-                setTaxAmount({
-                  ...taxAmount,
-                  IN_TAX: item?.tax || 0,
-                  IN_AMT: item?.amount || 0,
-                  IN_TOTAL: item?.total || 0,
-                });
-              } else {
-                setTaxAmount({
-                  ...taxAmount,
-                  OUT_TAX: item?.tax || 0,
-                  OUT_AMT: item?.amount || 0,
-                  OUT_TOTAL: item?.total || 0,
-                });
-              }
-            })
-          : initFinTaxAmount;
     });
   };
 
@@ -138,18 +134,46 @@ const Index: React.FC = () => {
     });
   };
 
-  const getFinClassData = (code: string) => {
+  const getTransData = (code: string, category: string = "") => {
     setFinClassCode(code);
-    POST(`trans/log`, {...form, finClassCode: code}).then((res: any) => {
+    POST(`trans/log`, {
+      ...form,
+      finClassCode: code,
+      useKind: "BIZ",
+      useYn: true,
+      category,
+    }).then((res: any) => {
       console.log("transdata: ", res.data);
       setLogs(res.data);
     });
   };
 
+  const getCategroyByClass = () => {
+    POST(`trans/class-category`, form).then((res: any) => {
+      console.log("getCategroyByClass: ", res.data);
+      setCategroyByClass(res.data);
+    });
+  };
+
+  const setCategroyByClass = (cate: categoryProps[]) => {
+    type classCategoryProps = {
+      [key: string]: categoryProps[];
+    };
+    const classCategory: classCategoryProps = {};
+    cate.forEach((category) => {
+      if (!classCategory[category.finClassCode]) {
+        classCategory[category.finClassCode] = [];
+      }
+      classCategory[category.finClassCode].push(category);
+    });
+    console.log("classCategory: ", classCategory);
+    setCategory((prevCategory) => ({...prevCategory, ...classCategory}));
+  };
+
   const closedModal = (isUpdated = false) => {
     setAsset(null);
     if (isUpdated) {
-      getFinClassData(finClassCode);
+      getTransData(finClassCode);
     }
     console.log("closedModal");
   };
@@ -159,30 +183,27 @@ const Index: React.FC = () => {
       <SectionTitle title="Financial Status" subtitle="재정상태" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
-        <div className="flex justify-between">
+        <div className="justify-between">
           <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <h2 className="text-lg font-bold mb-3">거래분류</h2>
-            <FinClassStatus
-              finAmount={finAmount}
-              getFinClassData={getFinClassData}
-            />
+            <FinClassStatus finAmount={finAmount} getTransData={getTransData} />
           </div>
-          <div className="w-1/3 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-            <h2 className="text-lg font-bold mb-3">Daily 재무제표</h2>
+          <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <h2 className="text-lg font-bold mb-3">재무제표</h2>
             <FinDailyStatus
               finAmount={finAmount}
-              taxAmount={taxAmount}
-              accountAmount={accountAmount}
+              category={category}
+              getTransData={getTransData}
             />
           </div>
-          <div className="w-1/3 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+          {/* <div className="w-1/3 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <h2 className="text-lg font-bold mb-3">간편재무상태표</h2>
             <FinSimpleStatus
               finAmount={finAmount}
               taxAmount={taxAmount}
               accountAmount={accountAmount}
             />
-          </div>
+          </div> */}
         </div>
       </Widget>
       <Widget>
