@@ -20,6 +20,7 @@ type Props = {
   finAmount: any;
   category: classCategoryProps;
   getTransData: any;
+  isNegativeNumber?: boolean;
 };
 
 export default function FinDailyStatus({
@@ -66,18 +67,21 @@ export default function FinDailyStatus({
                     finAmount={finAmount}
                     category={category}
                     getTransData={getTransData}
+                    isNegativeNumber={true}
                   />
                   <FinClassCategory
                     finClassCode="OUT2"
                     finAmount={finAmount}
                     category={category}
                     getTransData={getTransData}
+                    isNegativeNumber={true}
                   />
                   <FinClassCategory
                     finClassCode="OUT3"
                     finAmount={finAmount}
                     category={category}
                     getTransData={getTransData}
+                    isNegativeNumber={true}
                   />
                 </ul>
               </td>
@@ -90,7 +94,7 @@ export default function FinDailyStatus({
                     finClassCode="IN3"
                     finAmount={finAmount}
                     category={category}
-                    getTransData={() => getTransData}
+                    getTransData={getTransData}
                   />
                   <FinClassCategory
                     finClassCode="OUT3"
