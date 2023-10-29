@@ -2,6 +2,7 @@ import {useState} from "react";
 import {TransMoneyProps} from "../../model/TransMoney";
 import {UsePurpose, BaroBankCode, CardCode} from "data/commonCode";
 import {Badge} from "components/badges";
+import ModalTransMoney from "./ModalTransMoney";
 
 const fields: Record<string, string>[] = [
   {
@@ -66,12 +67,23 @@ const fields: Record<string, string>[] = [
 type Props = {
   logs: TransMoneyProps[];
   setData: any;
+  reload?: any;
 };
 
-export default function TransMoneyLog({logs, setData}: Props) {
+export default function TransMoneyLog({logs, reload}: Props) {
+  const [asset, setAsset] = useState<TransMoneyProps | null>(null);
+
   const assetDetail = async (asset: TransMoneyProps) => {
     console.log(asset);
-    setData(asset);
+    setAsset(asset);
+  };
+
+  const closedModal = (isUpdated = false) => {
+    setAsset(null);
+    if (isUpdated && reload) {
+      reload();
+    }
+    console.log("closedModal");
   };
 
   return (
@@ -95,7 +107,9 @@ export default function TransMoneyLog({logs, setData}: Props) {
                 <tr
                   key={i}
                   onClick={() => assetDetail(log)}
-                  className={`${!log.useYn && "line-through text-gray-400"}`}>
+                  className={`${
+                    !log.useYn && "line-through text-gray-400 cursor-pointer"
+                  } cursor-pointer`}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {new Date(log.transDate).toLocaleDateString("ko-KR")}{" "}
                     {new Date(log.transDate).toLocaleTimeString("ko-KR")}
@@ -103,7 +117,6 @@ export default function TransMoneyLog({logs, setData}: Props) {
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.corpNum} ({log.corpName})
                   </td>
-
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {log.transMoney.toLocaleString("ko-KR") || "-"}
                   </td>
@@ -169,6 +182,7 @@ export default function TransMoneyLog({logs, setData}: Props) {
           </tbody>
         </table>
       </div>
+      <ModalTransMoney asset={asset} closedModal={closedModal} />
     </>
   );
 }

@@ -41,14 +41,6 @@ const Index: React.FC = () => {
     });
   };
 
-  const closedModal = (isUpdated = false) => {
-    setAsset(null);
-    if (isUpdated) {
-      getTransLogs();
-    }
-    console.log("closedModal");
-  };
-
   return (
     <>
       <Notification />
@@ -60,9 +52,8 @@ const Index: React.FC = () => {
           handleChange={setForm}
           handleChangeName={"거래내역취합"}
         />
-        <TransMoneyLog logs={logs} setData={setAsset} />
+        <TransMoneyLog logs={logs} setData={setAsset} reload={getTransLogs} />
       </Widget>
-      <ModalTransMoney asset={asset} closedModal={closedModal} />
     </>
   );
 };
