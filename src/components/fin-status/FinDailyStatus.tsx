@@ -43,18 +43,6 @@ export default function FinDailyStatus({
                     category={category}
                     getTransData={getTransData}
                   />
-                  <FinClassCategory
-                    finClassCode="IN2"
-                    finAmount={finAmount}
-                    category={category}
-                    getTransData={getTransData}
-                  />
-                  <FinClassCategory
-                    finClassCode="IN3"
-                    finAmount={finAmount}
-                    category={category}
-                    getTransData={getTransData}
-                  />
                 </ul>
               </td>
             </tr>
@@ -64,20 +52,6 @@ export default function FinDailyStatus({
                 <ul>
                   <FinClassCategory
                     finClassCode="OUT1"
-                    finAmount={finAmount}
-                    category={category}
-                    getTransData={getTransData}
-                    isNegativeNumber={true}
-                  />
-                  <FinClassCategory
-                    finClassCode="OUT2"
-                    finAmount={finAmount}
-                    category={category}
-                    getTransData={getTransData}
-                    isNegativeNumber={true}
-                  />
-                  <FinClassCategory
-                    finClassCode="OUT3"
                     finAmount={finAmount}
                     category={category}
                     getTransData={getTransData}
@@ -102,24 +76,24 @@ export default function FinDailyStatus({
                     category={category}
                     getTransData={getTransData}
                   />
-                  <FinClassCategory
-                    finClassCode="IN1"
-                    finAmount={finAmount}
-                    category={category}
-                    getTransData={getTransData}
-                  />
-                  <FinClassCategory
-                    finClassCode="IN2"
-                    finAmount={finAmount}
-                    category={category}
-                    getTransData={getTransData}
-                  />
-                  <FinClassCategory
-                    finClassCode="OUT2"
-                    finAmount={finAmount}
-                    category={category}
-                    getTransData={getTransData}
-                  />
+                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px]">
+                    <div className="inline-block w-1/6">계</div>
+                    <div className="w-1/6">
+                      {(finAmount["IN3"] + finAmount["OUT3"]).toLocaleString()}
+                    </div>
+                    <ul className="w-1/3">
+                      <li className="flex justify-between">
+                        <div className="inline-block w-[100px] truncate">
+                          계
+                        </div>
+                        <div className="w-24">
+                          {(
+                            finAmount["IN3"] + finAmount["OUT3"]
+                          ).toLocaleString()}
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </td>
             </tr>
@@ -139,6 +113,24 @@ export default function FinDailyStatus({
                     category={category}
                     getTransData={getTransData}
                   />
+                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px]">
+                    <div className="inline-block w-1/6">계</div>
+                    <div className="w-1/6">
+                      {(finAmount["IN2"] + finAmount["OUT2"]).toLocaleString()}
+                    </div>
+                    <ul className="w-1/3">
+                      <li className="flex justify-between">
+                        <div className="inline-block w-[100px] truncate">
+                          계
+                        </div>
+                        <div className="w-24">
+                          {(
+                            finAmount["IN2"] + finAmount["OUT2"]
+                          ).toLocaleString()}
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </td>
             </tr>

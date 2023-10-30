@@ -67,6 +67,13 @@ type classCategoryProps = {
   OUT3: Array<categoryProps>;
 };
 
+const tabs = [
+  {index: 0, title: "전체", active: true, payType: ""},
+  {index: 1, title: "통장", active: false, payType: "CASH"},
+  {index: 2, title: "카드", active: false, payType: "CREDIT"},
+  {index: 3, title: "세금계산서", active: false, payType: "BILL"},
+];
+
 const Index: React.FC = () => {
   const [form, setForm] = useState<SearchProps>();
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
@@ -84,14 +91,16 @@ const Index: React.FC = () => {
     OUT2: [],
     OUT3: [],
   });
+  const [openTab, setOpenTab] = useState<number>(0);
 
   useEffect(() => {
+    console.log("form: ", form);
     if (form?.userId && form?.fromAt && form.fromAt) {
       getFinStatusData();
       getFinAccountData();
-      getAssetData();
-      getDebtData();
-      getCategroyByClass();
+      // getAssetData();
+      // getDebtData();
+      // getCategroyByClass();
     }
   }, [form]);
 
@@ -183,6 +192,25 @@ const Index: React.FC = () => {
       <SectionTitle title="Financial Status" subtitle="재정상태" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
+        <div className="flex flex-row overflow-x-auto lg:flex-wrap lg:space-x-1 m-3 mt-6">
+          {tabs.map((tab, key) => (
+            <div key={key} className="flex-none">
+              <button
+                onClick={() => {
+                  setOpenTab(tab.index);
+                  setForm((prev: any) => ({...prev, payType: tab.payType}));
+                }}
+                className={`font-bold uppercase text-xs p-4 rounded-lg flex flex-row items-center justify-around ${
+                  openTab === tab.index
+                    ? "bg-blue-500 text-white hover:bg-blue-600"
+                    : "bg-white dark:bg-gray-800 dark:hover:bg-gray-700 hover:bg-blue-50"
+                }`}
+                type="button">
+                {tab.title}
+              </button>
+            </div>
+          ))}
+        </div>
         <div className="justify-between">
           <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <h2 className="text-lg font-bold mb-3">거래분류</h2>

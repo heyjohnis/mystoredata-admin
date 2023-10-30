@@ -29,7 +29,7 @@ export default function SearchForm({
   }, [corpNum, userId, fromAt, toAt, category]);
 
   return (
-    <div className="flex">
+    <div className="flex m-3">
       <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
         <Label>사업자번호</Label>
         <Input
