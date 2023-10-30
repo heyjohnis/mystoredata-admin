@@ -1,23 +1,41 @@
-import Widget1 from "components/dashboard/widget-1";
-import Section from "components/dashboard/section";
 import SectionTitle from "components/dashboard/section-title";
-import {FiActivity, FiUsers, FiExternalLink, FiClock} from "react-icons/fi";
-import Bar1 from "components/dashboard/bar-chart";
-import {Donut1} from "components/dashboard/donut-chart";
-import {Line1} from "components/dashboard/line-chart";
-import Dropdown1 from "components/widgets/dropdown-1";
-import Markets from "components/dashboard/markets";
-import {List} from "components/dashboard/list";
-import Tasks from "components/tasks";
-import {Timeline1} from "components/timelines";
 import Notification from "components/dashboard/notification";
-import tasks from "json/tasks.json";
+import Widget from "components/widget";
+import SearchForm from "components/SearchForm";
+import FinDailyStatus from "components/fin-status/FinDailyStatus";
+import FinClassStatus from "components/fin-status/FinClassStatus";
+import {useState} from "react";
 
 const Index: React.FC = () => {
+  const [form, setForm] = useState({});
+  const [finAmount, setFinAmount] = useState({});
+  const [category, setCategory] = useState({});
+  const [logs, setLogs] = useState([]);
+
   return (
     <>
       <Notification />
       <SectionTitle title="Overview" subtitle="Dashboard" />
+      {/* <Widget>
+        <SearchForm form={form} handleChange={setForm} />
+        <div className="justify-between">
+          <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <h2 className="text-lg font-bold mb-3">거래분류</h2>
+            <FinClassStatus finAmount={finAmount} getTransData={getTransData} />
+          </div>
+          <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <h2 className="text-lg font-bold mb-3">재무제표</h2>
+            <FinDailyStatus
+              finAmount={finAmount}
+              category={category}
+              getTransData={getTransData}
+            />
+          </div>
+        </div>
+      </Widget>
+      <Widget>
+        <TransMoneyLog logs={logs} setData={setAsset} />
+      </Widget> */}
     </>
   );
 };

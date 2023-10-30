@@ -64,13 +64,13 @@ const initialState: NavigationState[] = [
     title: "거래데이터",
     items: [
       {
-        url: "/accounts/data",
+        url: "/account",
         icon: <LuBanknote size={20} />,
         title: "계좌데이터",
         items: [],
       },
       {
-        url: "/cards/data",
+        url: "/card",
         icon: <BsCreditCard size={20} />,
         title: "카드데이터",
         items: [],
@@ -88,37 +88,37 @@ const initialState: NavigationState[] = [
     title: "기초데이터",
     items: [
       {
-        url: "/fin-item/data",
+        url: "/fin-item",
         icon: <LiaMoneyBillAlt size={20} />,
         title: "금융상품",
         items: [],
       },
       {
-        url: "/trade-corp/data",
-        icon: <BsFillBuildingsFill size={20} />,
-        title: "거래처정보",
-        items: [],
-      },
-      {
-        url: "/tax/data",
+        url: "/tax",
         icon: <TbReceiptTax size={20} />,
         title: "세금계산서",
         items: [],
       },
       {
-        url: "/employee/data",
+        url: "/trade-corp",
+        icon: <BsFillBuildingsFill size={20} />,
+        title: "거래처정보",
+        items: [],
+      },
+      {
+        url: "/employee",
         icon: <MdPeopleOutline size={20} />,
         title: "직원정보",
         items: [],
       },
       {
-        url: "/asset/data",
+        url: "/asset",
         icon: <LiaMoneyCheckSolid size={20} />,
         title: "자산정보",
         items: [],
       },
       {
-        url: "/debt/data",
+        url: "/debt",
         icon: <AiOutlineMinusCircle size={20} />,
         title: "부채정보",
         items: [],
@@ -160,9 +160,15 @@ const initialState: NavigationState[] = [
     title: "재정상태",
     items: [
       {
-        url: "/fin-status",
+        url: "/fin-fs",
         icon: <AiOutlineDashboard size={20} />,
         title: "재정상태",
+        items: [],
+      },
+      {
+        url: "/fin-bs",
+        icon: <AiOutlineDashboard size={20} />,
+        title: "대차대조표",
         items: [],
       },
     ],
