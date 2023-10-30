@@ -124,7 +124,7 @@ const initialState: NavigationState[] = [
         items: [],
       },
       {
-        url: "/credit-card/data",
+        url: "/credit-card",
         icon: <AiOutlineCreditCard size={20} />,
         title: "신용카드정보",
         items: [],

@@ -29,6 +29,14 @@ const fields: Record<string, string>[] = [
     name: "사업자명",
     key: "corpName",
   },
+  {
+    name: "업종",
+    key: "tradeCorpBizType",
+  },
+  {
+    name: "업태",
+    key: "tradeCorpBizClass",
+  },
 ];
 
 const Index: React.FC = () => {
@@ -115,6 +123,12 @@ const Index: React.FC = () => {
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                       {corp.tradeCorpName}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {corp.tradeCorpBizType}
+                    </td>
+                    <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                      {corp.tradeCorpBizClass}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                       {corp.tradeRemark}
