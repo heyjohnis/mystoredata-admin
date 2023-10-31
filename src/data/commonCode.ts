@@ -83,7 +83,7 @@ export const CorpType: Record<string, string> = {
   P: "개인",
 };
 
-export const PayType: Record<string, string> = {
+export const tradeKind: Record<string, string> = {
   CREDIT: "신용",
   CHECK: "체크",
 };

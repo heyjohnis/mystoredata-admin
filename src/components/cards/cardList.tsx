@@ -4,7 +4,7 @@ import {useState} from "react";
 import {InputWrapper} from "components/forms/input-wrapper";
 import CardInput from "./cardInput";
 import {PUT, DELETE, POST} from "utils/restApi";
-import {CardCode, PayType, UsePurpose} from "data/commonCode";
+import {CardCode, tradeKind, UsePurpose} from "data/commonCode";
 import CommonCodeSelect from "components/CommonCodeSelect";
 
 export default function CardList({cards, user, baseMonth}: any) {
@@ -112,10 +112,10 @@ export default function CardList({cards, user, baseMonth}: any) {
                 </InputWrapper>
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                   <CommonCodeSelect
-                    name="payType"
-                    commonCode={PayType}
+                    name="tradeKind"
+                    commonCode={tradeKind}
                     onChange={handleChange}
-                    value={card?.payType}
+                    value={card?.tradeKind}
                     disabled={true}
                   />
                 </InputWrapper>
@@ -146,7 +146,7 @@ export default function CardList({cards, user, baseMonth}: any) {
                 </InputWrapper>
               </div>
               <div className="flex">
-                {card.payType === "CREDIT" && (
+                {card.tradeKind === "CREDIT" && (
                   <button
                     type="button"
                     onClick={() => addCreditCard(card)}

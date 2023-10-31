@@ -7,7 +7,7 @@ export type CardLogProps = {
   cardApprovalType: string;
   cardNum: string;
   cardType: string;
-  payType: string;
+  tradeKind: string;
   corpName: string;
   cardCompany: string;
   corpNum: string;

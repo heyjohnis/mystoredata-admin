@@ -28,7 +28,7 @@ const fields: Record<string, string>[] = [
   },
   {
     name: "카드유형",
-    key: "payType",
+    key: "tradeKind",
   },
   {
     name: "카테고리",
@@ -130,16 +130,16 @@ export default function TransMoneyLog({logs, reload}: Props) {
                     <Badge
                       size={"sm"}
                       color={`text-${
-                        log.payType === "CHECK"
+                        log.tradeKind === "CHECK"
                           ? "blue"
-                          : log.payType === "BILL"
+                          : log.tradeKind === "BILL"
                           ? "yellow"
-                          : log.payType === "CREDIT"
+                          : log.tradeKind === "CREDIT"
                           ? "red"
                           : "gray"
                       }-400 mr-1`}
                       rounded>
-                      {log.payType || "CASH"}
+                      {log.tradeKind || "CASH"}
                     </Badge>
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">

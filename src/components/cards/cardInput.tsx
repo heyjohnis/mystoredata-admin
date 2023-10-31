@@ -4,7 +4,7 @@ import {InputWrapper} from "components/forms/input-wrapper";
 import {CardProps} from "model/card";
 import {POST} from "utils/restApi";
 import CommonCodeSelect from "components/CommonCodeSelect";
-import {CardCode, CorpType, PayType} from "data/commonCode";
+import {CardCode, CorpType, tradeKind} from "data/commonCode";
 
 export default function CardInput({addCard, user}: any) {
   const [form, setForm] = useState<CardProps>();
@@ -50,8 +50,8 @@ export default function CardInput({addCard, user}: any) {
         </InputWrapper>
         <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
           <CommonCodeSelect
-            name="payType"
-            commonCode={PayType}
+            name="tradeKind"
+            commonCode={tradeKind}
             onChange={handleChange}
             placeholder="신용/체크"
           />

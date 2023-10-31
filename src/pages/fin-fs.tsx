@@ -68,10 +68,10 @@ type classCategoryProps = {
 };
 
 const tabs = [
-  {index: 0, title: "전체", active: true, payType: ""},
-  {index: 1, title: "통장", active: false, payType: "CASH"},
-  {index: 2, title: "카드", active: false, payType: "CREDIT"},
-  {index: 3, title: "세금계산서", active: false, payType: "BILL"},
+  {index: 0, title: "전체", active: true, tradeKind: ""},
+  {index: 1, title: "통장", active: false, tradeKind: "CASH"},
+  {index: 2, title: "카드", active: false, tradeKind: "CREDIT"},
+  {index: 3, title: "세금계산서", active: false, tradeKind: "BILL"},
 ];
 
 const Index: React.FC = () => {
@@ -190,7 +190,7 @@ const Index: React.FC = () => {
               <button
                 onClick={() => {
                   setOpenTab(tab.index);
-                  setForm((prev: any) => ({...prev, payType: tab.payType}));
+                  setForm((prev: any) => ({...prev, tradeKind: tab.tradeKind}));
                 }}
                 className={`font-bold uppercase text-xs p-4 rounded-lg flex flex-row items-center justify-around ${
                   openTab === tab.index

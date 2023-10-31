@@ -10,7 +10,7 @@ export type TransMoneyProps = {
   cardCompany: string;
   corpName: string;
   corpNum: string;
-  payType: string;
+  tradeKind: string;
   currency: string;
   mgtRemark1: string;
   mgtRemark2: string;
