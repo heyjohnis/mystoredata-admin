@@ -43,6 +43,22 @@ export default function FinDailyStatus({
                     category={category}
                     getTransData={getTransData}
                   />
+                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                    <div className="inline-block w-1/6">계</div>
+                    <div className="w-1/6">
+                      {finAmount["IN1"].toLocaleString()}
+                    </div>
+                    <ul className="w-1/3">
+                      <li className="flex justify-between">
+                        <div className="inline-block w-[100px] truncate">
+                          계
+                        </div>
+                        <div className="w-24">
+                          {finAmount["IN1"].toLocaleString()}
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </td>
             </tr>
@@ -57,6 +73,22 @@ export default function FinDailyStatus({
                     getTransData={getTransData}
                     isNegativeNumber={true}
                   />
+                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                    <div className="inline-block w-1/6">계</div>
+                    <div className="w-1/6">
+                      {(finAmount["OUT1"] * -1).toLocaleString()}
+                    </div>
+                    <ul className="w-1/3">
+                      <li className="flex justify-between">
+                        <div className="inline-block w-[100px] truncate">
+                          계
+                        </div>
+                        <div className="w-24">
+                          {(finAmount["OUT1"] * -1).toLocaleString()}
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </td>
             </tr>
@@ -76,7 +108,7 @@ export default function FinDailyStatus({
                     category={category}
                     getTransData={getTransData}
                   />
-                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px]">
+                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
                     <div className="inline-block w-1/6">계</div>
                     <div className="w-1/6">
                       {(finAmount["IN3"] + finAmount["OUT3"]).toLocaleString()}
@@ -113,13 +145,13 @@ export default function FinDailyStatus({
                     category={category}
                     getTransData={getTransData}
                   />
-                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px]">
+                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
                     <div className="inline-block w-1/6">계</div>
                     <div className="w-1/6">
                       {(finAmount["IN2"] + finAmount["OUT2"]).toLocaleString()}
                     </div>
                     <ul className="w-1/3">
-                      <li className="flex justify-between">
+                      <li className="flex justify-between ">
                         <div className="inline-block w-[100px] truncate">
                           계
                         </div>
@@ -137,9 +169,9 @@ export default function FinDailyStatus({
             <tr className="border-b-[2px]">
               <td>남은 돈(자본)</td>
               <td className="text-right">
-                <li className="flex justify-between">
-                  <div className="inline-block w-25"></div>
-                  <div>
+                <li className="flex justify-between font-bold">
+                  <div className="inline-block w-1/6">계</div>
+                  <div className="w-1/6">
                     {(
                       finAmount.IN1 +
                       finAmount.IN2 +
@@ -149,6 +181,21 @@ export default function FinDailyStatus({
                       finAmount.OUT3
                     ).toLocaleString()}
                   </div>
+                  <ul className="w-1/3">
+                    <li className="flex justify-between ">
+                      <div className="inline-block w-[100px] truncate">계</div>
+                      <div className="w-24">
+                        {(
+                          finAmount.IN1 +
+                          finAmount.IN2 +
+                          finAmount.IN3 +
+                          finAmount.OUT1 +
+                          finAmount.OUT2 +
+                          finAmount.OUT3
+                        ).toLocaleString()}
+                      </div>
+                    </li>
+                  </ul>{" "}
                 </li>
               </td>
             </tr>
