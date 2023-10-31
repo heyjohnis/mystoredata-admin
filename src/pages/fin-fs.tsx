@@ -100,7 +100,7 @@ const Index: React.FC = () => {
       getFinAccountData();
       // getAssetData();
       // getDebtData();
-      // getCategroyByClass();
+      getCategroyByClass();
     }
   }, [form]);
 
@@ -177,14 +177,6 @@ const Index: React.FC = () => {
     });
     console.log("classCategory: ", classCategory);
     setCategory((prevCategory) => ({...prevCategory, ...classCategory}));
-  };
-
-  const closedModal = (isUpdated = false) => {
-    setAsset(null);
-    if (isUpdated) {
-      getTransData(finClassCode);
-    }
-    console.log("closedModal");
   };
 
   return (
