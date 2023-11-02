@@ -18,6 +18,7 @@ import FinClassStatus from "components/fin-status/FinClassStatus";
 import FinSimpleStatus from "components/fin-status/FinSimpleStatus";
 import FinDailyStatus from "components/fin-status/FinDailyStatus";
 import FinStatusTradeKind from "components/fin-status/FinStatusTradeKind";
+import {init} from "next/dist/compiled/@vercel/og/satori";
 
 interface FinAmount {
   [key: string]: number;
@@ -68,6 +69,15 @@ type classCategoryProps = {
   OUT3: Array<categoryProps>;
 };
 
+const initCategory: classCategoryProps = {
+  IN1: [],
+  IN2: [],
+  IN3: [],
+  OUT1: [],
+  OUT2: [],
+  OUT3: [],
+};
+
 const tabs = [
   {index: 0, title: "전체", active: true, tradeKind: ""},
   {index: 1, title: "통장", active: false, tradeKind: "CASH"},
@@ -78,29 +88,18 @@ const tabs = [
 const Index: React.FC = () => {
   const [form, setForm] = useState<SearchProps>();
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
-  const [taxAmount, setTaxAmount] = useState<FinAmount>(initFinTaxAmount);
   const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const [asset, setAsset] = useState<TransMoneyProps[] | null>(null);
-  const [debt, setDebt] = useState<TransMoneyProps[] | null>(null);
   const [finClassCode, setFinClassCode] = useState<string>("");
-  const [category, setCategory] = useState<classCategoryProps>({
-    IN1: [],
-    IN2: [],
-    IN3: [],
-    OUT1: [],
-    OUT2: [],
-    OUT3: [],
-  });
+  const [category, setCategory] = useState<classCategoryProps>(initCategory);
   const [openTab, setOpenTab] = useState<number>(0);
 
   useEffect(() => {
     console.log("form: ", form);
     if (form?.userId && form?.fromAt && form.fromAt) {
       getFinStatusData();
-      getFinAccountData();
-      // getAssetData();
-      // getDebtData();
+      // getFinAccountData();
       getCategroyByClass();
     }
   }, [form]);
@@ -130,20 +129,6 @@ const Index: React.FC = () => {
     });
   };
 
-  const getAssetData = () => {
-    POST(`fin-status/asset`, form).then((res: any) => {
-      console.log("fin-asset: ", res.data);
-      setAsset([...res.data]);
-    });
-  };
-
-  const getDebtData = () => {
-    POST(`fin-status/debt`, form).then((res: any) => {
-      console.log("fin-debt: ", res.data);
-      setDebt([...res.data]);
-    });
-  };
-
   const getTransData = (code: string, category = "") => {
     setFinClassCode(code);
     POST(`trans/log`, {
@@ -166,18 +151,12 @@ const Index: React.FC = () => {
   };
 
   const setCategroyByClass = (cate: categoryProps[]) => {
-    type classCategoryProps = {
-      [key: string]: categoryProps[];
-    };
-    const classCategory: classCategoryProps = {};
+    const classCategory = JSON.parse(JSON.stringify(initCategory));
     cate.forEach((category) => {
-      if (!classCategory[category.finClassCode]) {
-        classCategory[category.finClassCode] = [];
-      }
-      classCategory[category.finClassCode].push(category);
+      const finClass = category?.finClassCode;
+      if (finClass) classCategory[finClass].push(category);
     });
-    console.log("classCategory: ", classCategory);
-    setCategory((prevCategory) => ({...prevCategory, ...classCategory}));
+    setCategory(classCategory);
   };
 
   return (
@@ -209,27 +188,21 @@ const Index: React.FC = () => {
             <h2 className="text-lg font-bold mb-3">거래분류</h2>
             <FinClassStatus finAmount={finAmount} getTransData={getTransData} />
           </div>
-          <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-            <h2 className="text-lg font-bold mb-3">재무제표</h2>
-            <FinStatusTradeKind
-              finAmount={finAmount}
-              category={category}
-              getTransData={getTransData}
-            />
+          <h2 className="p-4 pb-0 text-xl font-bold">재무제표</h2>
+          <div className="flex w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <div className="w-full">
+              <h3 className="text-lg font-bold p-4 pb-2">입금</h3>
+              <FinStatusTradeKind
+                finAmount={finAmount}
+                category={category}
+                getTransData={getTransData}
+              />
+            </div>
           </div>
-          {/* <div className="w-1/3 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-            <h2 className="text-lg font-bold mb-3">간편재무상태표</h2>
-            <FinSimpleStatus
-              finAmount={finAmount}
-              taxAmount={taxAmount}
-              accountAmount={accountAmount}
-            />
-          </div> */}
         </div>
       </Widget>
       <Widget>
         <TransMoneyLog logs={logs} setData={setAsset} />
-        {/* <ModalTransMoney asset={asset} closedModal={closedModal} /> */}
       </Widget>
     </>
   );

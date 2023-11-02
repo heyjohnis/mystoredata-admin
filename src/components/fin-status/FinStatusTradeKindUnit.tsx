@@ -1,17 +1,18 @@
 import {FinClassCode} from "data/commonCode";
 import {useEffect} from "react";
+import {finNumber} from "utils/finNumber";
 
 export default function FinStatusTradeKindUnit({
   finClassCode,
-  finAmount,
   category,
   getTransData,
   isNegativeNumber = false,
 }: any) {
   const corr = isNegativeNumber ? -1 : 1;
   useEffect(() => {
-    console.log("FinClassCategory: ", category);
+    console.log(`FinClassCategory ${finClassCode} : `, category[finClassCode]);
   }, [category]);
+
   return (
     category[finClassCode] &&
     category[finClassCode].map((c: any, i: number) => (
@@ -22,7 +23,7 @@ export default function FinStatusTradeKindUnit({
         <div className="inline-block w-[150px] truncate text-center">
           {c.categoryName}
         </div>
-        <div className="w-24">{(c.transMoney * corr).toLocaleString()}</div>
+        <div className="w-24">{finNumber(c.transMoney * corr)}</div>
       </li>
     ))
   );

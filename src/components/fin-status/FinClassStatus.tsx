@@ -1,3 +1,5 @@
+import {finNumber} from "utils/finNumber";
+
 type Props = {
   finAmount: any;
   getTransData: any;
@@ -12,7 +14,7 @@ export default function FinClassStatus({finAmount, getTransData}: Props) {
           onClick={() => getTransData("IN1")}>
           <div className="w-24 text-gray-500	text-xs mr-3">번것(수익+)</div>
           <div className="w-24 text-right text-lg">
-            {finAmount.IN1.toLocaleString()}
+            {finNumber(finAmount.IN1)}
           </div>
         </div>
         <div className="bg-gray w-2"></div>
@@ -21,7 +23,7 @@ export default function FinClassStatus({finAmount, getTransData}: Props) {
           onClick={() => getTransData("OUT1")}>
           <div className="w-24 text-gray-500	text-xs mr-3">쓴것(비용+)</div>
           <div className="w-24 text-right text-lg">
-            {(finAmount.OUT1 * -1).toLocaleString()}
+            {finNumber(finAmount.OUT1 * -1)}
           </div>
         </div>
       </div>
@@ -31,7 +33,7 @@ export default function FinClassStatus({finAmount, getTransData}: Props) {
           onClick={() => getTransData("IN2")}>
           <div className="w-24 text-gray-500	text-xs mr-3">빌린돈(부채+)</div>
           <div className="w-24 text-right text-lg">
-            {finAmount.IN2.toLocaleString()}
+            {finNumber(finAmount.IN2)}
           </div>
         </div>
         <div className="bg-gray w-2"></div>
@@ -40,7 +42,7 @@ export default function FinClassStatus({finAmount, getTransData}: Props) {
           onClick={() => getTransData("OUT2")}>
           <div className="w-24 text-gray-500	text-xs mr-3">갚은돈(부채-)</div>
           <div className="w-24 text-right text-lg">
-            {(finAmount.OUT2 * -1).toLocaleString()}
+            {finNumber(finAmount.OUT2 * -1)}
           </div>
         </div>
       </div>
@@ -50,7 +52,7 @@ export default function FinClassStatus({finAmount, getTransData}: Props) {
           onClick={() => getTransData("IN3")}>
           <div className="w-24 text-gray-500	text-xs mr-3">나머지(자산-)</div>
           <div className="w-24 text-right text-lg">
-            {finAmount.IN3.toLocaleString()}
+            {finNumber(finAmount.IN3)}
           </div>
         </div>
         <div className="bg-gray w-2"></div>
@@ -59,7 +61,7 @@ export default function FinClassStatus({finAmount, getTransData}: Props) {
           onClick={() => getTransData("OUT3")}>
           <div className="w-24 text-gray-500	text-xs mr-3">나머지(자산+)</div>
           <div className="w-24 text-right text-lg">
-            {(finAmount.OUT3 * -1).toLocaleString()}
+            {finNumber(finAmount.OUT3 * -1)}
           </div>
         </div>
       </div>

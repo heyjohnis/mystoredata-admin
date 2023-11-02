@@ -1,3 +1,4 @@
+import {finNumber} from "utils/finNumber";
 import FinClassCategory from "./FinClassCategory";
 import FinStatusTradeKindUnit from "./FinStatusTradeKindUnit";
 
@@ -44,11 +45,10 @@ export default function FinStatusTradeKind({
                     category={category}
                     getTransData={getTransData}
                   />
+
                   <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                    <div className="inline-block w-1/6">계</div>
-                    <div className="w-1/6">
-                      {finAmount["IN1"].toLocaleString()}
-                    </div>
+                    <div className="text-center w-1/2">소계</div>
+                    <div className="w-1/2">{finNumber(finAmount["IN1"])}</div>
                   </li>
                 </ul>
               </td>
@@ -65,9 +65,9 @@ export default function FinStatusTradeKind({
                     isNegativeNumber={true}
                   />
                   <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                    <div className="inline-block w-1/6">계</div>
-                    <div className="w-1/6">
-                      {(finAmount["OUT1"] * -1).toLocaleString()}
+                    <div className="text-center w-1/2">소계</div>
+                    <div className="w-1/2">
+                      {finNumber(finAmount["OUT1"] * -1)}
                     </div>
                   </li>
                 </ul>
@@ -83,11 +83,16 @@ export default function FinStatusTradeKind({
                     category={category}
                     getTransData={getTransData}
                   />
-
+                  <FinStatusTradeKindUnit
+                    finClassCode="OUT3"
+                    finAmount={finAmount}
+                    category={category}
+                    getTransData={getTransData}
+                  />
                   <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                    <div className="inline-block w-1/6">계</div>
-                    <div className="w-1/6">
-                      {(finAmount["IN3"] + finAmount["OUT3"]).toLocaleString()}
+                    <div className="text-center w-1/2">소계</div>
+                    <div className="">
+                      {finNumber(finAmount["IN3"] + finAmount["OUT3"])}
                     </div>
                   </li>
                 </ul>
@@ -103,10 +108,16 @@ export default function FinStatusTradeKind({
                     category={category}
                     getTransData={getTransData}
                   />
+                  <FinStatusTradeKindUnit
+                    finClassCode="OUT2"
+                    finAmount={finAmount}
+                    category={category}
+                    getTransData={getTransData}
+                  />
                   <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                    <div className="inline-block w-1/6">계</div>
-                    <div className="w-1/6">
-                      {finAmount["IN2"].toLocaleString()}
+                    <div className="text-center w-1/2">소계</div>
+                    <div className="w-1/2">
+                      {finNumber(finAmount["IN2"] + finAmount["OUT2"])}
                     </div>
                   </li>
                 </ul>
@@ -116,32 +127,17 @@ export default function FinStatusTradeKind({
               <td>자본</td>
               <td className="text-right">
                 <li className="flex justify-between font-bold">
-                  <div className="inline-block w-1/6">계</div>
-                  <div className="w-1/6">
-                    {(
+                  <div className="text-center w-1/2">소계</div>
+                  <div className="w-1/2">
+                    {finNumber(
                       finAmount.IN1 +
-                      finAmount.IN2 +
-                      finAmount.IN3 +
-                      finAmount.OUT1 +
-                      finAmount.OUT2 +
-                      finAmount.OUT3
-                    ).toLocaleString()}
+                        finAmount.IN2 +
+                        finAmount.IN3 +
+                        finAmount.OUT1 +
+                        finAmount.OUT2 +
+                        finAmount.OUT3
+                    )}
                   </div>
-                  <ul className="w-1/3">
-                    <li className="flex justify-between ">
-                      <div className="inline-block w-[100px] truncate">계</div>
-                      <div className="w-24">
-                        {(
-                          finAmount.IN1 +
-                          finAmount.IN2 +
-                          finAmount.IN3 +
-                          finAmount.OUT1 +
-                          finAmount.OUT2 +
-                          finAmount.OUT3
-                        ).toLocaleString()}
-                      </div>
-                    </li>
-                  </ul>{" "}
                 </li>
               </td>
             </tr>
