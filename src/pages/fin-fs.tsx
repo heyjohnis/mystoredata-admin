@@ -17,6 +17,7 @@ import {set} from "nprogress";
 import FinClassStatus from "components/fin-status/FinClassStatus";
 import FinSimpleStatus from "components/fin-status/FinSimpleStatus";
 import FinDailyStatus from "components/fin-status/FinDailyStatus";
+import FinStatusTradeKind from "components/fin-status/FinStatusTradeKind";
 
 interface FinAmount {
   [key: string]: number;
@@ -210,7 +211,7 @@ const Index: React.FC = () => {
           </div>
           <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <h2 className="text-lg font-bold mb-3">재무제표</h2>
-            <FinDailyStatus
+            <FinStatusTradeKind
               finAmount={finAmount}
               category={category}
               getTransData={getTransData}

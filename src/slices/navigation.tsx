@@ -15,7 +15,7 @@ import {BiTransfer, BiBuildings} from "react-icons/bi";
 import {TbReceiptTax, TbDirectionsOff, TbDirections} from "react-icons/tb";
 import {LiaMoneyCheckSolid} from "react-icons/lia";
 import {AiOutlineCreditCard} from "react-icons/ai";
-import {MdPeopleOutline} from "react-icons/md";
+import {MdPeopleOutline, MdOutlineLeaderboard} from "react-icons/md";
 import {LiaMoneyBillAlt} from "react-icons/lia";
 import {AiOutlineMinusCircle} from "react-icons/ai";
 
@@ -162,13 +162,13 @@ const initialState: NavigationState[] = [
       {
         url: "/fin-fs",
         icon: <AiOutlineDashboard size={20} />,
-        title: "재정상태",
+        title: "재무현황표",
         items: [],
       },
       {
-        url: "/fin-bs",
-        icon: <AiOutlineDashboard size={20} />,
-        title: "대차대조표",
+        url: "/fin-class",
+        icon: <MdOutlineLeaderboard size={20} />,
+        title: "재무상태표",
         items: [],
       },
     ],
