@@ -99,7 +99,6 @@ const Index: React.FC = () => {
     console.log("form: ", form);
     if (form?.userId && form?.fromAt && form.fromAt) {
       getFinStatusData();
-      // getFinAccountData();
       getCategroyByClass();
     }
   }, [form]);
@@ -119,13 +118,6 @@ const Index: React.FC = () => {
           : initFinAmount;
       console.log("setFinAmount: ", finAmounts);
       setFinAmount(finAmounts);
-    });
-  };
-
-  const getFinAccountData = () => {
-    POST(`fin-status/account`, form).then((res: any) => {
-      console.log("fin-account: ", res.data);
-      setAccountAmount([...res.data]);
     });
   };
 
