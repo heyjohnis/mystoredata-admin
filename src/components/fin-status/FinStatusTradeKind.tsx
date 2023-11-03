@@ -130,11 +130,9 @@ export default function FinStatusTradeKind({
                   <div className="text-center w-1/2">소계</div>
                   <div className="w-1/2">
                     {finNumber(
-                      finAmount.IN1 +
-                        finAmount.IN2 +
+                      finAmount.IN2 * -1 +
+                        finAmount.OUT2 * -1 +
                         finAmount.IN3 +
-                        finAmount.OUT1 +
-                        finAmount.OUT2 +
                         finAmount.OUT3
                     )}
                   </div>
