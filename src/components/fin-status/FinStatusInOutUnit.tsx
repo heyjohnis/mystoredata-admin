@@ -1,20 +1,26 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {finNumber} from "utils/finNumber";
 
-export default function FinStatusTradeKindUnit({
+export default function FinStatusInOutUnit({
   finClassCode,
-  category,
+  inOutAccount,
   getTransData,
   isNegativeNumber = false,
 }: any) {
   const corr = isNegativeNumber ? -1 : 1;
+  const [categoryData, setCategoryData] = useState<any>([]);
   useEffect(() => {
-    console.log(`FinClassCategory ${finClassCode} : `, category[finClassCode]);
-  }, [category]);
+    console.log("inOutAccount: ", inOutAccount);
+    const data = inOutAccount.filter(
+      (c: any) => c.finClassCode === finClassCode
+    );
+
+    setCategoryData(data);
+  }, [inOutAccount]);
 
   return (
-    category[finClassCode]?.length > 0 &&
-    category[finClassCode].map((c: any, i: number) => (
+    categoryData.length > 0 &&
+    categoryData.map((c: any, i: number) => (
       <li
         key={i}
         className="flex justify-between"
