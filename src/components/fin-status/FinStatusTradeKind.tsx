@@ -26,7 +26,7 @@ type Props = {
   getTransData: any;
   isNegativeNumber?: boolean;
   inOutAccount: any;
-  tradeKind: string;
+  tradeKind: string | undefined;
 };
 
 export default function FinStatusTradeKind({
@@ -49,9 +49,8 @@ export default function FinStatusTradeKind({
       <div className="p-5 pt-1">
         <table className="w-full">
           <tbody>
-            {tradeKind === "CASH" && (
+            {["CASH"].includes(tradeKind || "") && (
               <>
-                {" "}
                 <tr className="border-b-[2px] border-t-[2px]">
                   <td>입금</td>
                   <td className="text-right">
@@ -92,9 +91,9 @@ export default function FinStatusTradeKind({
                 </tr>
               </>
             )}
-            {tradeKind !== "CASH" && (
+            {!["CASH"].includes(tradeKind || "") && (
               <>
-                <tr className="border-b-[2px] border-t-[2px]">
+                <tr className="border-b-[2px] border-t-[2px] ">
                   <td>수익</td>
                   <td className="text-right">
                     <ul>
@@ -137,6 +136,10 @@ export default function FinStatusTradeKind({
               </>
             )}
             <tr className="border-b-[3px]">
+              <td> </td>
+              <td> </td>
+            </tr>
+            <tr>
               <td> </td>
               <td> </td>
             </tr>
