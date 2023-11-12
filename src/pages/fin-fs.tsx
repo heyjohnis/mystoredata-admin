@@ -74,8 +74,9 @@ const initCategory: classCategoryProps = {
 const tabs = [
   {index: 0, title: "전체", active: true, tradeKind: ""},
   {index: 1, title: "통장", active: false, tradeKind: "CASH"},
-  {index: 2, title: "카드", active: false, tradeKind: "CREDIT"},
-  {index: 3, title: "세금계산서", active: false, tradeKind: "BILL"},
+  {index: 2, title: "체크카드", active: false, tradeKind: "CHECK"},
+  {index: 3, title: "신용카드", active: false, tradeKind: "CREDIT"},
+  {index: 4, title: "세금계산서", active: false, tradeKind: "BILL"},
 ];
 
 const Index: React.FC = () => {
