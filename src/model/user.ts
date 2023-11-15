@@ -23,4 +23,5 @@ export type UserProps = {
   cards: Array<any>;
   createdAt: string;
   birth: string;
+  userType: string;
 };

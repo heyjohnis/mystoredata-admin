@@ -29,7 +29,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
   useEffect(() => {
     if (user) {
       setIsOpen(true);
-      setForm(user);
+      setForm({...user, userType: "CORP"});
       setIsReadOnly(user.userId ? true : false);
     }
   }, [user]);
@@ -69,6 +69,10 @@ const CorpDetailModal = ({user, closedModal}: any) => {
     const {name, value} = e.target;
     setForm((prevState: any) => ({...prevState, [name]: value}));
   };
+
+  useEffect(() => {
+    console.log("form: ", form);
+  }, [form]);
 
   return (
     <>

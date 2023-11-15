@@ -3,7 +3,7 @@ import {Fragment, useState, useRef} from "react";
 import {ExclamationIcon} from "@heroicons/react/outline";
 
 type props = {
-  title: string;
+  title?: string;
 };
 
 const Modal: React.FC = ({title}: props) => {
