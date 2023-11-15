@@ -24,7 +24,7 @@ export default function CardList({cards, user, baseMonth}: any) {
   };
 
   const cardDelete = (card: CardProps) => {
-    DELETE(`card/delete/${card._id}`)
+    DELETE(`card/delete/${card._id}`, card)
       .then((res: any) => {
         console.log("card/delete: ", res);
         if (res?.status === 200) {
@@ -65,6 +65,7 @@ export default function CardList({cards, user, baseMonth}: any) {
       cardNum: card.cardNum,
       card: card._id,
       transRemark: card.cardNum,
+      opsKind: card.opsKind,
     }).then((res: any) => {
       console.log({res});
       if (res?.data?._id) {
@@ -91,6 +92,17 @@ export default function CardList({cards, user, baseMonth}: any) {
           cardList.map((card: CardProps, i: any) => (
             <div key={i} className="flex justify-between">
               <div className="flex">
+                <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                  <Input
+                    name="opsKind"
+                    type="text"
+                    width="w-20"
+                    placeholder="opsKind"
+                    value={card?.opsKind}
+                    onChange={handleChange}
+                    readOnly={true}
+                  />
+                </InputWrapper>
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                   <CommonCodeSelect
                     width="w-25"
@@ -159,12 +171,6 @@ export default function CardList({cards, user, baseMonth}: any) {
                   onClick={() => syncCardLog(card)}
                   className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600">
                   데이터수집
-                </button>
-                <button
-                  type="button"
-                  onClick={() => cardDetail()}
-                  className="sm:col-span-4 mt-2 mr-2 px-4 text-xs font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                  상세보기
                 </button>
                 <button
                   type="button"

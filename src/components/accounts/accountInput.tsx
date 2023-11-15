@@ -32,6 +32,7 @@ export default function AccountInput({addAccount, user}: any) {
     POST("account/reg ", {
       ...form,
       corpNum: user.corpNum,
+      corpName: user.corpName,
       user: user._id,
       userId: user.userId,
       birth: useIndenty ? user.birth : "",

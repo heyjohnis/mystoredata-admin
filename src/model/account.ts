@@ -9,4 +9,5 @@ export type AccountProps = {
   useKind?: string;
   webId?: string;
   webPwd?: string;
+  opsKind?: string;
 };

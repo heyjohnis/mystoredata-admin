@@ -9,4 +9,5 @@ export type CardProps = {
   webId: string;
   webPwd: string;
   useKind?: string;
+  opsKind?: string;
 };

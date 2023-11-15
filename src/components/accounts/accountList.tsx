@@ -26,7 +26,7 @@ export default function AccountList({accounts, user, baseMonth}: any) {
 
   const accountDelete = (account: AccountProps) => {
     console.log("account delete: ", account);
-    DELETE(`account/delete/${account._id}`).then((res: any) => {
+    DELETE(`account/delete/${account._id}`, account).then((res: any) => {
       console.log(res);
       setAccountList(
         accountList.filter(
@@ -93,6 +93,17 @@ export default function AccountList({accounts, user, baseMonth}: any) {
           accountList.map((account: AccountProps, i: any) => (
             <div key={i} className="flex justify-between">
               <div className="flex">
+                <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                  <Input
+                    name="opsKind"
+                    type="text"
+                    width="w-20"
+                    placeholder="BaroOps"
+                    value={account?.opsKind}
+                    onChange={handleChange}
+                    readOnly={true}
+                  />
+                </InputWrapper>
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                   <CommonCodeSelect
                     width="w-25"
