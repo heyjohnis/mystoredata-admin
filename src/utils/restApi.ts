@@ -67,7 +67,7 @@ export async function PUT(uri: string, data: any): Promise<any> {
     });
 }
 
-export async function DELETE(uri: string): Promise<any> {
+export async function DELETE(uri: string, data?: any): Promise<any> {
   const serverURL =
     process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8089";
   const token = cookie.get("token");
@@ -76,6 +76,7 @@ export async function DELETE(uri: string): Promise<any> {
     method: "delete",
     url,
     headers: {Authorization: `Bearer ${token}`},
+    data,
   })
     .then((response) => response)
     .catch((error) => {

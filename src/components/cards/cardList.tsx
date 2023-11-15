@@ -92,6 +92,17 @@ export default function CardList({cards, user, baseMonth}: any) {
             <div key={i} className="flex justify-between">
               <div className="flex">
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                  <Input
+                    name="opsKind"
+                    type="text"
+                    width="w-20"
+                    placeholder="opsKind"
+                    value={card?.opsKind}
+                    onChange={handleChange}
+                    readOnly={true}
+                  />
+                </InputWrapper>
+                <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                   <CommonCodeSelect
                     width="w-25"
                     name="bankAccountType"
