@@ -29,7 +29,7 @@ export const Select: React.FC<SelectProps> = ({
         disabled && "bg-gray-100 dark:bg-gray-800"
       }`}
       onChange={onChange}
-      defaultValue={value}
+      value={value}
       disabled={disabled}>
       <option value="">{placeholder}</option>
       {options.map((option) => (

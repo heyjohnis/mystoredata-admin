@@ -10,3 +10,9 @@ export function strToDate(dateString: string): Date {
 
   return new Date(year, month, day, hour, minute, second);
 }
+
+export function dateChange(date: Date, day: number): Date {
+  const newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + day);
+  return newDate;
+}

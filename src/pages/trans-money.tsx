@@ -14,7 +14,7 @@ import TransMoneyLog from "components/trans-money/TransMoneyLog";
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const [asset, setAsset] = useState<TransMoneyProps | null>(null);
-  const [form, setForm] = useState<SearchProps | null>(null);
+  const [form, setForm] = useState<SearchProps>();
   useEffect(() => {
     getTransLogs();
   }, [form]);

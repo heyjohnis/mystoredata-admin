@@ -27,7 +27,7 @@ const fields: Record<string, string>[] = [
     key: "fin-class",
   },
   {
-    name: "카드유형",
+    name: "거래유형",
     key: "tradeKind",
   },
   {

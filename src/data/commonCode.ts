@@ -217,3 +217,10 @@ export const FinClassCode: Record<string, string> = {
   OUT2: "갚은것(부채-)",
   OUT3: "나머지(자산+)",
 };
+
+export const TradeKind: Record<string, string> = {
+  CREDIT: "신용",
+  CHECK: "체크",
+  BILL: "세금계산서",
+  CASH: "현금",
+};

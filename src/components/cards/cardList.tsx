@@ -74,7 +74,7 @@ export default function CardList({cards, user, baseMonth}: any) {
     });
   };
 
-  const handleChangeUsePurpose = async (card: CardProps) => {
+  const updateHandleChange = async (card: CardProps) => {
     const result = await PUT("card/update", {...card});
     console.log({result});
   };
@@ -126,16 +126,20 @@ export default function CardList({cards, user, baseMonth}: any) {
                   <CommonCodeSelect
                     name="tradeKind"
                     commonCode={tradeKind}
-                    onChange={handleChange}
                     value={card?.tradeKind}
-                    disabled={true}
+                    onChange={(e) =>
+                      updateHandleChange({
+                        ...card,
+                        tradeKind: e.target.value,
+                      })
+                    }
                   />
                 </InputWrapper>
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                   <Input
                     name="cardNum"
                     type="text"
-                    width="w-36"
+                    width="w-40"
                     placeholder="카드번호"
                     value={card?.cardNum}
                     onChange={handleChange}
@@ -149,7 +153,7 @@ export default function CardList({cards, user, baseMonth}: any) {
                     value={card?.useKind}
                     placeholder="사용목적"
                     onChange={(e) =>
-                      handleChangeUsePurpose({
+                      updateHandleChange({
                         ...card,
                         useKind: e.target.value,
                       })

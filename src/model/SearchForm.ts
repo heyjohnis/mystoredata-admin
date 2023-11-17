@@ -1,8 +1,9 @@
 export type SearchProps = {
-  corpNum: string;
-  userId: string;
-  fromAt: Date;
-  toAt: Date;
+  corpNum?: string;
+  userId?: string;
+  fromAt?: string;
+  toAt?: string;
   category?: string;
   tradeKind?: string;
+  finClassCode?: string;
 };

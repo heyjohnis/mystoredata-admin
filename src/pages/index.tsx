@@ -4,38 +4,42 @@ import Widget from "components/widget";
 import SearchForm from "components/SearchForm";
 import FinDailyStatus from "components/fin-status/FinDailyStatus";
 import FinClassStatus from "components/fin-status/FinClassStatus";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {POST} from "utils/restApi";
+import TransMoneyLog from "components/trans-money/TransMoneyLog";
+import {TransMoneyProps} from "model/TransMoney";
+import {SearchProps} from "model/SearchForm";
+import {dateChange} from "utils/date";
+
+const initForm: SearchProps = {
+  userId: "bethelean",
+  fromAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
+  toAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
+};
 
 const Index: React.FC = () => {
-  const [form, setForm] = useState({});
-  const [finAmount, setFinAmount] = useState({});
-  const [category, setCategory] = useState({});
+  const [form, setForm] = useState(initForm);
+
   const [logs, setLogs] = useState([]);
+  const [asset, setAsset] = useState<TransMoneyProps | null>(null);
+
+  const getTransLogs = () => {
+    POST(`trans/log`, form).then((res: any) => {
+      setLogs(res.data);
+    });
+  };
+  useEffect(() => {
+    getTransLogs();
+  }, [form]);
 
   return (
     <>
       <Notification />
       <SectionTitle title="Overview" subtitle="Dashboard" />
-      {/* <Widget>
-        <SearchForm form={form} handleChange={setForm} />
-        <div className="justify-between">
-          <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-            <h2 className="text-lg font-bold mb-3">거래분류</h2>
-            <FinClassStatus finAmount={finAmount} getTransData={getTransData} />
-          </div>
-          <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-            <h2 className="text-lg font-bold mb-3">재무제표</h2>
-            <FinDailyStatus
-              finAmount={finAmount}
-              category={category}
-              getTransData={getTransData}
-            />
-          </div>
-        </div>
-      </Widget>
       <Widget>
-        <TransMoneyLog logs={logs} setData={setAsset} />
-      </Widget> */}
+        <SearchForm form={form} handleChange={setForm} />
+        <TransMoneyLog logs={logs} setData={setAsset} reload={getTransLogs} />
+      </Widget>
     </>
   );
 };

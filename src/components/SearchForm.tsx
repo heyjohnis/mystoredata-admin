@@ -3,30 +3,54 @@ import {Input} from "components/forms/input";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 import {CategorySelect} from "./CommonCodeSelect";
-import {Category} from "data/commonCode";
+import {Category, FinClassCode, TradeKind} from "data/commonCode";
+import CommonCodeSelect from "components/CommonCodeSelect";
+import {set} from "nprogress";
+import {SearchProps} from "model/SearchForm";
+
+type props = {
+  handleChange: (e: any) => void;
+  handleClick?: () => void;
+  handleChangeName?: string;
+  form?: SearchProps;
+};
 
 export default function SearchForm({
   handleChange,
   handleClick,
   handleChangeName,
-}: any): any {
-  const [corpNum, setCorpNum] = useState<string>("");
-  const [userId, setUserId] = useState<string>("");
-  const [fromAt, setFromAt] = useState<string>("");
-  const [toAt, setToAt] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
-
+  form,
+}: props) {
+  const [corpNum, setCorpNum] = useState<string>(form?.corpNum || "");
+  const [userId, setUserId] = useState<string>(form?.userId || "");
+  const [fromAt, setFromAt] = useState<string>(form?.fromAt || "");
+  const [toAt, setToAt] = useState<string>(form?.toAt || "");
+  const [finClassCode, setFinClassCode] = useState<string>(
+    form?.finClassCode || ""
+  );
+  const [category, setCategory] = useState<string>(form?.category || "");
+  const [tradeKind, setTradeKind] = useState<string>(form?.tradeKind || "");
   const resetForm = () => {
     setCorpNum("");
     setUserId("");
     setFromAt("");
     setToAt("");
     setCategory("");
+    setFinClassCode("");
+    setTradeKind("");
   };
 
   useEffect(() => {
-    handleChange({corpNum, userId, fromAt, toAt, category});
-  }, [corpNum, userId, fromAt, toAt, category]);
+    handleChange({
+      corpNum,
+      userId,
+      fromAt,
+      toAt,
+      category,
+      finClassCode,
+      tradeKind,
+    });
+  }, [corpNum, userId, fromAt, toAt, category, finClassCode, tradeKind]);
 
   return (
     <div className="flex m-3">
@@ -52,8 +76,27 @@ export default function SearchForm({
         <Label>카테고리</Label>
         <CategorySelect
           name="category"
+          value={category}
           onChange={(e) => setCategory(e.target.value)}
           codes={Category}
+        />
+      </InputWrapper>
+      <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+        <Label>거래유형</Label>
+        <CommonCodeSelect
+          name="tradeKind"
+          onChange={(e) => setTradeKind(e.target.value)}
+          value={tradeKind}
+          commonCode={TradeKind}
+        />
+      </InputWrapper>
+      <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+        <Label>거래분류</Label>
+        <CommonCodeSelect
+          name="finClassCode"
+          onChange={(e) => setFinClassCode(e.target.value)}
+          value={finClassCode}
+          commonCode={FinClassCode}
         />
       </InputWrapper>
       <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
