@@ -64,7 +64,7 @@ const fields: Record<string, string>[] = [
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<TaxLogProps[]>([]);
   const [asset, setAsset] = useState<TaxLogProps | null>(null);
-  const [form, setForm] = useState<SearchProps | null>(null);
+  const [form, setForm] = useState<SearchProps>();
   useEffect(() => {
     getTaxLogs();
   }, [form]);

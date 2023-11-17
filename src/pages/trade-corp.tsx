@@ -40,7 +40,7 @@ const fields: Record<string, string>[] = [
 ];
 
 const Index: React.FC = () => {
-  const [form, setForm] = useState<SearchProps | null>(null);
+  const [form, setForm] = useState<SearchProps>();
   const [corps, setCorps] = useState<TradeCorpProps[]>([]);
   const [taxlogs, setTaxLogs] = useState<TaxLogProps[]>([]);
   const [taxPayedlogs, setTaxPayedLogs] = useState<TaxLogProps[]>([]);

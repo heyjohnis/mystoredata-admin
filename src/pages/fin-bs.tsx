@@ -39,8 +39,8 @@ const initFinTaxAmount: FinAmount = {
 const initForm: SearchProps = {
   userId: "bethelean",
   corpNum: "",
-  fromAt: new Date("2021-01-01"),
-  toAt: new Date(),
+  fromAt: new Date("2021-01-01").toISOString().slice(0, 10),
+  toAt: new Date().toISOString().slice(0, 10),
 };
 
 type assetProps = {

@@ -27,7 +27,7 @@ const fields: Record<string, string>[] = [
 ];
 
 const Index: React.FC = () => {
-  const [form, setForm] = useState<SearchProps | null>(null);
+  const [form, setForm] = useState<SearchProps>();
   const [emps, setEmps] = useState<EmployeeProps[]>([]);
   const [transMoneylogs, setTransMoneyLogs] = useState<TransMoneyProps[]>([]);
   const [asset, setAsset] = useState<TransMoneyProps | null>(null);
