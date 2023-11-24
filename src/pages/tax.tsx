@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {BaroBankCode, CardCode, UsePurpose} from "data/commonCode";
+import {BaroBankCode, CardCode, UseKind} from "data/commonCode";
 import {POST, PUT} from "utils/restApi";
 import {TaxLogProps} from "model/TaxLog";
 import SearchForm from "components/SearchForm";

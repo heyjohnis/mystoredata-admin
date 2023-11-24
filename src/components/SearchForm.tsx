@@ -3,7 +3,7 @@ import {Input} from "components/forms/input";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 import {CategorySelect} from "./CommonCodeSelect";
-import {Category, FinClassCode, TradeKind} from "data/commonCode";
+import {Category, FinClassCode, TradeKind, UseKind} from "data/commonCode";
 import CommonCodeSelect from "components/CommonCodeSelect";
 import {set} from "nprogress";
 import {SearchProps} from "model/SearchForm";
@@ -30,6 +30,7 @@ export default function SearchForm({
   );
   const [category, setCategory] = useState<string>(form?.category || "");
   const [tradeKind, setTradeKind] = useState<string>(form?.tradeKind || "");
+  const [useKind, setUseKind] = useState<string>(form?.useKind || "");
   const resetForm = () => {
     setCorpNum("");
     setUserId("");
@@ -38,6 +39,7 @@ export default function SearchForm({
     setCategory("");
     setFinClassCode("");
     setTradeKind("");
+    setUseKind("");
   };
 
   useEffect(() => {
@@ -88,6 +90,15 @@ export default function SearchForm({
           onChange={(e) => setTradeKind(e.target.value)}
           value={tradeKind}
           commonCode={TradeKind}
+        />
+      </InputWrapper>
+      <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+        <Label>거래유형</Label>
+        <CommonCodeSelect
+          name="tradeKind"
+          onChange={(e) => setTradeKind(e.target.value)}
+          value={useKind}
+          commonCode={UseKind}
         />
       </InputWrapper>
       <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">

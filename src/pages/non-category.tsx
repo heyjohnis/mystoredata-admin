@@ -6,7 +6,7 @@ import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 import {NonCategoryProps} from "model/NonCategory";
 import ModalNonCategory from "components/non-category/ModalNonCategory";
-import {FinClassCode, UsePurpose} from "data/commonCode";
+import {FinClassCode, UseKind} from "data/commonCode";
 import {Badge} from "components/badges";
 import {AxiosResponse} from "axios";
 
@@ -93,7 +93,7 @@ export default function CategoryRule() {
                       color="text-blue-400 mr-1"
                       outlined
                       rounded>
-                      {UsePurpose[category._id.useKind]}
+                      {UseKind[category._id.useKind]}
                     </Badge>{" "}
                     {category._id?.remark}
                   </td>

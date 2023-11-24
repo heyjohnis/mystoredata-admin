@@ -5,7 +5,7 @@ import {InputWrapper} from "components/forms/input-wrapper";
 import AccountInput from "./accountInput";
 import {POST, PUT, DELETE} from "utils/restApi";
 import CommonCodeSelect from "components/CommonCodeSelect";
-import {BaroBankCode, CorpType, UsePurpose} from "data/commonCode";
+import {BaroBankCode, CorpType, UseKind} from "data/commonCode";
 
 export default function AccountList({accounts, user, baseMonth}: any) {
   //const [form, setForm] = useState<AccountProps>();
@@ -138,7 +138,7 @@ export default function AccountList({accounts, user, baseMonth}: any) {
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                   <CommonCodeSelect
                     name="useKind"
-                    commonCode={UsePurpose}
+                    commonCode={UseKind}
                     value={account?.useKind}
                     placeholder="사용목적"
                     onChange={(e) =>

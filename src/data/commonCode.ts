@@ -73,7 +73,7 @@ export const CardCode: Record<string, string> = {
   WOORI: "우리카드",
 };
 
-export const UsePurpose: Record<string, string> = {
+export const UseKind: Record<string, string> = {
   BIZ: "사업목적",
   PERSONAL: "개인사용목적",
 };

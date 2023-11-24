@@ -6,4 +6,5 @@ export type SearchProps = {
   category?: string;
   tradeKind?: string;
   finClassCode?: string;
+  useKind?: string;
 };

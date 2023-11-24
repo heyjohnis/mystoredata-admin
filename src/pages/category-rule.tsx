@@ -6,7 +6,7 @@ import Notification from "components/dashboard/notification";
 import Widget from "components/widget";
 import {Badge} from "components/badges";
 import {CategoryRuleProps} from "model/CategoryRule";
-import {UsePurpose} from "data/commonCode";
+import {UseKind} from "data/commonCode";
 
 const fields: Record<string, string>[] = [
   {
@@ -78,7 +78,7 @@ export default function CategoryRule() {
                     {rule.user.toString()}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
-                    {UsePurpose[rule.useKind as keyof typeof UsePurpose]}
+                    {UseKind[rule.useKind as keyof typeof UseKind]}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     [{rule.category}] {rule.categoryName}

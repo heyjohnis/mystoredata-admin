@@ -9,7 +9,7 @@ import {TransMoneyProps} from "model/TransMoney";
 import {
   BaroBankCode,
   CardCode,
-  UsePurpose,
+  UseKind,
   FinClassCode,
   FinItemCode,
 } from "data/commonCode";
@@ -258,7 +258,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                     <CommonCodeSelect
                       name="useKind"
                       value={form?.useKind}
-                      commonCode={UsePurpose}
+                      commonCode={UseKind}
                       onChange={handleChange}
                     />
                   </InputWrapper>

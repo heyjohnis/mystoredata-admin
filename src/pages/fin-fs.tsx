@@ -8,12 +8,13 @@ import {SearchProps} from "model/SearchForm";
 import TransMoneyLog from "components/trans-money/TransMoneyLog";
 import FinClassStatus from "components/fin-status/FinClassStatus";
 import FinStatusTradeKind from "components/fin-status/FinStatusTradeKind";
+import {CategoryProps, ClassCategoryProps} from "model/ClassCategoryProps";
 
 interface FinAmount {
   [key: string]: number;
 }
 
-type dataProps = {
+type DataProps = {
   _id: string;
   amount: number;
 };
@@ -42,25 +43,7 @@ type assetProps = {
   amount: number;
 };
 
-type categoryProps = {
-  finClassCode: string;
-  category: string;
-  categoryName: string;
-  transMoney: number;
-};
-
-type classCategoryProps = {
-  IN1: Array<categoryProps>;
-  IN2: Array<categoryProps>;
-  IN3: Array<categoryProps>;
-  OUT1: Array<categoryProps>;
-  OUT2: Array<categoryProps>;
-  OUT3: Array<categoryProps>;
-  IN_OUT2: Array<categoryProps>;
-  IN_OUT3: Array<categoryProps>;
-};
-
-const initCategory: classCategoryProps = {
+const initCategory: ClassCategoryProps = {
   IN1: [],
   IN2: [],
   IN3: [],
@@ -86,9 +69,9 @@ const Index: React.FC = () => {
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const [asset, setAsset] = useState<TransMoneyProps[] | null>(null);
   const [finClassCode, setFinClassCode] = useState<string>("");
-  const [category, setCategory] = useState<classCategoryProps>(initCategory);
+  const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
   const [openTab, setOpenTab] = useState<number>(0);
-  const [inOutAccount, setInOutAccount] = useState<categoryProps[]>([]);
+  const [inOutAccount, setInOutAccount] = useState<CategoryProps[]>([]);
 
   useEffect(() => {
     console.log("form: ", form);
@@ -104,7 +87,7 @@ const Index: React.FC = () => {
       const finAmounts =
         res?.data.length > 0
           ? res?.data?.reduce(
-              (amts: FinAmount, amt: dataProps) => {
+              (amts: FinAmount, amt: DataProps) => {
                 amts[amt._id] = amt?.amount || 0;
                 return amts;
               },
@@ -144,7 +127,7 @@ const Index: React.FC = () => {
   };
 
   // 거래분류에 따른 category 데이터
-  const setCategroyByClass = (cate: categoryProps[]) => {
+  const setCategroyByClass = (cate: CategoryProps[]) => {
     const classCategory = JSON.parse(JSON.stringify(initCategory));
     cate.forEach((category) => {
       const finClass = category?.finClassCode;
@@ -159,9 +142,9 @@ const Index: React.FC = () => {
     });
   };
 
-  const setInOutKeyArray = (arr: categoryProps[], finClassCode: string) => {
-    return arr.reduce((acc: categoryProps[], cur: categoryProps) => {
-      const hasEl = acc.find((c: categoryProps) => {
+  const setInOutKeyArray = (arr: CategoryProps[], finClassCode: string) => {
+    return arr.reduce((acc: CategoryProps[], cur: CategoryProps) => {
+      const hasEl = acc.find((c: CategoryProps) => {
         return c.category === cur.category;
       });
       if (hasEl) {
@@ -210,7 +193,6 @@ const Index: React.FC = () => {
           <h2 className="p-4 pb-0 text-xl font-bold">재무제표</h2>
           <div className="flex w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <div className="w-full">
-              <h3 className="text-lg font-bold p-4 pb-2">입금</h3>
               <FinStatusTradeKind
                 finAmount={finAmount}
                 category={category}

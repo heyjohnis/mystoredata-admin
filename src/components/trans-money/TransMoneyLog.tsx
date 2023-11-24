@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {TransMoneyProps} from "../../model/TransMoney";
-import {UsePurpose, BaroBankCode, CardCode} from "data/commonCode";
+import {UseKind, BaroBankCode, CardCode} from "data/commonCode";
 import {Badge} from "components/badges";
 import ModalTransMoney from "./ModalTransMoney";
 
@@ -121,7 +121,7 @@ export default function TransMoneyLog({logs, reload}: Props) {
                     {log.transMoney.toLocaleString("ko-KR") || "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
-                    {UsePurpose[log.useKind as keyof typeof UsePurpose]}
+                    {UseKind[log.useKind as keyof typeof UseKind]}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                     {log.finClassName}

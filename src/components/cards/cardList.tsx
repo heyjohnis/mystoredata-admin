@@ -4,7 +4,7 @@ import {useState} from "react";
 import {InputWrapper} from "components/forms/input-wrapper";
 import CardInput from "./cardInput";
 import {PUT, DELETE, POST} from "utils/restApi";
-import {CardCode, tradeKind, UsePurpose} from "data/commonCode";
+import {CardCode, tradeKind, UseKind} from "data/commonCode";
 import CommonCodeSelect from "components/CommonCodeSelect";
 
 export default function CardList({cards, user, baseMonth}: any) {
@@ -149,7 +149,7 @@ export default function CardList({cards, user, baseMonth}: any) {
                 <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                   <CommonCodeSelect
                     name="useKind"
-                    commonCode={UsePurpose}
+                    commonCode={UseKind}
                     value={card?.useKind}
                     placeholder="사용목적"
                     onChange={(e) =>
