@@ -41,7 +41,7 @@ export default function FinStatusTradeKind({
       acc += cur?.finClassCode === finClassCode ? cur?.transMoney : 0;
       return acc;
     }, 0);
-    return finNumber(sum * (finClassCode.includes("OUT") ? -1 : 1));
+    return finNumber(sum);
   };
 
   return (
@@ -127,7 +127,7 @@ export default function FinStatusTradeKind({
                       <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
                         <div className="text-center w-1/2">소계</div>
                         <div className="w-1/2">
-                          {finNumber(finAmount["OUT1"] * -1)}
+                          {finNumber(finAmount["OUT1"])}
                         </div>
                       </li>
                     </ul>
@@ -188,8 +188,8 @@ export default function FinStatusTradeKind({
                   <div className="text-center w-1/2">소계</div>
                   <div className="w-1/2">
                     {finNumber(
-                      finAmount.IN2 * -1 +
-                        finAmount.OUT2 * -1 +
+                      finAmount.IN2 +
+                        finAmount.OUT2 +
                         finAmount.IN3 +
                         finAmount.OUT3
                     )}

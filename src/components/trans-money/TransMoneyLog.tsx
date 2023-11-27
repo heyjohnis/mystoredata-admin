@@ -13,7 +13,10 @@ const fields: Record<string, string>[] = [
     name: "사용자",
     key: "CorpNum",
   },
-
+  {
+    name: "거래구분",
+    key: "fin-class",
+  },
   {
     name: "거래금액",
     key: "transMoney",
@@ -21,10 +24,6 @@ const fields: Record<string, string>[] = [
   {
     name: "사용목적",
     key: "Withdraw",
-  },
-  {
-    name: "거래구분",
-    key: "fin-class",
   },
   {
     name: "거래유형",
@@ -117,14 +116,14 @@ export default function TransMoneyLog({logs, reload}: Props) {
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.corpNum} ({log.corpName})
                   </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
+                    {log.finClassName}
+                  </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {log.transMoney.toLocaleString("ko-KR") || "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                     {UseKind[log.useKind as keyof typeof UseKind]}
-                  </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
-                    {log.finClassName}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                     <Badge

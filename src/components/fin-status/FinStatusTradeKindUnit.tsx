@@ -5,9 +5,7 @@ export default function FinStatusTradeKindUnit({
   finClassCode,
   category,
   getTransData,
-  isNegativeNumber = false,
 }: any) {
-  const corr = isNegativeNumber ? -1 : 1;
   useEffect(() => {
     console.log(`FinClassCategory ${finClassCode} : `, category[finClassCode]);
   }, [category]);
@@ -22,7 +20,7 @@ export default function FinStatusTradeKindUnit({
         <div className="inline-block w-[150px] truncate text-center">
           {c.categoryName}
         </div>
-        <div className="w-24">{finNumber(c.transMoney * corr)}</div>
+        <div className="w-24">{finNumber(c.transMoney)}</div>
       </li>
     ))
   );

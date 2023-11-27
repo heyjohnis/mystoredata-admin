@@ -103,7 +103,7 @@ const Index: React.FC = () => {
     POST(`trans/log`, {
       ...form,
       finClassCodes: code,
-      useKind: "BIZ",
+      // useKind: "BIZ",
       useYn: true,
       category,
     }).then((res: any) => {

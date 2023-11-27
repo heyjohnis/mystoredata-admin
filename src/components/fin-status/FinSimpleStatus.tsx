@@ -45,21 +45,21 @@ export default function FinSimpleStatus({
                 <ul>
                   <li className="flex justify-between">
                     <div className="inline-block w-25">매입 출금액</div>
-                    <div>{(finAmount.OUT1 * -1).toLocaleString()}</div>
+                    <div>{finAmount.OUT1.toLocaleString()}</div>
                   </li>
                   <li className="flex justify-between">
                     <div className="inline-block w-25">갚은돈(부채-)</div>
-                    <div>{(finAmount.OUT2 * -1).toLocaleString()}</div>
+                    <div>{finAmount.OUT2.toLocaleString()}</div>
                   </li>
                   <li className="flex justify-between">
                     <div className="inline-block w-25">나머지(자산+)</div>
-                    <div>{(finAmount.OUT3 * -1).toLocaleString()}</div>
+                    <div>{finAmount.OUT3.toLocaleString()}</div>
                   </li>
                   <li className="flex justify-between">
                     <div className="inline-block w-25">
                       세금계산서(외상매입금)
                     </div>
-                    <div>{(taxAmount.OUT_AMT * -1).toLocaleString()}</div>
+                    <div>{taxAmount.OUT_AMT.toLocaleString()}</div>
                   </li>
                 </ul>
               </td>
@@ -106,7 +106,7 @@ export default function FinSimpleStatus({
                   </li>
                   <li className="flex justify-between">
                     <div className="inline-block w-25">갚은돈(부채-)</div>
-                    <div>{(finAmount.OUT2 * -1).toLocaleString()}</div>
+                    <div>{finAmount.OUT2.toLocaleString()}</div>
                   </li>
                   <li className="flex justify-between">
                     <div className="inline-block w-25">부가세(내야할)</div>

@@ -5,9 +5,7 @@ export default function FinStatusInOutUnit({
   finClassCode,
   inOutAccount,
   getTransData,
-  isNegativeNumber = false,
 }: any) {
-  const corr = isNegativeNumber ? -1 : 1;
   const [categoryData, setCategoryData] = useState<any>([]);
   useEffect(() => {
     console.log("inOutAccount: ", inOutAccount);
@@ -28,7 +26,7 @@ export default function FinStatusInOutUnit({
         <div className="inline-block w-[150px] truncate text-center">
           {c.categoryName}
         </div>
-        <div className="w-24">{finNumber(c.transMoney * corr)}</div>
+        <div className="w-24">{finNumber(c.transMoney)}</div>
       </li>
     ))
   );
