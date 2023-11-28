@@ -7,7 +7,6 @@ export type TradeCorpProps = {
   corpNum: string;
   corpName: string;
   tradeType: string;
-  tradeTypeCode: number;
   tradeCorpNum: string;
   tradeCorpName: string;
   tradeCorpCEOName: string;

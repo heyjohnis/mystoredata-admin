@@ -68,7 +68,6 @@ const Index: React.FC = () => {
     getTransLogs();
     getFinStatusData();
     getCategroyByClass();
-    getInOutAmount();
   }, [form]);
 
   const getFinStatusData = () => {
@@ -100,13 +99,6 @@ const Index: React.FC = () => {
     });
   };
 
-  const getInOutAmount = () => {
-    POST(`trans/in-out-account`, form).then((res: any) => {
-      console.log("getInOutAmount: ", res?.data);
-      res?.data && setInOutAccount(res.data);
-    });
-  };
-
   const getCategroyByClass = () => {
     POST(`trans/class-category`, form).then((res: any) => {
       console.log("getCategroyByClass: ", res?.data);
@@ -123,6 +115,8 @@ const Index: React.FC = () => {
     });
     const IN_OUT2_ARR = [...classCategory["IN2"], ...classCategory["OUT2"]];
     const IN_OUT3_ARR = [...classCategory["IN3"], ...classCategory["OUT3"]];
+    console.log("IN_OUT2_ARR: ", IN_OUT2_ARR);
+    console.log("IN_OUT3_ARR: ", IN_OUT3_ARR);
     setCategory({
       ...classCategory,
       IN2_OUT2: setInOutKeyArray(IN_OUT2_ARR, "IN2_OUT2"),
@@ -136,7 +130,16 @@ const Index: React.FC = () => {
         return c.category === cur.category;
       });
       if (hasEl) {
-        hasEl.transMoney += cur.transMoney;
+        let amount = cur.transMoney;
+        amount =
+          finClassCode === "IN3_OUT3" && hasEl.finClassCode.includes("OUT")
+            ? (amount *= -1)
+            : amount;
+        amount =
+          finClassCode === "IN2_OUT2" && hasEl.finClassCode.includes("OUT")
+            ? (amount *= -1)
+            : amount;
+        hasEl.transMoney += amount;
       } else {
         acc.push({
           finClassCode,
@@ -167,8 +170,8 @@ const Index: React.FC = () => {
                 finAmount={finAmount}
                 category={category}
                 getTransData={getTransData}
-                inOutAccount={inOutAccount}
                 tradeKind={form?.tradeKind}
+                inOutAccount={inOutAccount}
               />
             </div>
           </div>

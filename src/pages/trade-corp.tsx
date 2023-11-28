@@ -111,11 +111,11 @@ const Index: React.FC = () => {
                       <Badge
                         size={"sm"}
                         color={`text-${
-                          corp.tradeTypeCode > 0 ? "red" : "blue"
+                          corp.tradeType === "D" ? "red" : "blue"
                         }-400 mr-1`}
                         outlined
                         rounded>
-                        {corp.tradeType}
+                        {corp.tradeType === "D" ? "매출" : "매입"}
                       </Badge>
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">

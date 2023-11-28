@@ -71,14 +71,12 @@ const Index: React.FC = () => {
   const [finClassCode, setFinClassCode] = useState<string>("");
   const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
   const [openTab, setOpenTab] = useState<number>(0);
-  const [inOutAccount, setInOutAccount] = useState<CategoryProps[]>([]);
 
   useEffect(() => {
     console.log("form: ", form);
     if (form?.userId && form?.fromAt && form.fromAt) {
       getFinStatusData();
       getCategroyByClass();
-      getInOutAmount();
     }
   }, [form]);
 
@@ -112,13 +110,6 @@ const Index: React.FC = () => {
     });
   };
 
-  const getInOutAmount = () => {
-    POST(`trans/in-out-account`, form).then((res: any) => {
-      console.log("getInOutAmount: ", res.data);
-      setInOutAccount(res.data);
-    });
-  };
-
   const getCategroyByClass = () => {
     POST(`trans/class-category`, form).then((res: any) => {
       console.log("getCategroyByClass: ", res.data);
@@ -135,6 +126,8 @@ const Index: React.FC = () => {
     });
     const IN_OUT2_ARR = [...classCategory["IN2"], ...classCategory["OUT2"]];
     const IN_OUT3_ARR = [...classCategory["IN3"], ...classCategory["OUT3"]];
+    console.log("IN_OUT2_ARR: ", IN_OUT2_ARR);
+    console.log("IN_OUT3_ARR: ", IN_OUT3_ARR);
     setCategory({
       ...classCategory,
       IN2_OUT2: setInOutKeyArray(IN_OUT2_ARR, "IN2_OUT2"),
@@ -190,15 +183,15 @@ const Index: React.FC = () => {
             <h2 className="text-lg font-bold mb-3">거래분류</h2>
             <FinClassStatus finAmount={finAmount} getTransData={getTransData} />
           </div>
-          <h2 className="p-4 pb-0 text-xl font-bold">재무제표</h2>
-          <div className="flex w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+          <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <h2 className="w-full text-lg font-bold mb-3">제무재표</h2>
             <div className="w-full">
               <FinStatusTradeKind
                 finAmount={finAmount}
                 category={category}
                 getTransData={getTransData}
-                inOutAccount={inOutAccount}
                 tradeKind={form?.tradeKind}
+                inOutAccount={accountAmount}
               />
             </div>
           </div>
