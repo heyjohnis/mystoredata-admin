@@ -9,6 +9,9 @@ import TransMoneyLog from "components/trans-money/TransMoneyLog";
 import FinClassStatus from "components/fin-status/FinClassStatus";
 import FinStatusTradeKind from "components/fin-status/FinStatusTradeKind";
 import {CategoryProps, ClassCategoryProps} from "model/ClassCategoryProps";
+import {useCategoryFinClass} from "hooks/useCategoryFinClass";
+import {isEmptyForm} from "utils/form";
+import {useFinStatusData} from "hooks/useFinStatusData";
 
 interface FinAmount {
   [key: string]: number;
@@ -63,7 +66,7 @@ const tabs = [
 ];
 
 const Index: React.FC = () => {
-  const [form, setForm] = useState<SearchProps>();
+  const [form, setForm] = useState<SearchProps>({});
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
   const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
@@ -72,33 +75,20 @@ const Index: React.FC = () => {
   const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
   const [openTab, setOpenTab] = useState<number>(0);
 
+  const categoryFinClass = useCategoryFinClass(form);
+  const finStatusData = useFinStatusData(form);
+
   useEffect(() => {
-    console.log("form: ", form);
-    if (form?.userId && form?.fromAt && form.fromAt) {
-      getFinStatusData();
-      getCategroyByClass();
-    }
+    if (isEmptyForm(form)) return;
   }, [form]);
 
   useEffect(() => {
-    console.log("openTab: ", openTab);
-  }, [openTab]);
+    setCategory(categoryFinClass);
+  }, [categoryFinClass]);
 
-  const getFinStatusData = () => {
-    POST(`fin-status/amount`, form).then((res: any) => {
-      const finAmounts =
-        res?.data.length > 0
-          ? res?.data?.reduce(
-              (amts: FinAmount, amt: DataProps) => {
-                amts[amt._id] = amt?.amount || 0;
-                return amts;
-              },
-              {...initFinAmount} as FinAmount
-            )
-          : initFinAmount;
-      setFinAmount(finAmounts);
-    });
-  };
+  useEffect(() => {
+    setFinAmount(finStatusData);
+  }, [finStatusData]);
 
   const getTransData = (code: string, category = "") => {
     setFinClassCode(code);
@@ -112,50 +102,6 @@ const Index: React.FC = () => {
       console.log("transdata: ", res.data);
       setLogs(res.data);
     });
-  };
-
-  const getCategroyByClass = () => {
-    POST(`trans/class-category`, form).then((res: any) => {
-      console.log("getCategroyByClass: ", res.data);
-      setCategroyByClass(res.data);
-    });
-  };
-
-  // 거래분류에 따른 category 데이터
-  const setCategroyByClass = (cate: CategoryProps[]) => {
-    const classCategory = JSON.parse(JSON.stringify(initCategory));
-    cate.forEach((category) => {
-      const finClass = category?.finClassCode;
-      if (finClass) classCategory[finClass].push(category);
-    });
-    const IN_OUT2_ARR = [...classCategory["IN2"], ...classCategory["OUT2"]];
-    const IN_OUT3_ARR = [...classCategory["IN3"], ...classCategory["OUT3"]];
-    console.log("IN_OUT2_ARR: ", IN_OUT2_ARR);
-    console.log("IN_OUT3_ARR: ", IN_OUT3_ARR);
-    setCategory({
-      ...classCategory,
-      IN2_OUT2: setInOutKeyArray(IN_OUT2_ARR, "IN2_OUT2"),
-      IN3_OUT3: setInOutKeyArray(IN_OUT3_ARR, "IN3_OUT3"),
-    });
-  };
-
-  const setInOutKeyArray = (arr: CategoryProps[], finClassCode: string) => {
-    return arr.reduce((acc: CategoryProps[], cur: CategoryProps) => {
-      const hasEl = acc.find((c: CategoryProps) => {
-        return c.category === cur.category;
-      });
-      if (hasEl) {
-        hasEl.transMoney += cur.transMoney;
-      } else {
-        acc.push({
-          finClassCode,
-          category: cur.category,
-          categoryName: cur.categoryName,
-          transMoney: cur.transMoney,
-        });
-      }
-      return acc;
-    }, []);
   };
 
   return (

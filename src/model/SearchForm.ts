@@ -7,4 +7,5 @@ export type SearchProps = {
   tradeKind?: string;
   finClassCode?: string;
   useKind?: string;
+  all?: string;
 };
