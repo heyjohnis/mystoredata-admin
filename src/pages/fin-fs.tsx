@@ -80,6 +80,10 @@ const Index: React.FC = () => {
     }
   }, [form]);
 
+  useEffect(() => {
+    console.log("openTab: ", openTab);
+  }, [openTab]);
+
   const getFinStatusData = () => {
     POST(`fin-status/amount`, form).then((res: any) => {
       const finAmounts =

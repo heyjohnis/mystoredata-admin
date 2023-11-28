@@ -156,7 +156,7 @@ export default function FinStatusTradeKind({
                   <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
                     <div className="text-center w-1/2">소계</div>
                     <div className="">
-                      {finNumber(finAmount["IN3"] + finAmount["OUT3"])}
+                      {finNumber(finAmount["IN3"] - finAmount["OUT3"])}
                     </div>
                   </li>
                 </ul>
@@ -175,7 +175,7 @@ export default function FinStatusTradeKind({
                   <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
                     <div className="text-center w-1/2">소계</div>
                     <div className="w-1/2">
-                      {finNumber(finAmount["IN2"] + finAmount["OUT2"])}
+                      {finNumber(finAmount["IN2"] - finAmount["OUT2"])}
                     </div>
                   </li>
                 </ul>
@@ -188,10 +188,10 @@ export default function FinStatusTradeKind({
                   <div className="text-center w-1/2">소계</div>
                   <div className="w-1/2">
                     {finNumber(
-                      finAmount.IN2 +
-                        finAmount.OUT2 +
-                        finAmount.IN3 +
-                        finAmount.OUT3
+                      finAmount.IN3 -
+                        finAmount.OUT3 -
+                        finAmount.IN2 +
+                        finAmount.OUT2
                     )}
                   </div>
                 </li>

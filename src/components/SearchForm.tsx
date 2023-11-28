@@ -43,6 +43,7 @@ export default function SearchForm({
   };
 
   useEffect(() => {
+    console.log("form: ", form);
     handleChange({
       corpNum,
       userId,

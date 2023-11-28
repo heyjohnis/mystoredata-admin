@@ -109,19 +109,46 @@ const Index: React.FC = () => {
   // 거래분류에 따른 category 데이터
   const setCategroyByClass = (cate: CategoryProps[]) => {
     const classCategory = JSON.parse(JSON.stringify(initCategory));
+
     cate.forEach((category) => {
       const finClass = category?.finClassCode;
       if (finClass) classCategory[finClass].push(category);
     });
     const IN_OUT2_ARR = [...classCategory["IN2"], ...classCategory["OUT2"]];
     const IN_OUT3_ARR = [...classCategory["IN3"], ...classCategory["OUT3"]];
-    console.log("IN_OUT2_ARR: ", IN_OUT2_ARR);
-    console.log("IN_OUT3_ARR: ", IN_OUT3_ARR);
+
+    // 개인사용목적만 분류
+    const OUT1Logs = classCategory["OUT1"];
+    const personalLogs = OUT1Logs.filter(
+      (log: CategoryProps) => log?.useKind === "PERSONAL"
+    );
+    const sumPersonalLog = personalLogs.reduce(
+      (sum: number, cur: CategoryProps) => {
+        return sum + cur.transMoney;
+      },
+      0
+    );
+    const bizLogs = OUT1Logs.filter(
+      (log: CategoryProps) => log?.useKind === "BIZ"
+    );
+
+    classCategory["OUT1"] = [
+      ...bizLogs,
+      {
+        category: "-111111111",
+        categoryName: "개인사용목적*",
+        finClassCode: "OUT1",
+        transMoney: sumPersonalLog,
+        useKind: "PERSONAL",
+      },
+    ];
+
     setCategory({
       ...classCategory,
       IN2_OUT2: setInOutKeyArray(IN_OUT2_ARR, "IN2_OUT2"),
       IN3_OUT3: setInOutKeyArray(IN_OUT3_ARR, "IN3_OUT3"),
     });
+    console.log("classCategory: ", classCategory);
   };
 
   const setInOutKeyArray = (arr: CategoryProps[], finClassCode: string) => {

@@ -64,13 +64,13 @@ const initialState: NavigationState[] = [
     title: "거래데이터",
     items: [
       {
-        url: "/account",
+        url: "/account-log",
         icon: <LuBanknote size={20} />,
         title: "계좌데이터",
         items: [],
       },
       {
-        url: "/card",
+        url: "/card-log",
         icon: <BsCreditCard size={20} />,
         title: "카드데이터",
         items: [],

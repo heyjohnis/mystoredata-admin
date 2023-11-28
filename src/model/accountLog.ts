@@ -19,4 +19,5 @@ export type AccountLogProps = {
   mgtRemark2: string;
   transDate: Date;
   keyword: Array<string>;
+  _id: string;
 };

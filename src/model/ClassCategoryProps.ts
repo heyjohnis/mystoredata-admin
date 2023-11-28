@@ -14,4 +14,5 @@ export type CategoryProps = {
   category: string;
   categoryName: string;
   transMoney: number;
+  useKind?: string;
 };
