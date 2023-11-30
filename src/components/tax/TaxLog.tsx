@@ -42,19 +42,26 @@ const fields: Record<string, string>[] = [
     key: "InvoiceeBizClass",
   },
   {
-    name: "Remark1:",
-    key: "Remark1:",
+    name: "Remark1",
+    key: "remark1",
   },
   {
     name: "ItemName:",
     key: "ItemName:",
   },
+  {
+    name: "ID",
+    key: "_id",
+  },
 ];
-type Props = {
-  logs: TaxLogProps[];
-};
 
-export default function TaxLogs({logs}: Props) {
+export default function TaxLogs({
+  logs,
+  handleClick,
+}: {
+  logs: TaxLogProps[];
+  handleClick: (log: TaxLogProps) => void;
+}) {
   return (
     <div className="w-full overflow-x-auto">
       <table className="w-full text-left table-auto">
@@ -74,7 +81,10 @@ export default function TaxLogs({logs}: Props) {
             logs.map((log, i) => (
               <tr
                 key={i}
-                className={`${!log.useYn && "line-through text-gray-400"}`}>
+                onClick={() => handleClick(log)}
+                className={`${
+                  !log.useYn && "line-through text-gray-400"
+                } cursor-pointer`}>
                 <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                   {new Date(log.issueDT).toLocaleDateString("ko-KR")}{" "}
                   {new Date(log.issueDT).toLocaleTimeString("ko-KR")}
@@ -120,6 +130,9 @@ export default function TaxLogs({logs}: Props) {
                 </td>
                 <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                   {log.itemName}
+                </td>
+                <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                  {log._id}
                 </td>
               </tr>
             ))}

@@ -47,4 +47,5 @@ export type TaxLogProps = {
   taxRegID: string;
   remark1: string;
   useYn: boolean;
+  _id: string;
 };

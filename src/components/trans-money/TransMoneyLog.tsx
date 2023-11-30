@@ -61,11 +61,15 @@ const fields: Record<string, string>[] = [
     name: "거래일시",
     key: "transDate",
   },
+  {
+    name: "ID",
+    key: "_id",
+  },
 ];
 
 type Props = {
   logs: TransMoneyProps[];
-  setData: any;
+  setData?: any;
   reload?: any;
 };
 
@@ -175,6 +179,9 @@ export default function TransMoneyLog({logs, reload}: Props) {
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {new Date(log.transDate).toLocaleTimeString("ko-KR")}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log._id}
                   </td>
                 </tr>
               ))}

@@ -12,7 +12,7 @@ type props = {
   handleChange: (e: any) => void;
   handleClick?: () => void;
   handleChangeName?: string;
-  form?: SearchProps;
+  form: SearchProps;
 };
 
 export default function SearchForm({
@@ -45,6 +45,7 @@ export default function SearchForm({
   useEffect(() => {
     console.log("form: ", form);
     handleChange({
+      ...form,
       corpNum,
       userId,
       fromAt,
@@ -96,7 +97,7 @@ export default function SearchForm({
       <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
         <Label>거래유형</Label>
         <CommonCodeSelect
-          name="tradeKind"
+          name="useKind"
           onChange={(e) => setTradeKind(e.target.value)}
           value={useKind}
           commonCode={UseKind}

@@ -4,12 +4,11 @@ import {AccountLogProps} from "model/accountLog";
 import {SearchProps} from "model/SearchForm";
 import {isEmptyForm} from "utils/form";
 
-export const useAccount = (form: SearchProps) => {
+export const useAccountLog = (form: SearchProps) => {
   const [logs, setLogs] = useState<AccountLogProps[]>([]);
 
   useEffect(() => {
     if (!isEmptyForm(form)) return;
-    console.log("useAccount");
     POST(`account/log`, {...form}).then((res: any) => {
       setLogs(res?.data);
     });

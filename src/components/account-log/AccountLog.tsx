@@ -57,9 +57,10 @@ const fields: Record<string, string>[] = [
 
 type props = {
   logs: AccountLogProps[];
+  handleClick: (log: AccountLogProps) => void;
 };
 
-export default function AccountLog({logs}: props) {
+export default function AccountLog({logs, handleClick}: props) {
   return (
     <div className="w-full overflow-x-auto">
       <table className="w-full text-left table-auto">
@@ -76,7 +77,10 @@ export default function AccountLog({logs}: props) {
         </thead>
         <tbody>
           {logs.map((log, i) => (
-            <tr key={i}>
+            <tr
+              key={i}
+              onClick={() => handleClick(log)}
+              className="cursor-pointer">
               <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                 {new Date(log.transDate).toLocaleDateString("ko-KR")}{" "}
                 {new Date(log.transDate).toLocaleTimeString("ko-KR")}{" "}

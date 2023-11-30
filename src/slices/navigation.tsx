@@ -94,7 +94,7 @@ const initialState: NavigationState[] = [
         items: [],
       },
       {
-        url: "/tax",
+        url: "/tax-log",
         icon: <TbReceiptTax size={20} />,
         title: "세금계산서",
         items: [],

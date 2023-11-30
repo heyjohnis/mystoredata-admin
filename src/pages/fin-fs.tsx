@@ -1,26 +1,39 @@
-import SectionTitle from "components/section-title";
-import SearchForm from "components/SearchForm";
 import {useEffect, useState} from "react";
-import Widget from "components/widget";
+
 import {TransMoneyProps} from "model/TransMoney";
-import {POST} from "utils/restApi";
+import {ClassCategoryProps} from "model/ClassCategoryProps";
 import {SearchProps} from "model/SearchForm";
+import {AccountLogProps} from "model/accountLog";
+import {CardLogProps} from "model/cardLog";
+
+import {useCategoryFinClass} from "hooks/useCategoryFinClass";
+import {useFinStatusData} from "hooks/useFinStatusData";
+import {useTransLogs} from "hooks/useTransLog";
+import {useAccountLog} from "hooks/useAccountLog";
+import {useCardLog} from "hooks/useCardLog";
+import {useTaxLog} from "hooks/useTaxLog";
+
+import {dateChange} from "utils/date";
+import {isEmptyForm} from "utils/form";
+import {POST} from "utils/restApi";
+
 import TransMoneyLog from "components/trans-money/TransMoneyLog";
 import FinClassStatus from "components/fin-status/FinClassStatus";
 import FinStatusTradeKind from "components/fin-status/FinStatusTradeKind";
-import {CategoryProps, ClassCategoryProps} from "model/ClassCategoryProps";
-import {useCategoryFinClass} from "hooks/useCategoryFinClass";
-import {isEmptyForm} from "utils/form";
-import {useFinStatusData} from "hooks/useFinStatusData";
+import SectionTitle from "components/section-title";
+import SearchForm from "components/SearchForm";
+import Widget from "components/widget";
+import AccountLog from "components/account-log/AccountLog";
+import FinStatusTab from "components/fin-status/FinStatusTab";
+import CardLog from "components/card-log/CardLog";
+import TaxLogs from "components/tax/TaxLog";
+import {TaxLogProps} from "model/TaxLog";
+import ModalFinItem from "components/fin-item/ModalFinItem";
+import ModalFinStatus from "components/fin-status/ModalFinStatus";
 
 interface FinAmount {
   [key: string]: number;
 }
-
-type DataProps = {
-  _id: string;
-  amount: number;
-};
 
 const initFinAmount: FinAmount = {
   IN1: 0,
@@ -29,15 +42,6 @@ const initFinAmount: FinAmount = {
   OUT1: 0,
   OUT2: 0,
   OUT3: 0,
-};
-
-const initFinTaxAmount: FinAmount = {
-  IN_TAX: 0,
-  IN_AMT: 0,
-  IN_TOTAL: 0,
-  OUT_TAX: 0,
-  OUT_AMT: 0,
-  OUT_TOTAL: 0,
 };
 
 type assetProps = {
@@ -57,45 +61,66 @@ const initCategory: ClassCategoryProps = {
   IN_OUT3: [],
 };
 
-const tabs = [
-  {index: 0, title: "전체", active: true, tradeKind: ""},
-  {index: 1, title: "통장", active: false, tradeKind: "CASH"},
-  {index: 2, title: "체크카드", active: false, tradeKind: "CHECK"},
-  {index: 3, title: "신용카드", active: false, tradeKind: "CREDIT"},
-  {index: 4, title: "세금계산서", active: false, tradeKind: "BILL"},
-];
+const initForm: SearchProps = {
+  userId: "bethelean",
+  fromAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
+  toAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
+};
 
 const Index: React.FC = () => {
-  const [form, setForm] = useState<SearchProps>({});
+  const [form, setForm] = useState<SearchProps>(initForm);
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
   const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
-  const [asset, setAsset] = useState<TransMoneyProps[] | null>(null);
-  const [finClassCode, setFinClassCode] = useState<string>("");
+  const [accountLogs, setAccountLogs] = useState<AccountLogProps[]>([]);
+  const [cardLogs, setCardLogs] = useState<CardLogProps[]>([]);
+  const [taxLogs, setTaxLogs] = useState<TaxLogProps[]>([]);
   const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
-  const [openTab, setOpenTab] = useState<number>(0);
-
-  const categoryFinClass = useCategoryFinClass(form);
-  const finStatusData = useFinStatusData(form);
-
+  const [finData, setFinData] = useState<TransMoneyProps | null>(null);
+  // 통장거래내역
+  const accountLog = useAccountLog(form);
   useEffect(() => {
-    if (isEmptyForm(form)) return;
-  }, [form]);
+    if (!isEmptyForm(form)) return;
+    setAccountLogs(accountLog);
+  }, [form, accountLog]);
 
+  // 카드거래내역
+  const cardLog = useCardLog(form);
+  useEffect(() => {
+    if (!isEmptyForm(form)) return;
+    setCardLogs(cardLog);
+  }, [form, cardLog]);
+
+  // 세금계산서내역
+  const taxLog = useTaxLog(form);
+  useEffect(() => {
+    if (!isEmptyForm(form)) return;
+    setTaxLogs(taxLog);
+  }, [form, taxLog]);
+
+  // 전체거래내역조회
+  const transLog = useTransLogs(form);
+  useEffect(() => {
+    if (!isEmptyForm(form)) return;
+    setLogs(transLog);
+  }, [form, transLog]);
+
+  // 거래분류별 카고고리 합산 리스트
+  const categoryFinClass = useCategoryFinClass(form);
   useEffect(() => {
     setCategory(categoryFinClass);
   }, [categoryFinClass]);
 
+  // 거래분류별 합산 금액
+  const finStatusData = useFinStatusData(form);
   useEffect(() => {
     setFinAmount(finStatusData);
   }, [finStatusData]);
 
   const getTransData = (code: string, category = "") => {
-    setFinClassCode(code);
     POST(`trans/log`, {
       ...form,
       finClassCodes: code,
-      // useKind: "BIZ",
       useYn: true,
       category,
     }).then((res: any) => {
@@ -104,30 +129,59 @@ const Index: React.FC = () => {
     });
   };
 
+  const openModalFinStatus = (log: any) => {
+    console.log("openModalFinStatus: ", log._id);
+    if (log.bank) console.log("bank: ", log.bank);
+    if (log.card) console.log("card: ", log.card);
+    if (log.taxType) console.log("tax: ", log.taxType);
+
+    POST(`trans/trade-item`, {_id: log._id}).then((res: any) => {
+      setFinData(res.data);
+    });
+  };
+
+  const closedModal = (isUpdated = false) => {
+    console.log("closedModal");
+  };
   return (
     <>
       <SectionTitle title="Financial Status" subtitle="재정상태" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
-        <div className="flex flex-row overflow-x-auto lg:flex-wrap lg:space-x-1 m-3 mt-6">
-          {tabs.map((tab, key) => (
-            <div key={key} className="flex-none">
-              <button
-                onClick={() => {
-                  setOpenTab(tab.index);
-                  setForm((prev: any) => ({...prev, tradeKind: tab.tradeKind}));
-                }}
-                className={`font-bold uppercase text-xs p-4 rounded-lg flex flex-row items-center justify-around ${
-                  openTab === tab.index
-                    ? "bg-blue-500 text-white hover:bg-blue-600"
-                    : "bg-white dark:bg-gray-800 dark:hover:bg-gray-700 hover:bg-blue-50"
-                }`}
-                type="button">
-                {tab.title}
-              </button>
+
+        <FinStatusTab setForm={setForm} />
+        {["CASH", ""].includes(form?.tradeKind || "") && (
+          <div className="justify-between">
+            <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+              <h2 className="text-lg font-bold mb-3">통장거래</h2>
+              <AccountLog logs={accountLogs} handleClick={openModalFinStatus} />
             </div>
-          ))}
-        </div>
+          </div>
+        )}
+        {["CHECK", ""].includes(form?.tradeKind || "") && (
+          <div className="justify-between">
+            <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+              <h2 className="text-lg font-bold mb-3">체크카드거래</h2>
+              <CardLog logs={cardLogs} handleClick={openModalFinStatus} />
+            </div>
+          </div>
+        )}
+        {["CREDIT", ""].includes(form?.tradeKind || "") && (
+          <div className="justify-between">
+            <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+              <h2 className="text-lg font-bold mb-3">신용카드거래</h2>
+              <CardLog logs={cardLogs} handleClick={openModalFinStatus} />
+            </div>
+          </div>
+        )}
+        {["BILL", ""].includes(form?.tradeKind || "") && (
+          <div className="justify-between">
+            <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+              <h2 className="text-lg font-bold mb-3">세금계산서</h2>
+              <TaxLogs logs={taxLogs} handleClick={openModalFinStatus} />
+            </div>
+          </div>
+        )}
         <div className="justify-between">
           <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <h2 className="text-lg font-bold mb-3">거래분류</h2>
@@ -148,8 +202,9 @@ const Index: React.FC = () => {
         </div>
       </Widget>
       <Widget>
-        <TransMoneyLog logs={logs} setData={setAsset} />
+        <TransMoneyLog logs={logs} reload={() => {}} />
       </Widget>
+      <ModalFinStatus finData={finData} closedModal={closedModal} />
     </>
   );
 };
