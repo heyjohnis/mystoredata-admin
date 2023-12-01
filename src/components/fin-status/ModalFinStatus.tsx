@@ -1,17 +1,7 @@
 import {Dialog, Transition} from "@headlessui/react";
 import {Fragment, useEffect, useState} from "react";
 import {FiX} from "react-icons/fi";
-import {InputWrapper} from "components/forms/input-wrapper";
-import {Label} from "components/forms/label";
-import {Input} from "components/forms/input";
-import {GET, POST, PUT, DELETE} from "utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
-import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
-import {CategoryProps} from "model/Category";
-import Switch from "components/switch";
-import {FinItemProps} from "model/FinItem";
-import {BankCorpCode, FinItemCode} from "data/commonCode";
-import {Select} from "components/forms/select";
 import {finNumber} from "utils/finNumber";
 
 type Props = {

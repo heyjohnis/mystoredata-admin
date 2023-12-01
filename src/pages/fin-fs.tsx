@@ -28,7 +28,6 @@ import FinStatusTab from "components/fin-status/FinStatusTab";
 import CardLog from "components/card-log/CardLog";
 import TaxLogs from "components/tax/TaxLog";
 import {TaxLogProps} from "model/TaxLog";
-import ModalFinItem from "components/fin-item/ModalFinItem";
 import ModalFinStatus from "components/fin-status/ModalFinStatus";
 
 interface FinAmount {
@@ -144,6 +143,7 @@ const Index: React.FC = () => {
     if (log.taxType) console.log("tax: ", log.taxType);
 
     POST(`trans/trade-item`, {_id: log._id}).then((res: any) => {
+      console.log("trade-item: ", res.data);
       setFinData(res.data);
     });
   };
