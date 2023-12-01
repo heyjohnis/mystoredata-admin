@@ -28,7 +28,7 @@ const fields: Record<string, string>[] = [
 ];
 
 const Index: React.FC = () => {
-  const [form, setForm] = useState<SearchProps>();
+  const [form, setForm] = useState<SearchProps>({});
   const [creditCards, setCreditCards] = useState<FinItemProps[]>([]);
   const [cardLogs, setCardLogs] = useState<TransMoneyProps[]>([]);
   const [cashedLogs, setCashedLogs] = useState<TransMoneyProps[]>([]);

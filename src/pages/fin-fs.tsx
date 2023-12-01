@@ -73,10 +73,11 @@ const Index: React.FC = () => {
   const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const [accountLogs, setAccountLogs] = useState<AccountLogProps[]>([]);
-  const [cardLogs, setCardLogs] = useState<CardLogProps[]>([]);
+  const [creditCardLogs, setCreditCardLogs] = useState<CardLogProps[]>([]);
+  const [checkCardLogs, setCheckCardLogs] = useState<CardLogProps[]>([]);
   const [taxLogs, setTaxLogs] = useState<TaxLogProps[]>([]);
   const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
-  const [finData, setFinData] = useState<TransMoneyProps | null>(null);
+  const [finData, setFinData] = useState<TransMoneyProps[]>([]);
   // 통장거래내역
   const accountLog = useAccountLog(form);
   useEffect(() => {
@@ -85,11 +86,18 @@ const Index: React.FC = () => {
   }, [form, accountLog]);
 
   // 카드거래내역
-  const cardLog = useCardLog(form);
+  const checkCardLog = useCardLog(form, "CHECK");
   useEffect(() => {
     if (!isEmptyForm(form)) return;
-    setCardLogs(cardLog);
-  }, [form, cardLog]);
+    setCheckCardLogs(checkCardLog);
+  }, [form, checkCardLog]);
+
+  // 카드거래내역
+  const creditCardLog = useCardLog(form, "CREDIT");
+  useEffect(() => {
+    if (!isEmptyForm(form)) return;
+    setCreditCardLogs(creditCardLog);
+  }, [form, creditCardLog]);
 
   // 세금계산서내역
   const taxLog = useTaxLog(form);
@@ -162,7 +170,7 @@ const Index: React.FC = () => {
           <div className="justify-between">
             <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
               <h2 className="text-lg font-bold mb-3">체크카드거래</h2>
-              <CardLog logs={cardLogs} handleClick={openModalFinStatus} />
+              <CardLog logs={checkCardLogs} handleClick={openModalFinStatus} />
             </div>
           </div>
         )}
@@ -170,7 +178,7 @@ const Index: React.FC = () => {
           <div className="justify-between">
             <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
               <h2 className="text-lg font-bold mb-3">신용카드거래</h2>
-              <CardLog logs={cardLogs} handleClick={openModalFinStatus} />
+              <CardLog logs={creditCardLogs} handleClick={openModalFinStatus} />
             </div>
           </div>
         )}

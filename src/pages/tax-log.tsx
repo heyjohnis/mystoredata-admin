@@ -24,7 +24,12 @@ const Index: React.FC = () => {
       <SectionTitle title="tax receipt" subtitle="세금계산서 이력" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
-        <TaxLog logs={logs} />
+        <TaxLog
+          logs={logs}
+          handleClick={(e) => {
+            console.log(e);
+          }}
+        />
       </Widget>
     </>
   );

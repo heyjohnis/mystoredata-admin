@@ -5,7 +5,6 @@ import {Label} from "components/forms/label";
 import {CategorySelect} from "./CommonCodeSelect";
 import {Category, FinClassCode, TradeKind, UseKind} from "data/commonCode";
 import CommonCodeSelect from "components/CommonCodeSelect";
-import {set} from "nprogress";
 import {SearchProps} from "model/SearchForm";
 
 type props = {
