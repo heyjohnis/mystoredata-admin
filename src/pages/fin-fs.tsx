@@ -136,18 +136,6 @@ const Index: React.FC = () => {
     });
   };
 
-  const openModalFinStatus = (log: any) => {
-    console.log("openModalFinStatus: ", log._id);
-    if (log.bank) console.log("bank: ", log.bank);
-    if (log.card) console.log("card: ", log.card);
-    if (log.taxType) console.log("tax: ", log.taxType);
-
-    POST(`trans/trade-item`, {_id: log._id}).then((res: any) => {
-      console.log("trade-item: ", res.data);
-      setFinData(res.data);
-    });
-  };
-
   const closedModal = (isUpdated = false) => {
     console.log("closedModal");
   };
@@ -157,39 +145,6 @@ const Index: React.FC = () => {
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
 
-        <FinStatusTab setForm={setForm} />
-        {["CASH", ""].includes(form?.tradeKind || "") && (
-          <div className="justify-between">
-            <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-              <h2 className="text-lg font-bold mb-3">통장거래</h2>
-              <AccountLog logs={accountLogs} handleClick={openModalFinStatus} />
-            </div>
-          </div>
-        )}
-        {["CHECK", ""].includes(form?.tradeKind || "") && (
-          <div className="justify-between">
-            <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-              <h2 className="text-lg font-bold mb-3">체크카드거래</h2>
-              <CardLog logs={checkCardLogs} handleClick={openModalFinStatus} />
-            </div>
-          </div>
-        )}
-        {["CREDIT", ""].includes(form?.tradeKind || "") && (
-          <div className="justify-between">
-            <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-              <h2 className="text-lg font-bold mb-3">신용카드거래</h2>
-              <CardLog logs={creditCardLogs} handleClick={openModalFinStatus} />
-            </div>
-          </div>
-        )}
-        {["BILL", ""].includes(form?.tradeKind || "") && (
-          <div className="justify-between">
-            <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
-              <h2 className="text-lg font-bold mb-3">세금계산서</h2>
-              <TaxLogs logs={taxLogs} handleClick={openModalFinStatus} />
-            </div>
-          </div>
-        )}
         <div className="justify-between">
           <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <h2 className="text-lg font-bold mb-3">거래분류</h2>
@@ -212,7 +167,6 @@ const Index: React.FC = () => {
       <Widget>
         <TransMoneyLog logs={logs} reload={() => {}} />
       </Widget>
-      <ModalFinStatus finData={finData} closedModal={closedModal} />
     </>
   );
 };

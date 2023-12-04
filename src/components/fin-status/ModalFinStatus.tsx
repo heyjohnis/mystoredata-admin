@@ -8,6 +8,7 @@ type Props = {
   finData: TransMoneyProps[];
   category?: Record<string, string>;
   closedModal: (isSaved: boolean) => void;
+  tradeKind: string;
 };
 
 const finClassData: {
@@ -21,7 +22,7 @@ const finClassData: {
   OUT3: [],
 };
 
-const ModalFinStatus = ({finData, closedModal}: Props) => {
+const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
   const closeModal = () => {
@@ -90,7 +91,7 @@ const ModalFinStatus = ({finData, closedModal}: Props) => {
                 <div className="flex">
                   <div className="w-full p-4 mt-1 m-1 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800 flex justify-between">
                     <label className="block text-sm font-bold text-gray-700 dark:text-gray-200">
-                      수입
+                      {tradeKind === "CASH" ? "수입" : "수익"}
                     </label>
                     <div>
                       <ul>
@@ -109,7 +110,7 @@ const ModalFinStatus = ({finData, closedModal}: Props) => {
                 <div className="flex">
                   <div className="w-full p-4 mt-1 m-1 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800 flex justify-between">
                     <label className="block text-sm font-bold text-gray-700 dark:text-gray-200">
-                      지출
+                      {tradeKind === "CASH" ? "지출" : "비용"}
                     </label>
                     <div>
                       <ul>

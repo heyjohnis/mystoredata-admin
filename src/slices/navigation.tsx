@@ -160,14 +160,20 @@ const initialState: NavigationState[] = [
     title: "재정상태",
     items: [
       {
+        url: "/fin-trade",
+        icon: <MdOutlineLeaderboard size={20} />,
+        title: "거래현황",
+        items: [],
+      },
+      {
         url: "/fin-fs",
         icon: <AiOutlineDashboard size={20} />,
         title: "재무현황표",
         items: [],
       },
       {
-        url: "/fin-class",
-        icon: <MdOutlineLeaderboard size={20} />,
+        url: "/fin-bs",
+        icon: <AiOutlineDashboard size={20} />,
         title: "재무상태표",
         items: [],
       },
