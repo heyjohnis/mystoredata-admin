@@ -25,7 +25,12 @@ const Index: React.FC = () => {
       <SectionTitle title="account raw data" subtitle="계좌데이터" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
-        <AccountLog logs={logs} />
+        <AccountLog
+          logs={logs}
+          handleClick={() => {
+            console.log("click");
+          }}
+        />
       </Widget>
     </>
   );

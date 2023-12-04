@@ -165,7 +165,7 @@ const Index: React.FC = () => {
         </div>
       </Widget>
       <Widget>
-        <TransMoneyLog logs={logs} reload={() => {}} />
+        <TransMoneyLog logs={logs} />
       </Widget>
     </>
   );

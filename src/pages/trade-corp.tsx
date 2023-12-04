@@ -40,7 +40,7 @@ const fields: Record<string, string>[] = [
 ];
 
 const Index: React.FC = () => {
-  const [form, setForm] = useState<SearchProps>();
+  const [form, setForm] = useState<SearchProps>({});
   const [corps, setCorps] = useState<TradeCorpProps[]>([]);
   const [taxlogs, setTaxLogs] = useState<TaxLogProps[]>([]);
   const [taxPayedlogs, setTaxPayedLogs] = useState<TaxLogProps[]>([]);
@@ -141,11 +141,21 @@ const Index: React.FC = () => {
       </Widget>
       <Widget>
         <h3 className="m-2 text-lg font-bold	">부가세납부내역</h3>
-        <TaxLog logs={taxPayedlogs} />
+        <TaxLog
+          logs={taxPayedlogs}
+          handleClick={() => {
+            console.log("click");
+          }}
+        />
       </Widget>
       <Widget>
         <h3 className="m-2 text-lg font-bold	">세금계산서 발행 이력</h3>
-        <TaxLog logs={taxlogs} />
+        <TaxLog
+          logs={taxlogs}
+          handleClick={() => {
+            console.log("click");
+          }}
+        />
       </Widget>
       <Widget>
         <h3 className="m-2 text-lg font-bold	">거래내역</h3>

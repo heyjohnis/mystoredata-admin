@@ -51,7 +51,12 @@ const Index: React.FC = () => {
             />
           </InputWrapper>
         </div>
-        <CardLog logs={logs} />
+        <CardLog
+          logs={logs}
+          handleClick={() => {
+            console.log("click");
+          }}
+        />
       </Widget>
     </>
   );

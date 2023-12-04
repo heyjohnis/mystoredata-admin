@@ -75,7 +75,7 @@ const tabs = [
 ];
 
 const Index: React.FC = () => {
-  const [form, setForm] = useState<SearchProps>();
+  const [form, setForm] = useState<SearchProps>({});
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
   const [taxAmount, setTaxAmount] = useState<FinAmount>(initFinTaxAmount);
   const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
