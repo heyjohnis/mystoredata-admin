@@ -211,7 +211,12 @@ const Index: React.FC = () => {
         </div>
       </Widget>
       <Widget>
-        <TransMoneyLog logs={logs} reload={() => {}} />
+        <TransMoneyLog
+          logs={logs}
+          reload={() => {
+            console.log("reload");
+          }}
+        />
       </Widget>
       <ModalFinStatus
         finData={finData}
