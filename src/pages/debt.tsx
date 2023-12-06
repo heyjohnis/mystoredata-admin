@@ -54,7 +54,14 @@ const Index: React.FC = () => {
   return (
     <>
       <Notification />
-      <SectionTitle title="Debt Info" subtitle="부채 정보" />
+      <SectionTitle
+        title="Debt Info"
+        subtitle="부채 정보"
+        buttonName="항목추가"
+        handleEvent={() => {
+          alert("항목추가");
+        }}
+      />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
         <div className="w-full overflow-x-auto">

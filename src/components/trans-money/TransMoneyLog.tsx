@@ -120,7 +120,12 @@ export default function TransMoneyLog({logs, reload}: Props) {
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log.corpNum} ({log.corpName})
                   </td>
-                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
+                  <td
+                    className={`px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center ${
+                      ["OUT1", "IN2", "IN3"].includes(log.finClassCode)
+                        ? "text-red-600"
+                        : "text-blue-600"
+                    } `}>
                     {log.finClassName}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
