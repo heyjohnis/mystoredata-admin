@@ -40,4 +40,7 @@ export type TransMoneyProps = {
   debtCode: string;
   keyword: Array<string>;
   useYn: boolean;
+  accountLog: string;
+  cardLog: string;
+  item: string;
 };

@@ -65,6 +65,18 @@ const fields: Record<string, string>[] = [
     name: "ID",
     key: "_id",
   },
+  {
+    name: "AccountLog",
+    key: "accountLog",
+  },
+  {
+    name: "CardLog",
+    key: "cardLog",
+  },
+  {
+    name: "itemLog",
+    key: "itemLog",
+  },
 ];
 
 type Props = {
@@ -122,9 +134,9 @@ export default function TransMoneyLog({logs, reload}: Props) {
                   </td>
                   <td
                     className={`px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center ${
-                      ["OUT1", "IN2", "IN3"].includes(log.finClassCode)
-                        ? "text-red-600"
-                        : "text-blue-600"
+                      ["OUT1", "OUT2", "IN3"].includes(log.finClassCode)
+                        ? "text-blue-600"
+                        : "text-red-600"
                     } `}>
                     {log.finClassName}
                   </td>
@@ -187,6 +199,15 @@ export default function TransMoneyLog({logs, reload}: Props) {
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {log._id}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.accountLog}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.cardLog}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
+                    {log.item}
                   </td>
                 </tr>
               ))}
