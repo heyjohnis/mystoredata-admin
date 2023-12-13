@@ -273,7 +273,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                     <Input
                       name="hometaxPWD"
                       type="password"
-                      value={form?.hometaxPWD}
+                      value={form?.hometaxPWD || ""}
                       onChange={handleChange}
                     />
                   </InputWrapper>

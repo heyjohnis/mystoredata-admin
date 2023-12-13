@@ -25,6 +25,7 @@ const finClassData: {
 const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
+  const [equity, setEquity] = useState<number>(0);
   const closeModal = () => {
     console.log("close modal");
     setIsOpen(false);
@@ -35,12 +36,14 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
     finClassData.OUT1 = [];
     finClassData.OUT2 = [];
     finClassData.OUT3 = [];
+    setEquity(0);
   };
 
   useEffect(() => {
     if (finData) {
       setIsOpen(true);
       classfyFinData(finData);
+      calcEquity();
     }
   }, [finData]);
 
@@ -49,6 +52,23 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
       finClassData[data.finClassCode].push(data);
     });
     console.log({finClassData});
+  };
+
+  const calcEquity = () => {
+    const IN2 = finClassData.IN2.reduce((sum, cur) => {
+      return (sum += cur.transMoney);
+    }, 0);
+    const OUT2 = finClassData.OUT2.reduce((sum, cur) => {
+      return (sum += cur.transMoney);
+    }, 0);
+    const IN3 = finClassData.IN3.reduce((sum, cur) => {
+      return (sum += cur.transMoney);
+    }, 0);
+    const OUT3 = finClassData.OUT3.reduce((sum, cur) => {
+      return (sum += cur.transMoney);
+    }, 0);
+    console.log({IN2, OUT2, IN3, OUT3});
+    setEquity(-IN2 + OUT2 + IN3 - OUT3);
   };
 
   return (
@@ -96,7 +116,9 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
                     <div>
                       <ul>
                         {finClassData.IN1.map((data) => (
-                          <li className="flex justify-between">
+                          <li
+                            key={data.categoryName}
+                            className="flex justify-between">
                             <label>{data.categoryName}</label>
                             <div className="w-32 text-right">
                               {finNumber(data.transMoney)}
@@ -115,7 +137,9 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
                     <div>
                       <ul>
                         {finClassData.OUT1.map((data) => (
-                          <li className="flex justify-between">
+                          <li
+                            key={data.categoryName}
+                            className="flex justify-between">
                             <label>{data.categoryName}</label>
                             <div className="w-32 text-right">
                               {finNumber(data.transMoney)}
@@ -134,7 +158,9 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
                     <div>
                       <ul>
                         {finClassData.IN3.map((data) => (
-                          <li className="flex justify-between">
+                          <li
+                            key={data.categoryName}
+                            className="flex justify-between">
                             <label>{data.categoryName}</label>
                             <div className="w-32 text-right">
                               {finNumber(data.transMoney)}
@@ -142,7 +168,9 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
                           </li>
                         ))}
                         {finClassData.OUT3.map((data) => (
-                          <li className="flex justify-between">
+                          <li
+                            key={data.categoryName}
+                            className="flex justify-between">
                             <label>{data.categoryName}</label>
                             <div className="w-32 text-right">
                               {finNumber(data.transMoney * -1)}
@@ -161,7 +189,9 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
                     <div>
                       <ul>
                         {finClassData.IN2.map((data) => (
-                          <li className="flex justify-between">
+                          <li
+                            key={data.categoryName}
+                            className="flex justify-between">
                             <label>{data.categoryName}</label>
                             <div className="w-32 text-right">
                               {finNumber(data.transMoney)}
@@ -169,7 +199,9 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
                           </li>
                         ))}
                         {finClassData.OUT2.map((data) => (
-                          <li className="flex justify-between">
+                          <li
+                            key={data.categoryName}
+                            className="flex justify-between">
                             <label>{data.categoryName}</label>
                             <div className="w-32 text-right">
                               {finNumber(data.transMoney * -1)}
@@ -189,7 +221,9 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
                       <ul>
                         <li className="flex justify-between">
                           <label></label>
-                          <div className="w-32 text-right"></div>
+                          <div className="w-32 text-right">
+                            {finNumber(equity)}
+                          </div>
                         </li>
                       </ul>
                     </div>
