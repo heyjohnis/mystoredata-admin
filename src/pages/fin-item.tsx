@@ -37,8 +37,16 @@ const fields: Record<string, string>[] = [
     key: "accountNum",
   },
   {
-    name: "현재평가액",
+    name: "설정일(초기값)",
+    key: "defaultDate",
+  },
+  {
+    name: "원금(초기값)",
     key: "amount",
+  },
+  {
+    name: "현재평가액",
+    key: "currentAmount",
   },
 ];
 
@@ -57,6 +65,8 @@ const InitItem = {
   itemName: "",
   accountNum: "",
   amount: 0,
+  currentAmount: 0,
+  defaultDate: new Date(),
   isFixed: false,
   useYn: true,
 };
@@ -160,7 +170,13 @@ const Index: React.FC = () => {
                     {item.accountNum}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
+                    {new Date(item.defaultDate).toLocaleDateString("ko-KR")}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
                     {item.amount.toLocaleString()}
+                  </td>
+                  <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
+                    {item.currentAmount.toLocaleString()}
                   </td>
                 </tr>
               ))}

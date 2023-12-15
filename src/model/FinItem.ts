@@ -12,6 +12,8 @@ export type FinItemProps = {
   finCorpName: string;
   itemName: string;
   accountNum: string;
+  defaultDate: Date;
+  currentAmount: number;
   amount: number;
   isFixed: boolean;
   useYn: boolean;

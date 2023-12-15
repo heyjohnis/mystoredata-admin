@@ -4,11 +4,8 @@ import {FiX} from "react-icons/fi";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
-import {GET, POST, PUT, DELETE} from "utils/restApi";
-import {TransMoneyProps} from "model/TransMoney";
+import {POST, PUT, DELETE} from "utils/restApi";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
-import {CategoryProps} from "model/Category";
-import Switch from "components/switch";
 import {FinItemProps} from "model/FinItem";
 import {BankCorpCode, FinItemCode} from "data/commonCode";
 import {Select} from "components/forms/select";
@@ -200,12 +197,30 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
                     />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>현재평가액</Label>
+                    <Label>설정일(초기일)</Label>
+                    <Input
+                      name="defaultDate"
+                      type="date"
+                      onChange={handleChange}
+                      value={form?.defaultDate.toString().substring(0, 10)}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>원금(초기값)</Label>
                     <Input
                       name="amount"
                       type="text"
                       onChange={handleChange}
                       value={form?.amount.toLocaleString()}
+                    />
+                  </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>현재평가액</Label>
+                    <Input
+                      name="currentAmount"
+                      type="text"
+                      onChange={handleChange}
+                      value={form?.currentAmount.toLocaleString()}
                       disabled={form?.isFixed}
                     />
                   </InputWrapper>
