@@ -62,7 +62,7 @@ const initCategory: ClassCategoryProps = {
 
 const initForm: SearchProps = {
   userId: "bethelean",
-  fromAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
+  fromAt: new Date().getFullYear() + "-01-01",
   toAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
 };
 

@@ -21,7 +21,7 @@ export default function FinStatusInOutUnit({
     categoryData.map((c: any, i: number) => (
       <li
         key={i}
-        className="flex justify-between"
+        className="flex justify-between cursor-pointer"
         onClick={() => getTransData(finClassCode, c.category)}>
         <div className="inline-block w-[150px] truncate text-center">
           {c.categoryName}

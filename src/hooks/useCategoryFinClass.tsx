@@ -1,4 +1,4 @@
-import React, {use, useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {POST} from "utils/restApi";
 import {SearchProps} from "model/SearchForm";
 import {CategoryProps, ClassCategoryProps} from "model/ClassCategoryProps";
@@ -35,30 +35,30 @@ export const useCategoryFinClass = (form: SearchProps) => {
     });
 
     // 개인사용목적만 분류
-    // const OUT1Logs = classCategory["OUT1"];
-    // const personalLogs = OUT1Logs.filter(
-    //   (log: CategoryProps) => log?.useKind === "PERSONAL"
-    // );
-    // const sumPersonalLog = personalLogs.reduce(
-    //   (sum: number, cur: CategoryProps) => {
-    //     return sum + cur.transMoney;
-    //   },
-    //   0
-    // );
-    // const bizLogs = OUT1Logs.filter(
-    //   (log: CategoryProps) => log?.useKind === "BIZ"
-    // );
+    const OUT1Logs = classCategory["OUT1"];
+    const personalLogs = OUT1Logs.filter(
+      (log: CategoryProps) => log?.useKind === "PERSONAL"
+    );
+    const sumPersonalLog = personalLogs.reduce(
+      (sum: number, cur: CategoryProps) => {
+        return sum + cur.transMoney;
+      },
+      0
+    );
+    const bizLogs = OUT1Logs.filter(
+      (log: CategoryProps) => log?.useKind === "BIZ"
+    );
 
-    // classCategory["OUT1"] = [
-    //   ...bizLogs,
-    //   {
-    //     category: "-111111111",
-    //     categoryName: "개인사용목적*",
-    //     finClassCode: "OUT1",
-    //     transMoney: sumPersonalLog,
-    //     useKind: "PERSONAL",
-    //   },
-    // ];
+    classCategory["OUT1"] = [
+      ...bizLogs,
+      {
+        category: "-99999999",
+        categoryName: "개인사용목적*",
+        finClassCode: "OUT1",
+        transMoney: sumPersonalLog,
+        useKind: "PERSONAL",
+      },
+    ];
 
     const IN_OUT2_ARR = [
       ...classCategory["IN2"],
