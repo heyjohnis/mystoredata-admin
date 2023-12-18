@@ -98,8 +98,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
     POST(`emp/reg`, form)
       .then((res: any) => {
         console.log("save employee: ", res);
-        // setForm(res.data);
-        if (res?.data.n > 0) {
+        if (res?.status === 200) {
           closedModal(true);
           alert("저장되었습니다");
         }
@@ -116,13 +115,17 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
       finItemName: FinItemCode[type],
       finName: form?.transRemark,
     };
-    POST(`debt/reg`, req).then((res: any) => {
-      console.log("save loan: ", res);
-      if (res?.data.n > 0) {
-        closedModal(true);
-        alert("저장되었습니다");
-      }
-    });
+    POST(`debt/reg`, req)
+      .then((res: any) => {
+        console.log("save loan: ", res);
+        if (res?.status === 200) {
+          closedModal(true);
+          alert("저장되었습니다");
+        }
+      })
+      .catch((err) => {
+        console.log({err});
+      });
   };
   const saveAsset = (type: string) => {
     console.log("saveAsset: ", type);
@@ -132,13 +135,17 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
       finItemName: FinItemCode[type],
       finName: form?.transRemark,
     };
-    POST(`asset/reg`, req).then((res: any) => {
-      console.log("save asset: ", res);
-      if (res?.data.n > 0) {
-        closedModal(true);
-        alert("저장되었습니다");
-      }
-    });
+    POST(`asset/reg`, req)
+      .then((res: any) => {
+        console.log("save asset: ", res);
+        if (res?.status === 200) {
+          closedModal(true);
+          alert("저장되었습니다");
+        }
+      })
+      .catch((err) => {
+        console.log({err});
+      });
   };
 
   useEffect(() => {
