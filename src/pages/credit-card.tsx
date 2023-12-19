@@ -33,6 +33,7 @@ const Index: React.FC = () => {
   const [cardLogs, setCardLogs] = useState<TransMoneyProps[]>([]);
   const [cashedLogs, setCashedLogs] = useState<TransMoneyProps[]>([]);
   const [asset, setAsset] = useState<TransMoneyProps | null>(null);
+  const [sumCardDebtAmt, setSumCardDebtAmt] = useState<number>(0);
 
   useEffect(() => {
     getTradeCorpList();
@@ -55,16 +56,26 @@ const Index: React.FC = () => {
   };
 
   const getPayableLogs = () => {
-    POST(`credit-card/cashed`, form).then((res: any) => {
-      console.log({res});
+    POST(`credit-card/debt`, form).then((res) => {
+      console.log("getPayableLogs: ", res);
       setCashedLogs(res.data);
+      sumCardDebt(res.data);
     });
+  };
+
+  const sumCardDebt = (logs: TransMoneyProps[]) => {
+    const sum = logs.reduce((acc: number, cur: TransMoneyProps) => {
+      acc += cur.finClassCode === "IN2" ? cur.transMoney : cur.transMoney * -1;
+      return acc;
+    }, 0);
+    console.log("sumCardDebt: ", sum);
+    setSumCardDebtAmt(sum);
   };
 
   return (
     <>
       <Notification />
-      <SectionTitle title="Debt Info" subtitle="부채 정보" />
+      <SectionTitle title="Debt Info" subtitle="신용카드 정보" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
         <div className="w-full overflow-x-auto">
@@ -107,7 +118,12 @@ const Index: React.FC = () => {
         </div>
       </Widget>
       <Widget>
-        <h3 className="m-2 text-lg font-bold	">카드대금결제</h3>
+        <h3 className="m-2 text-lg font-bold	">
+          카드대금결제{" "}
+          <span className="text-sm">
+            {sumCardDebtAmt.toLocaleString("ko-KR")}
+          </span>
+        </h3>
         <TransMoneyLog logs={cashedLogs} setData={setAsset} />
       </Widget>
       <Widget>
