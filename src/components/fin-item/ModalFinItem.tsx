@@ -6,19 +6,21 @@ import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
 import {POST, PUT, DELETE} from "utils/restApi";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
-import {FinItemProps} from "model/FinItem";
+import {FinItemProps} from "model/FinItemProps";
 import {BankCorpCode, FinItemCode} from "data/commonCode";
 import {Select} from "components/forms/select";
 
 type Props = {
-  finItem: FinItemProps | null;
+  finItem: FinItemProps;
   category?: Record<string, string>;
   closedModal: (isSaved: boolean) => void;
+  saveItem: (finItem: FinItemProps) => void;
+  deleteItem: (finItem: FinItemProps) => void;
 };
 
-const ModalFinItem = ({finItem, closedModal}: Props) => {
+const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [form, setForm] = useState<FinItemProps>();
+  const [form, setForm] = useState<FinItemProps>(finItem);
   const [isChanged, setIsChanged] = useState<boolean>(false);
   const closeModal = () => {
     console.log("close modal");
@@ -26,7 +28,7 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
     closedModal(isChanged);
   };
   useEffect(() => {
-    if (finItem) {
+    if (finItem._id) {
       setIsOpen(true);
       setForm(finItem);
     }
@@ -40,53 +42,6 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
         ...prevState,
         itemTypeName: FinItemCode[value],
       }));
-    }
-  };
-
-  const saveFinItemInfo = () => {
-    if (!form?._id) {
-      POST("fin-item/reg", form)
-        .then((res: any) => {
-          if (res?.data) {
-            setForm(res.data);
-            setIsChanged(true);
-            alert("저장되었습니다");
-            closedModal(true);
-          } else {
-            alert("저장에 실패하였습니다");
-          }
-        })
-        .catch((err) => {
-          console.log({err});
-          alert("저장에 실패하였습니다" + err.toString());
-        });
-    } else {
-      console.log("update: ", form);
-      PUT(`fin-item/update/${form?._id}`, form)
-        .then((res: any) => {
-          console.log({res});
-          setIsChanged(true);
-          alert("저장되었습니다");
-        })
-        .catch((err) => {
-          console.log({err});
-        });
-    }
-  };
-
-  const deleteFinItemInfo = () => {
-    if (form?._id) {
-      const isDelete: boolean = window.confirm("삭제하시겠습니까?");
-      if (!isDelete) return;
-      DELETE(`fin-item/delete/${form?._id}`)
-        .then((res: any) => {
-          console.log({res});
-          setIsChanged(true);
-          alert("삭제되었습니다");
-        })
-        .catch((err) => {
-          console.log({err});
-        });
     }
   };
 
@@ -170,7 +125,7 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
                     <Label>재무분류</Label>
                     <CommonCodeSelect
                       name="itemType"
-                      value={form?.itemType}
+                      value={form?.finItemCode}
                       commonCode={FinItemCode}
                       onChange={handleChange}
                     />
@@ -211,7 +166,7 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
                       name="amount"
                       type="text"
                       onChange={handleChange}
-                      value={form?.amount.toLocaleString()}
+                      value={(form?.amount || 0).toLocaleString()}
                     />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
@@ -220,7 +175,7 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
                       name="currentAmount"
                       type="text"
                       onChange={handleChange}
-                      value={form?.currentAmount.toLocaleString()}
+                      value={(form?.currentAmount || 0).toLocaleString()}
                       disabled={form?.isFixed}
                     />
                   </InputWrapper>
@@ -229,14 +184,14 @@ const ModalFinItem = ({finItem, closedModal}: Props) => {
                   <button
                     type="button"
                     className="px-4 py-2 text-xs font-bold text-white uppercase bg-blue-500 rounded-lg hover:bg-blue-600"
-                    onClick={saveFinItemInfo}>
+                    onClick={() => saveItem(form)}>
                     저장
                   </button>
                   {!form?.isFixed && form?.user && (
                     <button
                       type="button"
                       className="px-4 py-2 text-xs font-bold text-white uppercase bg-red-500 rounded-lg hover:bg-red-600"
-                      onClick={deleteFinItemInfo}>
+                      onClick={() => deleteItem(form)}>
                       삭제
                     </button>
                   )}

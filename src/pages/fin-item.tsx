@@ -6,9 +6,9 @@ import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 
 import {useEffect, useState} from "react";
-import {GET} from "utils/restApi";
+import {GET, POST, PUT, DELETE} from "utils/restApi";
 
-import {FinItemProps} from "model/FinItem";
+import {FinItemProps} from "model/FinItemProps";
 import ModalFinItem from "components/fin-item/ModalFinItem";
 
 const fields: Record<string, string>[] = [
@@ -50,7 +50,7 @@ const fields: Record<string, string>[] = [
   },
 ];
 
-const InitItem = {
+const initItem = {
   _id: "",
   user: "",
   userId: "",
@@ -64,18 +64,25 @@ const InitItem = {
   finCorpName: "",
   itemName: "",
   accountNum: "",
-  amount: 0,
-  currentAmount: 0,
   defaultDate: new Date(),
-  isFixed: false,
+  currentAmount: 0,
+  isFixed: true,
+  createdAt: new Date(),
+  corpNum: "",
+  corpName: "",
+  finItemName: "",
+  finItemCode: "",
+  finName: "",
+  transRemark: "",
   useYn: true,
+  amount: 0,
 };
 
 const Index: React.FC = () => {
   const [items, setItems] = useState<FinItemProps[]>([]);
   const [userId, setUserId] = useState<string>("");
   const [corpNum, setCorpNum] = useState<string>("");
-  const [selectedItem, setSelectedItem] = useState<FinItemProps | null>(null);
+  const [selectedItem, setSelectedItem] = useState<FinItemProps>(initItem);
   useEffect(() => {
     getFinItems();
   }, [userId, corpNum]);
@@ -91,11 +98,11 @@ const Index: React.FC = () => {
   };
 
   const regFinItem = () => {
-    openModal(InitItem);
+    openModal(initItem);
   };
 
   const closedModal = (isChanged: boolean) => {
-    setSelectedItem(null);
+    setSelectedItem(initItem);
     if (isChanged) {
       getFinItems();
     }
@@ -103,6 +110,49 @@ const Index: React.FC = () => {
 
   const openModal = (item: FinItemProps | any) => {
     setSelectedItem(item);
+  };
+
+  const saveFinItemInfo = (item: FinItemProps) => {
+    if (!item?._id) {
+      POST("fin-item/reg", item)
+        .then((res: any) => {
+          if (res?.data) {
+            alert("저장되었습니다");
+            closedModal(true);
+          } else {
+            alert("저장에 실패하였습니다");
+          }
+        })
+        .catch((err) => {
+          console.log({err});
+          alert("저장에 실패하였습니다" + err.toString());
+        });
+    } else {
+      console.log("update: ", item);
+      PUT(`fin-item/update/${item?._id}`, item)
+        .then((res: any) => {
+          console.log({res});
+          alert("저장되었습니다");
+        })
+        .catch((err) => {
+          console.log({err});
+        });
+    }
+  };
+
+  const deleteFinItemInfo = (item: FinItemProps) => {
+    if (item?._id) {
+      const isDelete: boolean = window.confirm("삭제하시겠습니까?");
+      if (!isDelete) return;
+      DELETE(`fin-item/delete/${item?._id}`)
+        .then((res: any) => {
+          console.log({res});
+          alert("삭제되었습니다");
+        })
+        .catch((err) => {
+          console.log({err});
+        });
+    }
   };
 
   return (
@@ -187,6 +237,8 @@ const Index: React.FC = () => {
       <ModalFinItem
         finItem={selectedItem}
         closedModal={(isChanged) => closedModal(isChanged)}
+        saveItem={(item) => saveFinItemInfo(item)}
+        deleteItem={(item) => deleteFinItemInfo(item)}
       />
     </>
   );

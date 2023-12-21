@@ -1,15 +1,27 @@
-import {UserProps} from "./user";
-
 export type FinItemProps = {
   _id: string;
-  user: UserProps;
+  user: string;
   userId: string;
+  account: string;
+  card: string;
+  itemKind: string;
+  itemKindName: string;
+  itemType: string;
+  itemTypeName: string;
+  finCorpCode: string;
+  finCorpName: string;
+  itemName: string;
+  accountNum: string;
+  defaultDate: Date;
+  currentAmount: number;
+  isFixed: boolean;
+  createdAt?: Date;
   corpNum: string;
   corpName: string;
-  card: string;
   finItemName: string;
   finItemCode: string;
   finName: string;
   transRemark: string;
   useYn: boolean;
+  amount: number;
 };
