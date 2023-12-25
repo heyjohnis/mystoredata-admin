@@ -4,7 +4,6 @@ import {FiX} from "react-icons/fi";
 import {InputWrapper} from "components/forms/input-wrapper";
 import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
-import {POST, PUT, DELETE} from "utils/restApi";
 import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
 import {FinItemProps} from "model/FinItemProps";
 import {BankCorpCode, FinItemCode} from "data/commonCode";

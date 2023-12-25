@@ -107,6 +107,9 @@ const Index: React.FC = () => {
 
   const saveInfo = (finItem: FinItemProps) => {
     console.log("saveInfo", finItem);
+    POST(`asset/save`, finItem).then((res: any) => {
+      console.log({res});
+    });
     closedModal(true);
   };
 
