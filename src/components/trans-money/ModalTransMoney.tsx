@@ -291,7 +291,6 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
                       value={form?.finClassCode}
                       commonCode={FinClassCode}
                       onChange={handleChange}
-                      disabled={true}
                     />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">

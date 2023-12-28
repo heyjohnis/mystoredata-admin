@@ -151,7 +151,6 @@ const Index: React.FC = () => {
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                       {asset.corpNum} {asset.corpName} ({asset.userId})
                     </td>
-
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                       {asset.finItemCode}
                     </td>
