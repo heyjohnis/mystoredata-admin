@@ -191,7 +191,9 @@ const Index: React.FC = () => {
         finItem={finItem}
         closedModal={closedModal}
         saveItem={saveInfo}
-        deleteItem={() => {}}
+        deleteItem={() => {
+          console.log("deleteItem");
+        }}
       />
     </>
   );
