@@ -29,6 +29,10 @@ import CardLog from "components/card-log/CardLog";
 import TaxLogs from "components/tax/TaxLog";
 import {TaxLogProps} from "model/TaxLog";
 import ModalFinStatus from "components/fin-status/ModalFinStatus";
+import {InputWrapper} from "components/forms/input-wrapper";
+import CommonCodeSelect from "components/CommonCodeSelect";
+import {Label} from "components/forms/label";
+import {Input} from "components/forms/input";
 
 interface FinAmount {
   [key: string]: number;
@@ -77,73 +81,61 @@ const Index: React.FC = () => {
   const [taxLogs, setTaxLogs] = useState<TaxLogProps[]>([]);
   const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
   const [finData, setFinData] = useState<TransMoneyProps[]>([]);
-  // 통장거래내역
-  const accountLog = useAccountLog(form);
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setAccountLogs(accountLog);
-  }, [form, accountLog]);
+  const [userId, setUserId] = useState<string>("");
 
-  // 카드거래내역
-  const checkCardLog = useCardLog(form, "CHECK");
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setCheckCardLogs(checkCardLog);
-  }, [form, checkCardLog]);
+  const handleChange = (e: any) => {
+    setForm((prevState: any) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  // 카드거래내역
-  const creditCardLog = useCardLog(form, "CREDIT");
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setCreditCardLogs(creditCardLog);
-  }, [form, creditCardLog]);
+  const handleSubmit = () => {
+    getTransData();
+  };
 
-  // 세금계산서내역
-  const taxLog = useTaxLog(form);
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setTaxLogs(taxLog);
-  }, [form, taxLog]);
-
-  // 전체거래내역조회
-  const transLog = useTransLogs(form);
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setLogs(transLog);
-  }, [form, transLog]);
-
-  // 거래분류별 카고고리 합산 리스트
-  const categoryFinClass = useCategoryFinClass(form);
-  useEffect(() => {
-    setCategory(categoryFinClass);
-  }, [categoryFinClass]);
-
-  // 거래분류별 합산 금액
-  const finStatusData = useFinStatusData(form);
-  useEffect(() => {
-    setFinAmount(finStatusData);
-  }, [finStatusData]);
-
-  const getTransData = (code: string, category = "") => {
-    POST(`trans/log`, {
+  const getTransData = () => {
+    POST(`annual/year`, {
       ...form,
-      finClassCodes: code,
-      useYn: true,
-      category,
     }).then((res: any) => {
-      console.log("transdata: ", res.data);
-      setLogs(res.data);
+      console.log("transdata: ", res?.data?.category);
+      setCategory(res?.data?.category);
     });
   };
 
-  const closedModal = (isUpdated = false) => {
-    console.log("closedModal");
-  };
+  useEffect(() => {}, [category]);
+
   return (
     <>
-      <SectionTitle title="Financial Status" subtitle="재정상태" />
+      <SectionTitle title="Financial Status" subtitle="재무상태" />
       <Widget>
-        <SearchForm form={form} handleChange={setForm} />
+        <div className="flex m-3">
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>사용자ID</Label>
+            <Input
+              name="userId"
+              type="text"
+              value={form.userId}
+              onChange={handleChange}
+            />
+          </InputWrapper>
+
+          <InputWrapper outerClassName="sm:col-span-12 mt-2 mr-2">
+            <Label>연도</Label>
+            <CommonCodeSelect
+              name="year"
+              onChange={handleChange}
+              value={form?.year}
+              commonCode={{"2023": "2023", "2024": "2024"}}
+            />
+          </InputWrapper>
+
+          <button
+            className="px-4 py-2 text-xs font-bold text-white uppercase bg-gray-500 rounded-lg hover:bg-gray-600 mr-1"
+            onClick={handleSubmit}>
+            조회
+          </button>
+        </div>
 
         <div className="justify-between">
           <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">

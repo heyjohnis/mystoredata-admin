@@ -18,6 +18,7 @@ import {AiOutlineCreditCard} from "react-icons/ai";
 import {MdPeopleOutline, MdOutlineLeaderboard} from "react-icons/md";
 import {LiaMoneyBillAlt} from "react-icons/lia";
 import {AiOutlineMinusCircle} from "react-icons/ai";
+import {LuSheet} from "react-icons/lu";
 
 export type NavigationState = {
   title: string;
@@ -173,7 +174,7 @@ const initialState: NavigationState[] = [
       },
       {
         url: "/fin-bs",
-        icon: <AiOutlineDashboard size={20} />,
+        icon: <LuSheet size={20} />,
         title: "재무상태표",
         items: [],
       },

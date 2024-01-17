@@ -8,4 +8,5 @@ export type SearchProps = {
   finClassCode?: string;
   useKind?: string;
   all?: string;
+  year?: string;
 };
