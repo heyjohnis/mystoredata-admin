@@ -6,33 +6,20 @@ import {SearchProps} from "model/SearchForm";
 import {AccountLogProps} from "model/accountLog";
 import {CardLogProps} from "model/cardLog";
 
-import {useCategoryFinClass} from "hooks/useCategoryFinClass";
-import {useFinStatusData} from "hooks/useFinStatusData";
-import {useTransLogs} from "hooks/useTransLog";
-import {useAccountLog} from "hooks/useAccountLog";
-import {useCardLog} from "hooks/useCardLog";
-import {useTaxLog} from "hooks/useTaxLog";
-
 import {dateChange} from "utils/date";
-import {isEmptyForm} from "utils/form";
 import {POST} from "utils/restApi";
 
 import TransMoneyLog from "components/trans-money/TransMoneyLog";
 import FinClassStatus from "components/fin-status/FinClassStatus";
 import FinStatusTradeKind from "components/fin-status/FinStatusTradeKind";
 import SectionTitle from "components/section-title";
-import SearchForm from "components/SearchForm";
 import Widget from "components/widget";
-import AccountLog from "components/account-log/AccountLog";
-import FinStatusTab from "components/fin-status/FinStatusTab";
-import CardLog from "components/card-log/CardLog";
-import TaxLogs from "components/tax/TaxLog";
 import {TaxLogProps} from "model/TaxLog";
-import ModalFinStatus from "components/fin-status/ModalFinStatus";
 import {InputWrapper} from "components/forms/input-wrapper";
 import CommonCodeSelect from "components/CommonCodeSelect";
 import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
+import {finNumber} from "utils/finNumber";
 
 interface FinAmount {
   [key: string]: number;
@@ -64,24 +51,12 @@ const initCategory: ClassCategoryProps = {
   IN_OUT3: [],
 };
 
-const initForm: SearchProps = {
-  userId: "bethelean",
-  fromAt: new Date().getFullYear() + "-01-01",
-  toAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
-};
-
 const Index: React.FC = () => {
-  const [form, setForm] = useState<SearchProps>(initForm);
+  const [form, setForm] = useState<SearchProps>({});
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
   const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
-  const [accountLogs, setAccountLogs] = useState<AccountLogProps[]>([]);
-  const [creditCardLogs, setCreditCardLogs] = useState<CardLogProps[]>([]);
-  const [checkCardLogs, setCheckCardLogs] = useState<CardLogProps[]>([]);
-  const [taxLogs, setTaxLogs] = useState<TaxLogProps[]>([]);
   const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
-  const [finData, setFinData] = useState<TransMoneyProps[]>([]);
-  const [userId, setUserId] = useState<string>("");
 
   const handleChange = (e: any) => {
     setForm((prevState: any) => ({
@@ -98,8 +73,7 @@ const Index: React.FC = () => {
     POST(`annual/year`, {
       ...form,
     }).then((res: any) => {
-      console.log("transdata: ", res?.data?.category);
-      setCategory(res?.data?.category);
+      console.log("transdata: ", res?.data);
     });
   };
 
@@ -145,19 +119,163 @@ const Index: React.FC = () => {
           <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <h2 className="w-full text-lg font-bold mb-3">제무재표</h2>
             <div className="w-full">
-              <FinStatusTradeKind
-                finAmount={finAmount}
-                category={category}
-                getTransData={getTransData}
-                tradeKind={form?.tradeKind}
-                inOutAccount={accountAmount}
-              />
+              <div className="p-5 pt-1">
+                <table className="w-full">
+                  <tbody>
+                    {["CASH"].includes(tradeKind || "") && (
+                      <>
+                        <tr className="border-b-[2px] border-t-[2px]">
+                          <td>입금</td>
+                          <td className="text-right">
+                            <ul>
+                              <FinStatusInOutUnit
+                                finClassCode="IN3"
+                                inOutAccount={inOutAccount}
+                                getTransData={getTransData}
+                              />
+
+                              <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                                <div className="text-center w-1/2">소계</div>
+                                <div className="w-1/2">
+                                  {sumInOutAccount("IN3", inOutAccount)}
+                                </div>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr className="border-b-[2px]">
+                          <td>출금</td>
+                          <td className="text-right">
+                            <ul>
+                              <FinStatusInOutUnit
+                                finClassCode="OUT3"
+                                inOutAccount={inOutAccount}
+                                getTransData={getTransData}
+                                isNegativeNumber={true}
+                              />
+                              <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                                <div className="text-center w-1/2">소계</div>
+                                <div className="w-1/2">
+                                  {sumInOutAccount("OUT3", inOutAccount)}
+                                </div>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      </>
+                    )}
+                    {!["CASH"].includes(tradeKind || "") && (
+                      <>
+                        <tr className="border-b-[2px] border-t-[2px] ">
+                          <td>수익</td>
+                          <td className="text-right">
+                            <ul>
+                              <FinStatusTradeKindUnit
+                                finClassCode="IN1"
+                                finAmount={finAmount}
+                                category={category}
+                                getTransData={getTransData}
+                              />
+
+                              <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                                <div className="text-center w-1/2">소계</div>
+                                <div className="w-1/2">
+                                  {finNumber(finAmount["IN1"])}
+                                </div>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr className="border-b-[2px]">
+                          <td>지출</td>
+                          <td className="text-right">
+                            <ul>
+                              <FinStatusTradeKindUnit
+                                finClassCode="OUT1"
+                                finAmount={finAmount}
+                                category={category}
+                                getTransData={getTransData}
+                                isNegativeNumber={true}
+                              />
+                              <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                                <div className="text-center w-1/2">소계</div>
+                                <div className="w-1/2">
+                                  {finNumber(finAmount["OUT1"])}
+                                </div>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      </>
+                    )}
+                    <tr className="border-b-[3px]">
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr className="border-b-[2px]">
+                      <td>자산</td>
+                      <td className="text-right">
+                        <ul>
+                          <FinStatusTradeKindUnit
+                            finClassCode="IN3_OUT3"
+                            finAmount={finAmount}
+                            category={category}
+                            getTransData={getTransData}
+                          />
+                          <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                            <div className="text-center w-1/2">소계</div>
+                            <div className="">
+                              {finNumber(finAmount["IN3"] - finAmount["OUT3"])}
+                            </div>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="border-b-[2px]">
+                      <td>부채</td>
+                      <td className="text-right">
+                        <ul>
+                          <FinStatusTradeKindUnit
+                            finClassCode="IN2_OUT2"
+                            finAmount={finAmount}
+                            category={category}
+                            getTransData={getTransData}
+                          />
+                          <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                            <div className="text-center w-1/2">소계</div>
+                            <div className="w-1/2">
+                              {finNumber(finAmount["IN2"] - finAmount["OUT2"])}
+                            </div>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="border-b-[2px]">
+                      <td>자본</td>
+                      <td className="text-right">
+                        <li className="flex justify-between font-bold">
+                          <div className="text-center w-1/2">소계</div>
+                          <div className="w-1/2">
+                            {finNumber(
+                              finAmount.IN3 -
+                                finAmount.OUT3 -
+                                finAmount.IN2 +
+                                finAmount.OUT2
+                            )}
+                          </div>
+                        </li>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </Widget>
-      <Widget>
-        <TransMoneyLog logs={logs} />
       </Widget>
     </>
   );
