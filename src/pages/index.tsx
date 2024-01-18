@@ -136,7 +136,7 @@ const Index: React.FC = () => {
       ...bizLogs,
       {
         category: "-111111111",
-        categoryName: "개인사용목적*",
+        categoryName: "가계비",
         finClassCode: "OUT1",
         transMoney: sumPersonalLog,
         useKind: "PERSONAL",

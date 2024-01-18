@@ -1,62 +1,41 @@
 import {useEffect, useState} from "react";
 
-import {TransMoneyProps} from "model/TransMoney";
 import {ClassCategoryProps} from "model/ClassCategoryProps";
 import {SearchProps} from "model/SearchForm";
-import {AccountLogProps} from "model/accountLog";
-import {CardLogProps} from "model/cardLog";
 
 import {dateChange} from "utils/date";
 import {POST} from "utils/restApi";
 
-import TransMoneyLog from "components/trans-money/TransMoneyLog";
-import FinClassStatus from "components/fin-status/FinClassStatus";
-import FinStatusTradeKind from "components/fin-status/FinStatusTradeKind";
 import SectionTitle from "components/section-title";
 import Widget from "components/widget";
-import {TaxLogProps} from "model/TaxLog";
-import {InputWrapper} from "components/forms/input-wrapper";
 import CommonCodeSelect from "components/CommonCodeSelect";
 import {Label} from "components/forms/label";
 import {Input} from "components/forms/input";
+import {InputWrapper} from "components/forms/input-wrapper";
 import {finNumber} from "utils/finNumber";
 
 interface FinAmount {
   [key: string]: number;
 }
 
-const initFinAmount: FinAmount = {
-  IN1: 0,
-  IN2: 0,
-  IN3: 0,
-  OUT1: 0,
-  OUT2: 0,
-  OUT3: 0,
+type CategoryProps = {
+  category: string;
+  categoryName: string;
+  finClassCode: string;
+  total: number;
 };
 
-type assetProps = {
-  account: string;
-  itemName: string;
-  amount: number;
-};
-
-const initCategory: ClassCategoryProps = {
-  IN1: [],
-  IN2: [],
-  IN3: [],
-  OUT1: [],
-  OUT2: [],
-  OUT3: [],
-  IN_OUT2: [],
-  IN_OUT3: [],
+type FinClassDataProps = {
+  [key: string]: CategoryProps[];
 };
 
 const Index: React.FC = () => {
-  const [form, setForm] = useState<SearchProps>({});
-  const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
-  const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
-  const [logs, setLogs] = useState<TransMoneyProps[]>([]);
-  const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
+  const [form, setForm] = useState<SearchProps>({
+    userId: "bethelean",
+    year: "2023",
+  });
+  const [finAmount, setFinAmount] = useState<FinAmount>({});
+  const [finClass, setFinClass] = useState<FinClassDataProps>({});
 
   const handleChange = (e: any) => {
     setForm((prevState: any) => ({
@@ -66,7 +45,12 @@ const Index: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    getTransData();
+    POST(`annual/save`, {
+      ...form,
+    }).then((res: any) => {
+      console.log("resum: ");
+      getTransData();
+    });
   };
 
   const getTransData = () => {
@@ -74,10 +58,14 @@ const Index: React.FC = () => {
       ...form,
     }).then((res: any) => {
       console.log("transdata: ", res?.data);
+      setFinClass(res?.data?.finClass);
+      setFinAmount(res?.data?.finClassAmount);
     });
   };
 
-  useEffect(() => {}, [category]);
+  useEffect(() => {
+    getTransData();
+  }, [form]);
 
   return (
     <>
@@ -107,14 +95,70 @@ const Index: React.FC = () => {
           <button
             className="px-4 py-2 text-xs font-bold text-white uppercase bg-gray-500 rounded-lg hover:bg-gray-600 mr-1"
             onClick={handleSubmit}>
-            조회
+            재계산
           </button>
         </div>
 
         <div className="justify-between">
           <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <h2 className="text-lg font-bold mb-3">거래분류</h2>
-            <FinClassStatus finAmount={finAmount} getTransData={getTransData} />
+            <div className="flex justify-between m-5">
+              <div className="flex justify-center cursor-pointer items-center">
+                <div className="w-24 text-gray-500	text-xs mr-3">
+                  번것(수익+)
+                </div>
+                <div className="w-24 text-right text-lg">
+                  {finNumber(finAmount?.IN1)}
+                </div>
+              </div>
+              <div className="bg-gray w-2"></div>
+              <div className="flex justify-center cursor-pointer items-center">
+                <div className="w-24 text-gray-500	text-xs mr-3">
+                  쓴것(비용+)
+                </div>
+                <div className="w-24 text-right text-lg">
+                  {finNumber(finAmount?.OUT1)}
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between m-5">
+              <div className="flex justify-center cursor-pointer items-center">
+                <div className="w-24 text-gray-500	text-xs mr-3">
+                  빌린돈(부채+)
+                </div>
+                <div className="w-24 text-right text-lg">
+                  {finNumber(finAmount?.IN2)}
+                </div>
+              </div>
+              <div className="bg-gray w-2"></div>
+              <div className="flex justify-center cursor-pointer items-center">
+                <div className="w-24 text-gray-500	text-xs mr-3">
+                  갚은돈(부채-)
+                </div>
+                <div className="w-24 text-right text-lg">
+                  {finNumber(finAmount?.OUT2 || 0 * -1)}
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between m-5">
+              <div className="flex justify-center cursor-pointer items-center">
+                <div className="w-24 text-gray-500	text-xs mr-3">
+                  나머지(자산+)
+                </div>
+                <div className="w-24 text-right text-lg">
+                  {finNumber(finAmount?.IN3)}
+                </div>
+              </div>
+              <div className="bg-gray w-2"></div>
+              <div className="flex justify-center cursor-pointer items-center">
+                <div className="w-24 text-gray-500	text-xs mr-3">
+                  나머지(자산-)
+                </div>
+                <div className="w-24 text-right text-lg">
+                  {finNumber(finAmount?.OUT3 || 0 * -1)}
+                </div>
+              </div>
+            </div>
           </div>
           <div className="w-100 p-4 mt-4 m-3 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
             <h2 className="w-full text-lg font-bold mb-3">제무재표</h2>
@@ -122,92 +166,62 @@ const Index: React.FC = () => {
               <div className="p-5 pt-1">
                 <table className="w-full">
                   <tbody>
-                    {["CASH"].includes(tradeKind || "") && (
-                      <>
-                        <tr className="border-b-[2px] border-t-[2px]">
-                          <td>입금</td>
-                          <td className="text-right">
-                            <ul>
-                              <FinStatusInOutUnit
-                                finClassCode="IN3"
-                                inOutAccount={inOutAccount}
-                                getTransData={getTransData}
-                              />
-
-                              <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                                <div className="text-center w-1/2">소계</div>
+                    <tr className="border-b-[2px] border-t-[2px] ">
+                      <td>수익</td>
+                      <td className="text-right">
+                        <ul>
+                          {
+                            // IN1
+                            finClass?.IN1?.map((item, i) => (
+                              <li
+                                key={i}
+                                className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px]">
+                                <div className="text-center w-1/2">
+                                  {item.categoryName}
+                                </div>
                                 <div className="w-1/2">
-                                  {sumInOutAccount("IN3", inOutAccount)}
+                                  {finNumber(item.total)}
                                 </div>
                               </li>
-                            </ul>
-                          </td>
-                        </tr>
-                        <tr className="border-b-[2px]">
-                          <td>출금</td>
-                          <td className="text-right">
-                            <ul>
-                              <FinStatusInOutUnit
-                                finClassCode="OUT3"
-                                inOutAccount={inOutAccount}
-                                getTransData={getTransData}
-                                isNegativeNumber={true}
-                              />
-                              <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                                <div className="text-center w-1/2">소계</div>
+                            ))
+                          }
+                          <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                            <div className="text-center w-1/2">소계</div>
+                            <div className="w-1/2">
+                              {finNumber(finAmount?.IN1)}
+                            </div>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr className="border-b-[2px]">
+                      <td>지출</td>
+                      <td className="text-right">
+                        <ul>
+                          {
+                            // OUT1
+                            finClass?.OUT1_PERSONAL?.map((item, i) => (
+                              <li
+                                key={i}
+                                className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px]">
+                                <div className="text-center w-1/2">
+                                  {item.categoryName}
+                                </div>
                                 <div className="w-1/2">
-                                  {sumInOutAccount("OUT3", inOutAccount)}
+                                  {finNumber(item.total)}
                                 </div>
                               </li>
-                            </ul>
-                          </td>
-                        </tr>
-                      </>
-                    )}
-                    {!["CASH"].includes(tradeKind || "") && (
-                      <>
-                        <tr className="border-b-[2px] border-t-[2px] ">
-                          <td>수익</td>
-                          <td className="text-right">
-                            <ul>
-                              <FinStatusTradeKindUnit
-                                finClassCode="IN1"
-                                finAmount={finAmount}
-                                category={category}
-                                getTransData={getTransData}
-                              />
-
-                              <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                                <div className="text-center w-1/2">소계</div>
-                                <div className="w-1/2">
-                                  {finNumber(finAmount["IN1"])}
-                                </div>
-                              </li>
-                            </ul>
-                          </td>
-                        </tr>
-                        <tr className="border-b-[2px]">
-                          <td>지출</td>
-                          <td className="text-right">
-                            <ul>
-                              <FinStatusTradeKindUnit
-                                finClassCode="OUT1"
-                                finAmount={finAmount}
-                                category={category}
-                                getTransData={getTransData}
-                                isNegativeNumber={true}
-                              />
-                              <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                                <div className="text-center w-1/2">소계</div>
-                                <div className="w-1/2">
-                                  {finNumber(finAmount["OUT1"])}
-                                </div>
-                              </li>
-                            </ul>
-                          </td>
-                        </tr>
-                      </>
-                    )}
+                            ))
+                          }
+                          <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
+                            <div className="text-center w-1/2">소계</div>
+                            <div className="w-1/2">
+                              {finNumber(finAmount?.OUT1)}
+                            </div>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
                     <tr className="border-b-[3px]">
                       <td> </td>
                       <td> </td>
@@ -220,16 +234,22 @@ const Index: React.FC = () => {
                       <td>자산</td>
                       <td className="text-right">
                         <ul>
-                          <FinStatusTradeKindUnit
-                            finClassCode="IN3_OUT3"
-                            finAmount={finAmount}
-                            category={category}
-                            getTransData={getTransData}
-                          />
+                          {finClass?.IN_OUT3?.map((item, i) => (
+                            <li
+                              key={i}
+                              className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px]">
+                              <div className="text-center w-1/2">
+                                {item.categoryName}
+                              </div>
+                              <div className="w-1/2">
+                                {finNumber(item.total)}
+                              </div>
+                            </li>
+                          ))}
                           <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
                             <div className="text-center w-1/2">소계</div>
                             <div className="">
-                              {finNumber(finAmount["IN3"] - finAmount["OUT3"])}
+                              {finNumber(finAmount?.IN_OUT3)}
                             </div>
                           </li>
                         </ul>
@@ -239,16 +259,25 @@ const Index: React.FC = () => {
                       <td>부채</td>
                       <td className="text-right">
                         <ul>
-                          <FinStatusTradeKindUnit
-                            finClassCode="IN2_OUT2"
-                            finAmount={finAmount}
-                            category={category}
-                            getTransData={getTransData}
-                          />
+                          {
+                            // OUT2
+                            finClass?.IN_OUT2?.map((item, i) => (
+                              <li
+                                key={i}
+                                className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px]">
+                                <div className="text-center w-1/2">
+                                  {item.categoryName}
+                                </div>
+                                <div className="w-1/2">
+                                  {finNumber(item.total)}
+                                </div>
+                              </li>
+                            ))
+                          }
                           <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
                             <div className="text-center w-1/2">소계</div>
                             <div className="w-1/2">
-                              {finNumber(finAmount["IN2"] - finAmount["OUT2"])}
+                              {finNumber(finAmount?.IN_OUT2)}
                             </div>
                           </li>
                         </ul>
@@ -260,12 +289,7 @@ const Index: React.FC = () => {
                         <li className="flex justify-between font-bold">
                           <div className="text-center w-1/2">소계</div>
                           <div className="w-1/2">
-                            {finNumber(
-                              finAmount.IN3 -
-                                finAmount.OUT3 -
-                                finAmount.IN2 +
-                                finAmount.OUT2
-                            )}
+                            {finNumber(finAmount?.IN_OUT3 - finAmount?.IN_OUT2)}
                           </div>
                         </li>
                       </td>
