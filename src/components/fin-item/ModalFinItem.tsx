@@ -87,6 +87,15 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
                   <FiX size={18} className="stroke-current" />
                 </button>
                 <div className="flex">
+                  <InputWrapper outerClassName="sm:col-span-6 mt-2 mr-2">
+                    <Label>ID</Label>
+                    <Input
+                      name="userId"
+                      type="text"
+                      disabled={true}
+                      value={form?._id}
+                    />
+                  </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>사용자</Label>
                     <Input
@@ -97,6 +106,8 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
                       value={form?.userId}
                     />
                   </InputWrapper>
+                </div>
+                <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>재무구분</Label>
                     <Select
@@ -110,16 +121,7 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
                       disabled={form?.isFixed}
                     />
                   </InputWrapper>
-                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
-                    <Label>금융사</Label>
-                    <CommonCodeSelect
-                      name="corpCode"
-                      value={form?.finCorpCode}
-                      commonCode={BankCorpCode}
-                      onChange={handleChange}
-                      disabled={form?.isFixed}
-                    />
-                  </InputWrapper>
+
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>재무분류</Label>
                     <CommonCodeSelect
@@ -131,6 +133,16 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
                   </InputWrapper>
                 </div>
                 <div className="flex">
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>금융사</Label>
+                    <CommonCodeSelect
+                      name="corpCode"
+                      value={form?.finCorpCode}
+                      commonCode={BankCorpCode}
+                      onChange={handleChange}
+                      disabled={form?.isFixed}
+                    />
+                  </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>계좌번호</Label>
                     <Input
@@ -159,6 +171,8 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
                       value={form?.defaultDate.toString().substring(0, 10)}
                     />
                   </InputWrapper>
+                </div>
+                <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>원금(초기값)</Label>
                     <Input

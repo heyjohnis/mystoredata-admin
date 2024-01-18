@@ -113,6 +113,13 @@ const Index: React.FC = () => {
     closedModal(true);
   };
 
+  const deleteItem = (finItem: FinItemProps) => {
+    console.log("deleteItem", finItem);
+    POST(`asset/delete`, finItem).then((res: any) => {
+      console.log({res});
+    });
+  };
+
   return (
     <>
       <Notification />
@@ -190,9 +197,7 @@ const Index: React.FC = () => {
         finItem={finItem}
         closedModal={closedModal}
         saveItem={saveInfo}
-        deleteItem={() => {
-          console.log("deleteItem");
-        }}
+        deleteItem={deleteItem}
       />
     </>
   );
