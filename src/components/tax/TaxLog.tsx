@@ -1,4 +1,4 @@
-import {TaxLogProps} from "model/TaxLog";
+import {TaxLogProps} from "@/model/TaxLog";
 
 const fields: Record<string, string>[] = [
   {

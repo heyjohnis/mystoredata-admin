@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
-import {ClassCategoryProps} from "model/ClassCategoryProps";
-import {SearchProps} from "model/SearchForm";
+import {ClassCategoryProps} from "@/model/ClassCategoryProps";
+import {SearchProps} from "@/model/SearchForm";
 
 import {dateChange} from "@/utils/date";
 import {POST} from "@/utils/restApi";

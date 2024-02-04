@@ -1,5 +1,5 @@
 import {Input} from "@/components/forms/input";
-import {AccountProps} from "model/account";
+import {AccountProps} from "@/model/account";
 import {useState} from "react";
 import {InputWrapper} from "@/components/forms/input-wrapper";
 import AccountInput from "./accountInput";

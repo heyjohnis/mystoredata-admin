@@ -1,7 +1,8 @@
 import {useEffect} from "react";
 import {useRouter} from "next/router";
 import Centered from "@/layouts/centered";
-import Layout1 from "@/layouts/layout-1";
+import Admin from "@/layouts/admin";
+import User from "@/layouts/user";
 import ECommerce from "@/layouts/e-commerce";
 import {setConfig} from "@/slices/config";
 import {useHotkeys} from "react-hotkeys-hook";
@@ -65,10 +66,10 @@ const Layouts: React.FC<LayoutProps> = ({children}) => {
       return <>{children}</>;
     case "/e-commerce":
       return <ECommerce>{children}</ECommerce>;
-    case "/admin-login":
-      return <Layout1>{children}</Layout1>;
+    case "/admin":
+      return <Admin>{children}</Admin>;
     default:
-      return <Layout1>{children}</Layout1>;
+      return <User>{children}</User>;
   }
 };
 

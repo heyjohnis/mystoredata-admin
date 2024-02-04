@@ -2,11 +2,11 @@ import SectionTitle from "@/components/dashboard/section-title";
 import Notification from "@/components/dashboard/notification";
 import Widget from "@/components/widget";
 import {useEffect, useState} from "react";
-import {AccountLogProps} from "model/accountLog";
+import {AccountLogProps} from "@/model/accountLog";
 import AccountLog from "@/components/account-log/AccountLog";
 import {useAccountLog} from "@/hooks/useAccountLog";
 import SearchForm from "@/components/SearchForm";
-import {SearchProps} from "model/SearchForm";
+import {SearchProps} from "@/model/SearchForm";
 
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<AccountLogProps[]>([]);

@@ -6,7 +6,7 @@ import {Label} from "@/components/forms/label";
 import {Input} from "@/components/forms/input";
 import {PUT} from "@/utils/restApi";
 
-import {CategoryProps} from "model/Category";
+import {CategoryProps} from "@/model/Category";
 import {useDebouncedCallback} from "use-debounce";
 
 type Props = {

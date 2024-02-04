@@ -5,7 +5,7 @@ import SectionTitle from "@/components/dashboard/section-title";
 import Notification from "@/components/dashboard/notification";
 import Widget from "@/components/widget";
 import {Badge} from "@/components/badges";
-import {CategoryRuleProps} from "model/CategoryRule";
+import {CategoryRuleProps} from "@/model/CategoryRule";
 import {UseKind} from "@/data/commonCode";
 
 const fields: Record<string, string>[] = [

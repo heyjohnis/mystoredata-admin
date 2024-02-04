@@ -1,5 +1,5 @@
 import {BaroBankCode} from "@/data/commonCode";
-import {AccountLogProps} from "model/accountLog";
+import {AccountLogProps} from "@/model/accountLog";
 const fields: Record<string, string>[] = [
   {
     name: "거래일",

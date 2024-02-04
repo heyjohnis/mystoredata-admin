@@ -1,5 +1,5 @@
 import {CardCode} from "@/data/commonCode";
-import {CardLogProps} from "model/cardLog";
+import {CardLogProps} from "@/model/cardLog";
 
 const fields: Record<string, string>[] = [
   {

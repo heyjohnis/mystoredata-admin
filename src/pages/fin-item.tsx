@@ -8,7 +8,7 @@ import {Label} from "@/components/forms/label";
 import {useEffect, useState} from "react";
 import {GET, POST, PUT, DELETE} from "@/utils/restApi";
 
-import {FinItemProps} from "model/FinItemProps";
+import {FinItemProps} from "@/model/FinItemProps";
 import ModalFinItem from "@/components/fin-item/ModalFinItem";
 
 const fields: Record<string, string>[] = [

@@ -1,4 +1,4 @@
-import {SearchProps} from "model/SearchForm";
+import {SearchProps} from "@/model/SearchForm";
 
 export const isEmptyForm = (form: SearchProps): boolean => {
   let isValied = false;

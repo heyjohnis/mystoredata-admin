@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {POST} from "@/utils/restApi";
-import {AccountLogProps} from "model/accountLog";
-import {SearchProps} from "model/SearchForm";
+import {AccountLogProps} from "@/model/accountLog";
+import {SearchProps} from "@/model/SearchForm";
 import {isEmptyForm} from "@/utils/form";
 
 export const useAccountLog = (form: SearchProps) => {

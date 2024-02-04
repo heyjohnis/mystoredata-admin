@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 
-import {TransMoneyProps} from "model/TransMoney";
-import {ClassCategoryProps} from "model/ClassCategoryProps";
-import {SearchProps} from "model/SearchForm";
-import {AccountLogProps} from "model/accountLog";
-import {CardLogProps} from "model/cardLog";
+import {TransMoneyProps} from "@/model/TransMoney";
+import {ClassCategoryProps} from "@/model/ClassCategoryProps";
+import {SearchProps} from "@/model/SearchForm";
+import {AccountLogProps} from "@/model/accountLog";
+import {CardLogProps} from "@/model/cardLog";
 
 import {useCategoryFinClass} from "@/hooks/useCategoryFinClass";
 import {useFinStatusData} from "@/hooks/useFinStatusData";
@@ -27,7 +27,7 @@ import AccountLog from "@/components/account-log/AccountLog";
 import FinStatusTab from "@/components/fin-status/FinStatusTab";
 import CardLog from "@/components/card-log/CardLog";
 import TaxLogs from "@/components/tax/TaxLog";
-import {TaxLogProps} from "model/TaxLog";
+import {TaxLogProps} from "@/model/TaxLog";
 import ModalFinStatus from "@/components/fin-status/ModalFinStatus";
 
 interface FinAmount {

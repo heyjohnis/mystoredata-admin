@@ -4,10 +4,10 @@ import SearchForm from "@/components/SearchForm";
 import SectionTitle from "@/components/dashboard/section-title";
 import Notification from "@/components/dashboard/notification";
 import Widget from "@/components/widget";
-import {SearchProps} from "model/SearchForm";
+import {SearchProps} from "@/model/SearchForm";
 import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
-import {TransMoneyProps} from "model/TransMoney";
-import {FinItemProps} from "model/FinItemProps";
+import {TransMoneyProps} from "@/model/TransMoney";
+import {FinItemProps} from "@/model/FinItemProps";
 const fields: Record<string, string>[] = [
   {
     name: "사용자",

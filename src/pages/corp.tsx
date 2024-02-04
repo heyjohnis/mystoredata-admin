@@ -5,7 +5,7 @@ import Widget from "@/components/widget";
 import {useEffect, useState} from "react";
 import {GET} from "@/utils/restApi";
 import Modal from "@/components/corp/CorpDetailModal";
-import {UserProps} from "model/user";
+import {UserProps} from "@/model/user";
 
 const fields: Record<string, string>[] = [
   {

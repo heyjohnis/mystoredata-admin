@@ -5,7 +5,7 @@ import {CardCode} from "@/data/commonCode";
 
 import {useEffect, useState} from "react";
 import {GET} from "@/utils/restApi";
-import {CardLogProps} from "model/cardLog";
+import {CardLogProps} from "@/model/cardLog";
 import {InputWrapper} from "@/components/forms/input-wrapper";
 import {Label} from "@/components/forms/label";
 import {Input} from "@/components/forms/input";

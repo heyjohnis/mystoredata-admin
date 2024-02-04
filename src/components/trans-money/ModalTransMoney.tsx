@@ -5,7 +5,7 @@ import {InputWrapper} from "@/components/forms/input-wrapper";
 import {Label} from "@/components/forms/label";
 import {Input} from "@/components/forms/input";
 import {GET, POST, PUT} from "@/utils/restApi";
-import {TransMoneyProps} from "model/TransMoney";
+import {TransMoneyProps} from "@/model/TransMoney";
 import {
   BaroBankCode,
   CardCode,
@@ -14,7 +14,7 @@ import {
   FinItemCode,
 } from "@/data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "@/components/CommonCodeSelect";
-import {CategoryProps} from "model/Category";
+import {CategoryProps} from "@/model/Category";
 import Switch from "@/components/switch";
 
 type Props = {

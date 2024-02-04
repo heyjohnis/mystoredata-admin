@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {SearchProps} from "model/SearchForm";
+import {SearchProps} from "@/model/SearchForm";
 import {POST} from "@/utils/restApi";
 import {isEmptyForm} from "@/utils/form";
 

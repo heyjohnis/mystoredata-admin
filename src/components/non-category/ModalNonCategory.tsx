@@ -4,13 +4,13 @@ import {FiX} from "react-icons/fi";
 import {InputWrapper} from "@/components/forms/input-wrapper";
 import {Label} from "@/components/forms/label";
 import {Input} from "@/components/forms/input";
-import {NonCategoryProps} from "model/NonCategory";
+import {NonCategoryProps} from "@/model/NonCategory";
 import {useDebouncedCallback} from "use-debounce";
 import {CategorySelect} from "@/components/CommonCodeSelect";
-import {CategoryProps} from "model/Category";
+import {CategoryProps} from "@/model/Category";
 import {GET, PUT, POST} from "@/utils/restApi";
 import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
-import {TransMoneyProps} from "model/TransMoney";
+import {TransMoneyProps} from "@/model/TransMoney";
 
 type Props = {
   nonCategory?: NonCategoryProps;

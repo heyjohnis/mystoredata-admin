@@ -1,16 +1,16 @@
 import {useEffect, useState} from "react";
 import {POST} from "@/utils/restApi";
-import {TaxLogProps} from "model/TaxLog";
+import {TaxLogProps} from "@/model/TaxLog";
 import SearchForm from "@/components/SearchForm";
 import SectionTitle from "@/components/dashboard/section-title";
 import Notification from "@/components/dashboard/notification";
 import Widget from "@/components/widget";
 import {Badge} from "@/components/badges";
-import {SearchProps} from "model/SearchForm";
+import {SearchProps} from "@/model/SearchForm";
 import TaxLog from "@/components/tax/TaxLog";
 import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
-import {TransMoneyProps} from "model/TransMoney";
-import {EmployeeProps} from "model/Employee";
+import {TransMoneyProps} from "@/model/TransMoney";
+import {EmployeeProps} from "@/model/Employee";
 const fields: Record<string, string>[] = [
   {
     name: "사용자",

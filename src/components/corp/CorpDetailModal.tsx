@@ -5,7 +5,7 @@ import {InputWrapper} from "@/components/forms/input-wrapper";
 import {Label} from "@/components/forms/label";
 import {Input} from "@/components/forms/input";
 import {POST, PUT} from "@/utils/restApi";
-import {UserProps} from "model/user";
+import {UserProps} from "@/model/user";
 import AccountList from "@/components/accounts/accountList";
 import CardList from "@/components/cards/cardList";
 import Link from "next/link";

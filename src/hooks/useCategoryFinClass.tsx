@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {POST} from "@/utils/restApi";
-import {SearchProps} from "model/SearchForm";
-import {CategoryProps, ClassCategoryProps} from "model/ClassCategoryProps";
+import {SearchProps} from "@/model/SearchForm";
+import {CategoryProps, ClassCategoryProps} from "@/model/ClassCategoryProps";
 import {isEmptyForm} from "@/utils/form";
 
 const initCategory: ClassCategoryProps = {

@@ -1,5 +1,5 @@
 import {Input} from "@/components/forms/input";
-import {CardProps} from "model/card";
+import {CardProps} from "@/model/card";
 import {useState} from "react";
 import {InputWrapper} from "@/components/forms/input-wrapper";
 import CardInput from "./cardInput";

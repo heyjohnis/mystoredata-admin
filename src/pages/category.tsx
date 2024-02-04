@@ -5,7 +5,7 @@ import SectionTitle from "@/components/dashboard/section-title";
 import Notification from "@/components/dashboard/notification";
 import Widget from "@/components/widget";
 import {Badge} from "@/components/badges";
-import {CategoryProps} from "model/Category";
+import {CategoryProps} from "@/model/Category";
 import {Input} from "@/components/forms/input";
 import ModalCategory from "@/components/category/ModalCategory";
 import {FinClassCode, UseKind} from "../data/commonCode";

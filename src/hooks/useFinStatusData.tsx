@@ -1,4 +1,4 @@
-import {SearchProps} from "model/SearchForm";
+import {SearchProps} from "@/model/SearchForm";
 import React, {useEffect, useState} from "react";
 import {isEmptyForm} from "@/utils/form";
 import {POST} from "@/utils/restApi";

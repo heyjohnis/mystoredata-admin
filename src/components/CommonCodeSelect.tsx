@@ -1,5 +1,5 @@
 import {Select} from "@/components/forms/select";
-import {CategoryProps} from "model/Category";
+import {CategoryProps} from "@/model/Category";
 
 type CommonCodeSelectProps = {
   name: string;

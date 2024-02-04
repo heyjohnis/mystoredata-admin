@@ -8,7 +8,7 @@ export type Layout1Props = {
   children: React.ReactNode;
 };
 
-const Layout1: React.FC<Layout1Props> = ({children}) => {
+const Admin: React.FC<Layout1Props> = ({children}) => {
   const config = useAppSelector((state) => state.config);
   const {background, layout, collapsed} = config;
 
@@ -36,4 +36,4 @@ const Layout1: React.FC<Layout1Props> = ({children}) => {
     </>
   );
 };
-export default Layout1;
+export default Admin;

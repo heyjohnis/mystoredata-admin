@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
-import {TaxLogProps} from "model/TaxLog";
+import {TaxLogProps} from "@/model/TaxLog";
 import SearchForm from "@/components/SearchForm";
 import SectionTitle from "@/components/dashboard/section-title";
 import Notification from "@/components/dashboard/notification";
 import Widget from "@/components/widget";
 
-import {SearchProps} from "model/SearchForm";
+import {SearchProps} from "@/model/SearchForm";
 import TaxLog from "@/components/tax/TaxLog";
 import {useTaxLog} from "@/hooks/useTaxLog";
 
