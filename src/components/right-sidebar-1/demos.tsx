@@ -1,5 +1,5 @@
 import {useAppDispatch} from "@/store";
-import {setConfig} from "slices/config";
+import {setConfig} from "@/slices/config";
 
 type Demo = {
   name: string;

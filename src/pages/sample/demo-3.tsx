@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import {useEffect} from "react";
-import {setConfig} from "slices/config";
+import {setConfig} from "@/slices/config";
 import {useAppDispatch} from "@/store";
 
 const Index: React.FC = () => {

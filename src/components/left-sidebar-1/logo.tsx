@@ -1,5 +1,5 @@
 import {FiBox, FiMenu} from "react-icons/fi";
-import {setConfig} from "slices/config";
+import {setConfig} from "@/slices/config";
 import {useAppSelector, useAppDispatch} from "@/store";
 import Link from "next/link";
 

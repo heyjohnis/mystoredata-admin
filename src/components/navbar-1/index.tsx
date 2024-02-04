@@ -7,7 +7,7 @@ import Dropdown4 from "@/components/navbar-1/dropdown-4";
 import Dropdown5 from "@/components/navbar-1/dropdown-5";
 import Dropdown6 from "@/components/navbar-1/dropdown-6";
 import Search from "@/components/navbar-1/search";
-import {setConfig} from "slices/config";
+import {setConfig} from "@/slices/config";
 
 const Navbar: React.FC = () => {
   const config = useAppSelector((state) => state.config);

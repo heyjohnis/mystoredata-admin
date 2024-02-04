@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import Centered from "@/layouts/centered";
 import Layout1 from "@/layouts/layout-1";
 import ECommerce from "@/layouts/e-commerce";
-import {setConfig} from "slices/config";
+import {setConfig} from "@/slices/config";
 import {useHotkeys} from "react-hotkeys-hook";
 import {useAppSelector, useAppDispatch} from "@/store";
 
@@ -65,6 +65,8 @@ const Layouts: React.FC<LayoutProps> = ({children}) => {
       return <>{children}</>;
     case "/e-commerce":
       return <ECommerce>{children}</ECommerce>;
+    case "/admin-login":
+      return <Layout1>{children}</Layout1>;
     default:
       return <Layout1>{children}</Layout1>;
   }

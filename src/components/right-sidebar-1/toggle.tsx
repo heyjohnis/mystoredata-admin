@@ -1,5 +1,5 @@
 import {useAppSelector, useAppDispatch} from "@/store";
-import {setConfig} from "slices/config";
+import {setConfig} from "@/slices/config";
 import {FiX} from "react-icons/fi";
 
 const Toggle: React.FC = () => {
