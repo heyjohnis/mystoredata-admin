@@ -7,7 +7,7 @@ import Widget from "@/components/widget";
 
 import {SearchProps} from "model/SearchForm";
 import TaxLog from "@/components/tax/TaxLog";
-import {useTaxLog} from "hooks/useTaxLog";
+import {useTaxLog} from "@/hooks/useTaxLog";
 
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<TaxLogProps[]>([]);

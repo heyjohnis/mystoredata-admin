@@ -1,7 +1,7 @@
 import SectionTitle from "@/components/dashboard/section-title";
 import Notification from "@/components/dashboard/notification";
 import Widget from "@/components/widget";
-import {CardCode} from "data/commonCode";
+import {CardCode} from "@/data/commonCode";
 
 import {useEffect, useState} from "react";
 import {GET} from "@/utils/restApi";

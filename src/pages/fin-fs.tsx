@@ -6,12 +6,12 @@ import {SearchProps} from "model/SearchForm";
 import {AccountLogProps} from "model/accountLog";
 import {CardLogProps} from "model/cardLog";
 
-import {useCategoryFinClass} from "hooks/useCategoryFinClass";
-import {useFinStatusData} from "hooks/useFinStatusData";
-import {useTransLogs} from "hooks/useTransLog";
-import {useAccountLog} from "hooks/useAccountLog";
-import {useCardLog} from "hooks/useCardLog";
-import {useTaxLog} from "hooks/useTaxLog";
+import {useCategoryFinClass} from "@/hooks/useCategoryFinClass";
+import {useFinStatusData} from "@/hooks/useFinStatusData";
+import {useTransLogs} from "@/hooks/useTransLog";
+import {useAccountLog} from "@/hooks/useAccountLog";
+import {useCardLog} from "@/hooks/useCardLog";
+import {useTaxLog} from "@/hooks/useTaxLog";
 
 import {dateChange} from "@/utils/date";
 import {isEmptyForm} from "@/utils/form";

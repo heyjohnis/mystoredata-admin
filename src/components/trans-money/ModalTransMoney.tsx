@@ -12,7 +12,7 @@ import {
   UseKind,
   FinClassCode,
   FinItemCode,
-} from "data/commonCode";
+} from "@/data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "@/components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
 import Switch from "@/components/switch";

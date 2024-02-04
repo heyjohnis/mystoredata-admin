@@ -6,7 +6,7 @@ import {Label} from "@/components/forms/label";
 import {Input} from "@/components/forms/input";
 import CommonCodeSelect, {CategorySelect} from "@/components/CommonCodeSelect";
 import {FinItemProps} from "model/FinItemProps";
-import {BankCorpCode, FinItemCode} from "data/commonCode";
+import {BankCorpCode, FinItemCode} from "@/data/commonCode";
 import {Select} from "@/components/forms/select";
 
 type Props = {

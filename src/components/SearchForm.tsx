@@ -3,7 +3,7 @@ import {Input} from "@/components/forms/input";
 import {InputWrapper} from "@/components/forms/input-wrapper";
 import {Label} from "@/components/forms/label";
 import {CategorySelect} from "./CommonCodeSelect";
-import {Category, FinClassCode, TradeKind, UseKind} from "data/commonCode";
+import {Category, FinClassCode, TradeKind, UseKind} from "@/data/commonCode";
 import CommonCodeSelect from "@/components/CommonCodeSelect";
 import {SearchProps} from "model/SearchForm";
 

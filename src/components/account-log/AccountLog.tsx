@@ -1,4 +1,4 @@
-import {BaroBankCode} from "data/commonCode";
+import {BaroBankCode} from "@/data/commonCode";
 import {AccountLogProps} from "model/accountLog";
 const fields: Record<string, string>[] = [
   {

@@ -4,7 +4,7 @@ import {useState} from "react";
 import {InputWrapper} from "@/components/forms/input-wrapper";
 import CardInput from "./cardInput";
 import {PUT, DELETE, POST} from "@/utils/restApi";
-import {CardCode, tradeKind, UseKind} from "data/commonCode";
+import {CardCode, tradeKind, UseKind} from "@/data/commonCode";
 import CommonCodeSelect from "@/components/CommonCodeSelect";
 
 export default function CardList({cards, user, baseMonth}: any) {

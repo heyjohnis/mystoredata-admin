@@ -1,4 +1,4 @@
-import {FinClassCode} from "data/commonCode";
+import {FinClassCode} from "@/data/commonCode";
 import {useEffect} from "react";
 
 export default function FinClassCategory({

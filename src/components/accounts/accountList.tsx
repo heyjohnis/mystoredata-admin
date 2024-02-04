@@ -5,7 +5,7 @@ import {InputWrapper} from "@/components/forms/input-wrapper";
 import AccountInput from "./accountInput";
 import {POST, PUT, DELETE} from "@/utils/restApi";
 import CommonCodeSelect from "@/components/CommonCodeSelect";
-import {BaroBankCode, CorpType, UseKind} from "data/commonCode";
+import {BaroBankCode, CorpType, UseKind} from "@/data/commonCode";
 
 export default function AccountList({accounts, user, baseMonth}: any) {
   //const [form, setForm] = useState<AccountProps>();
