@@ -1,5 +1,5 @@
-import LeftSidebar2 from "@/components/left-sidebar-2";
-import LeftSidebar3 from "@/components/left-sidebar-3";
+import LeftSidebar2 from "@/components/sample/left-sidebar-2";
+import LeftSidebar3 from "@/components/sample/left-sidebar-3";
 
 const Index: React.FC = () => {
   return (

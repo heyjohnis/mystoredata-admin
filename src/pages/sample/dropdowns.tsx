@@ -1,7 +1,7 @@
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/ui/widget";
 import {FiHome, FiUser, FiMessageSquare, FiSettings} from "react-icons/fi";
-import Dropdown from "@/components/dropdowns";
+import Dropdown from "@/components/ui/dropdowns";
 
 const simple: React.ReactNode[] = [
   <span>Home</span>,

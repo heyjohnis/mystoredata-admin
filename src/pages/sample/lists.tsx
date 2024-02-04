@@ -1,10 +1,10 @@
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/widget";
-import List1 from "@/components/lists/list-1";
-import List2 from "@/components/lists/list-2";
-import List3 from "@/components/lists/list-3";
-import List4 from "@/components/lists/list-4";
-import List5 from "@/components/lists/list-5";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/ui/widget";
+import List1 from "@/components/ui/lists/list-1";
+import List2 from "@/components/ui/lists/list-2";
+import List3 from "@/components/ui/lists/list-3";
+import List4 from "@/components/ui/lists/list-4";
+import List5 from "@/components/ui/lists/list-5";
 import lists from "@/json/lists.json";
 
 export type ListProps = {

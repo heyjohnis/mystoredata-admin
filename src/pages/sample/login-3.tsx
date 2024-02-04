@@ -1,7 +1,7 @@
 import {useAppSelector} from "@/store";
 import Link from "next/link";
 import Login from "@/components/sample-forms/login";
-import SocialMedia from "@/components/login-3/social-media";
+import SocialMedia from "@/components/sample/login-3/social-media";
 
 const Index: React.FC = () => {
   const config = useAppSelector((state) => state.config);

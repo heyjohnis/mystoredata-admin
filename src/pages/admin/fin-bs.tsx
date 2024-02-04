@@ -6,12 +6,12 @@ import {SearchProps} from "@/model/SearchForm";
 import {dateChange} from "@/utils/date";
 import {POST} from "@/utils/restApi";
 
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/ui/widget";
 import CommonCodeSelect from "@/components/CommonCodeSelect";
-import {Label} from "@/components/forms/label";
-import {Input} from "@/components/forms/input";
-import {InputWrapper} from "@/components/forms/input-wrapper";
+import {Label} from "@/components/ui/forms/label";
+import {Input} from "@/components/ui/forms/input";
+import {InputWrapper} from "@/components/ui/forms/input-wrapper";
 import {finNumber} from "@/utils/finNumber";
 
 interface FinAmount {

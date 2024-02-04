@@ -1,16 +1,16 @@
-import Widget1 from "@/components/dashboard/widget-1";
-import Section from "@/components/dashboard/section";
-import SectionTitle from "@/components/dashboard/section-title";
+import Widget1 from "@/components/sample/dashboard/widget-1";
+import Section from "@/components/sample/dashboard/section";
+import SectionTitle from "@/components/sample/dashboard/section-title";
 import {FiActivity, FiUsers, FiExternalLink, FiClock} from "react-icons/fi";
-import Bar1 from "@/components/dashboard/bar-chart";
-import {Donut1} from "@/components/dashboard/donut-chart";
-import {Line1} from "@/components/dashboard/line-chart";
-import Dropdown1 from "@/components/widgets/dropdown-1";
-import Markets from "@/components/dashboard/markets";
-import {List} from "@/components/dashboard/list";
-import Tasks from "@/components/tasks";
-import {Timeline1} from "@/components/timelines";
-import Notification from "@/components/dashboard/notification";
+import Bar1 from "@/components/sample/dashboard/bar-chart";
+import {Donut1} from "@/components/sample/dashboard/donut-chart";
+import {Line1} from "@/components/sample/dashboard/line-chart";
+import Dropdown1 from "@/components/ui/widgets/dropdown-1";
+import Markets from "@/components/sample/dashboard/markets";
+import {List} from "@/components/sample/dashboard/list";
+import Tasks from "@/components/ui/tasks";
+import {Timeline1} from "@/components/ui/timelines";
+import Notification from "@/components/sample/dashboard/notification";
 import tasks from "@/json/tasks.json";
 
 const Index: React.FC = () => {

@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {Input} from "@/components/forms/input";
-import {InputWrapper} from "@/components/forms/input-wrapper";
+import {Input} from "@/components/ui/forms/input";
+import {InputWrapper} from "@/components/ui/forms/input-wrapper";
 import {AccountProps} from "@/model/account";
 import {POST} from "@/utils/restApi";
 import {CorpType, BaroBankCode, setBankInput} from "../../data/commonCode";

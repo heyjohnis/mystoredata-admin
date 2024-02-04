@@ -1,9 +1,9 @@
 import {Dialog, Transition} from "@headlessui/react";
 import {Fragment, useEffect, useState} from "react";
 import {FiX} from "react-icons/fi";
-import {InputWrapper} from "@/components/forms/input-wrapper";
-import {Label} from "@/components/forms/label";
-import {Input} from "@/components/forms/input";
+import {InputWrapper} from "@/components/ui/forms/input-wrapper";
+import {Label} from "@/components/ui/forms/label";
+import {Input} from "@/components/ui/forms/input";
 import {POST, PUT} from "@/utils/restApi";
 import {UserProps} from "@/model/user";
 import AccountList from "@/components/accounts/accountList";

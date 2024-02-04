@@ -1,6 +1,6 @@
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/social-feed/widget";
-import Tasks from "@/components/tasks";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/sample/social-feed/widget";
+import Tasks from "@/components/ui/tasks";
 import tasks from "@/json/tasks.json";
 
 const Index: React.FC = () => (

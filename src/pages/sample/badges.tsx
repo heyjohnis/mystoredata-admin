@@ -1,7 +1,7 @@
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/widget";
-import {Badge, CircularBadge} from "@/components/badges";
-import type {BadgeSize} from "@/components/badges";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/ui/widget";
+import {Badge, CircularBadge} from "@/components/ui/badges";
+import type {BadgeSize} from "@/components/ui/badges";
 
 const Badges: React.FC = () => {
   const sizes: BadgeSize[] = ["lg", "default", "sm"];

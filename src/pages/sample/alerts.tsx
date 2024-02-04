@@ -1,6 +1,6 @@
-import SectionTitle from "@/components/section-title";
-import Alert from "@/components/alerts";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/ui/section-title";
+import Alert from "@/components/ui/alerts";
+import Widget from "@/components/ui/widget";
 import {FiAlertCircle} from "react-icons/fi";
 
 const Index: React.FC = () => (

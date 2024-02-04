@@ -1,7 +1,7 @@
-import {Input} from "@/components/forms/input";
+import {Input} from "@/components/ui/forms/input";
 import {CardProps} from "@/model/card";
 import {useState} from "react";
-import {InputWrapper} from "@/components/forms/input-wrapper";
+import {InputWrapper} from "@/components/ui/forms/input-wrapper";
 import CardInput from "./cardInput";
 import {PUT, DELETE, POST} from "@/utils/restApi";
 import {CardCode, tradeKind, UseKind} from "@/data/commonCode";

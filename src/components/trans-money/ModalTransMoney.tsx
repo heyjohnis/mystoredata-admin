@@ -1,9 +1,9 @@
 import {Dialog, Transition} from "@headlessui/react";
 import {Fragment, useEffect, useState} from "react";
 import {FiX} from "react-icons/fi";
-import {InputWrapper} from "@/components/forms/input-wrapper";
-import {Label} from "@/components/forms/label";
-import {Input} from "@/components/forms/input";
+import {InputWrapper} from "@/components/ui/forms/input-wrapper";
+import {Label} from "@/components/ui/forms/label";
+import {Input} from "@/components/ui/forms/input";
 import {GET, POST, PUT} from "@/utils/restApi";
 import {TransMoneyProps} from "@/model/TransMoney";
 import {
@@ -15,7 +15,7 @@ import {
 } from "@/data/commonCode";
 import CommonCodeSelect, {CategorySelect} from "@/components/CommonCodeSelect";
 import {CategoryProps} from "@/model/Category";
-import Switch from "@/components/switch";
+import Switch from "@/components/ui/switch";
 
 type Props = {
   asset: TransMoneyProps | null;

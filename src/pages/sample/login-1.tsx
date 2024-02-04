@@ -2,7 +2,7 @@ import Link from "next/link";
 import Layout from "@/layouts/centered";
 import CenteredForm from "@/layouts/centered-form";
 import Login from "@/components/sample-forms/login";
-import SocialMedia from "@/components/login-1/social-media";
+import SocialMedia from "@/components/sample/login-1/social-media";
 
 const Index: React.FC = () => {
   return (

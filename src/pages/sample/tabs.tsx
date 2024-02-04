@@ -1,4 +1,4 @@
-import SectionTitle from "@/components/section-title";
+import SectionTitle from "@/components/ui/section-title";
 import {
   DefaultTabs,
   UnderlinedTabs,
@@ -6,7 +6,7 @@ import {
   Pills,
   VerticalTabs,
 } from "@/components/ui/tabs";
-import Widget from "@/components/widget";
+import Widget from "@/components/ui/widget";
 import {FiSettings, FiHeart, FiMenu} from "react-icons/fi";
 
 const Tab0: React.FC = () => (

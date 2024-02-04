@@ -1,7 +1,7 @@
-import SectionTitle from "@/components/section-title";
-import Line1 from "@/components/charts/line-1";
-import Area1 from "@/components/charts/area-1";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/ui/section-title";
+import Line1 from "@/components/ui/charts/line-1";
+import Area1 from "@/components/ui/charts/area-1";
+import Widget from "@/components/ui/widget";
 
 const Index: React.FC = () => (
   <>

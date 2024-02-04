@@ -1,6 +1,6 @@
-import SectionTitle from "@/components/section-title";
+import SectionTitle from "@/components/ui/section-title";
 import Tooltip, {Placement} from "@/components/ui/tooltips";
-import Widget from "@/components/widget";
+import Widget from "@/components/ui/widget";
 
 const placements: Placement[] = ["left", "top", "right", "bottom"];
 const Index: React.FC = () => (

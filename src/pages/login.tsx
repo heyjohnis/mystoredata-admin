@@ -1,9 +1,9 @@
 import {useAppSelector} from "@/store";
 import Link from "next/link";
 import Login from "@/components/sample-forms/login";
-import Text from "@/components/login-2/text";
-import Logo from "@/components/login-2/logo";
-import Footer from "@/components/login-2/footer";
+import Text from "@/components/sample/login-2/text";
+import Logo from "@/components/sample/login-2/logo";
+import Footer from "@/components/sample/login-2/footer";
 
 const Index: React.FC = () => {
   const config = useAppSelector((state) => state.config);

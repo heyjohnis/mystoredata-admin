@@ -1,14 +1,14 @@
-import SectionTitle from "@/components/dashboard/section-title";
-import Notification from "@/components/dashboard/notification";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/sample/dashboard/section-title";
+import Notification from "@/components/sample/dashboard/notification";
+import Widget from "@/components/ui/widget";
 import {CardCode} from "@/data/commonCode";
 
 import {useEffect, useState} from "react";
 import {GET} from "@/utils/restApi";
 import {CardLogProps} from "@/model/cardLog";
-import {InputWrapper} from "@/components/forms/input-wrapper";
-import {Label} from "@/components/forms/label";
-import {Input} from "@/components/forms/input";
+import {InputWrapper} from "@/components/ui/forms/input-wrapper";
+import {Label} from "@/components/ui/forms/label";
+import {Input} from "@/components/ui/forms/input";
 import CardLog from "@/components/card-log/CardLog";
 
 const Index: React.FC = () => {

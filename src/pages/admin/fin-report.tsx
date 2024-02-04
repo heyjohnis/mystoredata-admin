@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {POST} from "@/utils/restApi";
-import SectionTitle from "@/components/dashboard/section-title";
-import Notification from "@/components/dashboard/notification";
-import Widget from "@/components/widget";
-import {Badge} from "@/components/badges";
+import SectionTitle from "@/components/sample/dashboard/section-title";
+import Notification from "@/components/sample/dashboard/notification";
+import Widget from "@/components/ui/widget";
+import {Badge} from "@/components/ui/badges";
 import {CategoryProps} from "@/model/Category";
-import {Input} from "@/components/forms/input";
+import {Input} from "@/components/ui/forms/input";
 import ModalCategory from "@/components/category/ModalCategory";
 import {UseKind} from "../data/commonCode";
 import SearchForm from "@/components/SearchForm";

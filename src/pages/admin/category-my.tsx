@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {GET} from "@/utils/restApi";
-import SectionTitle from "@/components/dashboard/section-title";
-import Notification from "@/components/dashboard/notification";
-import Widget from "@/components/widget";
-import {Badge} from "@/components/badges";
+import SectionTitle from "@/components/sample/dashboard/section-title";
+import Notification from "@/components/sample/dashboard/notification";
+import Widget from "@/components/ui/widget";
+import {Badge} from "@/components/ui/badges";
 
 const fields: Record<string, string>[] = [
   {

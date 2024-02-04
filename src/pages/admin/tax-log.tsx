@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {TaxLogProps} from "@/model/TaxLog";
 import SearchForm from "@/components/SearchForm";
-import SectionTitle from "@/components/dashboard/section-title";
-import Notification from "@/components/dashboard/notification";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/sample/dashboard/section-title";
+import Notification from "@/components/sample/dashboard/notification";
+import Widget from "@/components/ui/widget";
 
 import {SearchProps} from "@/model/SearchForm";
 import TaxLog from "@/components/tax/TaxLog";

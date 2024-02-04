@@ -1,15 +1,15 @@
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/widget";
-import {InputWrapper} from "@/components/forms/input-wrapper";
-import {Label} from "@/components/forms/label";
-import {ErrorMessage} from "@/components/forms/error-message";
-import {SuccessMessage} from "@/components/forms/success-message";
-import {Hint} from "@/components/forms/hint";
-import {Input} from "@/components/forms/input";
-import {Textarea} from "@/components/forms/textarea";
-import {Select} from "@/components/forms/select";
-import {Checkbox} from "@/components/forms/checkbox";
-import {Radio} from "@/components/forms/radio";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/ui/widget";
+import {InputWrapper} from "@/components/ui/forms/input-wrapper";
+import {Label} from "@/components/ui/forms/label";
+import {ErrorMessage} from "@/components/ui/forms/error-message";
+import {SuccessMessage} from "@/components/ui/forms/success-message";
+import {Hint} from "@/components/ui/forms/hint";
+import {Input} from "@/components/ui/forms/input";
+import {Textarea} from "@/components/ui/forms/textarea";
+import {Select} from "@/components/ui/forms/select";
+import {Checkbox} from "@/components/ui/forms/checkbox";
+import {Radio} from "@/components/ui/forms/radio";
 
 const Index: React.FC = () => (
   <>

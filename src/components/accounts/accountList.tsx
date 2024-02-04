@@ -1,7 +1,7 @@
-import {Input} from "@/components/forms/input";
+import {Input} from "@/components/ui/forms/input";
 import {AccountProps} from "@/model/account";
 import {useState} from "react";
-import {InputWrapper} from "@/components/forms/input-wrapper";
+import {InputWrapper} from "@/components/ui/forms/input-wrapper";
 import AccountInput from "./accountInput";
 import {POST, PUT, DELETE} from "@/utils/restApi";
 import CommonCodeSelect from "@/components/CommonCodeSelect";

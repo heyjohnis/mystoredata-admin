@@ -3,9 +3,9 @@ import {BaroBankCode, CardCode, UseKind} from "@/data/commonCode";
 import {POST, PUT} from "@/utils/restApi";
 import {TransMoneyProps} from "@/model/TransMoney";
 import SearchForm from "@/components/SearchForm";
-import SectionTitle from "@/components/dashboard/section-title";
-import Notification from "@/components/dashboard/notification";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/sample/dashboard/section-title";
+import Notification from "@/components/sample/dashboard/notification";
+import Widget from "@/components/ui/widget";
 
 import ModalTransMoney from "@/components/trans-money/ModalTransMoney";
 import {SearchProps} from "@/model/SearchForm";

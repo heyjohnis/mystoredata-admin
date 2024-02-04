@@ -1,5 +1,5 @@
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/ui/widget";
 
 const Index: React.FC = () => (
   <>

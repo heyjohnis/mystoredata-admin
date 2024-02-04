@@ -1,21 +1,21 @@
-import Widget from "@/components/widget";
+import Widget from "@/components/ui/widget";
 import {UnderlinedTabs} from "@/components/ui/tabs";
-import SectionTitle from "@/components/section-title";
+import SectionTitle from "@/components/ui/section-title";
 import {
   Intro,
   Instructions,
   TemplateStructure,
-} from "@/components/documentation/installation";
+} from "@/components/sample/documentation/installation";
 import {
   CodeStructure,
   NamingConventions,
   Folders,
   Files,
-} from "@/components/documentation/code-structure";
-import {Customization} from "@/components/documentation/faq";
-import {Credits} from "@/components/documentation/credits";
-import {ChangeLog} from "@/components/documentation/change-log";
-import {Tree} from "@/components/documentation/tree";
+} from "@/components/sample/documentation/code-structure";
+import {Customization} from "@/components/sample/documentation/faq";
+import {Credits} from "@/components/sample/documentation/credits";
+import {ChangeLog} from "@/components/sample/documentation/change-log";
+import {Tree} from "@/components/sample/documentation/tree";
 
 const InstallationTab: React.FC = () => (
   <div className="w-full py-2">

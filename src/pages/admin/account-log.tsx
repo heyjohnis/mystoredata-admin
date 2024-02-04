@@ -1,6 +1,6 @@
-import SectionTitle from "@/components/dashboard/section-title";
-import Notification from "@/components/dashboard/notification";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/sample/dashboard/section-title";
+import Notification from "@/components/sample/dashboard/notification";
+import Widget from "@/components/ui/widget";
 import {useEffect, useState} from "react";
 import {AccountLogProps} from "@/model/accountLog";
 import AccountLog from "@/components/account-log/AccountLog";

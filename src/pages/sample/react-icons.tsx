@@ -1,5 +1,5 @@
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/ui/widget";
 import {FaBox} from "react-icons/fa";
 import {IoIosAttach} from "react-icons/io";
 import {MdCached} from "react-icons/md";

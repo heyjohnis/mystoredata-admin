@@ -1,5 +1,5 @@
-import Widget from "@/components/widget";
-import Todo from "@/components/todo";
+import Widget from "@/components/ui/widget";
+import Todo from "@/components/ui/todo";
 
 const Index: React.FC = () => (
   <>

@@ -1,8 +1,8 @@
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/widget";
-import PricingTable1 from "@/components/pricing-tables/pricing-table-1";
-import PricingTable2 from "@/components/pricing-tables/pricing-table-2";
-import PricingTable3 from "@/components/pricing-tables/pricing-table-3";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/ui/widget";
+import PricingTable1 from "@/components/ui/pricing-tables/pricing-table-1";
+import PricingTable2 from "@/components/ui/pricing-tables/pricing-table-2";
+import PricingTable3 from "@/components/ui/pricing-tables/pricing-table-3";
 
 const Index: React.FC = () => (
   <>

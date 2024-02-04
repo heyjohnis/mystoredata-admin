@@ -1,12 +1,12 @@
 import Link from "next/link";
-import Logo from "@/components/landing/logo";
-import Icons from "@/components/landing/icons";
-import Images from "@/components/landing/images";
-import Title from "@/components/landing/title";
-import Text from "@/components/landing/text";
-import Features from "@/components/landing/features";
-import Options from "@/components/landing/options";
-import Screenshots from "@/components/landing/screenshots";
+import Logo from "@/components/sample/landing/logo";
+import Icons from "@/components/sample/landing/icons";
+import Images from "@/components/sample/landing/images";
+import Title from "@/components/sample/landing/title";
+import Text from "@/components/sample/landing/text";
+import Features from "@/components/sample/landing/features";
+import Options from "@/components/sample/landing/options";
+import Screenshots from "@/components/sample/landing/screenshots";
 
 const Index: React.FC = () => (
   <div className="container mx-auto max-w-screen-lg lg:px-4">

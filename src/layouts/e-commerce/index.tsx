@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import Head from "next/head";
 import {useAppSelector} from "@/store";
-import Navbar1 from "@/components/navbar-1";
-import LeftSidebar2 from "@/components/left-sidebar-2";
-import RightSidebar1 from "@/components/right-sidebar-1";
+import Navbar1 from "@/components/sample/navbar-1";
+import LeftSidebar2 from "@/components/sample/left-sidebar-2";
+import RightSidebar1 from "@/components/sample/right-sidebar-1";
 
 export type ECommerceProps = {
   children: React.ReactNode;

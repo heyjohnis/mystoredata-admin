@@ -1,6 +1,6 @@
 import {useForm, FormProvider} from "react-hook-form";
-import SectionTitle from "@/components/section-title";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/ui/section-title";
+import Widget from "@/components/ui/widget";
 import {InputWrapper} from "@/components/react-hook-form/input-wrapper";
 import {Label} from "@/components/react-hook-form/label";
 import {ErrorMessage} from "@/components/react-hook-form/error-message";

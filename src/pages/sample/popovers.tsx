@@ -1,6 +1,6 @@
-import SectionTitle from "@/components/section-title";
-import Popover, {Placement} from "@/components/popovers";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/ui/section-title";
+import Popover, {Placement} from "@/components/ui/popovers";
+import Widget from "@/components/ui/widget";
 
 const placements: Placement[] = ["left", "top", "right", "bottom"];
 const Index: React.FC = () => (

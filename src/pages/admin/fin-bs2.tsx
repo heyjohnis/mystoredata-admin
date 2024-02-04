@@ -1,7 +1,7 @@
-import SectionTitle from "@/components/section-title";
+import SectionTitle from "@/components/ui/section-title";
 import SearchForm from "@/components/SearchForm";
 import {useEffect, useState} from "react";
-import Widget from "@/components/widget";
+import Widget from "@/components/ui/widget";
 import {TransMoneyProps} from "@/model/TransMoney";
 import {POST} from "@/utils/restApi";
 import {SearchProps} from "@/model/SearchForm";

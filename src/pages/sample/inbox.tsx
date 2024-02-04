@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Inbox from "@/components/inbox";
-import Categories from "@/components/inbox/categories";
-import Labels from "@/components/inbox/labels";
-import Links from "@/components/inbox/links";
+import Inbox from "@/components/sample/inbox";
+import Categories from "@/components/sample/inbox/categories";
+import Labels from "@/components/sample/inbox/labels";
+import Links from "@/components/sample/inbox/links";
 
 const Sidebar: React.FC = () => (
   <div className="space-y-4">

@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {GET} from "@/utils/restApi";
-import SectionTitle from "@/components/dashboard/section-title";
-import Notification from "@/components/dashboard/notification";
-import Widget from "@/components/widget";
+import SectionTitle from "@/components/sample/dashboard/section-title";
+import Notification from "@/components/sample/dashboard/notification";
+import Widget from "@/components/ui/widget";
 import {NonCategoryProps} from "@/model/NonCategory";
 import ModalNonCategory from "@/components/non-category/ModalNonCategory";
 import {FinClassCode, UseKind} from "@/data/commonCode";
-import {Badge} from "@/components/badges";
+import {Badge} from "@/components/ui/badges";
 import {AxiosResponse} from "axios";
 
 const fields: Record<string, string>[] = [
