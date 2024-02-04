@@ -1,3 +1,4 @@
+"use client";
 import {useAppSelector, useAppDispatch} from "@/store";
 import {FiSettings, FiMenu} from "react-icons/fi";
 import Dropdown1 from "@/components/navbar-1/dropdown-1";

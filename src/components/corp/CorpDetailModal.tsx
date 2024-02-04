@@ -311,7 +311,7 @@ const CorpDetailModal = ({user, closedModal}: any) => {
                 <div className="flex mt-3 pt-3 border-t-2 justify-between">
                   <Link
                     href={{
-                      pathname: "/category-my",
+                      pathname: "/admin/category-my",
                       query: {user: form._id},
                     }}>
                     <button

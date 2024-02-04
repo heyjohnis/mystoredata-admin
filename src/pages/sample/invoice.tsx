@@ -1,7 +1,7 @@
 import {FiBox} from "react-icons/fi";
 import SectionTitle from "@/components/section-title";
 import Widget from "@/components/widget";
-import {formatCurrency} from "functions/numbers";
+import {formatCurrency} from "@/functions/numbers";
 
 const Index: React.FC = () => {
   const items = [

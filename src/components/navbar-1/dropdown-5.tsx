@@ -1,3 +1,4 @@
+"use client";
 import AccountLinks from "@/components/navbar-1/account-links";
 import Image from "next/image";
 import clsx from "clsx";

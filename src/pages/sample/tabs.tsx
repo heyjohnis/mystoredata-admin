@@ -5,7 +5,7 @@ import {
   IconTabs,
   Pills,
   VerticalTabs,
-} from "@/components/tabs";
+} from "@/components/ui/tabs";
 import Widget from "@/components/widget";
 import {FiSettings, FiHeart, FiMenu} from "react-icons/fi";
 

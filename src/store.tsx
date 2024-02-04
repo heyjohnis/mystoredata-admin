@@ -1,3 +1,4 @@
+"use client";
 import {configureStore} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useSelector, useDispatch} from "react-redux";
 import colorsReducer from "@/slices/colors";

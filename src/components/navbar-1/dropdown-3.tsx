@@ -1,3 +1,4 @@
+"use client";
 import {FiBell} from "react-icons/fi";
 import List2 from "./list-2";
 

@@ -6,7 +6,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import {getColor} from "functions/colors";
+import {getColor} from "@/functions/colors";
 
 export type CustomTooltipProps = {
   active?: boolean;

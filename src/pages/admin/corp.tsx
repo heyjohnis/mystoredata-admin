@@ -39,9 +39,9 @@ const Index: React.FC = () => {
   }, []);
 
   const getUserList = () => {
-    GET("user/list?userType=CORP").then((res: any) => {
+    GET("/user/list?userType=CORP").then((res: any) => {
       console.log({res});
-      setUsers(res.data.data);
+      setUsers(res?.data?.data);
     });
   };
 

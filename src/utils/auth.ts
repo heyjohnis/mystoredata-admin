@@ -3,7 +3,7 @@ import Router from "next/router";
 
 export const handleLogin = (token: string, goto = "") => {
   cookie.set("token", token);
-  Router.push("/" + goto);
+  Router.push(goto);
 };
 
 // export const redirectUser = (ctx, location) => {

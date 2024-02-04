@@ -1,3 +1,4 @@
+"use client";
 import {FiMessageSquare} from "react-icons/fi";
 import ProjectStatus from "./project-status";
 import clsx from "clsx";

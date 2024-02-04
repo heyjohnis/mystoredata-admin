@@ -1,4 +1,4 @@
-import {getColor} from "functions/colors";
+import {getColor} from "@/functions/colors";
 import {
   ResponsiveContainer,
   LineChart,
@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import {random} from "functions/numbers";
+import {random} from "@/functions/numbers";
 
 export type CustomTooltipProps = {
   active?: boolean;

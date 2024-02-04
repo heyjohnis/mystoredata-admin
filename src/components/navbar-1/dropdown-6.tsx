@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 import {FiChevronDown} from "react-icons/fi";
 import {Menu, Transition} from "@headlessui/react";

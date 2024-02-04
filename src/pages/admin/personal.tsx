@@ -33,7 +33,7 @@ const Index: React.FC = () => {
   const getUserList = () => {
     GET("user/list?userType=PERS").then((res: any) => {
       console.log({res});
-      setUsers(res.data.data);
+      setUsers(res?.data?.data);
     });
   };
 
@@ -77,7 +77,7 @@ const Index: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, i) => (
+              {users?.map((user, i) => (
                 <tr key={i} onClick={() => userDetail(user)}>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                     {user["userId"]}

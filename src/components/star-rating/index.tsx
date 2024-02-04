@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import StarRatings from "react-star-ratings";
-import {getColor} from "functions/colors";
+import {getColor} from "@/functions/colors";
 
 export type RatingProps = {initialRating: number; numberOfStars: number};
 

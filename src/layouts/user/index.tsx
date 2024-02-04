@@ -1,3 +1,4 @@
+"use client";
 import Head from "next/head";
 import {useAppSelector} from "@/store";
 import Navbar1 from "@/components/navbar-1";

@@ -1,3 +1,4 @@
+"use client";
 import Apps from "./apps";
 import {FiBox} from "react-icons/fi";
 import clsx from "clsx";

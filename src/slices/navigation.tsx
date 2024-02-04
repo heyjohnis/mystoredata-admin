@@ -36,25 +36,25 @@ const initialState: NavigationState[] = [
     title: "사용자정보",
     items: [
       {
-        url: "/",
+        url: "/admin",
         icon: <FiCompass size={20} />,
         title: "Dashboard",
         items: [],
       },
       {
-        url: "/personal",
+        url: "/admin/personal",
         icon: <FiUser size={20} />,
         title: "개인사용자",
         items: [],
       },
       {
-        url: "/corp",
+        url: "/admin/corp",
         icon: <BiBuildings size={20} />,
         title: "사업자",
         items: [],
       },
       {
-        url: "/category-my",
+        url: "/admin/category-my",
         icon: <BiCategory size={20} />,
         title: "계정별 카테고리",
         items: [],
@@ -65,20 +65,20 @@ const initialState: NavigationState[] = [
     title: "거래데이터",
     items: [
       {
-        url: "/account-log",
+        url: "/admin/account-log",
         icon: <LuBanknote size={20} />,
         title: "계좌데이터",
         items: [],
       },
       {
-        url: "/card-log",
+        url: "/admin/card-log",
         icon: <BsCreditCard size={20} />,
         title: "카드데이터",
         items: [],
       },
 
       {
-        url: "/trans-money",
+        url: "/admin/trans-money",
         icon: <BiTransfer size={20} />,
         title: "개래내역취합",
         items: [],
@@ -89,43 +89,43 @@ const initialState: NavigationState[] = [
     title: "기초데이터",
     items: [
       {
-        url: "/fin-item",
+        url: "/admin/fin-item",
         icon: <LiaMoneyBillAlt size={20} />,
         title: "금융상품",
         items: [],
       },
       {
-        url: "/tax-log",
+        url: "/admin/tax-log",
         icon: <TbReceiptTax size={20} />,
         title: "세금계산서",
         items: [],
       },
       {
-        url: "/trade-corp",
+        url: "/admin/trade-corp",
         icon: <BsFillBuildingsFill size={20} />,
         title: "거래처정보",
         items: [],
       },
       {
-        url: "/employee",
+        url: "/admin/employee",
         icon: <MdPeopleOutline size={20} />,
         title: "직원정보",
         items: [],
       },
       {
-        url: "/asset",
+        url: "/admin/asset",
         icon: <LiaMoneyCheckSolid size={20} />,
         title: "자산정보",
         items: [],
       },
       {
-        url: "/debt",
+        url: "/admin/debt",
         icon: <AiOutlineMinusCircle size={20} />,
         title: "부채정보",
         items: [],
       },
       {
-        url: "/credit-card",
+        url: "/admin/credit-card",
         icon: <AiOutlineCreditCard size={20} />,
         title: "신용카드정보",
         items: [],
@@ -137,19 +137,19 @@ const initialState: NavigationState[] = [
     title: "처리 로직설정",
     items: [
       {
-        url: "/category",
+        url: "/admin/category",
         icon: <BiCategory size={20} />,
         title: "키워드 통한 카테고리",
         items: [],
       },
       {
-        url: "/category-rule",
+        url: "/admin/category-rule",
         icon: <TbDirections size={20} />,
         title: "거래적요 통한 카테고리",
         items: [],
       },
       {
-        url: "/non-category",
+        url: "/admin/non-category",
         icon: <TbDirectionsOff size={20} />,
         title: "임시 카테고리",
         items: [],
@@ -161,19 +161,19 @@ const initialState: NavigationState[] = [
     title: "재정상태",
     items: [
       {
-        url: "/fin-trade",
+        url: "/admin/fin-trade",
         icon: <MdOutlineLeaderboard size={20} />,
         title: "거래현황",
         items: [],
       },
       {
-        url: "/fin-fs",
+        url: "/admin/fin-fs",
         icon: <AiOutlineDashboard size={20} />,
         title: "재무현황표",
         items: [],
       },
       {
-        url: "/fin-bs",
+        url: "/admin/fin-bs",
         icon: <LuSheet size={20} />,
         title: "재무상태표",
         items: [],

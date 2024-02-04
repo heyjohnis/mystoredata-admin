@@ -5,7 +5,7 @@ import {ErrorMessage} from "@/components/react-hook-form/error-message";
 import {Input} from "@/components/react-hook-form/input";
 import axios from "axios";
 import {handleLogin} from "@/utils/auth";
-
+import {POST} from "@/utils/restApi";
 export type FormProps = {
   userId: string;
   password: string;
@@ -25,10 +25,10 @@ const Index: React.FC = () => {
   } = methods;
 
   const onSubmit = async (data: FormProps) => {
-    const url = `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`;
-    const response = await axios.post(url, data);
-    console.log(response);
-    handleLogin(response.data.token);
+    POST("/auth/login", data).then((res: any) => {
+      console.log(res);
+      handleLogin(res.data.token, "/admin");
+    });
   };
 
   return (

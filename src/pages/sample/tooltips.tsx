@@ -1,5 +1,5 @@
 import SectionTitle from "@/components/section-title";
-import Tooltip, {Placement} from "@/components/tooltips";
+import Tooltip, {Placement} from "@/components/ui/tooltips";
 import Widget from "@/components/widget";
 
 const placements: Placement[] = ["left", "top", "right", "bottom"];

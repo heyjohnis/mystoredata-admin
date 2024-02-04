@@ -1,6 +1,6 @@
 import SectionTitle from "@/components/section-title";
 import {ProgressBar, ProgressBarWithText} from "@/components/progress-bars";
-import {random} from "functions/numbers";
+import {random} from "@/functions/numbers";
 import Widget from "@/components/widget";
 
 const Index: React.FC = () => {

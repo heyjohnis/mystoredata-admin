@@ -1,5 +1,5 @@
 import Widget from "@/components/widget";
-import {UnderlinedTabs} from "@/components/tabs";
+import {UnderlinedTabs} from "@/components/ui/tabs";
 import SectionTitle from "@/components/section-title";
 import {
   Intro,

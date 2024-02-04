@@ -1,7 +1,8 @@
+"use client";
 import {useAppSelector, useAppDispatch} from "@/store";
 import {setConfig} from "@/slices/config";
 import Switch from "react-switch";
-import {getColor} from "functions/colors";
+import {getColor} from "@/functions/colors";
 
 const Component: React.FC = () => {
   const onColor = `blue-200`;

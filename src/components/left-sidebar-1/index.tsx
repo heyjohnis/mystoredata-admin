@@ -1,3 +1,4 @@
+"use client";
 import {Fragment} from "react";
 import {useAppSelector} from "@/store";
 import Title from "@/components/left-sidebar-1/title";
