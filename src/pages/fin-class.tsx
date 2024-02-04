@@ -105,7 +105,7 @@ const Index: React.FC = () => {
   }, [form]);
 
   const getFinStatusData = () => {
-    POST(`fin-status/amount`, form).then((res: any) => {
+    POST(`/fin-status/amount`, form).then((res: any) => {
       console.log("fin-status: ", res.data);
       const finAmounts =
         res?.data.length > 0
@@ -123,21 +123,21 @@ const Index: React.FC = () => {
   };
 
   const getFinAccountData = () => {
-    POST(`fin-status/account`, form).then((res: any) => {
+    POST(`/fin-status/account`, form).then((res: any) => {
       console.log("fin-account: ", res.data);
       setAccountAmount([...res.data]);
     });
   };
 
   const getAssetData = () => {
-    POST(`fin-status/asset`, form).then((res: any) => {
+    POST(`/fin-status/asset`, form).then((res: any) => {
       console.log("fin-asset: ", res.data);
       setAsset([...res.data]);
     });
   };
 
   const getDebtData = () => {
-    POST(`fin-status/debt`, form).then((res: any) => {
+    POST(`/fin-status/debt`, form).then((res: any) => {
       console.log("fin-debt: ", res.data);
       setDebt([...res.data]);
     });
@@ -145,7 +145,7 @@ const Index: React.FC = () => {
 
   const getTransData = (code: string, category = "") => {
     setFinClassCode(code);
-    POST(`trans/log`, {
+    POST(`/trans/log`, {
       ...form,
       finClassCode: code,
       useKind: "BIZ",
@@ -158,7 +158,7 @@ const Index: React.FC = () => {
   };
 
   const getCategroyByClass = () => {
-    POST(`trans/class-category`, form).then((res: any) => {
+    POST(`/trans/class-category`, form).then((res: any) => {
       console.log("getCategroyByClass: ", res.data);
       setCategroyByClass(res.data);
     });

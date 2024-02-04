@@ -7,7 +7,7 @@ export const useTaxLog = (form: SearchProps) => {
   const [logs, setLogs] = useState([]);
 
   const getTaxLogs = () => {
-    POST(`tax/logs`, {...form}).then((res: any) => {
+    POST(`/tax/logs`, {...form}).then((res: any) => {
       setLogs(res?.data);
     });
   };

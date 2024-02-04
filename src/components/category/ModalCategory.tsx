@@ -25,7 +25,7 @@ const ModalCategory = ({category, closedModal}: Props) => {
   };
 
   const saveCategorKeywords = async () => {
-    const {data}: any = await PUT(`category/keyword-rule/${form?.code}`, {
+    const {data}: any = await PUT(`/category/keyword-rule/${form?.code}`, {
       ...form,
     });
     if (data) {

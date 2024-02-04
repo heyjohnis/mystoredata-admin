@@ -34,7 +34,7 @@ export const useFinStatusData = (form: SearchProps) => {
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
 
   const getFinStatusData = () => {
-    POST(`fin-status/amount`, form).then((res: any) => {
+    POST(`/fin-status/amount`, form).then((res: any) => {
       const finAmounts =
         res?.data.length > 0
           ? res?.data?.reduce(

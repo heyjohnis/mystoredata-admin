@@ -33,7 +33,7 @@ export default function Index() {
   }, [router.query]);
 
   const getCategories: any = async (user: string) => {
-    const {data}: any = await GET(`user/category/${user}`);
+    const {data}: any = await GET(`/user/category/${user}`);
     console.log("getCategories: ", data);
     setCategories([
       ...data.corpCategory,

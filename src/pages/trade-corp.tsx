@@ -52,25 +52,25 @@ const Index: React.FC = () => {
   }, [form]);
 
   const getTradeCorpList = () => {
-    POST(`trade-corp/list`, form).then((res: any) => {
+    POST(`/trade-corp/list`, form).then((res: any) => {
       console.log({res});
       setCorps(res.data);
     });
   };
 
   const getLogs = (tradeCorp: string, userId: string) => {
-    POST(`tax/logs`, {userId, tradeCorp}).then((res: any) => {
+    POST(`/tax/logs`, {userId, tradeCorp}).then((res: any) => {
       console.log({res});
       setTaxLogs(res.data);
     });
-    POST(`trans/trade-log`, {userId, tradeCorp}).then((res: any) => {
+    POST(`/trans/trade-log`, {userId, tradeCorp}).then((res: any) => {
       console.log({res});
       setTransMoneyLogs(res.data);
     });
   };
 
   const getTaxPayedLogs = (tradeCorp: string, userId: string) => {
-    POST(`tax/payed`, {userId, tradeCorp}).then((res: any) => {
+    POST(`/tax/payed`, {userId, tradeCorp}).then((res: any) => {
       console.log({res});
       setTaxPayedLogs(res.data);
     });

@@ -47,7 +47,7 @@ export default function CategoryRule() {
   }, []);
 
   const getNonCategories: any = async (userId: string) => {
-    const res: any = await GET(`category/non-category/${userId || ""}`);
+    const res: any = await GET(`/category/non-category/${userId || ""}`);
     console.log(res.data);
     setNonCategories(res.data.sort((a: any, b: any) => b.total - a.total));
   };

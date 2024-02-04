@@ -9,7 +9,7 @@ export const useAccountLog = (form: SearchProps) => {
 
   useEffect(() => {
     if (!isEmptyForm(form)) return;
-    POST(`account/log`, {...form}).then((res: any) => {
+    POST(`/account/log`, {...form}).then((res: any) => {
       setLogs(res?.data);
     });
   }, [form]);

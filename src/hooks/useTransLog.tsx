@@ -5,7 +5,7 @@ import {POST} from "@/utils/restApi";
 export const useTransLogs = (form: SearchProps) => {
   const [logs, setLogs] = useState([]);
   const getTransLogs = () => {
-    POST(`trans/log`, form).then((res: any) => {
+    POST(`/trans/log`, form).then((res: any) => {
       res?.data && setLogs(res.data);
     });
   };

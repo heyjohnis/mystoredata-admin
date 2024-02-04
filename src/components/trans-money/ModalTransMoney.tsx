@@ -47,7 +47,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
 
   const getCategory = async (asset: TransMoneyProps) => {
     console.log("getCategory: ", asset);
-    const {data}: any = await GET(`user/category/${asset.user}`);
+    const {data}: any = await GET(`/user/category/${asset.user}`);
     setPersonalCategory(data.personalCategory);
     setCorpCategory(data.corpCategory);
     setUserCategory(data.userCategory || []);
@@ -68,7 +68,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   };
 
   const updateDetail = () => {
-    PUT(`trans/update/${form?._id}`, form)
+    PUT(`/trans/update/${form?._id}`, form)
       .then((res: any) => {
         console.log({res});
         if (res.data.n > 0) alert("저장되었습니다");
@@ -84,7 +84,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   };
 
   const saveRule = () => {
-    POST(`user/category/rule`, form)
+    POST(`/user/category/rule`, form)
       .then((res: any) => {
         if (res.data.n > 0) alert("저장되었습니다");
         else alert("저장에 실패하였습니다");
@@ -95,7 +95,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
   };
 
   const saveEmpPay = () => {
-    POST(`emp/reg`, form)
+    POST(`/emp/reg`, form)
       .then((res: any) => {
         console.log("save employee: ", res);
         if (res?.status === 200) {
@@ -115,7 +115,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
       finItemName: FinItemCode[type],
       finName: form?.transRemark,
     };
-    POST(`debt/reg`, req)
+    POST(`/debt/reg`, req)
       .then((res: any) => {
         console.log("save loan: ", res);
         if (res?.status === 200) {
@@ -135,7 +135,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
       finItemName: FinItemCode[type],
       finName: form?.transRemark,
     };
-    POST(`asset/reg`, req)
+    POST(`/asset/reg`, req)
       .then((res: any) => {
         console.log("save asset: ", res);
         if (res?.status === 200) {

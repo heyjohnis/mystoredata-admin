@@ -89,7 +89,7 @@ const Index: React.FC = () => {
 
   const getFinItems = () => {
     console.log("get fin items");
-    GET(`fin-item/list?corpNum=${corpNum}&userId=${userId}`).then(
+    GET(`/fin-item/list?corpNum=${corpNum}&userId=${userId}`).then(
       (res: any) => {
         console.log({res});
         setItems(res.data);
@@ -129,7 +129,7 @@ const Index: React.FC = () => {
         });
     } else {
       console.log("update: ", item);
-      PUT(`fin-item/update/${item?._id}`, item)
+      PUT(`/fin-item/update/${item?._id}`, item)
         .then((res: any) => {
           console.log({res});
           alert("저장되었습니다");
@@ -144,7 +144,7 @@ const Index: React.FC = () => {
     if (item?._id) {
       const isDelete: boolean = window.confirm("삭제하시겠습니까?");
       if (!isDelete) return;
-      DELETE(`fin-item/delete/${item?._id}`)
+      DELETE(`/fin-item/delete/${item?._id}`)
         .then((res: any) => {
           console.log({res});
           alert("삭제되었습니다");

@@ -81,14 +81,14 @@ const Index: React.FC = () => {
   }, [form]);
 
   const getTradeCorpList = () => {
-    POST(`asset/list`, form).then((res: any) => {
+    POST(`/asset/list`, form).then((res: any) => {
       console.log({res});
       setAssts(res.data);
     });
   };
 
   const getLogs = (asset: string, userId: string) => {
-    POST(`trans/asset-log`, {userId, asset}).then((res: any) => {
+    POST(`/trans/asset-log`, {userId, asset}).then((res: any) => {
       console.log({res});
       setTransMoneyLogs(res.data);
     });
@@ -107,7 +107,7 @@ const Index: React.FC = () => {
 
   const saveInfo = (finItem: FinItemProps) => {
     console.log("saveInfo", finItem);
-    POST(`asset/save`, finItem).then((res: any) => {
+    POST(`/asset/save`, finItem).then((res: any) => {
       console.log({res});
     });
     closedModal(true);
@@ -115,7 +115,7 @@ const Index: React.FC = () => {
 
   const deleteItem = (finItem: FinItemProps) => {
     console.log("deleteItem", finItem);
-    POST(`asset/delete`, finItem).then((res: any) => {
+    POST(`/asset/delete`, finItem).then((res: any) => {
       console.log({res});
     });
   };

@@ -58,7 +58,7 @@ const Index: React.FC = () => {
   const [inOutAccount, setInOutAccount] = useState<CategoryProps[]>([]);
 
   const getTransLogs = () => {
-    POST(`trans/log`, form).then((res: any) => {
+    POST(`/trans/log`, form).then((res: any) => {
       res?.data && setLogs(res.data);
     });
   };
@@ -71,7 +71,7 @@ const Index: React.FC = () => {
   }, [form]);
 
   const getFinStatusData = () => {
-    POST(`fin-status/amount`, form).then((res: any) => {
+    POST(`/fin-status/amount`, form).then((res: any) => {
       const finAmounts =
         res?.data.length > 0
           ? res?.data?.reduce(
@@ -88,7 +88,7 @@ const Index: React.FC = () => {
 
   const getTransData = (code: string, category = "") => {
     setFinClassCode(code);
-    POST(`trans/log`, {
+    POST(`/trans/log`, {
       ...form,
       finClassCodes: code,
       useYn: true,
@@ -100,7 +100,7 @@ const Index: React.FC = () => {
   };
 
   const getCategroyByClass = () => {
-    POST(`trans/class-category`, form).then((res: any) => {
+    POST(`/trans/class-category`, form).then((res: any) => {
       console.log("getCategroyByClass: ", res?.data);
       res?.data && setCategroyByClass(res.data);
     });

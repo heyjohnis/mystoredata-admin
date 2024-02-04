@@ -40,7 +40,7 @@ export default function Index() {
   }, []);
 
   const getCategories: any = async () => {
-    const {data}: any = await GET(`category/keyword-rule`);
+    const {data}: any = await GET(`/category/keyword-rule`);
     setCategories(data);
   };
 

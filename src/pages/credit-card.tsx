@@ -42,21 +42,21 @@ const Index: React.FC = () => {
   }, [form]);
 
   const getTradeCorpList = () => {
-    POST(`credit-card/list`, form).then((res: any) => {
+    POST(`/credit-card/list`, form).then((res: any) => {
       console.log({res});
       setCreditCards(res.data);
     });
   };
 
   const getCardLogs = () => {
-    POST(`trans/credit-log`, form).then((res: any) => {
+    POST(`/trans/credit-log`, form).then((res: any) => {
       console.log({res});
       setCardLogs(res.data);
     });
   };
 
   const getPayableLogs = () => {
-    POST(`credit-card/debt`, form).then((res) => {
+    POST(`/credit-card/debt`, form).then((res) => {
       console.log("getPayableLogs: ", res);
       setCashedLogs(res.data);
       sumCardDebt(res.data);

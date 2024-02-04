@@ -6,7 +6,7 @@ import {isEmptyForm} from "@/utils/form";
 export const useCardLog = (form: SearchProps, tradeKind?: string) => {
   const [logs, setLogs] = useState([]);
   const getCardLogs = () => {
-    POST(`card/log`, {...form, tradeKind}).then((res: any) => {
+    POST(`/card/log`, {...form, tradeKind}).then((res: any) => {
       console.log({res});
       setLogs(res?.data);
     });

@@ -20,13 +20,13 @@ const Index: React.FC = () => {
   }, [form]);
 
   const getTransLogs = () => {
-    POST(`trans/log`, form).then((res: any) => {
+    POST(`/trans/log`, form).then((res: any) => {
       setLogs(res.data);
     });
   };
 
   const transMerge = () => {
-    PUT(`trans/merge`, {
+    PUT(`/trans/merge`, {
       corpNum: form?.corpNum,
       userId: form?.userId,
       fromAt: form?.fromAt,

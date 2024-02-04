@@ -41,7 +41,7 @@ export default function CategoryRule() {
   }, [router.query]);
 
   const getCategories: any = async (user: string) => {
-    const data = await GET(`rule/category?user=${user || ""}`).then(
+    const data = await GET(`/rule/category?user=${user || ""}`).then(
       (res: any) => {
         console.log(res);
         setRules(res.data.data);

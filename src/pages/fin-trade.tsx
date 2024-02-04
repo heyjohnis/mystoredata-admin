@@ -126,7 +126,7 @@ const Index: React.FC = () => {
   }, [finStatusData]);
 
   const getTransData = (code: string, category = "") => {
-    POST(`trans/log`, {
+    POST(`/trans/log`, {
       ...form,
       finClassCodes: code,
       useYn: true,
@@ -143,7 +143,7 @@ const Index: React.FC = () => {
     if (log.card) log.card && setTradeKind("CRDIT");
     if (log.taxType) log.taxType && setTradeKind("BILL");
 
-    POST(`trans/trade-item`, {_id: log._id}).then((res: any) => {
+    POST(`/trans/trade-item`, {_id: log._id}).then((res: any) => {
       console.log("trade-item: ", res.data);
       setFinData(res.data);
     });

@@ -20,7 +20,7 @@ const Index: React.FC = () => {
   }, [userId, corpNum]);
 
   const getCardLogs = () => {
-    GET(`card/log?userId=${userId}&corpNum=${corpNum}`).then((res: any) => {
+    GET(`/card/log?userId=${userId}&corpNum=${corpNum}`).then((res: any) => {
       console.log({res});
       setLogs(res.data);
     });

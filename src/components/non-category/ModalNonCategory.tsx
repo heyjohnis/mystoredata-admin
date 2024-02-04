@@ -30,7 +30,7 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
   };
 
   const getCategories: any = async () => {
-    const {data}: any = await GET(`category/keyword-rule`);
+    const {data}: any = await GET(`/category/keyword-rule`);
     setCategories(data);
   };
 
@@ -63,7 +63,7 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
 
   const getTransLog = () => {
     const category = nonCategory?._id.category;
-    POST(`trans/log`, {...form, category}).then((res: any) => {
+    POST(`/trans/log`, {...form, category}).then((res: any) => {
       console.log("transdata: ", res.data);
       setLogs(res.data);
     });
@@ -77,7 +77,7 @@ const ModalNonCategory = ({nonCategory, closedModal}: Props) => {
       changeCategory: form?.changeCategory,
       changeCategoryName: form?.changeCategoryName,
     };
-    PUT(`trans/update-category`, req).then((res) => {
+    PUT(`/trans/update-category`, req).then((res) => {
       console.log("updated category: ", res);
     });
   };

@@ -81,14 +81,14 @@ const Index: React.FC = () => {
   }, [form]);
 
   const getTradeCorpList = () => {
-    POST(`debt/list`, form).then((res: any) => {
+    POST(`/debt/list`, form).then((res: any) => {
       console.log({res});
       setDebts(res.data);
     });
   };
 
   const getLogs = (debt: string, userId: string) => {
-    POST(`trans/debt-log`, {userId, debt}).then((res: any) => {
+    POST(`/trans/debt-log`, {userId, debt}).then((res: any) => {
       console.log({res});
       setTransMoneyLogs(res.data);
     });
@@ -107,7 +107,7 @@ const Index: React.FC = () => {
 
   const saveInfo = (finItem: FinItemProps) => {
     console.log("saveInfo", finItem);
-    POST(`debt/save`, finItem).then((res: any) => {
+    POST(`/debt/save`, finItem).then((res: any) => {
       console.log({res});
     });
     closedModal(true);

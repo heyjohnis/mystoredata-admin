@@ -38,7 +38,7 @@ export default function Index() {
   }, []);
 
   const getCategories: any = async () => {
-    const {data}: any = await POST(`fin-report/categories`, form);
+    const {data}: any = await POST(`/fin-report/categories`, form);
     setCategories(data);
   };
 

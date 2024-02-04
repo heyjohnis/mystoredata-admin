@@ -45,7 +45,7 @@ const Index: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    POST(`annual/save`, {
+    POST(`/annual/save`, {
       ...form,
     }).then((res: any) => {
       console.log("resum: ");
@@ -54,7 +54,7 @@ const Index: React.FC = () => {
   };
 
   const getTransData = () => {
-    POST(`annual/year`, {
+    POST(`/annual/year`, {
       ...form,
     }).then((res: any) => {
       console.log("transdata: ", res?.data);

@@ -19,7 +19,7 @@ export const useCategoryFinClass = (form: SearchProps) => {
   const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
 
   const getCategroyByClass = () => {
-    POST(`trans/class-category`, form).then((res: any) => {
+    POST(`/trans/class-category`, form).then((res: any) => {
       console.log("getCategroyByClass: ", res.data);
       setCategroyByClass(res?.data);
     });
