@@ -1,5 +1,5 @@
 import {FiClock} from "react-icons/fi";
-import posts from "json/posts.json";
+import posts from "@/json/posts.json";
 import Input from "./input";
 import Comments from "./comments";
 import Icons from "./icons";

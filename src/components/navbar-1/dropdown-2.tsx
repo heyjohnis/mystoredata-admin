@@ -1,6 +1,6 @@
 import {Menu, Transition} from "@headlessui/react";
 import {Fragment} from "react";
-import flags from "json/navbar-flags.json";
+import flags from "@/json/navbar-flags.json";
 import Link from "next/link";
 
 const Dropdown: React.FC = () => {
@@ -25,10 +25,13 @@ const Dropdown: React.FC = () => {
           </div>
           <div className="flex flex-wrap">
             {flags.map((item, i) => (
-              <Link href="/" key={i} className="flex items-center justify-start w-1/2 p-2 text-sm text-gray-900 bg-white space-x-2 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <span
-                    className={`text-base flag-icon flag-icon-${item.code}`}></span>
-                  <span>{item.name}</span>
+              <Link
+                href="/"
+                key={i}
+                className="flex items-center justify-start w-1/2 p-2 text-sm text-gray-900 bg-white space-x-2 dark:bg-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                <span
+                  className={`text-base flag-icon flag-icon-${item.code}`}></span>
+                <span>{item.name}</span>
               </Link>
             ))}
           </div>

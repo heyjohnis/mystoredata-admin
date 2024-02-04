@@ -1,4 +1,4 @@
-import items from "json/timelines.json";
+import items from "@/json/timelines.json";
 
 export const Timeline1: React.FC = () => {
   return (

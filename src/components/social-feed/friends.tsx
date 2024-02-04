@@ -1,4 +1,4 @@
-import friends from "json/friends.json";
+import friends from "@/json/friends.json";
 
 const Index: React.FC = () => {
   return (

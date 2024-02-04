@@ -1,5 +1,5 @@
 import Question from "./question";
-import items from "json/faq.json";
+import items from "@/json/faq.json";
 
 const Faq: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import StarRating from "@/components/star-rating";
 import {FiPaperclip} from "react-icons/fi";
-import data from "json/inbox.json";
+import data from "@/json/inbox.json";
 
 export type DataProps = {
   name: string;

@@ -11,7 +11,7 @@ import {List} from "@/components/dashboard/list";
 import Tasks from "@/components/tasks";
 import {Timeline1} from "@/components/timelines";
 import Notification from "@/components/dashboard/notification";
-import tasks from "json/tasks.json";
+import tasks from "@/json/tasks.json";
 
 const Index: React.FC = () => {
   return (

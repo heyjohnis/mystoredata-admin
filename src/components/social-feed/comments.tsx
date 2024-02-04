@@ -1,4 +1,4 @@
-import comments from "json/comments.json";
+import comments from "@/json/comments.json";
 
 export type CommentProps = {
   name: string;

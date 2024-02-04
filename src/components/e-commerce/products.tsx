@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import StarRating from "@/components/star-rating";
-import items from "json/products.json";
+import items from "@/json/products.json";
 import {formatCurrency} from "functions/numbers";
 import {FiGrid, FiMenu} from "react-icons/fi";
 

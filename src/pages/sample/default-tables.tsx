@@ -1,6 +1,6 @@
 import SectionTitle from "@/components/section-title";
 import Widget from "@/components/widget";
-import countries from "json/countries.json";
+import countries from "@/json/countries.json";
 import {formatNumber} from "functions/numbers";
 
 export type CountriesProps = {

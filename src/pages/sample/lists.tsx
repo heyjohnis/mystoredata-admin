@@ -5,7 +5,7 @@ import List2 from "@/components/lists/list-2";
 import List3 from "@/components/lists/list-3";
 import List4 from "@/components/lists/list-4";
 import List5 from "@/components/lists/list-5";
-import lists from "json/lists.json";
+import lists from "@/json/lists.json";
 
 export type ListProps = {
   title: string;
