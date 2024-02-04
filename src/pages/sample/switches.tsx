@@ -1,6 +1,6 @@
-import SectionTitle from "components/section-title";
-import Switch from "components/switch";
-import Widget from "components/widget";
+import SectionTitle from "@/components/section-title";
+import Switch from "@/components/switch";
+import Widget from "@/components/widget";
 
 const items = {
   title: "API Access",

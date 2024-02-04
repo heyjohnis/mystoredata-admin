@@ -1,10 +1,10 @@
-import SectionTitle from "components/section-title";
-import {UnderlinedTabs} from "components/tabs";
-import AccountSettings from "components/sample-forms/account-settings";
-import EmailPreferences from "components/sample-forms/email-preferences";
-import SecuritySettings from "components/sample-forms/security-settings";
+import SectionTitle from "@/components/section-title";
+import {UnderlinedTabs} from "@/components/tabs";
+import AccountSettings from "@/components/sample-forms/account-settings";
+import EmailPreferences from "@/components/sample-forms/email-preferences";
+import SecuritySettings from "@/components/sample-forms/security-settings";
 import {FiTwitter, FiFacebook, FiInstagram} from "react-icons/fi";
-import Widget from "components/social-feed/widget";
+import Widget from "@/components/social-feed/widget";
 
 const tabs = [
   {

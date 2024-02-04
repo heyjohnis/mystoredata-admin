@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {FiChevronRight} from "react-icons/fi";
-import {Badge} from "components/badges";
+import {Badge} from "@/components/badges";
 
 export type BadgeProps = {
   color: string;

@@ -1,4 +1,4 @@
-import {useAppSelector} from "store";
+import {useAppSelector} from "@/store";
 
 const Text: React.FC = () => {
   const config = useAppSelector((state) => state.config);

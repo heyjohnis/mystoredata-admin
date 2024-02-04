@@ -3,7 +3,7 @@ import Colors, {PaletteProps} from "./colors";
 import Toggle from "./toggle";
 import Sidebar from "./sidebar";
 import Demos from "./demos";
-import {useAppSelector} from "store";
+import {useAppSelector} from "@/store";
 
 const RightSidebar: React.FC = () => {
   const colors: PaletteProps[] = [

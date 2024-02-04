@@ -1,13 +1,13 @@
-import SectionTitle from "components/section-title";
-import SearchForm from "components/SearchForm";
+import SectionTitle from "@/components/section-title";
+import SearchForm from "@/components/SearchForm";
 import {useEffect, useState} from "react";
-import Widget from "components/widget";
+import Widget from "@/components/widget";
 import {TransMoneyProps} from "model/TransMoney";
-import {POST} from "utils/restApi";
+import {POST} from "@/utils/restApi";
 import {SearchProps} from "model/SearchForm";
-import TransMoneyLog from "components/trans-money/TransMoneyLog";
-import FinClassStatus from "components/fin-status/FinClassStatus";
-import FinDailyStatus from "components/fin-status/FinDailyStatus";
+import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
+import FinClassStatus from "@/components/fin-status/FinClassStatus";
+import FinDailyStatus from "@/components/fin-status/FinDailyStatus";
 
 interface FinAmount {
   [key: string]: number;

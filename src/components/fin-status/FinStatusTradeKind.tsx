@@ -1,4 +1,4 @@
-import {finNumber} from "utils/finNumber";
+import {finNumber} from "@/utils/finNumber";
 import FinStatusTradeKindUnit from "./FinStatusTradeKindUnit";
 import FinStatusInOutUnit from "./FinStatusInOutUnit";
 

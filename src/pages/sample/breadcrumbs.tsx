@@ -1,6 +1,6 @@
-import SectionTitle from "components/section-title";
-import Breadcrumb from "components/breadcrumbs";
-import Widget from "components/widget";
+import SectionTitle from "@/components/section-title";
+import Breadcrumb from "@/components/breadcrumbs";
+import Widget from "@/components/widget";
 
 const Basic: React.FC = () => {
   const items1 = [{title: "Home", url: "/", last: true}];

@@ -1,4 +1,4 @@
-import {Select} from "components/forms/select";
+import {Select} from "@/components/forms/select";
 import {CategoryProps} from "model/Category";
 
 type CommonCodeSelectProps = {

@@ -1,6 +1,6 @@
 import {FiBox, FiMenu} from "react-icons/fi";
 import {setConfig} from "slices/config";
-import {useAppSelector, useAppDispatch} from "store";
+import {useAppSelector, useAppDispatch} from "@/store";
 import Link from "next/link";
 
 const Logo: React.FC = () => {
@@ -8,9 +8,11 @@ const Logo: React.FC = () => {
   const {name, collapsed} = useAppSelector((state) => state.config);
   return (
     <div className="truncate flex flex-row items-center justify-start w-full text-base font-bold tracking-wider uppercase whitespace-nowrap text-blue-500">
-      <Link href="/" className="flex flex-row items-center justify-start space-x-2">
-          <FiBox size={28} />
-          <span>{name}</span>
+      <Link
+        href="/"
+        className="flex flex-row items-center justify-start space-x-2">
+        <FiBox size={28} />
+        <span>{name}</span>
       </Link>
       <button
         onClick={() =>

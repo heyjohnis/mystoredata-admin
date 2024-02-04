@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import Portal from "components/portal";
-import Alert from "components/alerts";
+import Portal from "@/components/portal";
+import Alert from "@/components/alerts";
 
 export type NotificationProps = {
   position: string;

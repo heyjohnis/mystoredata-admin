@@ -3,16 +3,16 @@ import {useEffect, useState} from "react";
 import {ClassCategoryProps} from "model/ClassCategoryProps";
 import {SearchProps} from "model/SearchForm";
 
-import {dateChange} from "utils/date";
-import {POST} from "utils/restApi";
+import {dateChange} from "@/utils/date";
+import {POST} from "@/utils/restApi";
 
-import SectionTitle from "components/section-title";
-import Widget from "components/widget";
-import CommonCodeSelect from "components/CommonCodeSelect";
-import {Label} from "components/forms/label";
-import {Input} from "components/forms/input";
-import {InputWrapper} from "components/forms/input-wrapper";
-import {finNumber} from "utils/finNumber";
+import SectionTitle from "@/components/section-title";
+import Widget from "@/components/widget";
+import CommonCodeSelect from "@/components/CommonCodeSelect";
+import {Label} from "@/components/forms/label";
+import {Input} from "@/components/forms/input";
+import {InputWrapper} from "@/components/forms/input-wrapper";
+import {finNumber} from "@/utils/finNumber";
 
 interface FinAmount {
   [key: string]: number;

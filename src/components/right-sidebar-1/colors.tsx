@@ -1,4 +1,4 @@
-import {useAppDispatch} from "store";
+import {useAppDispatch} from "@/store";
 import {setConfig} from "slices/config";
 
 export type PaletteProps = {bg: string; text: string; name: string};

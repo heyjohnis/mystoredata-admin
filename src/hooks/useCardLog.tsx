@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {SearchProps} from "model/SearchForm";
-import {POST} from "utils/restApi";
-import {isEmptyForm} from "utils/form";
+import {POST} from "@/utils/restApi";
+import {isEmptyForm} from "@/utils/form";
 
 export const useCardLog = (form: SearchProps, tradeKind?: string) => {
   const [logs, setLogs] = useState([]);

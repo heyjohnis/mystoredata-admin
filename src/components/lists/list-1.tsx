@@ -1,4 +1,4 @@
-import {CircularBadge} from "components/badges";
+import {CircularBadge} from "@/components/badges";
 
 export type ItemProps = {
   title: string;

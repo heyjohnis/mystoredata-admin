@@ -1,5 +1,5 @@
-import SectionTitle from "components/section-title";
-import Widget from "components/widget";
+import SectionTitle from "@/components/section-title";
+import Widget from "@/components/widget";
 import {FiStar} from "react-icons/fi";
 
 const Buttons: React.FC = () => (

@@ -1,12 +1,12 @@
-import SectionTitle from "components/section-title";
-import Bar1 from "components/charts/bar-1";
-import Bar4 from "components/charts/bar-4";
-import Bar2 from "components/charts/bar-2";
-import Bar3 from "components/charts/bar-3";
-import HorizontalBar2 from "components/charts/horizontal-bar-2";
-import HorizontalBar1 from "components/charts/horizontal-bar-1";
+import SectionTitle from "@/components/section-title";
+import Bar1 from "@/components/charts/bar-1";
+import Bar4 from "@/components/charts/bar-4";
+import Bar2 from "@/components/charts/bar-2";
+import Bar3 from "@/components/charts/bar-3";
+import HorizontalBar2 from "@/components/charts/horizontal-bar-2";
+import HorizontalBar1 from "@/components/charts/horizontal-bar-1";
 
-import Widget from "components/widget";
+import Widget from "@/components/widget";
 
 const Index: React.FC = () => (
   <>

@@ -1,16 +1,16 @@
-import SectionTitle from "components/dashboard/section-title";
-import Notification from "components/dashboard/notification";
-import Widget from "components/widget";
-import SearchForm from "components/SearchForm";
-import FinDailyStatus from "components/fin-status/FinDailyStatus";
-import FinClassStatus from "components/fin-status/FinClassStatus";
+import SectionTitle from "@/components/dashboard/section-title";
+import Notification from "@/components/dashboard/notification";
+import Widget from "@/components/widget";
+import SearchForm from "@/components/SearchForm";
+import FinDailyStatus from "@/components/fin-status/FinDailyStatus";
+import FinClassStatus from "@/components/fin-status/FinClassStatus";
 import {useEffect, useState} from "react";
-import {POST} from "utils/restApi";
-import TransMoneyLog from "components/trans-money/TransMoneyLog";
+import {POST} from "@/utils/restApi";
+import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
 import {TransMoneyProps} from "model/TransMoney";
 import {SearchProps} from "model/SearchForm";
-import {dateChange} from "utils/date";
-import FinStatusTradeKind from "components/fin-status/FinStatusTradeKind";
+import {dateChange} from "@/utils/date";
+import FinStatusTradeKind from "@/components/fin-status/FinStatusTradeKind";
 import {CategoryProps, ClassCategoryProps} from "model/ClassCategoryProps";
 
 interface FinAmount {

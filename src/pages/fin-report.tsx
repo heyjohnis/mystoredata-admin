@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {POST} from "utils/restApi";
-import SectionTitle from "components/dashboard/section-title";
-import Notification from "components/dashboard/notification";
-import Widget from "components/widget";
-import {Badge} from "components/badges";
+import {POST} from "@/utils/restApi";
+import SectionTitle from "@/components/dashboard/section-title";
+import Notification from "@/components/dashboard/notification";
+import Widget from "@/components/widget";
+import {Badge} from "@/components/badges";
 import {CategoryProps} from "model/Category";
-import {Input} from "components/forms/input";
-import ModalCategory from "components/category/ModalCategory";
+import {Input} from "@/components/forms/input";
+import ModalCategory from "@/components/category/ModalCategory";
 import {UseKind} from "../data/commonCode";
-import SearchForm from "components/SearchForm";
+import SearchForm from "@/components/SearchForm";
 
 const fields: Record<string, string>[] = [
   {

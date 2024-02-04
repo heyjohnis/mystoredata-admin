@@ -1,5 +1,5 @@
-import SectionTitle from "components/section-title";
-import {Badge} from "components/badges";
+import SectionTitle from "@/components/section-title";
+import {Badge} from "@/components/badges";
 
 export type ItemProps = {
   date: string;

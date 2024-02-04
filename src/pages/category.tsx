@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {GET, PUT} from "utils/restApi";
-import SectionTitle from "components/dashboard/section-title";
-import Notification from "components/dashboard/notification";
-import Widget from "components/widget";
-import {Badge} from "components/badges";
+import {GET, PUT} from "@/utils/restApi";
+import SectionTitle from "@/components/dashboard/section-title";
+import Notification from "@/components/dashboard/notification";
+import Widget from "@/components/widget";
+import {Badge} from "@/components/badges";
 import {CategoryProps} from "model/Category";
-import {Input} from "components/forms/input";
-import ModalCategory from "components/category/ModalCategory";
+import {Input} from "@/components/forms/input";
+import ModalCategory from "@/components/category/ModalCategory";
 import {FinClassCode, UseKind} from "../data/commonCode";
 
 const fields: Record<string, string>[] = [

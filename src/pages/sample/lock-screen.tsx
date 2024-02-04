@@ -1,6 +1,6 @@
 import Link from "next/link";
-import CenteredForm from "layouts/centered-form";
-import LockScreen from "components/sample-forms/login";
+import CenteredForm from "@/layouts/centered-form";
+import LockScreen from "@/components/sample-forms/login";
 
 const Index: React.FC = () => {
   return (

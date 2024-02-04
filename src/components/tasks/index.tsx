@@ -1,7 +1,7 @@
 import React, {useState, useReducer} from "react";
 import moment from "moment";
 import {FiX} from "react-icons/fi";
-import {Badge} from "components/badges";
+import {Badge} from "@/components/badges";
 export function randomElement<T>(items: T[]): T {
   return items[Math.floor(Math.random() * items.length)];
 }

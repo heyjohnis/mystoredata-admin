@@ -1,5 +1,5 @@
-import CenteredForm from "layouts/centered-form";
-import Subscribe from "components/sample-forms/subscribe";
+import CenteredForm from "@/layouts/centered-form";
+import Subscribe from "@/components/sample-forms/subscribe";
 
 const Index: React.FC = () => {
   return (

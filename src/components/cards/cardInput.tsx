@@ -1,9 +1,9 @@
 import {useState} from "react";
-import {Input} from "components/forms/input";
-import {InputWrapper} from "components/forms/input-wrapper";
+import {Input} from "@/components/forms/input";
+import {InputWrapper} from "@/components/forms/input-wrapper";
 import {CardProps} from "model/card";
-import {POST} from "utils/restApi";
-import CommonCodeSelect from "components/CommonCodeSelect";
+import {POST} from "@/utils/restApi";
+import CommonCodeSelect from "@/components/CommonCodeSelect";
 import {CardCode, CorpType, tradeKind} from "data/commonCode";
 
 export default function CardInput({addCard, user}: any) {

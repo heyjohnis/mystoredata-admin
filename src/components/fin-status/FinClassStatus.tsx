@@ -1,4 +1,4 @@
-import {finNumber} from "utils/finNumber";
+import {finNumber} from "@/utils/finNumber";
 
 type Props = {
   finAmount: any;

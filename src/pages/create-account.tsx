@@ -1,6 +1,6 @@
 import Link from "next/link";
-import CenteredForm from "layouts/centered-form";
-import CreateAccount from "components/sample-forms/create-account";
+import CenteredForm from "@/layouts/centered-form";
+import CreateAccount from "@/components/sample-forms/create-account";
 
 const Index: React.FC = () => {
   return (

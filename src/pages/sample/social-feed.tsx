@@ -1,7 +1,7 @@
-import Widget from "components/social-feed/widget";
-import Widget2 from "components/user-widgets/widget-2";
-import Friends from "components/social-feed/friends";
-import Posts from "components/social-feed/posts";
+import Widget from "@/components/social-feed/widget";
+import Widget2 from "@/components/user-widgets/widget-2";
+import Friends from "@/components/social-feed/friends";
+import Posts from "@/components/social-feed/posts";
 
 const Index: React.FC = () => {
   return (

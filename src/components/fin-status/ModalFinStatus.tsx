@@ -2,7 +2,7 @@ import {Dialog, Transition} from "@headlessui/react";
 import {Fragment, useEffect, useState} from "react";
 import {FiX} from "react-icons/fi";
 import {TransMoneyProps} from "model/TransMoney";
-import {finNumber} from "utils/finNumber";
+import {finNumber} from "@/utils/finNumber";
 
 type Props = {
   finData: TransMoneyProps[];

@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import {FiChevronRight} from "react-icons/fi";
 import type {NavigationState} from "slices/navigation";
-import {CircularBadge} from "components/badges";
+import {CircularBadge} from "@/components/badges";
 
 type ItemContentProps = {
   icon?: React.ReactNode;

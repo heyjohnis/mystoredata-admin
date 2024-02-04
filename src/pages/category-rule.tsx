@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {GET} from "utils/restApi";
-import SectionTitle from "components/dashboard/section-title";
-import Notification from "components/dashboard/notification";
-import Widget from "components/widget";
-import {Badge} from "components/badges";
+import {GET} from "@/utils/restApi";
+import SectionTitle from "@/components/dashboard/section-title";
+import Notification from "@/components/dashboard/notification";
+import Widget from "@/components/widget";
+import {Badge} from "@/components/badges";
 import {CategoryRuleProps} from "model/CategoryRule";
 import {UseKind} from "data/commonCode";
 

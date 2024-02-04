@@ -1,17 +1,17 @@
 import {useForm, FormProvider} from "react-hook-form";
-import SectionTitle from "components/section-title";
-import Widget from "components/widget";
-import {InputWrapper} from "components/react-hook-form/input-wrapper";
-import {Label} from "components/react-hook-form/label";
-import {ErrorMessage} from "components/react-hook-form/error-message";
-import {Input} from "components/react-hook-form/input";
-import {NumericInput} from "components/react-hook-form/numeric-input";
-import {Textarea} from "components/react-hook-form/textarea";
-import {Select} from "components/react-hook-form/select";
-import {Switch} from "components/react-hook-form/switch";
-import {Checkbox} from "components/react-hook-form/checkbox";
-import {Radio} from "components/react-hook-form/radio";
-import {ReactSelect} from "components/react-hook-form/react-select";
+import SectionTitle from "@/components/section-title";
+import Widget from "@/components/widget";
+import {InputWrapper} from "@/components/react-hook-form/input-wrapper";
+import {Label} from "@/components/react-hook-form/label";
+import {ErrorMessage} from "@/components/react-hook-form/error-message";
+import {Input} from "@/components/react-hook-form/input";
+import {NumericInput} from "@/components/react-hook-form/numeric-input";
+import {Textarea} from "@/components/react-hook-form/textarea";
+import {Select} from "@/components/react-hook-form/select";
+import {Switch} from "@/components/react-hook-form/switch";
+import {Checkbox} from "@/components/react-hook-form/checkbox";
+import {Radio} from "@/components/react-hook-form/radio";
+import {ReactSelect} from "@/components/react-hook-form/react-select";
 
 export type FormProps = {
   name: string;

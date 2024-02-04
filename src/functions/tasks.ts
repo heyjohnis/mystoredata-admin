@@ -1,6 +1,6 @@
 import faker from "faker";
 import moment from "moment";
-import {Task, randomElement} from "components/tasks";
+import {Task, randomElement} from "@/components/tasks";
 
 export const generateTasks = (n: number): Task[] => {
   return Array.from(Array(n).keys()).map((i) => {

@@ -1,10 +1,10 @@
 import {useForm, FormProvider} from "react-hook-form";
-import {InputWrapper} from "components/react-hook-form/input-wrapper";
-import {Label} from "components/react-hook-form/label";
-import {ErrorMessage} from "components/react-hook-form/error-message";
-import {Input} from "components/react-hook-form/input";
+import {InputWrapper} from "@/components/react-hook-form/input-wrapper";
+import {Label} from "@/components/react-hook-form/label";
+import {ErrorMessage} from "@/components/react-hook-form/error-message";
+import {Input} from "@/components/react-hook-form/input";
 import axios from "axios";
-import {handleLogin} from "utils/auth";
+import {handleLogin} from "@/utils/auth";
 
 export type FormProps = {
   userId: string;
@@ -25,12 +25,10 @@ const Index: React.FC = () => {
   } = methods;
 
   const onSubmit = async (data: FormProps) => {
-  
     const url = `${process.env.NEXT_PUBLIC_SERVER_URL}auth/login`;
     const response = await axios.post(url, data);
     console.log(response);
     handleLogin(response.data.token);
-
   };
 
   return (

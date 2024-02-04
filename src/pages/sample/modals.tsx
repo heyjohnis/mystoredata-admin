@@ -1,8 +1,8 @@
-import SectionTitle from "components/section-title";
-import Modal1 from "components/modals/modal-1";
-import Modal2 from "components/modals/modal-2";
-import Modal3 from "components/modals/modal-3";
-import Widget from "components/widget";
+import SectionTitle from "@/components/section-title";
+import Modal1 from "@/components/modals/modal-1";
+import Modal2 from "@/components/modals/modal-2";
+import Modal3 from "@/components/modals/modal-3";
+import Widget from "@/components/widget";
 
 const Index: React.FC = () => {
   return (

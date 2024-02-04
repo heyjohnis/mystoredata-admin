@@ -1,9 +1,9 @@
 import {useForm, FormProvider} from "react-hook-form";
-import {InputWrapper} from "components/react-hook-form/input-wrapper";
-import {Label} from "components/react-hook-form/label";
-import {ErrorMessage} from "components/react-hook-form/error-message";
-import {Input} from "components/react-hook-form/input";
-import {Select} from "components/react-hook-form/select";
+import {InputWrapper} from "@/components/react-hook-form/input-wrapper";
+import {Label} from "@/components/react-hook-form/label";
+import {ErrorMessage} from "@/components/react-hook-form/error-message";
+import {Input} from "@/components/react-hook-form/input";
+import {Select} from "@/components/react-hook-form/select";
 
 export type FormProps = {
   firstName: string;

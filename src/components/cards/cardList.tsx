@@ -1,11 +1,11 @@
-import {Input} from "components/forms/input";
+import {Input} from "@/components/forms/input";
 import {CardProps} from "model/card";
 import {useState} from "react";
-import {InputWrapper} from "components/forms/input-wrapper";
+import {InputWrapper} from "@/components/forms/input-wrapper";
 import CardInput from "./cardInput";
-import {PUT, DELETE, POST} from "utils/restApi";
+import {PUT, DELETE, POST} from "@/utils/restApi";
 import {CardCode, tradeKind, UseKind} from "data/commonCode";
-import CommonCodeSelect from "components/CommonCodeSelect";
+import CommonCodeSelect from "@/components/CommonCodeSelect";
 
 export default function CardList({cards, user, baseMonth}: any) {
   const [form, setForm] = useState<CardProps>();

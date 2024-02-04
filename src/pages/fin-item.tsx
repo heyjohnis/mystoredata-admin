@@ -1,15 +1,15 @@
-import SectionTitle from "components/dashboard/section-title";
-import Notification from "components/dashboard/notification";
-import Widget from "components/widget";
-import {Input} from "components/forms/input";
-import {InputWrapper} from "components/forms/input-wrapper";
-import {Label} from "components/forms/label";
+import SectionTitle from "@/components/dashboard/section-title";
+import Notification from "@/components/dashboard/notification";
+import Widget from "@/components/widget";
+import {Input} from "@/components/forms/input";
+import {InputWrapper} from "@/components/forms/input-wrapper";
+import {Label} from "@/components/forms/label";
 
 import {useEffect, useState} from "react";
-import {GET, POST, PUT, DELETE} from "utils/restApi";
+import {GET, POST, PUT, DELETE} from "@/utils/restApi";
 
 import {FinItemProps} from "model/FinItemProps";
-import ModalFinItem from "components/fin-item/ModalFinItem";
+import ModalFinItem from "@/components/fin-item/ModalFinItem";
 
 const fields: Record<string, string>[] = [
   {

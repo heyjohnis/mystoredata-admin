@@ -1,6 +1,6 @@
 import Link from "next/link";
-import CenteredForm from "layouts/centered-form";
-import ResetPassword from "components/sample-forms/reset-password";
+import CenteredForm from "@/layouts/centered-form";
+import ResetPassword from "@/components/sample-forms/reset-password";
 
 const Index: React.FC = () => {
   return (

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import {FiChevronDown} from "react-icons/fi";
 import {Menu, Transition} from "@headlessui/react";
 import {Fragment} from "react";
-import List1 from "components/navbar-1/list-1";
+import List1 from "@/components/navbar-1/list-1";
 
 const Dropdown: React.FC = () => {
   return (

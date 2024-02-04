@@ -1,7 +1,7 @@
-import {useAppSelector} from "store";
+import {useAppSelector} from "@/store";
 import Link from "next/link";
-import Login from "components/sample-forms/login";
-import SocialMedia from "components/login-3/social-media";
+import Login from "@/components/sample-forms/login";
+import SocialMedia from "@/components/login-3/social-media";
 
 const Index: React.FC = () => {
   const config = useAppSelector((state) => state.config);
@@ -46,15 +46,9 @@ const Index: React.FC = () => {
           </div>
           <div className="flex flex-col w-full mt-4">
             <div className="flex flex-row space-x-2">
-              <Link href="/privacy-policy">
-                Privacy policy
-              </Link>
-              <Link href="/terms-of-service">
-                Terms of service
-              </Link>
-              <Link href="/contact-us">
-                Contact us
-              </Link>
+              <Link href="/privacy-policy">Privacy policy</Link>
+              <Link href="/terms-of-service">Terms of service</Link>
+              <Link href="/contact-us">Contact us</Link>
             </div>
             <div className="mt-auto text-gray-300">&copy; {name} 2021</div>
           </div>

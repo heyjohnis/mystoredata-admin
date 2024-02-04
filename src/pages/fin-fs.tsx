@@ -13,22 +13,22 @@ import {useAccountLog} from "hooks/useAccountLog";
 import {useCardLog} from "hooks/useCardLog";
 import {useTaxLog} from "hooks/useTaxLog";
 
-import {dateChange} from "utils/date";
-import {isEmptyForm} from "utils/form";
-import {POST} from "utils/restApi";
+import {dateChange} from "@/utils/date";
+import {isEmptyForm} from "@/utils/form";
+import {POST} from "@/utils/restApi";
 
-import TransMoneyLog from "components/trans-money/TransMoneyLog";
-import FinClassStatus from "components/fin-status/FinClassStatus";
-import FinStatusTradeKind from "components/fin-status/FinStatusTradeKind";
-import SectionTitle from "components/section-title";
-import SearchForm from "components/SearchForm";
-import Widget from "components/widget";
-import AccountLog from "components/account-log/AccountLog";
-import FinStatusTab from "components/fin-status/FinStatusTab";
-import CardLog from "components/card-log/CardLog";
-import TaxLogs from "components/tax/TaxLog";
+import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
+import FinClassStatus from "@/components/fin-status/FinClassStatus";
+import FinStatusTradeKind from "@/components/fin-status/FinStatusTradeKind";
+import SectionTitle from "@/components/section-title";
+import SearchForm from "@/components/SearchForm";
+import Widget from "@/components/widget";
+import AccountLog from "@/components/account-log/AccountLog";
+import FinStatusTab from "@/components/fin-status/FinStatusTab";
+import CardLog from "@/components/card-log/CardLog";
+import TaxLogs from "@/components/tax/TaxLog";
 import {TaxLogProps} from "model/TaxLog";
-import ModalFinStatus from "components/fin-status/ModalFinStatus";
+import ModalFinStatus from "@/components/fin-status/ModalFinStatus";
 
 interface FinAmount {
   [key: string]: number;

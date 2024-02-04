@@ -1,8 +1,8 @@
 import {Fragment} from "react";
-import {useAppSelector} from "store";
-import Title from "components/left-sidebar-1/title";
-import Item from "components/left-sidebar-1/item";
-import Logo from "components/left-sidebar-1/logo";
+import {useAppSelector} from "@/store";
+import Title from "@/components/left-sidebar-1/title";
+import Item from "@/components/left-sidebar-1/item";
+import Logo from "@/components/left-sidebar-1/logo";
 
 const LeftSidebar: React.FC = () => {
   const navigation = useAppSelector((state) => state.navigation);

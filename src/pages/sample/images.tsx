@@ -1,5 +1,5 @@
-import SectionTitle from "components/section-title";
-import Widget from "components/widget";
+import SectionTitle from "@/components/section-title";
+import Widget from "@/components/widget";
 
 const sizes = ["h-8", "h-16", "h-20", "h-24", "h-32"];
 const outlines = [

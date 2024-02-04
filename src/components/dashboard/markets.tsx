@@ -1,7 +1,7 @@
-import Avatars from "components/dashboard/avatars";
-import Flag from "components/flag";
+import Avatars from "@/components/dashboard/avatars";
+import Flag from "@/components/flag";
 import {formatNumber} from "functions/numbers";
-import {ProgressBar} from "components/progress-bars";
+import {ProgressBar} from "@/components/progress-bars";
 import data from "json/dashboard-table.json";
 
 export type DataProps = {

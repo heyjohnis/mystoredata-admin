@@ -1,4 +1,4 @@
-import StarRating from "components/star-rating";
+import StarRating from "@/components/star-rating";
 import {FiPaperclip} from "react-icons/fi";
 import data from "json/inbox.json";
 

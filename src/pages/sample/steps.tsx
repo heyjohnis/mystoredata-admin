@@ -1,6 +1,6 @@
-import SectionTitle from "components/section-title";
-import Widget from "components/widget";
-import {Steps1, Steps2, Steps3} from "components/steps/samples";
+import SectionTitle from "@/components/section-title";
+import Widget from "@/components/widget";
+import {Steps1, Steps2, Steps3} from "@/components/steps/samples";
 
 const Index: React.FC = () => {
   return (

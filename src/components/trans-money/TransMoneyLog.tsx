@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {TransMoneyProps} from "../../model/TransMoney";
 import {UseKind, BaroBankCode, CardCode} from "data/commonCode";
-import {Badge} from "components/badges";
+import {Badge} from "@/components/badges";
 import ModalTransMoney from "./ModalTransMoney";
 
 const fields: Record<string, string>[] = [

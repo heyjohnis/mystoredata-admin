@@ -1,5 +1,5 @@
-import {useAppSelector} from "store";
-import SectionTitle from "components/section-title";
+import {useAppSelector} from "@/store";
+import SectionTitle from "@/components/section-title";
 
 export const CodeStructure: React.FC = () => {
   const config = useAppSelector((state) => state.config);

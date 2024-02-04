@@ -1,19 +1,21 @@
 import Link from "next/link";
-import Logo from "components/landing/logo";
-import Icons from "components/landing/icons";
-import Images from "components/landing/images";
-import Title from "components/landing/title";
-import Text from "components/landing/text";
-import Features from "components/landing/features";
-import Options from "components/landing/options";
-import Screenshots from "components/landing/screenshots";
+import Logo from "@/components/landing/logo";
+import Icons from "@/components/landing/icons";
+import Images from "@/components/landing/images";
+import Title from "@/components/landing/title";
+import Text from "@/components/landing/text";
+import Features from "@/components/landing/features";
+import Options from "@/components/landing/options";
+import Screenshots from "@/components/landing/screenshots";
 
 const Index: React.FC = () => (
   <div className="container mx-auto max-w-screen-lg lg:px-4">
     <div className="flex items-center justify-around w-full px-4 py-4 text-gray-900 bg-white dark:bg-gray-900 dark:text-white">
       <Logo />
       <div className="hidden lg:flex lg:flex-row whitespace-nowrap">
-        <Link href="/documentation" className="px-4 py-2 text-xs font-bold uppercase">
+        <Link
+          href="/documentation"
+          className="px-4 py-2 text-xs font-bold uppercase">
           Documentation
         </Link>
         <a

@@ -1,5 +1,5 @@
 import React, {useReducer} from "react";
-import StarRating from "components/star-rating";
+import StarRating from "@/components/star-rating";
 
 export type ItemProps = {
   value: number;

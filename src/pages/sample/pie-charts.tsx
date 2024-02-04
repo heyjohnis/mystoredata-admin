@@ -1,8 +1,8 @@
-import SectionTitle from "components/section-title";
-import Donut1 from "components/charts/donut-1";
-import Donut2 from "components/charts/donut-2";
-import Pie1 from "components/charts/pie-1";
-import Widget from "components/widget";
+import SectionTitle from "@/components/section-title";
+import Donut1 from "@/components/charts/donut-1";
+import Donut2 from "@/components/charts/donut-2";
+import Pie1 from "@/components/charts/pie-1";
+import Widget from "@/components/widget";
 
 const Index: React.FC = () => (
   <>

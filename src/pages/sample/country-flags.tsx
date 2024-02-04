@@ -1,7 +1,7 @@
-import SectionTitle from "components/section-title";
+import SectionTitle from "@/components/section-title";
 import flags from "json/flags.json";
-import Widget from "components/widget";
-import Flag from "components/flag";
+import Widget from "@/components/widget";
+import Flag from "@/components/flag";
 
 const Flags: React.FC = () => (
   <>

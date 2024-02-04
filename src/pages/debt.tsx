@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react";
-import {POST} from "utils/restApi";
-import SearchForm from "components/SearchForm";
-import SectionTitle from "components/dashboard/section-title";
-import Notification from "components/dashboard/notification";
-import Widget from "components/widget";
+import {POST} from "@/utils/restApi";
+import SearchForm from "@/components/SearchForm";
+import SectionTitle from "@/components/dashboard/section-title";
+import Notification from "@/components/dashboard/notification";
+import Widget from "@/components/widget";
 import {SearchProps} from "model/SearchForm";
-import TransMoneyLog from "components/trans-money/TransMoneyLog";
+import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
 import {TransMoneyProps} from "model/TransMoney";
 import {FinItemProps} from "model/FinItemProps";
-import {finNumber} from "utils/finNumber";
-import ModalFinItem from "components/fin-item/ModalFinItem";
+import {finNumber} from "@/utils/finNumber";
+import ModalFinItem from "@/components/fin-item/ModalFinItem";
 
 const fields: Record<string, string>[] = [
   {

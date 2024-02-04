@@ -1,10 +1,10 @@
 import {useState} from "react";
-import {Input} from "components/forms/input";
-import {InputWrapper} from "components/forms/input-wrapper";
+import {Input} from "@/components/forms/input";
+import {InputWrapper} from "@/components/forms/input-wrapper";
 import {AccountProps} from "model/account";
-import {POST} from "utils/restApi";
+import {POST} from "@/utils/restApi";
 import {CorpType, BaroBankCode, setBankInput} from "../../data/commonCode";
-import CommonCodeSelect from "components/CommonCodeSelect";
+import CommonCodeSelect from "@/components/CommonCodeSelect";
 
 export default function AccountInput({addAccount, user}: any) {
   const [form, setForm] = useState<AccountProps>();

@@ -1,6 +1,6 @@
-import SectionTitle from "components/section-title";
-import Widget from "components/widget";
-import Products from "components/e-commerce/products";
+import SectionTitle from "@/components/section-title";
+import Widget from "@/components/widget";
+import Products from "@/components/e-commerce/products";
 
 const Index: React.FC = () => {
   return (

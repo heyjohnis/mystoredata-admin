@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {finNumber} from "utils/finNumber";
+import {finNumber} from "@/utils/finNumber";
 
 export default function FinStatusTradeKindUnit({
   finClassCode,

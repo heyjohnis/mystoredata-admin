@@ -1,22 +1,22 @@
 import {FiSlack, FiGithub} from "react-icons/fi";
-import SectionTitle from "components/section-title";
-import Faq from "components/faq";
-import Features from "components/support/features";
-import Search from "components/support/search";
-import Title from "components/support/title";
-import Widget1 from "components/support/widget-1";
-import SearchForm from "components/SearchForm";
+import SectionTitle from "@/components/section-title";
+import Faq from "@/components/faq";
+import Features from "@/components/support/features";
+import Search from "@/components/support/search";
+import Title from "@/components/support/title";
+import Widget1 from "@/components/support/widget-1";
+import SearchForm from "@/components/SearchForm";
 import {useEffect, useState} from "react";
-import Widget from "components/widget";
+import Widget from "@/components/widget";
 import {TransMoneyProps} from "model/TransMoney";
-import {POST} from "utils/restApi";
+import {POST} from "@/utils/restApi";
 import {SearchProps} from "model/SearchForm";
-import TransMoneyLog from "components/trans-money/TransMoneyLog";
-import ModalTransMoney from "components/trans-money/ModalTransMoney";
+import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
+import ModalTransMoney from "@/components/trans-money/ModalTransMoney";
 import {set} from "nprogress";
-import FinClassStatus from "components/fin-status/FinClassStatus";
-import FinSimpleStatus from "components/fin-status/FinSimpleStatus";
-import FinDailyStatus from "components/fin-status/FinDailyStatus";
+import FinClassStatus from "@/components/fin-status/FinClassStatus";
+import FinSimpleStatus from "@/components/fin-status/FinSimpleStatus";
+import FinDailyStatus from "@/components/fin-status/FinDailyStatus";
 
 interface FinAmount {
   [key: string]: number;

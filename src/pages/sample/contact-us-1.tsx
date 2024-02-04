@@ -1,5 +1,5 @@
-import CenteredForm from "layouts/centered-form";
-import ContactUs from "components/sample-forms/contact-us";
+import CenteredForm from "@/layouts/centered-form";
+import ContactUs from "@/components/sample-forms/contact-us";
 
 const Index: React.FC = () => {
   return (

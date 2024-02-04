@@ -1,10 +1,10 @@
-import SectionTitle from "components/dashboard/section-title";
-import Notification from "components/dashboard/notification";
-import Widget from "components/widget";
+import SectionTitle from "@/components/dashboard/section-title";
+import Notification from "@/components/dashboard/notification";
+import Widget from "@/components/widget";
 
 import {useEffect, useState} from "react";
-import {GET} from "utils/restApi";
-import Modal from "components/user/PersonalDetailModal";
+import {GET} from "@/utils/restApi";
+import Modal from "@/components/user/PersonalDetailModal";
 import {UserProps} from "model/user";
 
 const fields: Record<string, string>[] = [

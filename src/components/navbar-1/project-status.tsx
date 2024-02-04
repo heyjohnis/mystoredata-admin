@@ -1,4 +1,4 @@
-import {ProgressBar} from "components/progress-bars";
+import {ProgressBar} from "@/components/progress-bars";
 
 export type ItemProps = {
   title: string;

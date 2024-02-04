@@ -1,10 +1,10 @@
 import {Dialog, Transition} from "@headlessui/react";
 import {Fragment, useEffect, useState} from "react";
 import {FiX} from "react-icons/fi";
-import {InputWrapper} from "components/forms/input-wrapper";
-import {Label} from "components/forms/label";
-import {Input} from "components/forms/input";
-import {GET, POST, PUT} from "utils/restApi";
+import {InputWrapper} from "@/components/forms/input-wrapper";
+import {Label} from "@/components/forms/label";
+import {Input} from "@/components/forms/input";
+import {GET, POST, PUT} from "@/utils/restApi";
 import {TransMoneyProps} from "model/TransMoney";
 import {
   BaroBankCode,
@@ -13,9 +13,9 @@ import {
   FinClassCode,
   FinItemCode,
 } from "data/commonCode";
-import CommonCodeSelect, {CategorySelect} from "components/CommonCodeSelect";
+import CommonCodeSelect, {CategorySelect} from "@/components/CommonCodeSelect";
 import {CategoryProps} from "model/Category";
-import Switch from "components/switch";
+import Switch from "@/components/switch";
 
 type Props = {
   asset: TransMoneyProps | null;

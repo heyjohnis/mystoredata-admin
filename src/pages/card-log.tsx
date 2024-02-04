@@ -1,15 +1,15 @@
-import SectionTitle from "components/dashboard/section-title";
-import Notification from "components/dashboard/notification";
-import Widget from "components/widget";
+import SectionTitle from "@/components/dashboard/section-title";
+import Notification from "@/components/dashboard/notification";
+import Widget from "@/components/widget";
 import {CardCode} from "data/commonCode";
 
 import {useEffect, useState} from "react";
-import {GET} from "utils/restApi";
+import {GET} from "@/utils/restApi";
 import {CardLogProps} from "model/cardLog";
-import {InputWrapper} from "components/forms/input-wrapper";
-import {Label} from "components/forms/label";
-import {Input} from "components/forms/input";
-import CardLog from "components/card-log/CardLog";
+import {InputWrapper} from "@/components/forms/input-wrapper";
+import {Label} from "@/components/forms/label";
+import {Input} from "@/components/forms/input";
+import CardLog from "@/components/card-log/CardLog";
 
 const Index: React.FC = () => {
   const [logs, setLogs] = useState<CardLogProps[]>([]);

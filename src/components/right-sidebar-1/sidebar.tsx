@@ -1,4 +1,4 @@
-import {useAppSelector, useAppDispatch} from "store";
+import {useAppSelector, useAppDispatch} from "@/store";
 import {setConfig} from "slices/config";
 import Switch from "react-switch";
 import {getColor} from "functions/colors";

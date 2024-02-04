@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Notification, {NotificationProps} from "components/notifications";
+import Notification, {NotificationProps} from "@/components/notifications";
 import {FiAlertCircle} from "react-icons/fi";
 
 const Index: React.FC = () => {

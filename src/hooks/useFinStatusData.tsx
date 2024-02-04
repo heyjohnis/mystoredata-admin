@@ -1,7 +1,7 @@
 import {SearchProps} from "model/SearchForm";
 import React, {useEffect, useState} from "react";
-import {isEmptyForm} from "utils/form";
-import {POST} from "utils/restApi";
+import {isEmptyForm} from "@/utils/form";
+import {POST} from "@/utils/restApi";
 
 interface FinAmount {
   [key: string]: number;

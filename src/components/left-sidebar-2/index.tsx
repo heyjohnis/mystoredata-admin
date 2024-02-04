@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import Logo from "components/left-sidebar-2/logo";
-import Ratings from "components/e-commerce/ratings";
-import Colors from "components/e-commerce/colors";
-import Brands from "components/e-commerce/brands";
-import Categories from "components/e-commerce/categories";
+import Logo from "@/components/left-sidebar-2/logo";
+import Ratings from "@/components/e-commerce/ratings";
+import Colors from "@/components/e-commerce/colors";
+import Brands from "@/components/e-commerce/brands";
+import Categories from "@/components/e-commerce/categories";
 
 export type TitleProps = {
   children: React.ReactNode;

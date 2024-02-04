@@ -1,10 +1,10 @@
-import {Input} from "components/forms/input";
+import {Input} from "@/components/forms/input";
 import {AccountProps} from "model/account";
 import {useState} from "react";
-import {InputWrapper} from "components/forms/input-wrapper";
+import {InputWrapper} from "@/components/forms/input-wrapper";
 import AccountInput from "./accountInput";
-import {POST, PUT, DELETE} from "utils/restApi";
-import CommonCodeSelect from "components/CommonCodeSelect";
+import {POST, PUT, DELETE} from "@/utils/restApi";
+import CommonCodeSelect from "@/components/CommonCodeSelect";
 import {BaroBankCode, CorpType, UseKind} from "data/commonCode";
 
 export default function AccountList({accounts, user, baseMonth}: any) {

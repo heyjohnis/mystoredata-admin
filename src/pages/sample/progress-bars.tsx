@@ -1,7 +1,7 @@
-import SectionTitle from "components/section-title";
-import {ProgressBar, ProgressBarWithText} from "components/progress-bars";
+import SectionTitle from "@/components/section-title";
+import {ProgressBar, ProgressBarWithText} from "@/components/progress-bars";
 import {random} from "functions/numbers";
-import Widget from "components/widget";
+import Widget from "@/components/widget";
 
 const Index: React.FC = () => {
   const palette = ["bg-red-500", "bg-green-500", "bg-blue-500"];

@@ -1,10 +1,10 @@
 import {FiSlack, FiGithub} from "react-icons/fi";
-import SectionTitle from "components/section-title";
-import Faq from "components/faq";
-import Features from "components/support/features";
-import Search from "components/support/search";
-import Title from "components/support/title";
-import Widget1 from "components/support/widget-1";
+import SectionTitle from "@/components/section-title";
+import Faq from "@/components/faq";
+import Features from "@/components/support/features";
+import Search from "@/components/support/search";
+import Title from "@/components/support/title";
+import Widget1 from "@/components/support/widget-1";
 
 const Index: React.FC = () => (
   <>

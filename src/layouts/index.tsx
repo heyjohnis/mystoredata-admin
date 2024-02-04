@@ -1,11 +1,11 @@
 import {useEffect} from "react";
 import {useRouter} from "next/router";
-import Centered from "layouts/centered";
-import Layout1 from "layouts/layout-1";
-import ECommerce from "layouts/e-commerce";
+import Centered from "@/layouts/centered";
+import Layout1 from "@/layouts/layout-1";
+import ECommerce from "@/layouts/e-commerce";
 import {setConfig} from "slices/config";
 import {useHotkeys} from "react-hotkeys-hook";
-import {useAppSelector, useAppDispatch} from "store";
+import {useAppSelector, useAppDispatch} from "@/store";
 
 export type LayoutProps = {
   children: React.ReactNode;
