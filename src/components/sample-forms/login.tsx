@@ -26,7 +26,7 @@ const Index: React.FC = () => {
   const onSubmit = async (data: FormProps) => {
     POST("/auth/login", data).then((res: any) => {
       console.log(res);
-      handleLogin(res.data.token, "/admin");
+      handleLogin(res?.data?.token, "/admin");
     });
   };
 

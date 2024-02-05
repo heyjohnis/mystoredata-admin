@@ -1,9 +1,10 @@
 "use client";
 import Head from "next/head";
 import React, {useState} from "react";
-import {Navbar} from "@/components/common/Navbar";
 import {SideMenu} from "@/components/common/SideMenu";
 import {FiMenu} from "react-icons/fi";
+import {FootBarButtons} from "@/components/common/FootBarButtons";
+
 export type UserAppLayout = {
   children: React.ReactNode;
 };
@@ -14,20 +15,23 @@ const UserAppLayout: React.FC<UserAppLayout> = ({children}) => {
   return (
     <>
       <Head>
-        <title>MyStoreData-Admin</title>
+        <title>My Store Data</title>
       </Head>
       <SideMenu isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
-      <div className="wrapper">
-        <div className="main w-full bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
+      <div className="flex flex-col h-screen justify-between ">
+        <header>
           <div className="absolute right-0">
             <button
               className="flex items-center justify-center w-8 h-16 mx-4"
               onClick={() => setIsOpenMenu(!isOpenMenu)}>
-              <FiMenu size={20} />
+              <FiMenu size={24} />
             </button>
           </div>
-          <div className="w-full min-h-screen p-4">{children}</div>
-        </div>
+        </header>
+        <div className="w-ful mb-auto p-4 overflow-auto">{children}</div>
+        <footer>
+          <FootBarButtons />
+        </footer>
       </div>
     </>
   );
