@@ -41,6 +41,7 @@ const Layouts: React.FC<LayoutProps> = ({children}) => {
   );
 
   const router = useRouter();
+  console.log(router);
   const {pathname} = router;
   switch (pathname) {
     case "/404":
@@ -67,9 +68,8 @@ const Layouts: React.FC<LayoutProps> = ({children}) => {
       return <>{children}</>;
     case "/e-commerce":
       return <ECommerce>{children}</ECommerce>;
-    case "/admin":
-      return <Admin>{children}</Admin>;
     default:
+      if (pathname.indexOf("/admin") > -1) return <Admin>{children}</Admin>;
       return <User>{children}</User>;
   }
 };

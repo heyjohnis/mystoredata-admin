@@ -102,7 +102,7 @@ class MyDocument extends Document {
           />
           <meta name="theme-color" content="#2196f3" />
         </Head>
-        <body className="font-sans text-sm antialiased disable-scrollbars bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+        <body className="flex flex-col w-full mx-auto font-sans text-sm antialiased disable-scrollbars bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
           <div id="portal" />
           <Main />
           <NextScript />

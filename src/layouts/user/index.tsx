@@ -1,40 +1,35 @@
 "use client";
 import Head from "next/head";
-import {useAppSelector} from "@/store";
-import Navbar1 from "@/components/sample/navbar-1";
-import LeftSidebar1 from "@/components/sample/left-sidebar-1";
-import RightSidebar1 from "@/components/sample/right-sidebar-1";
-
-export type Layout1Props = {
+import React, {useState} from "react";
+import {Navbar} from "@/components/common/Navbar";
+import {SideMenu} from "@/components/common/SideMenu";
+import {FiMenu} from "react-icons/fi";
+export type UserAppLayout = {
   children: React.ReactNode;
 };
 
-const User: React.FC<Layout1Props> = ({children}) => {
-  const config = useAppSelector((state) => state.config);
-  const {background, layout, collapsed} = config;
+const UserAppLayout: React.FC<UserAppLayout> = ({children}) => {
+  const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 
   return (
     <>
       <Head>
         <title>MyStoreData-Admin</title>
       </Head>
-      <div
-        data-layout={layout}
-        data-collapsed={collapsed}
-        data-background={background}
-        className={`font-sans antialiased text-sm disable-scrollbars ${
-          background === "dark" ? "dark" : ""
-        }`}>
-        <RightSidebar1 />
-        <div className="wrapper">
-          <LeftSidebar1 />
-          <div className="main w-full bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
-            <Navbar1 />
-            <div className="w-full min-h-screen p-4">{children}</div>
+      <SideMenu isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
+      <div className="wrapper">
+        <div className="main w-full bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
+          <div className="absolute right-0">
+            <button
+              className="flex items-center justify-center w-8 h-16 mx-4"
+              onClick={() => setIsOpenMenu(!isOpenMenu)}>
+              <FiMenu size={20} />
+            </button>
           </div>
+          <div className="w-full min-h-screen p-4">{children}</div>
         </div>
       </div>
     </>
   );
 };
-export default User;
+export default UserAppLayout;

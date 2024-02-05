@@ -1,3 +1,4 @@
+"use client";
 import Head from "next/head";
 import {useAppSelector} from "@/store";
 import Navbar1 from "@/components/sample/navbar-1";
@@ -8,7 +9,7 @@ export type Layout1Props = {
   children: React.ReactNode;
 };
 
-const Admin: React.FC<Layout1Props> = ({children}) => {
+const User: React.FC<Layout1Props> = ({children}) => {
   const config = useAppSelector((state) => state.config);
   const {background, layout, collapsed} = config;
 
@@ -28,6 +29,7 @@ const Admin: React.FC<Layout1Props> = ({children}) => {
         <div className="wrapper">
           <LeftSidebar1 />
           <div className="main w-full bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
+            <Navbar1 />
             <div className="w-full min-h-screen p-4">{children}</div>
           </div>
         </div>
@@ -35,4 +37,4 @@ const Admin: React.FC<Layout1Props> = ({children}) => {
     </>
   );
 };
-export default Admin;
+export default User;

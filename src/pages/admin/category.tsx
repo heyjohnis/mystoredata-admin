@@ -8,7 +8,7 @@ import {Badge} from "@/components/ui/badges";
 import {CategoryProps} from "@/model/Category";
 import {Input} from "@/components/ui/forms/input";
 import ModalCategory from "@/components/category/ModalCategory";
-import {FinClassCode, UseKind} from "../data/commonCode";
+import {FinClassCode, UseKind} from "@/data/commonCode";
 
 const fields: Record<string, string>[] = [
   {
