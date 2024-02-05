@@ -18,17 +18,15 @@ const UserAppLayout: React.FC<UserAppLayout> = ({children}) => {
         <title>My Store Data</title>
       </Head>
       <SideMenu isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
-      <div className="flex flex-col h-screen justify-between ">
-        <header>
-          <div className="absolute right-0">
-            <button
-              className="flex items-center justify-center w-8 h-16 mx-4"
-              onClick={() => setIsOpenMenu(!isOpenMenu)}>
-              <FiMenu size={24} />
-            </button>
-          </div>
-        </header>
-        <div className="w-ful mb-auto p-4 overflow-auto">{children}</div>
+      <div className="flex flex-col h-screen justify-between bg-slate-50 ">
+        <div className="absolute right-0 z-10">
+          <button
+            className="flex items-center justify-center w-8 h-16 mx-4"
+            onClick={() => setIsOpenMenu(!isOpenMenu)}>
+            <FiMenu size={24} />
+          </button>
+        </div>
+        <div className="w-ful mb-auto overflow-auto">{children}</div>
         <footer>
           <FootBarButtons />
         </footer>

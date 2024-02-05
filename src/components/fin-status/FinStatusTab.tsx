@@ -16,7 +16,7 @@ export default function FinStatusTab({setForm}: props) {
   const [openTab, setOpenTab] = useState(0);
 
   return (
-    <div className="flex flex-row overflow-x-auto lg:flex-wrap lg:space-x-1 mt-5 mb-3">
+    <div className="flex flex-row overflow-x-auto lg:flex-wrap lg:space-x-1 mt-3 mb-1">
       {tabs.map((tab, key) => (
         <div key={key} className="flex-none">
           <button

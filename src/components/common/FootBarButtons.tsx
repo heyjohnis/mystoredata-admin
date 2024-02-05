@@ -21,7 +21,7 @@ const IconButton = ({icon, name}: Props) => {
 
 export function FootBarButtons() {
   return (
-    <div className="border-t border-solid border-t-gray-200">
+    <div className="border-t border-solid border-t-gray-200 bg-white">
       <ul className="flex justify-between">
         <IconButton icon={BsCreditCard} name="거래분석" />
         <IconButton icon={TbReceiptTax} name="당일거래현황" />
