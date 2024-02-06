@@ -119,16 +119,20 @@ export function ModalTradeStatusDetail({
                     {dateToString(log?.transDate)}
                   </div>
                   <div className="font-bold text-lg leading-6">
-                    {log?.transRemark || log?.useStoreName}
+                    {log?.transRemark ||
+                      log?.useStoreName ||
+                      log?.invoiceeCorpName}
                   </div>
                   {log?.bank ? (
                     <div className="text-xs">{`[${BaroBankCode[log?.bank]}] ${
                       log?.bankAccountNum
                     }`}</div>
-                  ) : (
+                  ) : log?.cardCompay ? (
                     <div className="text-xs">{`[${
                       CardCode[log?.cardCompany]
                     }] ${cardNumberSecurity(log?.cardNum)}`}</div>
+                  ) : (
+                    <span className="block my-2">{log?.itemName}</span>
                   )}
                 </div>
                 <div className="w-full mt-2 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
@@ -169,7 +173,6 @@ export function ModalTradeStatusDetail({
                       </ul>
                     </div>
                   </div>
-
                   <div className="border-b border-gray-100 p-4 flex justify-between">
                     <label className="w-20 block text-sm font-bold text-gray-700 dark:text-gray-200">
                       부채
