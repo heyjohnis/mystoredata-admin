@@ -3,7 +3,6 @@ import {IoIosArrowBack} from "react-icons/io";
 import {IoIosArrowForward} from "react-icons/io";
 import {SearchProps} from "@/model/SearchForm";
 import {dateChange, lastDayOfMonth} from "@/utils/date";
-import {set} from "nprogress";
 
 type Props = {
   children: React.ReactNode;
@@ -27,10 +26,11 @@ type FormProps = {
   setForm: (form: SearchProps) => void;
 };
 export function DateSelector({form, setForm}: FormProps) {
-  const targetDate = dateChange(new Date(), -1).toISOString().slice(0, 10);
+  const targetDate =
+    dateChange(new Date(), -1).toISOString().slice(0, 10) || "";
 
   const dateFormat = (unit: string) => {
-    let fromAt, toAt;
+    let fromAt, toAt, dateValue;
     switch (unit) {
       case "day":
         fromAt = targetDate;
@@ -44,8 +44,8 @@ export function DateSelector({form, setForm}: FormProps) {
         });
         break;
       case "month":
-        const dateMonth = targetDate.slice(0, 7);
-        fromAt = dateMonth + "-01";
+        dateValue = targetDate?.slice(0, 7);
+        fromAt = dateValue + "-01";
         toAt = lastDayOfMonth(new Date(fromAt));
         setForm({
           ...form,
@@ -56,9 +56,9 @@ export function DateSelector({form, setForm}: FormProps) {
         });
         break;
       case "year":
-        const dateYear = targetDate.slice(0, 4);
-        fromAt = dateYear + "-01-01";
-        toAt = dateYear + "-12-31";
+        dateValue = targetDate.slice(0, 4);
+        fromAt = dateValue + "-01-01";
+        toAt = dateValue + "-12-31";
         setForm({
           ...form,
           displayDate: targetDate.slice(0, 4),

@@ -5,7 +5,7 @@ import {FiActivity, FiUsers, FiExternalLink, FiClock} from "react-icons/fi";
 import Bar1 from "@/components/sample/dashboard/bar-chart";
 import {Donut1} from "@/components/sample/dashboard/donut-chart";
 import {Line1} from "@/components/sample/dashboard/line-chart";
-import Dropdown1 from "@/components/ui/widgets/dropdown-1";
+import Dropdown1 from "@/components/sample/widgets/dropdown-1";
 import Markets from "@/components/sample/dashboard/markets";
 import {List} from "@/components/sample/dashboard/list";
 import Tasks from "@/components/ui/tasks";

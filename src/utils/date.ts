@@ -14,7 +14,7 @@ export function strToDate(dateString: string): Date {
 export function dateChange(
   date: Date,
   num: number,
-  unit: String = "day"
+  unit: string | null = "day"
 ): Date {
   const newDate = new Date(date);
   if (unit === "day") {
@@ -33,7 +33,6 @@ export function dateChange(
 export function dateToString(date: string): string {
   //2024-02-04T19:36:00.000Z
   if (date?.indexOf("T") > -1) {
-    date.split("T")[0];
     return `${date.split("T")[0]} ${date.split("T")[1].substring(0, 5)}`;
   }
   return date;

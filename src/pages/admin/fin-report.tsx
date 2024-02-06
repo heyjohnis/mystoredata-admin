@@ -8,7 +8,7 @@ import {Badge} from "@/components/ui/badges";
 import {CategoryProps} from "@/model/Category";
 import {Input} from "@/components/ui/forms/input";
 import ModalCategory from "@/components/category/ModalCategory";
-import {UseKind} from "../data/commonCode";
+import {UseKind} from "@/data/commonCode";
 import SearchForm from "@/components/SearchForm";
 
 const fields: Record<string, string>[] = [
