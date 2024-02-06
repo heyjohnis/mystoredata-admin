@@ -1,18 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {TradeStatus} from "@/components/trade/TradeStatus";
-
-type FormProp = {
-  tradeKind?: string;
-  date?: string;
-  kind?: string;
-  category?: string;
-  memo?: string;
-  amount?: number;
-  account?: string;
-  itemName?: string;
-  tax?: number;
-};
+import {useRouter} from "next/router";
 
 export default function IndexPage() {
-  return <TradeStatus />;
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/trade/analysis");
+  }, []);
+  return <></>;
 }

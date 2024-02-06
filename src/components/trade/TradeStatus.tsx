@@ -3,33 +3,19 @@ import {DateSelector} from "@/components/common/DateSelector";
 import {SearchProps} from "@/model/SearchForm";
 import {POST} from "@/utils/restApi";
 import {dateChange} from "@/utils/date";
-
 import {TransMoneyProps} from "@/model/TransMoney";
 import {ClassCategoryProps} from "@/model/ClassCategoryProps";
 import {AccountLogProps} from "@/model/accountLog";
 import {CardLogProps} from "@/model/cardLog";
-
 import {useCategoryFinClass} from "@/hooks/useCategoryFinClass";
 import {useFinStatusData} from "@/hooks/useFinStatusData";
 import {useTransLogs} from "@/hooks/useTransLog";
 import {useAccountLog} from "@/hooks/useAccountLog";
 import {useCardLog} from "@/hooks/useCardLog";
 import {useTaxLog} from "@/hooks/useTaxLog";
-
 import {isEmptyForm} from "@/utils/form";
-
-import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
-import FinClassStatus from "@/components/fin-status/FinClassStatus";
-import FinStatusTradeKind from "@/components/fin-status/FinStatusTradeKind";
-import SectionTitle from "@/components/ui/section-title";
-import SearchForm from "@/components/SearchForm";
-import Widget from "@/components/ui/widget";
-import AccountLog from "@/components/account-log/AccountLog";
 import FinStatusTab from "@/components/fin-status/FinStatusTab";
-import CardLog from "@/components/card-log/CardLog";
-import TaxLogs from "@/components/tax/TaxLog";
 import {TaxLogProps} from "@/model/TaxLog";
-import ModalFinStatus from "@/components/fin-status/ModalFinStatus";
 import TradeLogComp from "./TradeLogComp";
 import {ModalTradeStatusDetail} from "./ModalTradeStatusDetail";
 const Title = ({children}: {children: React.ReactNode}) => {
@@ -37,11 +23,9 @@ const Title = ({children}: {children: React.ReactNode}) => {
     <h2 className="w-full m-auto mt-4 mb-2 text-lg font-bold">{children}</h2>
   );
 };
-
 interface FinAmount {
   [key: string]: number;
 }
-
 const initFinAmount: FinAmount = {
   IN1: 0,
   IN2: 0,
@@ -69,9 +53,10 @@ const initCategory: ClassCategoryProps = {
 };
 
 const initForm: SearchProps = {
-  userId: "bethelean",
   fromAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
   toAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
+  displayDate: dateChange(new Date(), -1).toISOString().slice(0, 10),
+  dateUnit: "day",
 };
 
 export function TradeStatus() {
@@ -170,29 +155,32 @@ export function TradeStatus() {
     <>
       <div className="sticky top-0 p-5 pb-0 m-0 bg-white ">
         <h1 className="w-[60%] text-center m-auto mb-2 text-2xl">
-          {form.toAt}
+          {form.displayDate}
         </h1>
-        <DateSelector />
+        <DateSelector form={form} setForm={setForm} />
       </div>
       <div className="p-5 pt-1 m-0 bg-white ">
         <FinStatusTab setForm={setForm} />
       </div>
       <div className="p-5 pt-0">
         {["CASH", ""].includes(form?.tradeKind || "") && (
-          <div>
+          <div className="relative">
             <Title>통장거래</Title>
-            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-900 max-h-96	 overflow-y-auto">
               <TradeLogComp
                 logs={accountLogs}
                 handleClick={openModalFinStatus}
               />
+            </div>
+            <div className="absolute inset-x-0 bottom-0 h-8 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent blur"></div>
             </div>
           </div>
         )}
         {["CHECK", ""].includes(form?.tradeKind || "") && (
           <div className="justify-between">
             <Title>체크카드거래</Title>
-            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800 max-h-80 overflow-y-auto">
               <TradeLogComp
                 logs={checkCardLogs}
                 handleClick={openModalFinStatus}
@@ -203,7 +191,7 @@ export function TradeStatus() {
         {["CREDIT", ""].includes(form?.tradeKind || "") && (
           <div className="justify-between">
             <Title>신용카드거래</Title>
-            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800 max-h-80 overflow-y-auto">
               <TradeLogComp
                 logs={creditCardLogs}
                 handleClick={openModalFinStatus}
@@ -214,13 +202,14 @@ export function TradeStatus() {
         {["BILL", ""].includes(form?.tradeKind || "") && (
           <div className="justify-between">
             <Title>세금계산서</Title>
-            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800 max-h-80 overflow-y-auto">
               <TradeLogComp logs={taxLogs} handleClick={openModalFinStatus} />
             </div>
           </div>
         )}
       </div>
       <ModalTradeStatusDetail
+        log={log}
         finData={finData}
         closedModal={closedModal}
         tradeKind={tradeKind}

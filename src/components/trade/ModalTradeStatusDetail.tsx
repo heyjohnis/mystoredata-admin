@@ -3,9 +3,13 @@ import {Fragment, useEffect, useState} from "react";
 import {FiX} from "react-icons/fi";
 import {TransMoneyProps} from "@/model/TransMoney";
 import {finNumber} from "@/utils/finNumber";
-
+import {dateToString} from "@/utils/date";
+import {BaroBankCode} from "@/data/commonCode";
+import {CardCode} from "@/data/commonCode";
+import {cardNumberSecurity} from "@/utils/security";
 type Props = {
   finData: TransMoneyProps[];
+  log?: any;
   category?: Record<string, string>;
   closedModal: (isSaved: boolean) => void;
   tradeKind: string;
@@ -26,6 +30,7 @@ export function ModalTradeStatusDetail({
   finData,
   closedModal,
   tradeKind,
+  log,
 }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
@@ -44,7 +49,8 @@ export function ModalTradeStatusDetail({
   };
 
   useEffect(() => {
-    if (finData) {
+    console.log("finData: ", finData, log);
+    if (finData.length > 0) {
       console.log("finData: ", finData);
       setIsOpen(true);
       classfyFinData(finData);
@@ -102,120 +108,85 @@ export function ModalTradeStatusDetail({
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-              <div className="relative inline-block w-full max-w-md p-4 overflow-hidden text-left align-middle bg-white shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl">
+              <div className="relative inline-block w-full max-w-md p-4 overflow-hidden text-left align-middle bg-gray-50 shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl">
                 <button
                   className="absolute top-0 right-0 m-4 font-bold uppercase"
                   onClick={closeModal}>
                   <FiX size={18} className="stroke-current" />
                 </button>
-                <div></div>
-                <div className="flex">
-                  <div className="w-full p-4 mt-1 m-1 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800 flex justify-between">
-                    <label className="block text-sm font-bold text-gray-700 dark:text-gray-200">
+                <div className="my-4">
+                  <div className="text-xs leading-3">
+                    {dateToString(log?.transDate)}
+                  </div>
+                  <div className="font-bold text-lg leading-6">
+                    {log?.transRemark || log?.useStoreName}
+                  </div>
+                  {log?.bank ? (
+                    <div className="text-xs">{`[${BaroBankCode[log?.bank]}] ${
+                      log?.bankAccountNum
+                    }`}</div>
+                  ) : (
+                    <div className="text-xs">{`[${
+                      CardCode[log?.cardCompany]
+                    }] ${cardNumberSecurity(log?.cardNum)}`}</div>
+                  )}
+                </div>
+                <div className="w-full mt-2 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+                  <div className="border-b border-gray-100 p-4 flex justify-between">
+                    <label className="w-20 block text-sm font-bold text-gray-700 dark:text-gray-200">
                       {tradeKind === "CASH" ? "수입" : "수익"}
                     </label>
-                    <div>
-                      <ul>
-                        {finClassData.IN1.map((data) => (
-                          <li
-                            key={data.categoryName}
-                            className="flex justify-between">
-                            <label>{data.categoryName}</label>
-                            <div className="w-32 text-right">
-                              {finNumber(data.transMoney)}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <ul>
+                      {finClassData.IN1.map((data, index) => (
+                        <FinItem key={index} data={data} />
+                      ))}
+                    </ul>
                   </div>
-                </div>
-                <div className="flex">
-                  <div className="w-full p-4 mt-1 m-1 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800 flex justify-between">
-                    <label className="block text-sm font-bold text-gray-700 dark:text-gray-200">
+                  <div className="p-4 flex justify-between">
+                    <label className="w-20 block text-sm font-bold text-gray-700 dark:text-gray-200">
                       {tradeKind === "CASH" ? "지출" : "비용"}
                     </label>
-                    <div>
-                      <ul>
-                        {finClassData.OUT1.map((data) => (
-                          <li
-                            key={data.categoryName}
-                            className="flex justify-between">
-                            <label>{data.categoryName}</label>
-                            <div className="w-32 text-right">
-                              {finNumber(data.transMoney)}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <ul>
+                      {finClassData.OUT1.map((data, index) => (
+                        <FinItem key={index} data={data} />
+                      ))}
+                    </ul>
                   </div>
                 </div>
-                <div className="flex">
-                  <div className="w-full p-4 mt-1 m-1 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800 flex justify-between">
-                    <label className="block text-sm font-bold text-gray-700 dark:text-gray-200">
+                <div className="w-full mt-2 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+                  <div className="border-b border-gray-100 p-4 flex justify-between">
+                    <label className="w-20 block text-sm font-bold text-gray-700 dark:text-gray-200">
                       자산
                     </label>
                     <div>
                       <ul>
-                        {finClassData.IN3.map((data) => (
-                          <li
-                            key={data.categoryName}
-                            className="flex justify-between">
-                            <label>{data.categoryName}</label>
-                            <div className="w-32 text-right">
-                              {finNumber(data.transMoney)}
-                            </div>
-                          </li>
+                        {finClassData.IN3.map((data, index) => (
+                          <FinItem key={index} data={data} />
                         ))}
-                        {finClassData.OUT3.map((data) => (
-                          <li
-                            key={data.categoryName}
-                            className="flex justify-between">
-                            <label>{data.categoryName}</label>
-                            <div className="w-32 text-right">
-                              {finNumber(data.transMoney * -1)}
-                            </div>
-                          </li>
+                        {finClassData.OUT3.map((data, index) => (
+                          <FinItem key={index} data={data} />
                         ))}
                       </ul>
                     </div>
                   </div>
-                </div>
-                <div className="flex">
-                  <div className="w-full p-4 mt-1 m-1 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800 flex justify-between">
-                    <label className="block text-sm font-bold text-gray-700 dark:text-gray-200">
+
+                  <div className="border-b border-gray-100 p-4 flex justify-between">
+                    <label className="w-20 block text-sm font-bold text-gray-700 dark:text-gray-200">
                       부채
                     </label>
                     <div>
                       <ul>
-                        {finClassData.IN2.map((data) => (
-                          <li
-                            key={data.categoryName}
-                            className="flex justify-between">
-                            <label>{data.categoryName}</label>
-                            <div className="w-32 text-right">
-                              {finNumber(data.transMoney)}
-                            </div>
-                          </li>
+                        {finClassData.IN2.map((data, index) => (
+                          <FinItem key={index} data={data} />
                         ))}
-                        {finClassData.OUT2.map((data) => (
-                          <li
-                            key={data.categoryName}
-                            className="flex justify-between">
-                            <label>{data.categoryName}</label>
-                            <div className="w-32 text-right">
-                              {finNumber(data.transMoney * -1)}
-                            </div>
-                          </li>
+                        {finClassData.OUT2.map((data, index) => (
+                          <FinItem key={index} data={data} />
                         ))}
                       </ul>
                     </div>
                   </div>
-                </div>
-                <div className="flex">
-                  <div className="w-full p-4 mt-1 m-1 bg-white border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-800 flex justify-between">
-                    <label className="block text-sm font-bold text-gray-700 dark:text-gray-200">
+                  <div className="border-b border-gray-100 p-4 flex justify-between">
+                    <label className="w-20 block text-sm font-bold text-gray-700 dark:text-gray-200">
                       자본
                     </label>
                     <div>
@@ -236,5 +207,14 @@ export function ModalTradeStatusDetail({
         </Dialog>
       </Transition>
     </>
+  );
+}
+
+function FinItem({data}: {data: TransMoneyProps}) {
+  return (
+    <li className="flex justify-between">
+      <label className="text-right">{data.categoryName}</label>
+      <div className="w-24 text-right">{finNumber(data.transMoney)}</div>
+    </li>
   );
 }

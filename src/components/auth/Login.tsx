@@ -10,7 +10,7 @@ export type FormProps = {
   password: string;
 };
 
-const Index: React.FC = ({href}: {href?: string}) => {
+const Index: React.FC = () => {
   const methods = useForm<FormProps>({
     defaultValues: {
       userId: "",
@@ -26,7 +26,7 @@ const Index: React.FC = ({href}: {href?: string}) => {
   const onSubmit = async (data: FormProps) => {
     POST("/auth/login", data).then((res: any) => {
       console.log(res);
-      handleLogin(res?.data?.token, href);
+      handleLogin(res?.data?.token, "/");
     });
   };
 

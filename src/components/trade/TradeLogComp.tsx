@@ -1,4 +1,5 @@
 import React from "react";
+import {finNumber} from "@/utils/finNumber";
 
 type Props = {
   logs: any;
@@ -13,7 +14,7 @@ export default function TradeLogComp({logs, handleClick}: Props) {
           key={index}
           onClick={() => handleClick(log)}>
           <div>{log.transRemark || log.useStoreName}</div>
-          <div>{log.transMoney.toLocaleString()}</div>
+          <div>{finNumber(log.transMoney)}</div>
         </li>
       ))}
       {logs.length === 0 && <li>거래내역이 없습니다.</li>}

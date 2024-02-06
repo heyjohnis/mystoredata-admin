@@ -1,7 +1,6 @@
 import {useAppSelector} from "@/store";
 import Link from "next/link";
-import Login from "@/components/sample-forms/login";
-import Text from "@/components/sample/login-2/text";
+import Login from "@/components/auth/Login";
 import Logo from "@/components/sample/login-2/logo";
 import Footer from "@/components/sample/login-2/footer";
 
@@ -13,7 +12,6 @@ const Index: React.FC = () => {
       <div className="flex flex-row w-full h-screen overflow-hidden">
         <div className="relative items-start justify-between hidden w-1/2 p-8 text-white lg:flex lg:flex-col bg-login-2">
           <Logo />
-          <Text />
           <Footer />
         </div>
         <div className="flex flex-col items-start justify-center w-full p-8 text-gray-900 bg-white dark:bg-gray-900 dark:text-white lg:w-1/2 lg:p-24">
