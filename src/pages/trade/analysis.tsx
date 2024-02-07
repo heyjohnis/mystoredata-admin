@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {TradeStatus} from "@/components/trade/TradeStatus";
+import {TradeAnalysis} from "@/components/trade/TradeAnalysis";
 
 type FormProp = {
   tradeKind?: string;
@@ -14,5 +14,5 @@ type FormProp = {
 };
 
 export default function TradeAnalysisPage() {
-  return <TradeStatus />;
+  return <TradeAnalysis />;
 }

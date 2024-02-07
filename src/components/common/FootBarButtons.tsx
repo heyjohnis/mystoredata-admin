@@ -47,7 +47,7 @@ export function FootBarButtons() {
         <IconButton
           icon={TbReceiptTax}
           name="당일거래현황"
-          href="/trade/current"
+          href="/trade/status"
         />
         <IconButton icon={LuSheet} name="제무재표" href="/trade/current" />
         <IconButton icon={BiTransfer} name="거래내역" href="/trade/current" />
