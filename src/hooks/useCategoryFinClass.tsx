@@ -20,7 +20,7 @@ export const useCategoryFinClass = (form: SearchProps) => {
 
   const getCategroyByClass = () => {
     POST(`/trans/class-category`, form).then((res: any) => {
-      console.log("getCategroyByClass: ", res.data);
+      console.log("getCategroyByClass: ", res?.data);
       setCategroyByClass(res?.data);
     });
   };

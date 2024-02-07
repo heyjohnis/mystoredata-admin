@@ -40,7 +40,7 @@ const ModalFinStatus = ({finData, closedModal, tradeKind}: Props) => {
   };
 
   useEffect(() => {
-    if (finData) {
+    if (finData.length > 0) {
       setIsOpen(true);
       classfyFinData(finData);
       calcEquity();
