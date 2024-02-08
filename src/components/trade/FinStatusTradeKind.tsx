@@ -46,159 +46,107 @@ export default function FinStatusTradeKind({
 
   return (
     <>
-      <div className="p-5 pt-1">
-        <table className="w-full">
-          <tbody>
-            {["CASH"].includes(tradeKind || "") && (
-              <>
-                <tr className="border-b-[2px] border-t-[2px]">
-                  <td>입금</td>
-                  <td className="text-right">
-                    <ul>
-                      <FinStatusInOutUnit
-                        finClassCode="IN3"
-                        inOutAccount={inOutAccount}
-                        getTransData={getTransData}
-                      />
+      <div className="w-100 px-6 py-2 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+        <div className="border-b border-gray-100 flex justify-between py-1 min-h-[40px]">
+          <label className="w-20 flex items-center text-sm font-bold text-gray-700 dark:text-gray-200">
+            {tradeKind === "CASH" ? "수입" : "수익"}
+          </label>
 
-                      <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                        <div className="text-center w-1/2">소계</div>
-                        <div className="w-1/2">
-                          {sumInOutAccount("IN3", inOutAccount)}
-                        </div>
-                      </li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr className="border-b-[2px]">
-                  <td>출금</td>
-                  <td className="text-right">
-                    <ul>
-                      <FinStatusInOutUnit
-                        finClassCode="OUT3"
-                        inOutAccount={inOutAccount}
-                        getTransData={getTransData}
-                        isNegativeNumber={true}
-                      />
-                      <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                        <div className="text-center w-1/2">소계</div>
-                        <div className="w-1/2">
-                          {sumInOutAccount("OUT3", inOutAccount)}
-                        </div>
-                      </li>
-                    </ul>
-                  </td>
-                </tr>
-              </>
-            )}
-            {!["CASH"].includes(tradeKind || "") && (
-              <>
-                <tr className="border-b-[2px] border-t-[2px] ">
-                  <td>수익</td>
-                  <td className="text-right">
-                    <ul>
-                      <FinStatusTradeKindUnit
-                        finClassCode="IN1"
-                        finAmount={finAmount}
-                        category={category}
-                        getTransData={getTransData}
-                      />
+          <ul className="w-full">
+            <FinStatusTradeKindUnit
+              finClassCode="IN1"
+              finAmount={finAmount}
+              category={category}
+              getTransData={getTransData}
+            />
 
-                      <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                        <div className="text-center w-1/2">소계</div>
-                        <div className="w-1/2">
-                          {finNumber(finAmount["IN1"])}
-                        </div>
-                      </li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr className="border-b-[2px]">
-                  <td>지출</td>
-                  <td className="text-right">
-                    <ul>
-                      <FinStatusTradeKindUnit
-                        finClassCode="OUT1"
-                        finAmount={finAmount}
-                        category={category}
-                        getTransData={getTransData}
-                        isNegativeNumber={true}
-                      />
-                      <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                        <div className="text-center w-1/2">소계</div>
-                        <div className="w-1/2">
-                          {finNumber(finAmount["OUT1"])}
-                        </div>
-                      </li>
-                    </ul>
-                  </td>
-                </tr>
-              </>
-            )}
-            <tr className="border-b-[3px]">
-              <td> </td>
-              <td> </td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td> </td>
-            </tr>
-            <tr className="border-b-[2px]">
-              <td>자산</td>
-              <td className="text-right">
-                <ul>
-                  <FinStatusTradeKindUnit
-                    finClassCode="IN3_OUT3"
-                    finAmount={finAmount}
-                    category={category}
-                    getTransData={getTransData}
-                  />
-                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                    <div className="text-center w-1/2">소계</div>
-                    <div className="">
-                      {finNumber(finAmount["IN3"] - finAmount["OUT3"])}
-                    </div>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr className="border-b-[2px]">
-              <td>부채</td>
-              <td className="text-right">
-                <ul>
-                  <FinStatusTradeKindUnit
-                    finClassCode="IN2_OUT2"
-                    finAmount={finAmount}
-                    category={category}
-                    getTransData={getTransData}
-                  />
-                  <li className="flex justify-between cursor-pointer pt-1 pb-1 border-t-[1px] font-bold">
-                    <div className="text-center w-1/2">소계</div>
-                    <div className="w-1/2">
-                      {finNumber(finAmount["IN2"] - finAmount["OUT2"])}
-                    </div>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr className="border-b-[2px]">
-              <td>자본</td>
-              <td className="text-right">
-                <li className="flex justify-between font-bold">
-                  <div className="text-center w-1/2">소계</div>
-                  <div className="w-1/2">
-                    {finNumber(
-                      finAmount.IN3 -
-                        finAmount.OUT3 -
-                        finAmount.IN2 +
-                        finAmount.OUT2
-                    )}
-                  </div>
-                </li>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            <li className="w-full flex justify-end py-1 mt-1">
+              <label className="text-right flex font-bold">소계</label>
+              <div className="w-24 text-right font-bold">
+                {sumInOutAccount("IN1", inOutAccount)}
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div className=" border-gray-100 flex justify-between py-1 min-h-[40px]">
+          <label className="w-20 flex-none flex items-center text-sm font-bold text-gray-700 dark:text-gray-200">
+            {tradeKind === "CASH" ? "지출" : "비용"}
+          </label>
+          <ul className="w-full">
+            <FinStatusTradeKindUnit
+              finClassCode="OUT1"
+              finAmount={finAmount}
+              category={category}
+              getTransData={getTransData}
+              isNegativeNumber={true}
+            />
+            <li className="w-full flex justify-end py-1 mt-1">
+              <label className="text-right flex font-bold">소계</label>
+              <div className="w-24 text-right font-bold">
+                {sumInOutAccount("OUT1", inOutAccount)}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="w-100 mt-3 px-6 py-2 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800">
+        <div className="border-b border-gray-100 flex justify-between py-1 min-h-[40px]">
+          <label className="w-20 flex items-center text-sm font-bold text-gray-700 dark:text-gray-200">
+            자산
+          </label>
+          <ul className="w-full">
+            <FinStatusTradeKindUnit
+              finClassCode="IN3_OUT3"
+              finAmount={finAmount}
+              category={category}
+              getTransData={getTransData}
+            />
+            <li className="w-full flex justify-end py-1 mt-1">
+              <label className="text-right flex font-bold">소계</label>
+              <div className="w-24 text-right font-bold">
+                {finNumber(finAmount["IN3"] - finAmount["OUT3"])}
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div className="border-b border-gray-100 flex justify-between py-1 min-h-[40px]">
+          <label className="w-20 flex items-center text-sm font-bold text-gray-700 dark:text-gray-200">
+            부채
+          </label>
+          <ul className="w-full">
+            <FinStatusTradeKindUnit
+              finClassCode="IN2_OUT2"
+              finAmount={finAmount}
+              category={category}
+              getTransData={getTransData}
+            />
+            <li className="w-full flex justify-end py-1 mt-1">
+              <label className="text-right flex font-bold">소계</label>
+              <div className="w-24 text-right font-bold">
+                {finNumber(finAmount["IN2"] - finAmount["OUT2"])}
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div className=" border-gray-100 flex justify-between py-1 min-h-[40px]">
+          <label className="w-20 flex items-center text-sm font-bold text-gray-700 dark:text-gray-200">
+            자본
+          </label>
+          <ul className="w-full">
+            <li className="w-full flex justify-end py-1 mt-1">
+              <label className="text-right flex font-bold">소계</label>
+              <div className="w-24 text-right font-bold">
+                {finNumber(
+                  finAmount.IN3 -
+                    finAmount.OUT3 -
+                    finAmount.IN2 +
+                    finAmount.OUT2
+                )}
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import {finNumber} from "@/utils/finNumber";
 
 export default function FinStatusTradeKindUnit({
-  finClassCode,
+  finClassCode = "",
   category,
   getTransData,
 }: any) {
@@ -11,16 +11,14 @@ export default function FinStatusTradeKindUnit({
   }, [category]);
 
   return (
-    category[finClassCode]?.length > 0 &&
-    category[finClassCode].map((c: any, i: number) => (
+    category[finClassCode || ""]?.length > 0 &&
+    category[finClassCode || ""].map((c: any, i: number) => (
       <li
         key={i}
-        className="flex justify-between cursor-pointer"
+        className="w-full flex justify-end py-[3px]"
         onClick={() => getTransData(finClassCode, c.category)}>
-        <div className="inline-block w-[150px] truncate text-center">
-          {c.categoryName}
-        </div>
-        <div className="w-24">{finNumber(c.transMoney)}</div>
+        <label className="w-max-24 text-right">{c.categoryName}</label>
+        <div className="w-24 text-right">{finNumber(c.transMoney)}</div>
       </li>
     ))
   );

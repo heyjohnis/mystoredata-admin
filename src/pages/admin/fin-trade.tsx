@@ -78,6 +78,7 @@ const Index: React.FC = () => {
   const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
   const [finData, setFinData] = useState<TransMoneyProps[]>([]);
   const [tradeKind, setTradeKind] = useState<string>("");
+
   // 통장거래내역
   const accountLog = useAccountLog(form);
   useEffect(() => {
@@ -142,7 +143,6 @@ const Index: React.FC = () => {
     if (log.bank) log.bank && setTradeKind("CASH");
     if (log.card) log.card && setTradeKind("CRDIT");
     if (log.taxType) log.taxType && setTradeKind("BILL");
-
     POST(`/trans/trade-item`, {_id: log._id}).then((res: any) => {
       console.log("trade-item: ", res.data);
       setFinData(res.data);
@@ -152,12 +152,12 @@ const Index: React.FC = () => {
   const closedModal = (isUpdated = false) => {
     console.log("closedModal");
   };
+
   return (
     <>
       <SectionTitle title="Financial Status" subtitle="재정상태" />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
-
         <FinStatusTab setForm={setForm} />
         {["CASH", ""].includes(form?.tradeKind || "") && (
           <div className="justify-between">
