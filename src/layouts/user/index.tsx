@@ -26,8 +26,8 @@ const UserAppLayout: React.FC<UserAppLayout> = ({children}) => {
             <FiMenu size={24} />
           </button>
         </div>
-        <div className="w-ful mb-auto overflow-auto">{children}</div>
-        <footer>
+        <div className="w-ful mb-auto flex-grow overflow-auto">{children}</div>
+        <footer className="fixed bottom-0 w-full">
           <FootBarButtons />
         </footer>
       </div>
