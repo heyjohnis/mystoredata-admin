@@ -58,7 +58,7 @@ export function ModalTradeCategoryItems({popupData, closedModal}: Props) {
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto w-full h-full"
+          className="fixed inset-0 z-50 overflow-y-auto w-full h-full"
           onClose={closeModal}>
           <div className="flex flex-col items-center justify-center min-h-screen text-center bg-slate-100">
             <Transition.Child
@@ -82,7 +82,7 @@ export function ModalTradeCategoryItems({popupData, closedModal}: Props) {
               <div className="w-full min-h-screen p-6 overflow-hidden text-left align-middle bg-gray-50 shadow-xl dark:bg-gray-700 dark:text-white transition-all transform">
                 <div className="sticky top-0">
                   <button
-                    className="absolute top-0 right-0 p-4 font-bold uppercase"
+                    className="absolute top-[-40px] right-[-15px] p-4 font-bold uppercase"
                     onClick={closeModal}>
                     <FiX size={18} className="stroke-current" />
                   </button>

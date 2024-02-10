@@ -19,7 +19,7 @@ const UserAppLayout: React.FC<UserAppLayout> = ({children}) => {
       </Head>
       <SideMenu isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
       <div className="flex flex-col h-screen justify-between bg-slate-50 ">
-        <div className="absolute right-0 z-50">
+        <div className="absolute right-0 z-20">
           <button
             className="flex items-center justify-center w-8 h-16 mx-4"
             onClick={() => setIsOpenMenu(!isOpenMenu)}>
