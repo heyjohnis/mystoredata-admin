@@ -152,69 +152,71 @@ export function TradeAnalysis() {
   }, [form]);
   return (
     <>
-      <div className="sticky top-0 p-5 pb-0 m-0 z-100 bg-white ">
+      <div className="sticky top-0 p-5 pb-0 m-0 z-[100] bg-white ">
         <h1 className="w-[60%] text-center m-auto mb-2 text-2xl">
           {form.displayDate}
         </h1>
         <DateSelector form={form} setForm={setForm} />
       </div>
-      <div className="p-5 pt-1 m-0 bg-white ">
-        <FinStatusTab setForm={setForm} />
-      </div>
-      <div className="p-5 pt-0">
-        {["CASH", ""].includes(form?.tradeKind || "") && (
-          <div className="relative">
-            <Title>통장거래</Title>
-            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-900 max-h-96	 overflow-y-auto">
-              <TradeLogComp
-                logs={accountLogs}
-                handleClick={openModalFinStatus}
-              />
+      <div>
+        <div className="p-5 pt-1 m-0 bg-white ">
+          <FinStatusTab setForm={setForm} />
+        </div>
+        <div className="p-5 pt-0">
+          {["CASH", ""].includes(form?.tradeKind || "") && (
+            <div className="relative">
+              <Title>통장거래</Title>
+              <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-900 max-h-96	 overflow-y-auto">
+                <TradeLogComp
+                  logs={accountLogs}
+                  handleClick={openModalFinStatus}
+                />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 h-10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent blur-sm"></div>
+              </div>
             </div>
-            <div className="absolute inset-x-0 bottom-0 h-10 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent blur-sm"></div>
+          )}
+          {["CHECK", ""].includes(form?.tradeKind || "") && (
+            <div className="relative">
+              <Title>체크카드거래</Title>
+              <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800 max-h-80 overflow-y-auto">
+                <TradeLogComp
+                  logs={checkCardLogs}
+                  handleClick={openModalFinStatus}
+                />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 h-10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent blur-sm"></div>
+              </div>
             </div>
-          </div>
-        )}
-        {["CHECK", ""].includes(form?.tradeKind || "") && (
-          <div className="relative">
-            <Title>체크카드거래</Title>
-            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800 max-h-80 overflow-y-auto">
-              <TradeLogComp
-                logs={checkCardLogs}
-                handleClick={openModalFinStatus}
-              />
+          )}
+          {["CREDIT", ""].includes(form?.tradeKind || "") && (
+            <div className="relative">
+              <Title>신용카드거래</Title>
+              <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800 max-h-80 overflow-y-auto">
+                <TradeLogComp
+                  logs={creditCardLogs}
+                  handleClick={openModalFinStatus}
+                />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 h-10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent blur-sm"></div>
+              </div>
             </div>
-            <div className="absolute inset-x-0 bottom-0 h-10 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent blur-sm"></div>
+          )}
+          {["BILL", ""].includes(form?.tradeKind || "") && (
+            <div className="relative">
+              <Title>세금계산서</Title>
+              <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800 max-h-80 overflow-y-auto">
+                <TradeLogComp logs={taxLogs} handleClick={openModalFinStatus} />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 h-10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent blur-sm"></div>
+              </div>
             </div>
-          </div>
-        )}
-        {["CREDIT", ""].includes(form?.tradeKind || "") && (
-          <div className="relative">
-            <Title>신용카드거래</Title>
-            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800 max-h-80 overflow-y-auto">
-              <TradeLogComp
-                logs={creditCardLogs}
-                handleClick={openModalFinStatus}
-              />
-            </div>
-            <div className="absolute inset-x-0 bottom-0 h-10 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent blur-sm"></div>
-            </div>
-          </div>
-        )}
-        {["BILL", ""].includes(form?.tradeKind || "") && (
-          <div className="relative">
-            <Title>세금계산서</Title>
-            <div className="w-100 p-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-900 dark:border-gray-800 max-h-80 overflow-y-auto">
-              <TradeLogComp logs={taxLogs} handleClick={openModalFinStatus} />
-            </div>
-            <div className="absolute inset-x-0 bottom-0 h-10 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent blur-sm"></div>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
       <ModalTradeStatusDetail
         log={log}
