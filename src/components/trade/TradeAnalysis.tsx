@@ -152,7 +152,7 @@ export function TradeAnalysis() {
   }, [form]);
   return (
     <>
-      <div className="sticky top-0 p-5 pb-0 m-0 z-[100] bg-white ">
+      <div className="sticky top-0 p-5 pb-0 m-0 z-10 bg-white ">
         <h1 className="w-[60%] text-center m-auto mb-2 text-2xl">
           {form.displayDate}
         </h1>
