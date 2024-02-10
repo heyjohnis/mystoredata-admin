@@ -42,3 +42,31 @@ export function lastDayOfMonth(date: Date): string {
   const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
   return lastDate.toISOString().substring(0, 10);
 }
+
+type props = {
+  year: "numeric";
+  month: "2-digit";
+  day: "2-digit";
+  hour: "2-digit";
+  minute: "2-digit";
+  hour12: boolean;
+  timeZone: string;
+};
+
+export function formatDateToTimezonePattern(date: Date) {
+  const options: props = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "Asia/Seoul",
+  };
+
+  const formatter = new Intl.DateTimeFormat("ko-KR", options);
+  const formattedDate = formatter.format(date);
+  console.log("formatDateToTimezonePattern: ", formattedDate);
+
+  return formattedDate.replace(",", ""); // 쉼표 제거
+}

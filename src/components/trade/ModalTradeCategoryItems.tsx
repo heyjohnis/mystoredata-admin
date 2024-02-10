@@ -3,13 +3,23 @@ import {Fragment, useEffect, useState} from "react";
 import {FiX} from "react-icons/fi";
 import {TransMoneyProps} from "@/model/TransMoney";
 import {finNumber} from "@/utils/finNumber";
-import {dateToString} from "@/utils/date";
-import {BaroBankCode} from "@/data/commonCode";
+import {dateToString, formatDateToTimezonePattern} from "@/utils/date";
+import {BaroBankCode, FinClassCode, UseKind} from "@/data/commonCode";
 import {CardCode} from "@/data/commonCode";
 import {cardNumberSecurity} from "@/utils/security";
+import {PopupProps} from "./TradeStatus";
+import {set} from "nprogress";
+
 type Props = {
-  logs?: any;
+  popupData: PopupProps;
   closedModal: (isSaved: boolean) => void;
+};
+
+type CategoryProps = {
+  finClassCode?: string;
+  category?: string;
+  categoryName?: string;
+  transMoney?: number;
 };
 
 const finClassData: {
@@ -23,42 +33,34 @@ const finClassData: {
   OUT3: [],
 };
 
-export function ModalTradeCategoryItems({logs, closedModal}: Props) {
+export function ModalTradeCategoryItems({popupData, closedModal}: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
-  const [equity, setEquity] = useState<number>(0);
+  const [category, setCategory] = useState<CategoryProps>();
+  const [logs, setLogs] = useState<TransMoneyProps[]>([]);
   const closeModal = () => {
     console.log("close modal");
     setIsOpen(false);
     closedModal(isChanged);
-    finClassData.IN1 = [];
-    finClassData.IN2 = [];
-    finClassData.IN3 = [];
-    finClassData.OUT1 = [];
-    finClassData.OUT2 = [];
-    finClassData.OUT3 = [];
-    setEquity(0);
   };
 
   useEffect(() => {
-    console.log("finData: ", logs);
-  }, [logs]);
-
-  const classfyFinData = (finData: TransMoneyProps[]) => {
-    finData.forEach((data) => {
-      finClassData[data.finClassCode].push(data);
-    });
-    console.log({finClassData});
-  };
+    if ((popupData?.logs?.length || 0) > 0) {
+      setIsOpen(true);
+      console.log("popupData: ", popupData);
+      setCategory(popupData?.category);
+      setLogs(popupData?.logs || []);
+    }
+  }, [popupData]);
 
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto w-full"
+          className="fixed inset-0 z-10 overflow-y-auto w-full h-full"
           onClose={closeModal}>
-          <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+          <div className="flex flex-col items-center justify-center min-h-screen text-center bg-slate-100">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -77,26 +79,70 @@ export function ModalTradeCategoryItems({logs, closedModal}: Props) {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-              <div className="relative inline-block w-full max-w-md p-4 overflow-hidden text-left align-middle bg-gray-50 shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl">
-                <button
-                  className="absolute top-0 right-0 m-4 font-bold uppercase"
-                  onClick={closeModal}>
-                  <FiX size={18} className="stroke-current" />
-                </button>
+              <div className="w-full min-h-screen p-6 overflow-hidden text-left align-middle bg-gray-50 shadow-xl dark:bg-gray-700 dark:text-white transition-all transform">
+                <div className="sticky top-0">
+                  <button
+                    className="absolute top-0 right-0 p-4 font-bold uppercase"
+                    onClick={closeModal}>
+                    <FiX size={18} className="stroke-current" />
+                  </button>
+                  <div className="my-6 flex justify-between">
+                    <div>
+                      <div className="h-6 w-full">
+                        {FinClassCode[category?.finClassCode || " "]}{" "}
+                      </div>
+                      <h2 className="text-2xl font-bold">
+                        {category?.categoryName}
+                      </h2>
+                    </div>
+                    <div className="text-2xl flex justify-center place-items-end font-bold">
+                      {finNumber(category?.transMoney || 0)}
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  {logs.map((log) => {
+                    return (
+                      <div key={log._id} className="my-2 border-b pt-2 pb-4">
+                        <div className="flex justify-between">
+                          <div>
+                            <div>
+                              {formatDateToTimezonePattern(
+                                new Date(log?.transDate)
+                              )}
+                            </div>
+                            <div className="text-xl font-bold">
+                              {log.useStoreName || log.transRemark}
+                            </div>
+                          </div>
+                          <div className="flex place-items-end text-xl font-bold">
+                            {finNumber(log.transMoney)}
+                          </div>
+                        </div>
+                        <div className="h-0 overflow-hidden">
+                          {log?.cardCompany && (
+                            <div>
+                              {CardCode[log?.cardCompany || ""]}{" "}
+                              {cardNumberSecurity(log.cardNum)}
+                            </div>
+                          )}
+                          {log?.bank && (
+                            <div>
+                              {BaroBankCode[log?.bank || ""]}{" "}
+                              {log.bankAccountNum}
+                            </div>
+                          )}
+                          <div>{UseKind[log.useKind]}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </Transition.Child>
           </div>
         </Dialog>
       </Transition>
     </>
-  );
-}
-
-function FinItem({data}: {data: TransMoneyProps}) {
-  return (
-    <li className="flex justify-between">
-      <label className="text-right">{data.categoryName}</label>
-      <div className="w-24 text-right">{finNumber(data.transMoney)}</div>
-    </li>
   );
 }

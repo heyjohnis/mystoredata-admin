@@ -15,7 +15,7 @@ export async function POST(uri: string, data: any): Promise<any> {
   })
     .then((response) => response)
     .catch((error) => {
-      if (error.response.status === 401) {
+      if (error?.response?.status === 401) {
         Router.push("/login");
       }
       if (error.response?.data?.error?.message) {

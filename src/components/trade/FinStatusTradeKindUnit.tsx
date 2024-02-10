@@ -16,7 +16,14 @@ export default function FinStatusTradeKindUnit({
       <li
         key={i}
         className="w-full flex justify-end py-[3px]"
-        onClick={() => getTransData(finClassCode, c.category)}>
+        onClick={() =>
+          getTransData({
+            finClassCode,
+            category: c.category,
+            categoryName: c.categoryName,
+            transMoney: c.transMoney,
+          })
+        }>
         <label className="w-max-24 text-right">{c.categoryName}</label>
         <div className="w-24 text-right">{finNumber(c.transMoney)}</div>
       </li>

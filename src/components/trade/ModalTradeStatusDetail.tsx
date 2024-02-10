@@ -110,7 +110,7 @@ export function ModalTradeStatusDetail({
               leaveTo="opacity-0 scale-95">
               <div className="relative inline-block w-full max-w-md p-4 overflow-hidden text-left align-middle bg-gray-50 shadow-xl dark:bg-gray-700 dark:text-white transition-all transform rounded-2xl">
                 <button
-                  className="absolute top-0 right-0 m-4 font-bold uppercase"
+                  className="absolute top-0 right-0 p-4 font-bold uppercase"
                   onClick={closeModal}>
                   <FiX size={18} className="stroke-current" />
                 </button>

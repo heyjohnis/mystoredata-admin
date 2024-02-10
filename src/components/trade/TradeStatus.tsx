@@ -54,6 +54,18 @@ const initForm: SearchProps = {
   dateUnit: "day",
 };
 
+type CategoryProps = {
+  finClassCode?: string;
+  category?: string;
+  categoryName?: string;
+  transMoney?: number;
+};
+
+export type PopupProps = {
+  category?: CategoryProps;
+  logs?: TransMoneyProps[];
+};
+
 export function TradeStatus() {
   const [form, setForm] = useState<SearchProps>(initForm);
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
@@ -62,7 +74,7 @@ export function TradeStatus() {
   const [finData, setFinData] = useState<TransMoneyProps[]>([]);
   const [tradeKind, setTradeKind] = useState<string>("");
   const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
-
+  const [popupData, setPopupData] = useState<PopupProps>({});
   // 전체거래내역조회
   const transLog = useTransLogs(form);
   useEffect(() => {
@@ -82,15 +94,23 @@ export function TradeStatus() {
     setFinAmount(finStatusData);
   }, [finStatusData]);
 
-  const getTransData = (code: string, category = "") => {
+  const getTransData = ({
+    finClassCode,
+    category,
+    categoryName,
+    transMoney,
+  }: CategoryProps) => {
     POST(`/trans/log`, {
       ...form,
-      finClassCodes: code,
+      finClassCodes: finClassCode,
       useYn: true,
       category,
     }).then((res: any) => {
-      console.log("transdata: ", res.data);
-      setLogs(res.data);
+      console.log("transdata: ", res?.data);
+      setPopupData({
+        category: {finClassCode, category, categoryName, transMoney},
+        logs: res?.data,
+      });
     });
   };
 
@@ -133,7 +153,10 @@ export function TradeStatus() {
           inOutAccount={accountAmount}
         />
       </div>
-      <ModalTradeCategoryItems logs={logs} closedModal={closedModal} />
+      <ModalTradeCategoryItems
+        popupData={popupData}
+        closedModal={closedModal}
+      />
     </>
   );
 }
