@@ -3,7 +3,6 @@ import {POST} from "@/utils/restApi";
 import {SearchProps} from "@/model/SearchForm";
 import {CategoryProps, ClassCategoryProps} from "@/model/ClassCategoryProps";
 import {isEmptyForm} from "@/utils/form";
-import {set} from "nprogress";
 
 const initCategory: ClassCategoryProps = {
   IN1: [],

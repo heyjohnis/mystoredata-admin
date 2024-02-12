@@ -114,7 +114,7 @@ const Index: React.FC = () => {
 
   const saveFinItemInfo = (item: FinItemProps) => {
     if (!item?._id) {
-      POST("fin-item/reg", item)
+      POST("/fin-item/reg", item)
         .then((res: any) => {
           if (res?.data) {
             alert("저장되었습니다");

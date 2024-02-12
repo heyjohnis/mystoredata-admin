@@ -44,7 +44,7 @@ export default function AccountList({accounts, user, baseMonth}: any) {
 
   const syncAccountLog = (account: AccountProps) => {
     console.log("account sync: ", account);
-    POST("account/regLog", {
+    POST("/account/regLog", {
       ...account,
       corpNum: user.corpNum,
       userId: user.userId,
@@ -52,7 +52,7 @@ export default function AccountList({accounts, user, baseMonth}: any) {
       baseMonth,
     })
       .then((res: any) => {
-        if (res.data.success) {
+        if (res?.data?.success) {
           alert("데이터 수집이 완료되었습니다.");
         }
         console.log("account/regLog: ", res);
@@ -72,7 +72,7 @@ export default function AccountList({accounts, user, baseMonth}: any) {
     };
     console.log("regFinItem: ", req);
     console.log("account: ", account);
-    POST("fin-item/reg", req).then((res: any) => {
+    POST("/fin-item/reg", req).then((res: any) => {
       console.log(res);
       if (res.data.success) {
         alert("자산등록이 완료되었습니다.");

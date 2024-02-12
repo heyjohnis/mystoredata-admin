@@ -71,6 +71,7 @@ const Index: React.FC = () => {
   }, [finStatusData]);
 
   const getTransData = (code: string, category = "") => {
+    console.log("getTransData: ", code, category);
     POST(`/trans/yearly-log`, {
       ...form,
       finClassCodes: code,

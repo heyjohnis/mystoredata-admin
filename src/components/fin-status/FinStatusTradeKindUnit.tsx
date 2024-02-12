@@ -12,7 +12,7 @@ export default function FinStatusTradeKindUnit({
 
   return (
     category[finClassCode || ""]?.length > 0 &&
-    category[finClassCode].map((c: any, i: number) => (
+    category[finClassCode]?.map((c: any, i: number) => (
       <li
         key={i}
         className="flex justify-between cursor-pointer"
