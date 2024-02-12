@@ -110,7 +110,6 @@ const Index: React.FC = () => {
   const saveInfo = (finItem: FinItemProps) => {
     let apiUrl = "/debt/reg";
     if (finItem._id) apiUrl = "/debt/save";
-    console;
     console.log("saveInfo", apiUrl);
     POST(apiUrl, finItem).then((res: any) => {
       console.log({res});

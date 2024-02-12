@@ -76,6 +76,8 @@ const initItem = {
   transRemark: "",
   useYn: true,
   amount: 0,
+  category: "",
+  categoryName: "",
 };
 
 const Index: React.FC = () => {

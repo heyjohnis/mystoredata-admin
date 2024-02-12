@@ -37,7 +37,8 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
   }, [finItem]);
 
   const handleChange = (e: any) => {
-    let {name, value} = e.target;
+    const {name} = e.target;
+    let value = e.target.value;
     value = value.replace(/,/g, "");
     setForm((prevState: any) => ({...prevState, [name]: value}));
     if (name === "itemType") {
