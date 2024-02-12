@@ -11,6 +11,8 @@ export type FinItemProps = {
   finCorpCode: string;
   finCorpName: string;
   itemName: string;
+  category: string;
+  categoryName: string;
   accountNum: string;
   defaultDate: Date;
   currentAmount: number;

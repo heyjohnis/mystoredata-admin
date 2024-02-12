@@ -67,6 +67,8 @@ const initFinItem: FinItemProps = {
   accountNum: "",
   currentAmount: 0,
   isFixed: false,
+  category: "",
+  categoryName: "",
 };
 
 const Index: React.FC = () => {
@@ -77,10 +79,10 @@ const Index: React.FC = () => {
   const [asset, setAsset] = useState<TransMoneyProps | null>(null);
 
   useEffect(() => {
-    getTradeCorpList();
+    getTradeDebtList();
   }, [form]);
 
-  const getTradeCorpList = () => {
+  const getTradeDebtList = () => {
     POST(`/debt/list`, form).then((res: any) => {
       console.log({res});
       setDebts(res.data);
@@ -106,11 +108,25 @@ const Index: React.FC = () => {
   };
 
   const saveInfo = (finItem: FinItemProps) => {
-    console.log("saveInfo", finItem);
-    POST(`/debt/save`, finItem).then((res: any) => {
+    let apiUrl = "/debt/reg";
+    if (finItem._id) apiUrl = "/debt/save";
+    console;
+    console.log("saveInfo", apiUrl);
+    POST(apiUrl, finItem).then((res: any) => {
       console.log({res});
+      getTradeDebtList();
+      getLogs(finItem._id, finItem.userId);
     });
     closedModal(true);
+  };
+
+  const deleteItem = (finItem: FinItemProps) => {
+    POST(`/debt/delete`, finItem).then((res: any) => {
+      console.log({res});
+      getTradeDebtList();
+      getLogs(finItem._id, finItem.userId);
+      closedModal(true);
+    });
   };
 
   return (
@@ -120,9 +136,12 @@ const Index: React.FC = () => {
         title="Debt Info"
         subtitle="부채 정보"
         buttonName="항목추가"
-        handleEvent={() => {
-          alert("항목추가");
-        }}
+        handleEvent={() =>
+          setFinItem((prev: FinItemProps) => ({
+            ...prev,
+            userId: form?.userId || "",
+          }))
+        }
       />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />
@@ -165,7 +184,7 @@ const Index: React.FC = () => {
                       {new Date(debt?.defaultDate).toLocaleDateString("ko-KR")}
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                      {finNumber(debt?.amount || 0)}
+                      {(debt?.amount || 0).toLocaleString()} 원
                     </td>
                     <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap">
                       <button
@@ -191,9 +210,7 @@ const Index: React.FC = () => {
         finItem={finItem}
         closedModal={closedModal}
         saveItem={saveInfo}
-        deleteItem={() => {
-          console.log("deleteItem");
-        }}
+        deleteItem={deleteItem}
       />
     </>
   );

@@ -11,7 +11,7 @@ export default function FinStatusTradeKindUnit({
   }, [category]);
 
   return (
-    category[finClassCode]?.length > 0 &&
+    category[finClassCode || ""]?.length > 0 &&
     category[finClassCode].map((c: any, i: number) => (
       <li
         key={i}

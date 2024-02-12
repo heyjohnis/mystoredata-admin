@@ -141,7 +141,7 @@ export default function TransMoneyLog({logs, reload}: Props) {
                     {log.finClassName}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-right">
-                    {log.transMoney.toLocaleString("ko-KR") || "-"}
+                    {log.transMoney?.toLocaleString("ko-KR") || "-"}
                   </td>
                   <td className="px-6 py-3 border-b border-gray-100 dark:border-gray-800 whitespace-nowrap text-center">
                     {UseKind[log.useKind as keyof typeof UseKind]}

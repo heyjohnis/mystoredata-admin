@@ -56,3 +56,20 @@ export const useFinStatusData = (form: SearchProps) => {
 
   return finAmount;
 };
+
+export const useYearlyFinStatusData = (form: SearchProps) => {
+  const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
+
+  const getFinStatusData = () => {
+    POST(`/fin-status/amount/yearly`, form).then((res: any) => {
+      setFinAmount(res?.data || initFinAmount);
+    });
+  };
+
+  useEffect(() => {
+    if (!isEmptyForm) return;
+    getFinStatusData();
+  }, [form]);
+
+  return finAmount;
+};

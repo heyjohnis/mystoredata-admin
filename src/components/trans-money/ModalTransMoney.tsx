@@ -115,7 +115,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
       finItemName: FinItemCode[type],
       finName: form?.transRemark,
     };
-    POST(`/debt/reg`, req)
+    POST(`/debt/trans/reg`, req)
       .then((res: any) => {
         console.log("save loan: ", res);
         if (res?.status === 200) {
@@ -135,7 +135,7 @@ const ModalTransMoney = ({asset, closedModal}: Props) => {
       finItemName: FinItemCode[type],
       finName: form?.transRemark,
     };
-    POST(`/asset/reg`, req)
+    POST(`/asset/trans/reg`, req)
       .then((res: any) => {
         console.log("save asset: ", res);
         if (res?.status === 200) {

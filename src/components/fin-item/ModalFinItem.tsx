@@ -8,6 +8,7 @@ import CommonCodeSelect, {CategorySelect} from "@/components/CommonCodeSelect";
 import {FinItemProps} from "@/model/FinItemProps";
 import {BankCorpCode, FinItemCode} from "@/data/commonCode";
 import {Select} from "@/components/ui/forms/select";
+import {Category} from "@/data/commonCode";
 
 type Props = {
   finItem: FinItemProps;
@@ -27,14 +28,17 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
     closedModal(isChanged);
   };
   useEffect(() => {
-    if (finItem._id) {
+    if (finItem.userId) {
       setIsOpen(true);
       setForm(finItem);
+    } else {
+      setIsOpen(false);
     }
   }, [finItem]);
 
   const handleChange = (e: any) => {
-    const {name, value} = e.target;
+    let {name, value} = e.target;
+    value = value.replace(/,/g, "");
     setForm((prevState: any) => ({...prevState, [name]: value}));
     if (name === "itemType") {
       setForm((prevState: any) => ({
@@ -42,12 +46,13 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
         itemTypeName: FinItemCode[value],
       }));
     }
+    if (name === "category") {
+      setForm((prevState: any) => ({
+        ...prevState,
+        categoryName: Category[value],
+      }));
+    }
   };
-
-  useEffect(() => {
-    console.log("form: ", finItem);
-    console.log("updateDetail: ", finItem);
-  }, [finItem]);
 
   return (
     <>
@@ -131,6 +136,15 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
                       onChange={handleChange}
                     />
                   </InputWrapper>
+                  <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
+                    <Label>카테고리</Label>
+                    <CategorySelect
+                      name="category"
+                      value={form?.category}
+                      onChange={handleChange}
+                      codes={Category}
+                    />
+                  </InputWrapper>
                 </div>
                 <div className="flex">
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
@@ -156,10 +170,10 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
                     <Label>이름</Label>
                     <Input
-                      name="itemName"
+                      name="finName"
                       type="text"
                       onChange={handleChange}
-                      value={form?.itemName}
+                      value={form?.finName}
                     />
                   </InputWrapper>
                   <InputWrapper outerClassName="sm:col-span-4 mt-2 mr-2">
@@ -168,7 +182,7 @@ const ModalFinItem = ({finItem, closedModal, saveItem, deleteItem}: Props) => {
                       name="defaultDate"
                       type="date"
                       onChange={handleChange}
-                      value={form?.defaultDate.toString().substring(0, 10)}
+                      value={form?.defaultDate?.toString()?.substring(0, 10)}
                     />
                   </InputWrapper>
                 </div>

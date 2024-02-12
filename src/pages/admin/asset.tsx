@@ -10,6 +10,7 @@ import {TransMoneyProps} from "@/model/TransMoney";
 import {FinItemProps} from "@/model/FinItemProps";
 import {finNumber} from "@/utils/finNumber";
 import ModalFinItem from "@/components/fin-item/ModalFinItem";
+import {set} from "nprogress";
 
 const fields: Record<string, string>[] = [
   {
@@ -67,6 +68,8 @@ const initFinItem: FinItemProps = {
   accountNum: "",
   currentAmount: 0,
   isFixed: false,
+  category: "",
+  categoryName: "",
 };
 
 const Index: React.FC = () => {
@@ -77,13 +80,13 @@ const Index: React.FC = () => {
   const [asset, setAsset] = useState<TransMoneyProps | null>(null);
 
   useEffect(() => {
-    getTradeCorpList();
+    getTradeAssetList();
   }, [form]);
 
-  const getTradeCorpList = () => {
+  const getTradeAssetList = () => {
     POST(`/asset/list`, form).then((res: any) => {
       console.log({res});
-      setAssts(res.data);
+      setAssts(res?.data);
     });
   };
 
@@ -95,7 +98,7 @@ const Index: React.FC = () => {
   };
 
   const openModal = (e: React.MouseEvent, asset: FinItemProps) => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     setFinItem(asset);
     console.log("openModal", asset);
   };
@@ -107,16 +110,22 @@ const Index: React.FC = () => {
 
   const saveInfo = (finItem: FinItemProps) => {
     console.log("saveInfo", finItem);
-    POST(`/asset/save`, finItem).then((res: any) => {
+    let apiUrl = "/asset/reg";
+    if (finItem._id) apiUrl = "/asset/save";
+    POST(apiUrl, finItem).then((res: any) => {
       console.log({res});
+      getTradeAssetList();
+      getLogs(finItem._id, finItem.userId);
     });
     closedModal(true);
   };
 
   const deleteItem = (finItem: FinItemProps) => {
-    console.log("deleteItem", finItem);
     POST(`/asset/delete`, finItem).then((res: any) => {
       console.log({res});
+      getTradeAssetList();
+      getLogs(finItem._id, finItem.userId);
+      closedModal(true);
     });
   };
 
@@ -127,9 +136,12 @@ const Index: React.FC = () => {
         title="자산 Info"
         subtitle="자산 정보"
         buttonName="항목추가"
-        handleEvent={() => {
-          alert("항목추가");
-        }}
+        handleEvent={() =>
+          setFinItem((prev: FinItemProps) => ({
+            ...prev,
+            userId: form?.userId || "",
+          }))
+        }
       />
       <Widget>
         <SearchForm form={form} handleChange={setForm} />

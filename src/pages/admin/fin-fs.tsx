@@ -3,18 +3,9 @@ import {useEffect, useState} from "react";
 import {TransMoneyProps} from "@/model/TransMoney";
 import {ClassCategoryProps} from "@/model/ClassCategoryProps";
 import {SearchProps} from "@/model/SearchForm";
-import {AccountLogProps} from "@/model/accountLog";
-import {CardLogProps} from "@/model/cardLog";
 
-import {useCategoryFinClass} from "@/hooks/useCategoryFinClass";
-import {useFinStatusData} from "@/hooks/useFinStatusData";
-import {useTransLogs} from "@/hooks/useTransLog";
-import {useAccountLog} from "@/hooks/useAccountLog";
-import {useCardLog} from "@/hooks/useCardLog";
-import {useTaxLog} from "@/hooks/useTaxLog";
-
-import {dateChange} from "@/utils/date";
-import {isEmptyForm} from "@/utils/form";
+import {useYearlyCategoryFinClass} from "@/hooks/useCategoryFinClass";
+import {useYearlyFinStatusData} from "@/hooks/useFinStatusData";
 import {POST} from "@/utils/restApi";
 
 import TransMoneyLog from "@/components/trans-money/TransMoneyLog";
@@ -23,12 +14,7 @@ import FinStatusTradeKind from "@/components/fin-status/FinStatusTradeKind";
 import SectionTitle from "@/components/ui/section-title";
 import SearchForm from "@/components/SearchForm";
 import Widget from "@/components/ui/widget";
-import AccountLog from "@/components/account-log/AccountLog";
-import FinStatusTab from "@/components/fin-status/FinStatusTab";
-import CardLog from "@/components/card-log/CardLog";
-import TaxLogs from "@/components/tax/TaxLog";
-import {TaxLogProps} from "@/model/TaxLog";
-import ModalFinStatus from "@/components/fin-status/ModalFinStatus";
+import {dateChange} from "@/utils/date";
 
 interface FinAmount {
   [key: string]: number;
@@ -62,7 +48,7 @@ const initCategory: ClassCategoryProps = {
 
 const initForm: SearchProps = {
   userId: "bethelean",
-  fromAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
+  fromAt: new Date().getFullYear() + "-01-01",
   toAt: dateChange(new Date(), -1).toISOString().slice(0, 10),
 };
 
@@ -71,74 +57,31 @@ const Index: React.FC = () => {
   const [finAmount, setFinAmount] = useState<FinAmount>(initFinAmount);
   const [accountAmount, setAccountAmount] = useState<assetProps[]>([]);
   const [logs, setLogs] = useState<TransMoneyProps[]>([]);
-  const [accountLogs, setAccountLogs] = useState<AccountLogProps[]>([]);
-  const [creditCardLogs, setCreditCardLogs] = useState<CardLogProps[]>([]);
-  const [checkCardLogs, setCheckCardLogs] = useState<CardLogProps[]>([]);
-  const [taxLogs, setTaxLogs] = useState<TaxLogProps[]>([]);
   const [category, setCategory] = useState<ClassCategoryProps>(initCategory);
-  const [finData, setFinData] = useState<TransMoneyProps[]>([]);
-  // 통장거래내역
-  const accountLog = useAccountLog(form);
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setAccountLogs(accountLog);
-  }, [form, accountLog]);
 
-  // 카드거래내역
-  const checkCardLog = useCardLog(form, "CHECK");
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setCheckCardLogs(checkCardLog);
-  }, [form, checkCardLog]);
-
-  // 카드거래내역
-  const creditCardLog = useCardLog(form, "CREDIT");
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setCreditCardLogs(creditCardLog);
-  }, [form, creditCardLog]);
-
-  // 세금계산서내역
-  const taxLog = useTaxLog(form);
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setTaxLogs(taxLog);
-  }, [form, taxLog]);
-
-  // 전체거래내역조회
-  const transLog = useTransLogs(form);
-  useEffect(() => {
-    if (!isEmptyForm(form)) return;
-    setLogs(transLog);
-  }, [form, transLog]);
-
-  // 거래분류별 카고고리 합산 리스트
-  const categoryFinClass = useCategoryFinClass(form);
+  const categoryFinClass = useYearlyCategoryFinClass(form);
   useEffect(() => {
     setCategory(categoryFinClass);
   }, [categoryFinClass]);
 
   // 거래분류별 합산 금액
-  const finStatusData = useFinStatusData(form);
+  const finStatusData = useYearlyFinStatusData(form);
   useEffect(() => {
     setFinAmount(finStatusData);
   }, [finStatusData]);
 
   const getTransData = (code: string, category = "") => {
-    POST(`/trans/log`, {
+    POST(`/trans/yearly-log`, {
       ...form,
       finClassCodes: code,
       useYn: true,
       category,
     }).then((res: any) => {
-      console.log("transdata: ", res.data);
-      setLogs(res.data);
+      console.log("transdata: ", res?.data);
+      setLogs(res?.data);
     });
   };
 
-  const closedModal = (isUpdated = false) => {
-    console.log("closedModal");
-  };
   return (
     <>
       <SectionTitle title="Financial Status" subtitle="재정상태" />
