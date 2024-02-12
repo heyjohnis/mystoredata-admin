@@ -18,6 +18,7 @@ import FinStatusTab from "@/components/fin-status/FinStatusTab";
 import {TaxLogProps} from "@/model/TaxLog";
 import TradeLogComp from "./TradeLogComp";
 import {ModalTradeStatusDetail} from "./ModalTradeStatusDetail";
+import DateHeader from "../common/DateHeader";
 const Title = ({children}: {children: React.ReactNode}) => {
   return (
     <h2 className="w-full m-auto mt-4 mb-2 text-lg font-bold">{children}</h2>
@@ -153,9 +154,7 @@ export function TradeAnalysis() {
   return (
     <>
       <div className="sticky top-0 p-5 pb-0 m-0 z-10 bg-white ">
-        <h1 className="w-[60%] text-center m-auto mb-2 text-2xl">
-          {form.displayDate}
-        </h1>
+        <DateHeader form={form} setForm={setForm} />
         <DateSelector form={form} setForm={setForm} />
       </div>
       <div>

@@ -49,7 +49,7 @@ export function FootBarButtons() {
           name="당일거래현황"
           href="/trade/status"
         />
-        <IconButton icon={LuSheet} name="제무재표" href="/trade/current" />
+        <IconButton icon={LuSheet} name="제무재표" href="/trade/fs" />
         <IconButton icon={BiTransfer} name="거래내역" href="/trade/current" />
         <IconButton icon={FiUser} name="나의정보" href="/trade/current" />
       </ul>

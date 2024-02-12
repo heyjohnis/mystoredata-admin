@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {IoIosArrowBack} from "react-icons/io";
 import {IoIosArrowForward} from "react-icons/io";
+
 import {SearchProps} from "@/model/SearchForm";
 import {dateChange, lastDayOfMonth} from "@/utils/date";
 
@@ -25,6 +26,7 @@ type FormProps = {
   form: SearchProps;
   setForm: (form: SearchProps) => void;
 };
+
 export function DateSelector({form, setForm}: FormProps) {
   const targetDate =
     dateChange(new Date(), -1).toISOString().slice(0, 10) || "";
